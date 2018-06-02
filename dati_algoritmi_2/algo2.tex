@@ -1,0 +1,192 @@
+\documentclass[a4paper,portrait,12pt]{article}
+\usepackage[top=0.5in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{epstopdf}
+\usepackage{float}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usepackage{subfloat}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{eufrak}
+\usepackage{subfiles}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{csquotes}
+\usepackage{program}
+\usepackage{mathtools}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definizione}[section]
+
+\newtheorem{proposition}{Proposizione}
+\newtheorem{corollary}{Corollario}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+ 
+\begin{document}
+
+\title{Appunti Dati e Algoritmi 2}
+
+\maketitle
+\date
+\newpage
+
+\tableofcontents
+\newpage
+
+
+\section{Teoria dell'NP-Completezza}
+
+
+\subsection{Introduzione} 
+
+Le \textit{classi di complessità} sono insiemi di problemi. Le principali classi di complessità 
+note sono:
+\begin{enumerate}
+\item problemi che ammettono algoritmi \textit{efficienti} (ovvero polinomiali, di qualunque grado);
+\item problemi che ammettono limite di esecuzione inferiore del tipo $f(n) = c^n$ con $c > 1$, sono un numero ristretto
+	di problemi, perlopiù costruiti appositiamente per avere tale limite;
+\item problemi che non ammettono algoritmo di risoluzione, ovvero problemi \textit{indecidibili} come l'\textit{Halting 
+	Problem} di Turing \footnote{Il problema originale è in realtà il famoso \textit{Entscheidungsproblem}, ovvero 
+	\textit{il problema della decisione}, posto da Hilbert nel 1928 e risolto contemporaneamente nel 1936 da A. Turing
+ 	(con le macchine omonime) e da A. Church (per mezzo del \textit{lambda calcolo})};
+\item problemi per i quali non è stato determinato un algorimo efficiente ma di cui non si ha nemmeno un \textit{lower 
+	bound}, chiamati per questo \textit{problemi intrattabili}; si tratta di problemi reali, riscontrabili in 
+	moltissimi ambiti scientifici e ingegneristici; possiedono inoltre un'interessante \textit{proprietà di 
+	chiusura}: risolto uno di questi problemi in tempo polinomiale è possibile risolvere in modo simile anche tutti
+	gli altri problemi di questa classe.
+\end{enumerate} 
+
+Per semplificare la teoria ci si occupa soltanto di \textit{problemi decisionali}, quindi problemi nella forma
+\begin{equation}
+\Pi : I \mapsto \{yes,no\}
+\end{equation}
+che differiscono da quelli precedentemente incontrati nella forma $\Pi \subseteq I \times S$.\\ 
+Sia $\Pi_C (x)$ il problema concreto tale che
+\begin{equation}
+\forall x \in \{0,1\}^*,\quad \Pi_C (x) = 
+	\left\{
+		\begin{array}{ll}
+			1 \quad se\quad (\exists i \in I\quad |\quad e(i) = x)\quad\wedge\quad(\Pi_A (i) = x)\\
+			0 \quad altrimenti\\
+		\end{array}
+	\right.
+\end{equation}
+si definisce la \textit{complessità} (o il tempo) associato ad un algoritmo che risolva $\Pi_C$ la funzione
+\begin{equation}
+T_{A_{\Pi_C}} (n) = max\{\# \quad passi\quad eseguiti\quad da\quad A_{\Pi_C} (x) \quad\forall x \quad | \quad 
+\left|x\right| = n \}
+\end{equation}
+dove $\left|x\right| = \left|e(i)\right|$ è la taglia di $x$ data dalla funzione di encoding $e$.\\
+D'ora in poi si utilizzeranno encoding \textit{concisi}, più vicini possibile all'encoding di taglia minima così da
+poter avere problemi ugulmente definiti come $\Pi_C : \{0,1\}^* \mapsto \{0,1\}$.\\
+
+
+\subsection{Linguaggi Formali} 
+
+Sia $\Sigma = {0,1}$ un alfabeto, si definisce \textit{linguaggio formale} $L$ su $\Sigma$
+un insieme di stringhe $L \subseteq \Sigma^*$, $L \subseteq {0,1}^*$. Esempi:
+\begin{itemize}
+	\item $\epsilon$, stringa vuota
+	\item $L = \{\emptyset\}$, linguaggio vuoto
+	\item $L^0 = L = \{\epsilon\}$, linguaggio contenente soltanto la stringa vuota
+	\item $L_1 \cup L_2$, $L_1 \cap L_2$, unione e intersezione di linguaggi
+	\item $L^C = \{0,1\}^* - L$, linguaggio complementare
+	\item $L_1\cdot L_2 = \{z \in {0,1}^* \quad | \quad \exists x \in L_1,\quad \exists y \in L_2 \quad | 
+		\quad z = \langle x,y \rangle\}$, concatenazione di linguaggi
+	\item $L^* = \bigcup_{i = 0}^{\infty} L^i$, tutte le concatenazioni finite di tutti gli elementi di $L$.
+\end{itemize}
+Dato un problema concreto $\Pi_C : \{0,1\}^* \mapsto \{0,1\}$, si definisce
+\begin{equation}
+L_{\Pi_C} = \{x \in \{0,1\}^* \quad | \quad \Pi_C (x) = 1\}
+\end{equation}
+è il linguaggio accettato dal problema concreto $\Pi_C$.\\
+Fino a qui si è sviluppata una teoria riguardante soltamente i problemi decisionali, mentre la maggior parte dei problemi
+sono problemi di ottimizzazione, ovvero nella forma
+\begin{equation}
+\Pi_{OPT} \subseteq I \times S, \quad c : S \mapsto \mathbb{R}^+ \cup \{0\}\\
+\forall i \in I \quad determina \quad s^*\quad |\quad (i\Pi s^*) \quad\wedge\quad c(s^*) = inf/sup\{c(s),i\Pi s\}
+\end{equation}
+Tuttavia gli algoritmi che risolvono problemi decisionali possono essere introdotti in procedure che risolvono problemi 
+di ottimizzazione.
+Sia $A$ un algoritmo con input in $\{0,1\}^*$ e output in $\{0,1\}$, $A$ \textit{accetta} $x \in \{0,1\}^*$ 
+se $A(x) = 1$, $A$ \textit{rigetta} $x$ se $A(x) = 0$ ($A$ termina in un numero finito di passi).
+Si dice \textit{linguaggio accettatto} da $A$ il linguaggio definito come
+\begin{equation}
+L_A = \{x \in \{0,1\}^* \quad | \quad A(x) = 1\}
+\end{equation}
+Un linguaggio $L$ è deciso in tempo polinomiale da un algoritmo $A$ se
+\begin{enumerate}
+	\item $L = L_A$
+	\item $\exists k_1 \in \mathbb{N} \quad | \quad T_A(\left|x\right|) = O(\left|x\right|^{k_1})$
+\end{enumerate}
+
+
+\subsection{Classi di complessità} 
+
+Si definisce la classe $\mathcal{P}$ la classe
+\begin{equation}
+\mathcal{P} = \{L \subseteq \{0,1\} \quad | \quad L \quad deciso \quad in \quad tempo \quad polinomiale\} 
+\end{equation}
+\begin{equation}
+= \{\Pi_C : \{0,1\}^* \mapsto \{0,1\} \quad | \quad L \quad deciso \quad in \quad tempo \quad polinomiale\}
+\end{equation}
+poiché esiste un isomorfismo tra i problemi concreti $\Pi_C$ e i linguaggi $L$.\\
+
+Per introdurre la classe $\mathcal{NP}$ è necessario comprendere la differenza tra i concetti di
+\begin{itemize}
+	\item \textit{risoluzione}, dato un problema $\Pi \subseteq I\times S$, l'algoritmo che lo risolve riceve 
+	un'istanza $i \in I$ e restituisce una soluzione $s \in S$;
+	\item \textit{verificabilità}, dato un problema $\Pi \subseteq I\times S$, l'algoritmo riceve 
+	un'istanza de problema $i \in I$ e una sua presunta soluzione $q$ (chiamata \textit{certificato}) e verifica 
+	che $q \in S$ o meno. 
+\end{itemize}
+Sia $V(x,y)$ un algoritmo verificatore. Si dice che $x$ è verificato da $V$ se $\exists y \quad | \quad V(x,y) = 1$. Si
+dice che $L$ è verificato in tempo polinomiale se $\exists V(x,y)$ tale che:
+\begin{enumerate}
+	\item $L = L_V$;
+	\item $\exists c_1,k_1 \in \mathbb{R}^+\cup \{0\} \quad | \quad \forall x \in L \quad \exists y \quad 
+	V(x,y) = 1$ e $\left|y\right| \le c_1 \left|x\right|^{k_1}$
+	\item $\exists c_2,k_2 \in \mathbb{R}^+\cup \{0\} \quad | T(\left|x\right|,\left|y\right|) \le 
+	c_2 (\left|x\right| + \left|y\right|)^{k_2}$
+\end{enumerate}
+Come si può vedere, al punto 2 viene posta una condizione sulla dimensione del certificato. Se questa non fosse presente
+si potrebbe pensare di fornire tutte le possibili soluzioni come certificato. Ma questo equvarrebbe a risolvere il
+problema con la forza bruta.\\
+
+La classe $\mathcal{NP}$ è quindi definita come
+\begin{equation}
+\mathcal{NP} = \{L \subseteq \{0,1\}^* \quad |\quad L \quad verificabile \quad in \quad tempo \quad polinomiale\}
+\end{equation}
+\textbf{Nota bene.} $\mathcal{NP}$ non significa \textit{Non Polynomial time}, ma bensì \textit{Nondeterministic 
+Polynomial time}; questo perché la classe $\mathcal{NP}$ può essere alternativamente definita per mezzo delle
+macchine di Turing non deterministiche.\\
+
+Con questo teorema si rende esplicito il rapporto tra le classi $\mathcal{P}$ e $\mathcal{NP}$.\\
+\textbf{Teorema.} $\mathcal{P} \subseteq \mathcal{NP}$, ovvero $L \subseteq \{0,1\}^* \in \mathcal{P} \Rightarrow 
+L \in \mathcal{NP}$.\\
+
+\textbf{Dimostrazione.} Intuitivamente, essendo $\mathcal{P} = {L \quad | \quad risolubile \quad itp}$ e 
+$\mathcal{NP} = {L \quad | \quad verificabile \quad itp}$, se $L \in \mathcal{P} \Rightarrow \exists A_L$ che
+decide $L$ in tempo polinomiale. Quindi, se $L \in \mathcal{NP}$ deve esistere $V_L$ algoritmo verificatore che
+verifica $L$ in tempo polinomiale (\textit{aggiungere dimostrazione formale}).\\
+
+\textbf{Riducibilità.} Sia $\Pi_1 : \{0,1\}^* \mapsto \{0,1\}$ e $\Pi_2 : \{0,1\}^* \mapsto \{0,1\}$ e sia $f$ la 
+funzione $f : \Pi_1 \mapsto \Pi_2$, $f : i_1 \mapsto i_2 = f(i_1)$. In questo modo abbiamo che $\Pi_1 (i_1) = 
+\Pi_2 (f(i_1)) = \Pi_2 (i_2)$.\\
+Questa funzione è calcolabile in tempo polinomiale se $\exists A_f : \{0,1\}^* \mapsto {0,1} \quad | \quad 
+A_f(x) = f(x)$ e $\exists k > 0 \quad | \quad T_{A_f} (\left|x\right|) = O(\left|x\right|^k)$.
+
+\end{document}

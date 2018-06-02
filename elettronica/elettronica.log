@@ -1,0 +1,2262 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.5.28)  31 MAY 2018 19:43
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**elettronica.tex
+(./elettronica.tex
+LaTeX2e <2018-04-01> patch level 4
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2018/04/16 v5.8 Page Geometry
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count88
+\Gm@cntv=\count89
+\c@Gm@tempcnt=\count90
+\Gm@bindingoffset=\dimen103
+\Gm@wd@mp=\dimen104
+\Gm@odd@mp=\dimen105
+\Gm@even@mp=\dimen106
+\Gm@layoutwidth=\dimen107
+\Gm@layoutheight=\dimen108
+\Gm@layouthoffset=\dimen109
+\Gm@layoutvoffset=\dimen110
+\Gm@dimlist=\toks15
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2018/02/06 v6.86b Hypertext links for LaTeX
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
+
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+Package: hobsub-generic 2016/05/16 v1.14 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2016/05/16 v1.14 Construct package bundles (HO)
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package hobsub Info: Skipping package `ifvtex' (already loaded).
+Package: intcalc 2016/05/16 v1.2 Expandable calculations with integers (HO)
+Package hobsub Info: Skipping package `ifpdf' (already loaded).
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+Package: pdftexcmds 2018/01/30 v0.27 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2016/05/16 v1.14 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2016/05/16 v1.4 Expandable calculations on big integers (HO
+)
+Package: bitset 2016/05/16 v1.2 Handle bit-vector datatype (HO)
+Package: uniquecounter 2016/05/16 v1.3 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2016/05/16 v1.5 Let assignment for LaTeX macros (HO)
+Package: hopatch 2016/05/16 v1.3 Wrapper for package hooks (HO)
+Package: xcolor-patch 2016/05/16 xcolor patch
+Package: atveryend 2016/05/16 v1.9 Hooks at the very end of document (HO)
+Package atveryend Info: \enddocument detected (standard20110627).
+Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
+Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
+Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/auxhook.sty
+Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+)
+\@linkdim=\dimen111
+\Hy@linkcounter=\count91
+\Hy@pagecounter=\count92
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2018/02/06 v6.86b Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+\Hy@SavedSpaceFactor=\count93
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Hyper figures OFF on input line 4509.
+Package hyperref Info: Link nesting OFF on input line 4514.
+Package hyperref Info: Hyper index ON on input line 4517.
+Package hyperref Info: Plain pages OFF on input line 4524.
+Package hyperref Info: Backreferencing OFF on input line 4529.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4762.
+\c@Hy@tempcnt=\count94
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip10
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 5115.
+\XeTeXLinkMargin=\dimen112
+\Fld@menulength=\count95
+\Field@Width=\dimen113
+\Fld@charsize=\dimen114
+Package hyperref Info: Hyper figures OFF on input line 6369.
+Package hyperref Info: Link nesting OFF on input line 6374.
+Package hyperref Info: Hyper index ON on input line 6377.
+Package hyperref Info: backreferencing OFF on input line 6384.
+Package hyperref Info: Link coloring OFF on input line 6389.
+Package hyperref Info: Link coloring with OCG OFF on input line 6394.
+Package hyperref Info: PDF/A mode OFF on input line 6399.
+LaTeX Info: Redefining \ref on input line 6439.
+LaTeX Info: Redefining \pageref on input line 6443.
+\Hy@abspage=\count96
+\c@Item=\count97
+\c@Hfootnote=\count98
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2018/02/06 v6.86b Hyperref driver for pdfTeX
+\Fld@listcount=\count99
+\c@bookmark@seq@number=\count100
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip43
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks16
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/preprint/fullpage.sty
+Package: fullpage 1999/02/23 1.1 (PWD)
+\FP@margin=\skip44
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf.sty
+Package: epstopdf 2016/05/15 v2.6 Conversion with epstopdf on the fly (HO)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+)
+
+Package epstopdf Warning: No graphics package `graphic{s,x}' loaded.
+
+)) (/usr/local/texlive/2018/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count101
+\float@exts=\toks17
+\float@box=\box26
+\@float@everytoks=\toks18
+\@floatcapt=\box27
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/fancybox/fancybox.sty
+Package: fancybox 2010/05/15 1.4
+
+Style option: `fancybox' v1.4 <2010/05/15> (tvz)
+\@fancybox=\box28
+\shadowsize=\dimen115
+\@Sbox=\box29
+\do@VerbBox=\toks19
+\the@fancyput=\toks20
+\this@fancyput=\toks21
+\EndVerbatimTokens=\toks22
+\Verbatim@Outfile=\write3
+\Verbatim@Infile=\read1
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/local/texlive/2018/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/local/texlive/2018/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.te
+x
+\pgfutil@everybye=\toks23
+\pgfutil@tempdima=\dimen116
+\pgfutil@tempdimb=\dimen117
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-li
+sts.tex))
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box30
+(/usr/local/texlive/2018/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+Package: pgfrcs 2015/08/07 v3.0.1a (rcs-revision 1.31)
+))
+Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen118
+\Gin@req@width=\dimen119
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2014/07/09 v3.0.1a (rcs-revision 1.48)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks24
+\pgfkeys@temptoks=\toks25
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.c
+ode.tex
+\pgfkeys@tmptoks=\toks26
+))
+\pgf@x=\dimen120
+\pgf@y=\dimen121
+\pgf@xa=\dimen122
+\pgf@ya=\dimen123
+\pgf@xb=\dimen124
+\pgf@yb=\dimen125
+\pgf@xc=\dimen126
+\pgf@yc=\dimen127
+\w@pgf@writea=\write4
+\r@pgf@reada=\read2
+\c@pgf@counta=\count102
+\c@pgf@countb=\count103
+\c@pgf@countc=\count104
+\c@pgf@countd=\count105
+\t@pgf@toka=\toks27
+\t@pgf@tokb=\toks28
+\t@pgf@tokc=\toks29
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.d
+ef
+File: pgfsys-pdftex.def 2014/10/11  (rcs-revision 1.35)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-p
+df.def
+File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
+)))
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.
+code.tex
+File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
+\pgfsyssoftpath@smallbuffer@items=\count106
+\pgfsyssoftpath@bigbuffer@items=\count107
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.
+code.tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+)) (/usr/local/texlive/2018/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2010/04/11 v3.0.1a (rcs-revision 1.7)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen128
+\pgfmath@count=\count108
+\pgfmath@box=\box31
+\pgfmath@toks=\toks30
+\pgfmath@stack@operand=\toks31
+\pgfmath@stack@operation=\toks32
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.
+tex
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic
+.code.tex)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigo
+nometric.code.tex)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.rando
+m.code.tex)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.compa
+rison.code.tex)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.
+code.tex)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round
+.code.tex)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.
+code.tex)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integ
+erarithmetics.code.tex)))
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count109
+))
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.co
+de.tex
+File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
+\pgf@picminx=\dimen129
+\pgf@picmaxx=\dimen130
+\pgf@picminy=\dimen131
+\pgf@picmaxy=\dimen132
+\pgf@pathminx=\dimen133
+\pgf@pathmaxx=\dimen134
+\pgf@pathminy=\dimen135
+\pgf@pathmaxy=\dimen136
+\pgf@xx=\dimen137
+\pgf@xy=\dimen138
+\pgf@yx=\dimen139
+\pgf@yy=\dimen140
+\pgf@zx=\dimen141
+\pgf@zy=\dimen142
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconst
+ruct.code.tex
+File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
+\pgf@path@lastx=\dimen143
+\pgf@path@lasty=\dimen144
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage
+.code.tex
+File: pgfcorepathusage.code.tex 2014/11/02  (rcs-revision 1.24)
+\pgf@shorten@end@additional=\dimen145
+\pgf@shorten@start@additional=\dimen146
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.co
+de.tex
+File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
+\pgfpic=\box32
+\pgf@hbox=\box33
+\pgf@layerbox@main=\box34
+\pgf@picture@serial@count=\count110
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicst
+ate.code.tex
+File: pgfcoregraphicstate.code.tex 2014/11/02  (rcs-revision 1.12)
+\pgflinewidth=\dimen147
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransform
+ations.code.tex
+File: pgfcoretransformations.code.tex 2015/08/07  (rcs-revision 1.20)
+\pgf@pt@x=\dimen148
+\pgf@pt@y=\dimen149
+\pgf@pt@temp=\dimen150
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.cod
+e.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.c
+ode.tex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathproce
+ssing.code.tex
+File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.co
+de.tex
+File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
+\pgfarrowsep=\dimen151
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.cod
+e.tex
+File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
+\pgf@max=\dimen152
+\pgf@sys@shading@range@num=\count111
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.cod
+e.tex
+File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.
+code.tex
+File: pgfcoreexternal.code.tex 2014/07/09  (rcs-revision 1.21)
+\pgfexternal@startupbox=\box35
+))
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.co
+de.tex
+File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretranspare
+ncy.code.tex
+File: pgfcoretransparency.code.tex 2013/09/30  (rcs-revision 1.5)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.
+code.tex
+File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
+)))
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.cod
+e.tex
+File: pgfmoduleshapes.code.tex 2014/03/21  (rcs-revision 1.35)
+\pgfnodeparttextbox=\box36
+)
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.
+tex
+File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version
+-0-65.sty
+Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen153
+\pgf@nodesepend=\dimen154
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version
+-1-18.sty
+Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
+))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/local/texlive/2018/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen155
+\pgffor@skip=\dimen156
+\pgffor@stack=\toks33
+\pgffor@toks=\toks34
+))
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.cod
+e.tex
+Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothan
+dlers.code.tex
+File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
+\pgf@plot@mark@count=\count112
+\pgfplotmarksize=\dimen157
+)
+\tikz@lastx=\dimen158
+\tikz@lasty=\dimen159
+\tikz@lastxsaved=\dimen160
+\tikz@lastysaved=\dimen161
+\tikzleveldistance=\dimen162
+\tikzsiblingdistance=\dimen163
+\tikz@figbox=\box37
+\tikz@figbox@bg=\box38
+\tikz@tempbox=\box39
+\tikz@tempbox@bg=\box40
+\tikztreelevel=\count113
+\tikznumberofchildren=\count114
+\tikznumberofcurrentchild=\count115
+\tikz@fig@count=\count116
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.cod
+e.tex
+File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
+\pgfmatrixcurrentrow=\count117
+\pgfmatrixcurrentcolumn=\count118
+\pgf@matrix@numberofcolumns=\count119
+)
+\tikz@expandcount=\count120
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
+)))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/subfloat/subfloat.sty
+Package: subfloat 2003/08/21 version 2.14
+
+Package `subfloat', Version 2.14 of 2003/08/21.
+
+Package subfloat Warning: Numbers of floats not counted:
+(subfloat)                If you use one of the counters subfloatfiguremax or
+(subfloat)                subfloattablemax you will get strange error messages
+(subfloat)                containing \c@subfloatfiguremax or
+(subfloat)                \c@subfloattablemax:
+(subfloat)                Please switch on countmax or remove the code using
+(subfloat)                the counter then..
+
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2016/05/22 v1.1-161 Sub-captions (AR)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2017/03/19 v3.3-145 Customizing captions (AR)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2018/04/15 v1.7-167 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 64.
+\captionmargin=\dimen164
+\captionmargin@=\dimen165
+\captionwidth=\dimen166
+\caption@tempdima=\dimen167
+\caption@indent=\dimen168
+\caption@parindent=\dimen169
+\caption@hangindent=\dimen170
+)
+\c@ContinuedFloat=\count121
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+)
+\c@subfigure=\count122
+\c@subtable=\count123
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/04/06 v1.3b Input encoding file
+\inpenc@prehook=\toks35
+\inpenc@posthook=\toks36
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2017/09/02 v2.17a AMS math features
+\@mathmargin=\skip45
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks37
+\ex@=\dimen171
+))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen172
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count124
+LaTeX Info: Redefining \frac on input line 213.
+\uproot@=\count125
+\leftroot@=\count126
+LaTeX Info: Redefining \overline on input line 375.
+\classnum@=\count127
+\DOTSCASE@=\count128
+LaTeX Info: Redefining \ldots on input line 472.
+LaTeX Info: Redefining \dots on input line 475.
+LaTeX Info: Redefining \cdots on input line 596.
+\Mathstrutbox@=\box41
+\strutbox@=\box42
+\big@size=\dimen173
+LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
+\macc@depth=\count129
+\c@MaxMatrixCols=\count130
+\dotsspace@=\muskip11
+\c@parentequation=\count131
+\dspbrk@lvl=\count132
+\tag@help=\toks38
+\row@=\count133
+\column@=\count134
+\maxfields@=\count135
+\andhelp@=\toks39
+\eqnshift@=\dimen174
+\alignsep@=\dimen175
+\tagshift@=\dimen176
+\tagwidth@=\dimen177
+\totwidth@=\dimen178
+\lineht@=\dimen179
+\@envbody=\toks40
+\multlinegap=\skip46
+\multlinetaggap=\skip47
+\mathdisplay@stack=\toks41
+LaTeX Info: Redefining \[ on input line 2817.
+LaTeX Info: Redefining \] on input line 2818.
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2017/10/31 v2.20.4
+\thm@style=\toks42
+\thm@bodyfont=\toks43
+\thm@headfont=\toks44
+\thm@notefont=\toks45
+\thm@headpunct=\toks46
+\thm@preskip=\skip48
+\thm@postskip=\skip49
+\thm@headsep=\skip50
+\dth@everypar=\toks47
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/eucal.sty
+Package: eucal 2009/06/22 v3.00 Euler Script fonts
+LaTeX Font Info:    Overwriting math alphabet `\EuScript' in version `bold'
+(Font)                  U/eus/m/n --> U/eus/b/n on input line 33.
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/eufrak.sty
+
+Package eufrak Warning: The eufrak package is redundant if the amsfonts package
+ is used on input line 36.
+
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/subfiles/subfiles.sty
+Package: subfiles 2012/05/23 Federico Garcia
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2014/10/28 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks48
+\verbatim@line=\toks49
+\verbatim@in@stream=\read3
+))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count136
+\lst@gtempboxa=\box43
+\lst@token=\toks50
+\lst@length=\count137
+\lst@currlwidth=\dimen180
+\lst@column=\count138
+\lst@pos=\count139
+\lst@lostspace=\dimen181
+\lst@width=\dimen182
+\lst@newlines=\count140
+\lst@lineno=\count141
+\lst@maxwidth=\dimen183
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count142
+\lst@skipnumbers=\count143
+\lst@framebox=\box44
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/csquotes/csquotes.sty
+Package: csquotes 2018/04/13 v5.2d context-sensitive quotations (JAW)
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2018/02/11 v2.5e e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count144
+)
+\csq@reset=\count145
+\csq@gtype=\count146
+\csq@glevel=\count147
+\csq@qlevel=\count148
+\csq@maxlvl=\count149
+\csq@tshold=\count150
+\csq@ltx@everypar=\toks51
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/csquotes/csquotes.def
+File: csquotes.def 2018/04/13 v5.2d csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/csquotes/csquotes.cfg
+File: csquotes.cfg 
+))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/program/program.sty
+\@gtempa=\dimen184
+\@gtempa=\dimen185
+\@gtempa=\dimen186
+\@gtempa=\dimen187
+\@gtempa=\dimen188
+\@gtempa=\dimen189
+\@gtempa=\dimen190
+\@gtempa=\dimen191
+\@gtempa=\dimen192
+\@gtempa=\dimen193
+\@gtempa=\dimen194
+\@gtempa=\dimen195
+\@gtempa=\dimen196
+\@gtempa=\dimen197
+\@gtempa=\dimen198
+\@gtempa=\dimen199
+\@gtempa=\dimen256
+\@gtempa=\dimen257
+\@gtempa=\dimen258
+\@gtempa=\dimen259
+\@gtempa=\dimen260
+\@gtempa=\dimen261
+\@gtempa=\dimen262
+\@gtempa=\dimen263
+\@gtempa=\dimen264
+\@gtempa=\dimen265
+\@gtempa=\dimen266
+\@gtempa=\dimen267
+\@gtempa=\dimen268
+\@gtempa=\dimen269
+\@gtempa=\dimen270
+\@gtempa=\dimen271
+\@gtempa=\dimen272
+\@gtempa=\dimen273
+\@gtempa=\dimen274
+\@gtempa=\dimen275
+\@gtempa=\dimen276
+\@gtempa=\dimen277
+\@gtempa=\dimen278
+\@gtempa=\dimen279
+\@gtempa=\dimen280
+\@gtempa=\dimen281
+\@gtempa=\dimen282
+\@gtempa=\dimen283
+\@gtempa=\dimen284
+\@gtempa=\dimen285
+\@gtempa=\dimen286
+\@gtempa=\dimen287
+\@gtempa=\dimen288
+\@gtempa=\dimen289
+\c@programline=\count151
+\old@nxttabmar=\count152
+\symeulerletters=\mathgroup7
+\powersetbox=\box45
+LaTeX Font Info:    Try loading font information for U+msa on input line 841.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 841.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for U+lasy on input line 841.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+LaTeX Font Info:    Try loading font information for U+eur on input line 841.
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/ueur.fd
+File: ueur.fd 2013/01/14 v3.01 Euler Roman
+))
+(/usr/local/texlive/2018/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2018/01/08 v1.21 mathematical typesetting tools
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count153
+\calc@Bcount=\count154
+\calc@Adimen=\dimen290
+\calc@Bdimen=\dimen291
+\calc@Askip=\skip51
+\calc@Bskip=\skip52
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count155
+\calc@Cskip=\skip53
+)
+(/usr/local/texlive/2018/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2017/03/31 v1.3 programming setup (MH)
+)
+LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
+\g_MT_multlinerow_int=\count156
+\l_MT_multwidth_dim=\dimen292
+\origjot=\skip54
+\l_MT_shortvdotswithinadjustabove_dim=\dimen293
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen294
+\l_MT_above_intertext_sep=\dimen295
+\l_MT_below_intertext_sep=\dimen296
+\l_MT_above_shortintertext_sep=\dimen297
+\l_MT_below_shortintertext_sep=\dimen298
+)
+\c@definition=\count157
+\c@proposition=\count158
+\c@corollary=\count159
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... none found.
+
+
+LaTeX Warning: Unused global option(s):
+    [portrait].
+
+(./elettronica.aux
+
+LaTeX Warning: Label `fig:integratore' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:integratore' multiply defined.
+
+
+LaTeX Warning: Label `fig:derivatore' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:derivatore' multiply defined.
+
+
+LaTeX Warning: Label `fig:integratore' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:integratore' multiply defined.
+
+
+LaTeX Warning: Label `fig:integratore' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:integratore' multiply defined.
+
+
+LaTeX Warning: Label `fig:integratore' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:integratore' multiply defined.
+
+
+LaTeX Warning: Label `fig:derivatore' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:derivatore' multiply defined.
+
+
+LaTeX Warning: Label `fig:integratore' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:integratore' multiply defined.
+
+
+LaTeX Warning: Label `fig:derivatore' multiply defined.
+
+
+LaTeX Warning: Label `sub@fig:derivatore' multiply defined.
+
+)
+\openout1 = `elettronica.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
+LaTeX Font Info:    ... okay on input line 38.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(89.62709pt, 418.25368pt, 89.6271pt)
+* v-part:(T,H,B)=(36.135pt, 707.5052pt, 101.40665pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=452.9679pt
+* \textheight=670.50687pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=0.0pt
+* \headheight=0.0pt
+* \headsep=0.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=35.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+\AtBeginShipoutBox=\box46
+Package hyperref Info: Link coloring OFF on input line 38.
+(/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
+
+(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
+)
+\c@section@level=\count160
+)
+LaTeX Info: Redefining \ref on input line 38.
+LaTeX Info: Redefining \pageref on input line 38.
+LaTeX Info: Redefining \nameref on input line 38.
+
+(./elettronica.out) (./elettronica.out)
+\@outlinefile=\write5
+\openout5 = `elettronica.out'.
+
+ ABD: EveryShipout initializing macros
+(/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count161
+\scratchdimen=\dimen299
+\scratchbox=\box47
+\nofMPsegments=\count162
+\nofMParguments=\count163
+\everyMPshowfont=\toks52
+\MPscratchCnt=\count164
+\MPscratchDim=\dimen300
+\MPnumerator=\count165
+\makeMPintoPDFobject=\count166
+\everyMPtoPDFconversion=\toks53
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: listings package is loaded.
+Package caption Info: End \AtBeginDocument code.
+\c@lstlisting=\count167
+
+
+LaTeX Warning: No \author given.
+
+[1
+
+{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(./elettronica.toc)
+\tf@toc=\write6
+\openout6 = `elettronica.toc'.
+
+ [2]
+
+Package amsmath Warning: Foreign command \over;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 60.
+
+[3]
+<img/invertente.pdf, id=185, 301.125pt x 301.125pt>
+File: img/invertente.pdf Graphic file (type pdf)
+<use img/invertente.pdf>
+Package pdftex.def Info: img/invertente.pdf  used on input line 172.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+<img/noninvertente.pdf, id=186, 301.125pt x 301.125pt>
+File: img/noninvertente.pdf Graphic file (type pdf)
+<use img/noninvertente.pdf>
+Package pdftex.def Info: img/noninvertente.pdf  used on input line 178.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+<img/transresistenza.pdf, id=187, 301.125pt x 301.125pt>
+File: img/transresistenza.pdf Graphic file (type pdf)
+<use img/transresistenza.pdf>
+Package pdftex.def Info: img/transresistenza.pdf  used on input line 184.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+<img/bufferunitario.pdf, id=188, 301.125pt x 200.75pt>
+File: img/bufferunitario.pdf Graphic file (type pdf)
+<use img/bufferunitario.pdf>
+Package pdftex.def Info: img/bufferunitario.pdf  used on input line 190.
+(pdftex.def)             Requested size: 113.24197pt x 75.49548pt.
+<img/sommatore.pdf, id=189, 301.125pt x 301.125pt>
+File: img/sommatore.pdf Graphic file (type pdf)
+<use img/sommatore.pdf>
+Package pdftex.def Info: img/sommatore.pdf  used on input line 196.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+<img/sottrattore.pdf, id=190, 301.125pt x 301.125pt>
+File: img/sottrattore.pdf Graphic file (type pdf)
+<use img/sottrattore.pdf>
+Package pdftex.def Info: img/sottrattore.pdf  used on input line 202.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 170--206
+[]$[]$ $[]$
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 170--206
+[]$ $[]$
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 170--206
+[]$ $[]$ 
+ []
+
+[4] [5 <./img/invertente.pdf> <./img/noninvertente.pdf> <./img/transresistenza.
+pdf> <./img/bufferunitario.pdf> <./img/sommatore.pdf> <./img/sottrattore.pdf>]
+<img/integratore.pdf, id=265, 301.125pt x 301.125pt>
+File: img/integratore.pdf Graphic file (type pdf)
+<use img/integratore.pdf>
+Package pdftex.def Info: img/integratore.pdf  used on input line 255.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+<img/derivatore.pdf, id=266, 301.125pt x 301.125pt>
+File: img/derivatore.pdf Graphic file (type pdf)
+<use img/derivatore.pdf>
+Package pdftex.def Info: img/derivatore.pdf  used on input line 261.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 253--265
+[]$[]$ $[]$ 
+ []
+
+<img/passabasso.pdf, id=267, 301.125pt x 301.125pt>
+File: img/passabasso.pdf Graphic file (type pdf)
+<use img/passabasso.pdf>
+Package pdftex.def Info: img/passabasso.pdf  used on input line 298.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+<img/passaalto.pdf, id=268, 301.125pt x 301.125pt>
+File: img/passaalto.pdf Graphic file (type pdf)
+<use img/passaalto.pdf>
+Package pdftex.def Info: img/passaalto.pdf  used on input line 304.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+<img/passabanda.pdf, id=269, 301.125pt x 301.125pt>
+File: img/passabanda.pdf Graphic file (type pdf)
+<use img/passabanda.pdf>
+Package pdftex.def Info: img/passabanda.pdf  used on input line 310.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 296--314
+[]$[]$ $[]$
+ []
+
+[6 <./img/integratore.pdf> <./img/derivatore.pdf>]
+<img/comparatore.pdf, id=298, 301.125pt x 301.125pt>
+File: img/comparatore.pdf Graphic file (type pdf)
+<use img/comparatore.pdf>
+Package pdftex.def Info: img/comparatore.pdf  used on input line 325.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+<img/triggerschmitt.pdf, id=299, 301.125pt x 301.125pt>
+File: img/triggerschmitt.pdf Graphic file (type pdf)
+<use img/triggerschmitt.pdf>
+Package pdftex.def Info: img/triggerschmitt.pdf  used on input line 331.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 323--335
+[]$[]$ $[]$ 
+ []
+
+[7 <./img/passabasso.pdf> <./img/passaalto.pdf> <./img/passabanda.pdf> <./img/c
+omparatore.pdf> <./img/triggerschmitt.pdf>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 381.
+
+
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 381.
+
+Overfull \hbox (2.69464pt too wide) in paragraph at lines 387--391
+\OT1/cmr/m/n/12 L'\OT1/cmr/m/it/12 ampiezza della banda proibita $\OML/cmm/m/it
+/12 E[]$ \OT1/cmr/m/n/12 rap-p-re-senta la quan-tit^^Ra di en-er-gia nec-es-sar
+ia a rompere
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 392--398
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 399--402
+
+ []
+
+[8]
+Overfull \hbox (2.08609pt too wide) in paragraph at lines 427--429
+[]$\OML/cmm/m/it/12 ^^V$ \OT1/cmr/m/n/12 : mo-bilit^^Ra dei por-ta-tori di car-
+ica (nel si-li-cio $\OML/cmm/m/it/12 ^^V[] \OT1/cmr/m/n/12 = 1350 \OML/cmm/m/it
+/12 cm[]=Vs$ \OT1/cmr/m/n/12 e $\OML/cmm/m/it/12 ^^V[] \OT1/cmr/m/n/12 = 500 \O
+ML/cmm/m/it/12 cm[]=Vs$\OT1/cmr/m/n/12 ) 
+ []
+
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 475--484
+
+ []
+
+[10]
+<img/diodo.pdf, id=376, 200.75pt x 86.3225pt>
+File: img/diodo.pdf Graphic file (type pdf)
+<use img/diodo.pdf>
+Package pdftex.def Info: img/diodo.pdf  used on input line 549.
+(pdftex.def)             Requested size: 135.89174pt x 58.4377pt.
+ [11 <./img/diodo.pdf>]
+Overfull \hbox (17.67792pt too wide) in paragraph at lines 587--590
+\OT1/cmr/m/n/12 Per quanto riguarda l'intervallo di con-duzione del diodo $^^A\
+OML/cmm/m/it/12 T$\OT1/cmr/m/n/12 , questo si ri-cava con l'intersezione
+ []
+
+<img/raddcap.pdf, id=392, 301.125pt x 301.125pt>
+File: img/raddcap.pdf Graphic file (type pdf)
+<use img/raddcap.pdf>
+Package pdftex.def Info: img/raddcap.pdf  used on input line 613.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+<img/raddRC.pdf, id=393, 301.125pt x 301.125pt>
+File: img/raddRC.pdf Graphic file (type pdf)
+<use img/raddRC.pdf>
+Package pdftex.def Info: img/raddRC.pdf  used on input line 619.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+<img/uscitaraddcap.pdf, id=394, 501.55379pt x 501.55379pt>
+File: img/uscitaraddcap.pdf Graphic file (type pdf)
+<use img/uscitaraddcap.pdf>
+Package pdftex.def Info: img/uscitaraddcap.pdf  used on input line 625.
+(pdftex.def)             Requested size: 113.24197pt x 113.24269pt.
+<img/uscitaraddRC.pdf, id=395, 501.55379pt x 501.55379pt>
+File: img/uscitaraddRC.pdf Graphic file (type pdf)
+<use img/uscitaraddRC.pdf>
+Package pdftex.def Info: img/uscitaraddRC.pdf  used on input line 631.
+(pdftex.def)             Requested size: 113.24197pt x 113.24269pt.
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 611--635
+[]$[]$ $[]$
+ []
+
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 611--635
+[]$ $[]$ 
+ []
+
+[12]
+<img/radd.pdf, id=400, 301.125pt x 301.125pt>
+File: img/radd.pdf Graphic file (type pdf)
+<use img/radd.pdf>
+Package pdftex.def Info: img/radd.pdf  used on input line 651.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+<img/raddponte.pdf, id=401, 301.125pt x 301.125pt>
+File: img/raddponte.pdf Graphic file (type pdf)
+<use img/raddponte.pdf>
+Package pdftex.def Info: img/raddponte.pdf  used on input line 657.
+(pdftex.def)             Requested size: 113.24197pt x 113.24323pt.
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 649--661
+[]$[]$ $[]$ 
+ []
+
+[13 <./img/raddcap.pdf> <./img/raddRC.pdf> <./img/uscitaraddcap.pdf> <./img/usc
+itaraddRC.pdf> <./img/radd.pdf> <./img/raddponte.pdf>] [14] [15]
+Overfull \hbox (1.76035pt too wide) in paragraph at lines 812--814
+$\OML/cmm/m/it/12 g[]$ \OT1/cmr/m/n/12 ^^Re la con-dut-tanza per pic-coli seg-n
+ali o con-dut-tanza dif-feren-ziale. Af-fich^^Se queste equazioni
+ []
+
+[16]
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \let 
+l.815 $\left|
+             v_d\right| < 5 mV$ \quad e \quad $\left|i_d\right| < 0.2 I_D$.
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.815 $\left|v_d\right
+                      | < 5 mV$ \quad e \quad $\left|i_d\right| < 0.2 I_D$.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \endgroup 
+l.815 $\left|v_d\right|
+                        < 5 mV$ \quad e \quad $\left|i_d\right| < 0.2 I_D$.
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Extra \right.
+<to be read again> 
+                   \endgroup 
+l.815 $\left|v_d\right|
+                        < 5 mV$ \quad e \quad $\left|i_d\right| < 0.2 I_D$.
+I'm ignoring a \right that had no matching \left.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.815 $\left|v_d\right|
+                        < 5 mV$ \quad e \quad $\left|i_d\right| < 0.2 I_D$.
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+                \right .
+l.815 $\left|v_d\right| < 5 mV$
+                                \quad e \quad $\left|i_d\right| < 0.2 I_D$.
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \let 
+l.815 ...|v_d\right| < 5 mV$ \quad e \quad $\left|
+                                                  i_d\right| < 0.2 I_D$.
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.815 ...t| < 5 mV$ \quad e \quad $\left|i_d\right
+                                                  | < 0.2 I_D$.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \endgroup 
+l.815 ...| < 5 mV$ \quad e \quad $\left|i_d\right|
+                                                   < 0.2 I_D$.
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Extra \right.
+<to be read again> 
+                   \endgroup 
+l.815 ...| < 5 mV$ \quad e \quad $\left|i_d\right|
+                                                   < 0.2 I_D$.
+I'm ignoring a \right that had no matching \left.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.815 ...| < 5 mV$ \quad e \quad $\left|i_d\right|
+                                                   < 0.2 I_D$.
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+                \right .
+l.815 ...quad e \quad $\left|i_d\right| < 0.2 I_D$
+                                                  .
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \let 
+l.829 $\left|
+             v_{be}\right| < 5 mV$ \quad e \quad $\left|i_c\right| < 0.2 I_C$.
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.829 $\left|v_{be}\right
+                         | < 5 mV$ \quad e \quad $\left|i_c\right| < 0.2 I_C$.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \endgroup 
+l.829 $\left|v_{be}\right|
+                           < 5 mV$ \quad e \quad $\left|i_c\right| < 0.2 I_C$.
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Extra \right.
+<to be read again> 
+                   \endgroup 
+l.829 $\left|v_{be}\right|
+                           < 5 mV$ \quad e \quad $\left|i_c\right| < 0.2 I_C$.
+I'm ignoring a \right that had no matching \left.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.829 $\left|v_{be}\right|
+                           < 5 mV$ \quad e \quad $\left|i_c\right| < 0.2 I_C$.
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+                \right .
+l.829 $\left|v_{be}\right| < 5 mV$
+                                   \quad e \quad $\left|i_c\right| < 0.2 I_C$.
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \let 
+l.829 ...{be}\right| < 5 mV$ \quad e \quad $\left|
+                                                  i_c\right| < 0.2 I_C$.
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.829 ...t| < 5 mV$ \quad e \quad $\left|i_c\right
+                                                  | < 0.2 I_C$.
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \endgroup 
+l.829 ...| < 5 mV$ \quad e \quad $\left|i_c\right|
+                                                   < 0.2 I_C$.
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Extra \right.
+<to be read again> 
+                   \endgroup 
+l.829 ...| < 5 mV$ \quad e \quad $\left|i_c\right|
+                                                   < 0.2 I_C$.
+I'm ignoring a \right that had no matching \left.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.829 ...| < 5 mV$ \quad e \quad $\left|i_c\right|
+                                                   < 0.2 I_C$.
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+                \right .
+l.829 ...quad e \quad $\left|i_c\right| < 0.2 I_C$
+                                                  .
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \let 
+l.835 \item $r_o = {{1 \over \left|
+                                   \lambda \right|} + \left|V_{DS}\right| \o...
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.835 \item $r_o = {{1 \over \left|\lambda
+                                           \right|} + \left|V_{DS}\right| \o...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \endgroup 
+l.835 \item $r_o = {{1 \over \left|\lambda \right|
+                                                  } + \left|V_{DS}\right| \o...
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Extra \right.
+<to be read again> 
+                   \endgroup 
+l.835 \item $r_o = {{1 \over \left|\lambda \right|
+                                                  } + \left|V_{DS}\right| \o...
+I'm ignoring a \right that had no matching \left.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.835 \item $r_o = {{1 \over \left|\lambda \right|
+                                                  } + \left|V_{DS}\right| \o...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Extra }, or forgotten \right.
+l.835 ...m $r_o = {{1 \over \left|\lambda \right|}
+                                                   + \left|V_{DS}\right| \ov...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \let 
+l.835 ...{{1 \over \left|\lambda \right|} + \left|
+                                                  V_{DS}\right| \over I_D} \...
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.835 ...eft|\lambda \right|} + \left|V_{DS}\right
+                                                  | \over I_D} \cong {1 \ove...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \endgroup 
+l.835 ...ft|\lambda \right|} + \left|V_{DS}\right|
+                                                   \over I_D} \cong {1 \over...
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Extra \right.
+<to be read again> 
+                   \endgroup 
+l.835 ...ft|\lambda \right|} + \left|V_{DS}\right|
+                                                   \over I_D} \cong {1 \over...
+I'm ignoring a \right that had no matching \left.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.835 ...ft|\lambda \right|} + \left|V_{DS}\right|
+                                                   \over I_D} \cong {1 \over...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Extra }, or forgotten \right.
+l.835 ...\right|} + \left|V_{DS}\right| \over I_D}
+                                                   \cong {1 \over \left|\lambda
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \let 
+l.835 ...}\right| \over I_D} \cong {1 \over \left|
+                                                  \lambda
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.835 ...| \over I_D} \cong {1 \over \left|\lambda
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.835 ...| \over I_D} \cong {1 \over \left|\lambda
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+! LaTeX Error: Variable name ended by end of line..
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.835 ...| \over I_D} \cong {1 \over \left|\lambda
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \let 
+l.836 	\right|
+               I_D}$;
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+
+! LaTeX Error: Variable name ended by end of line..
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.836 	\right| I_D}$;
+                     
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Command \item invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.837 \item
+            $g_m = {2 I_D \over V_{GS} - V_{TN}} = \sqrt{2 K_n I_D (1 - \lam...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.837 \item $
+             g_m = {2 I_D \over V_{GS} - V_{TN}} = \sqrt{2 K_n I_D (1 - \lam...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.837 \item $
+             g_m = {2 I_D \over V_{GS} - V_{TN}} = \sqrt{2 K_n I_D (1 - \lam...
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.837 \item $
+             g_m = {2 I_D \over V_{GS} - V_{TN}} = \sqrt{2 K_n I_D (1 - \lam...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+                \right .
+l.837 \item $
+             g_m = {2 I_D \over V_{GS} - V_{TN}} = \sqrt{2 K_n I_D (1 - \lam...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+                \right .
+l.837 \item $
+             g_m = {2 I_D \over V_{GS} - V_{TN}} = \sqrt{2 K_n I_D (1 - \lam...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.837 \item $
+             g_m = {2 I_D \over V_{GS} - V_{TN}} = \sqrt{2 K_n I_D (1 - \lam...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.837 \item $
+             g_m = {2 I_D \over V_{GS} - V_{TN}} = \sqrt{2 K_n I_D (1 - \lam...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.837 \item $g_
+               m = {2 I_D \over V_{GS} - V_{TN}} = \sqrt{2 K_n I_D (1 - \lam...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \let 
+l.837 ...D (1 - \lambda V_{DS})} = {2 \over \left|
+                                                  V_{TN}
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+
+! LaTeX Error: Variable name ended by end of line..
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.837 ... \lambda V_{DS})} = {2 \over \left|V_{TN}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \let 
+l.838 	\right|
+              } \sqrt{I_{DSS} I_D (1 + \lambda V_{DS})}$ essendo $I_{DSS} = ...
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.838 	\right|} \sqrt{
+                      I_{DSS} I_D (1 + \lambda V_{DS})}$ essendo $I_{DSS} = ...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.838 ...sendo $I_{DSS} = {K_n V_{TN}^2 \over 2}$.
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+! LaTeX Error: Variable name ended by end of line..
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.838 ...sendo $I_{DSS} = {K_n V_{TN}^2 \over 2}$.
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Command \end{itemize} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.839 \end{itemize}
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.839 \end{itemize}
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.839 \end{itemize}
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.839 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.839 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (155.2828pt too wide) in paragraph at lines 835--841
+[]$\OML/cmm/m/it/12 r[] \OT1/cmr/m/n/12 = []$g$[] = [] = [] = []$
+ []
+
+<img/bjtpiccolo.pdf, id=488, 60.225pt x 31.5579pt>
+File: img/bjtpiccolo.pdf Graphic file (type pdf)
+<use img/bjtpiccolo.pdf>
+Package pdftex.def Info: img/bjtpiccolo.pdf  used on input line 849.
+(pdftex.def)             Requested size: 113.24197pt x 59.34473pt.
+<img/mospiccolo.pdf, id=489, 60.225pt x 29.3898pt>
+File: img/mospiccolo.pdf Graphic file (type pdf)
+<use img/mospiccolo.pdf>
+Package pdftex.def Info: img/mospiccolo.pdf  used on input line 855.
+(pdftex.def)             Requested size: 113.24197pt x 55.2676pt.
+
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 847--859
+[]$[]$ $[]$ 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 871--872
+
+ []
+
+[17 <./img/bjtpiccolo.pdf> <./img/mospiccolo.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 873--876
+
+ []
+
+<img/elettronicaEs/transdiodo1.pdf, id=513, 1386.17876pt x 836.12375pt>
+File: img/elettronicaEs/transdiodo1.pdf Graphic file (type pdf)
+<use img/elettronicaEs/transdiodo1.pdf>
+Package pdftex.def Info: img/elettronicaEs/transdiodo1.pdf  used on input line 
+898.
+(pdftex.def)             Requested size: 135.89174pt x 81.9587pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 906--907
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 908--911
+
+ []
+
+[18 <./img/elettronicaEs/transdiodo1.pdf>]
+<img/elettronicaEs/MOS1.pdf, id=535, 661.47125pt x 1066.98625pt>
+File: img/elettronicaEs/MOS1.pdf Graphic file (type pdf)
+<use img/elettronicaEs/MOS1.pdf>
+Package pdftex.def Info: img/elettronicaEs/MOS1.pdf  used on input line 922.
+(pdftex.def)             Requested size: 90.5922pt x 146.12088pt.
+<img/elettronicaEs/VGS.pdf, id=536, 1423.3175pt x 1438.37375pt>
+File: img/elettronicaEs/VGS.pdf Graphic file (type pdf)
+<use img/elettronicaEs/VGS.pdf>
+Package pdftex.def Info: img/elettronicaEs/VGS.pdf  used on input line 923.
+(pdftex.def)             Requested size: 135.89174pt x 137.3273pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 931--932
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 933--935
+
+ []
+
+<img/elettronicaEs/MOS2.pdf, id=538, 400.49625pt x 744.7825pt>
+File: img/elettronicaEs/MOS2.pdf Graphic file (type pdf)
+<use img/elettronicaEs/MOS2.pdf>
+Package pdftex.def Info: img/elettronicaEs/MOS2.pdf  used on input line 949.
+(pdftex.def)             Requested size: 90.5922pt x 168.46661pt.
+[19 <./img/elettronicaEs/MOS1.pdf> <./img/elettronicaEs/VGS.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 957--958
+
+ []
+
+
+Overfull \hbox (20.80756pt too wide) in paragraph at lines 959--961
+[]\OT1/cmr/m/n/12 Nel cir-cuito di figura []12[] $\OML/cmm/m/it/12 R \OT1/cmr/m
+/n/12 = 1 \OML/cmm/m/it/12 k\OT1/cmr/m/n/12 
+$, $\OML/cmm/m/it/12 C \OT1/cmr/m/n/12 = 1 \OML/cmm/m/it/12 ^^VF$\OT1/cmr/m/n/1
+2 . Qual'^^Re il val-ore in mod-ulo dell'amplificazione
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 959--961
+
+ []
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \let 
+l.962 RISPOSTA: $\left|
+                       A_v(\omega_0)\right| = 8,33$
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.962 RISPOSTA: $\left|A_v(\omega
+                                 _0)\right| = 8,33$
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing delimiter (. inserted).
+<to be read again> 
+                   \endgroup 
+l.962 RISPOSTA: $\left|A_v(\omega_0)\right|
+                                            = 8,33$
+I was expecting to see something like `(' or `\{' or
+`\}' here. If you typed, e.g., `{' instead of `\{', you
+should probably delete the `{' by typing `1' now, so that
+braces don't get unbalanced. Otherwise just proceed.
+Acceptable delimiters are characters whose \delcode is
+nonnegative, or you can use `\delimiter <delimiter code>'.
+
+! Extra \right.
+<to be read again> 
+                   \endgroup 
+l.962 RISPOSTA: $\left|A_v(\omega_0)\right|
+                                            = 8,33$
+I'm ignoring a \right that had no matching \left.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.962 RISPOSTA: $\left|A_v(\omega_0)\right|
+                                            = 8,33$
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+                \right .
+l.962 ...OSTA: $\left|A_v(\omega_0)\right| = 8,33$
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 967--968
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 969--972
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 978--979
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 980--984
+
+ []
+
+<img/elettronicaEs/filtrointegratore.pdf, id=569, 425.33907pt x 335.75438pt>
+File: img/elettronicaEs/filtrointegratore.pdf Graphic file (type pdf)
+<use img/elettronicaEs/filtrointegratore.pdf>
+Package pdftex.def Info: img/elettronicaEs/filtrointegratore.pdf  used on input
+ line 989.
+(pdftex.def)             Requested size: 135.89174pt x 107.2694pt.
+[20 <./img/elettronicaEs/MOS2.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 997--998
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 999--1002
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1016--1017
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1018--1023
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1036--1037
+
+ []
+
+[21 <./img/elettronicaEs/filtrointegratore.pdf>]
+<img/elettronicaEs/raddrizzatore.pdf, id=604, 712.6625pt x 226.8475pt>
+File: img/elettronicaEs/raddrizzatore.pdf Graphic file (type pdf)
+<use img/elettronicaEs/raddrizzatore.pdf>
+Package pdftex.def Info: img/elettronicaEs/raddrizzatore.pdf  used on input lin
+e 1054.
+(pdftex.def)             Requested size: 226.48395pt x 72.09077pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1062--1063
+
+ []
+
+[22 <./img/elettronicaEs/raddrizzatore.pdf>]
+<img/elettronicaEs/EC.pdf, id=624, 2294.5725pt x 2294.5725pt>
+File: img/elettronicaEs/EC.pdf Graphic file (type pdf)
+<use img/elettronicaEs/EC.pdf>
+Package pdftex.def Info: img/elettronicaEs/EC.pdf  used on input line 1091.
+(pdftex.def)             Requested size: 226.48395pt x 226.45963pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1099--1100
+
+ []
+
+[23 <./img/elettronicaEs/EC.pdf>]
+<img/elettronicaEs/CC.pdf, id=644, 2308.625pt x 2281.52374pt>
+File: img/elettronicaEs/CC.pdf Graphic file (type pdf)
+<use img/elettronicaEs/CC.pdf>
+Package pdftex.def Info: img/elettronicaEs/CC.pdf  used on input line 1127.
+(pdftex.def)             Requested size: 226.48395pt x 223.81409pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1135--1136
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1137--1139
+
+ []
+
+<img/elettronicaEs/ampli.pdf, id=646, 1062.97125pt x 599.23875pt>
+File: img/elettronicaEs/ampli.pdf Graphic file (type pdf)
+<use img/elettronicaEs/ampli.pdf>
+Package pdftex.def Info: img/elettronicaEs/ampli.pdf  used on input line 1144.
+(pdftex.def)             Requested size: 135.89174pt x 76.60538pt.
+<img/elettronicaEs/trasferimento.pdf, id=647, 1019.81pt x 722.7pt>
+File: img/elettronicaEs/trasferimento.pdf Graphic file (type pdf)
+<use img/elettronicaEs/trasferimento.pdf>
+Package pdftex.def Info: img/elettronicaEs/trasferimento.pdf  used on input lin
+e 1145.
+(pdftex.def)             Requested size: 135.89174pt x 96.29211pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1153--1154
+
+ []
+
+[24 <./img/elettronicaEs/CC.pdf> <./img/elettronicaEs/ampli.pdf> <./img/elettro
+nicaEs/trasferimento.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 1155--1157
+
+ []
+
+<img/elettronicaEs/BJT1.pdf, id=684, 406.51875pt x 735.74875pt>
+File: img/elettronicaEs/BJT1.pdf Graphic file (type pdf)
+<use img/elettronicaEs/BJT1.pdf>
+Package pdftex.def Info: img/elettronicaEs/BJT1.pdf  used on input line 1171.
+(pdftex.def)             Requested size: 45.29955pt x 81.97668pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1179--1180
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1181--1185
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1200--1201
+
+ []
+
+[25 <./img/elettronicaEs/BJT1.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 1202--1206
+
+ []
+
+<img/elettronicaEs/MOSpiccolo1.pdf, id=704, 1689.31125pt x 690.58pt>
+File: img/elettronicaEs/MOSpiccolo1.pdf Graphic file (type pdf)
+<use img/elettronicaEs/MOSpiccolo1.pdf>
+Package pdftex.def Info: img/elettronicaEs/MOSpiccolo1.pdf  used on input line 
+1218.
+(pdftex.def)             Requested size: 226.48395pt x 92.5815pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1225--1226
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1227--1231
+
+ []
+
+<img/elettronicaEs/MOSpiccolo2.pdf, id=706, 1318.9275pt x 915.42pt>
+File: img/elettronicaEs/MOSpiccolo2.pdf Graphic file (type pdf)
+<use img/elettronicaEs/MOSpiccolo2.pdf>
+Package pdftex.def Info: img/elettronicaEs/MOSpiccolo2.pdf  used on input line 
+1242.
+(pdftex.def)             Requested size: 226.48395pt x 157.18378pt.
+[26 <./img/elettronicaEs/MOSpiccolo1.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 1250--1251
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1252--1256
+
+ []
+
+<img/elettronicaEs/MOSampli.pdf, id=723, 1962.33125pt x 1319.93124pt>
+File: img/elettronicaEs/MOSampli.pdf Graphic file (type pdf)
+<use img/elettronicaEs/MOSampli.pdf>
+Package pdftex.def Info: img/elettronicaEs/MOSampli.pdf  used on input line 127
+1.
+(pdftex.def)             Requested size: 226.48395pt x 152.32262pt.
+[27 <./img/elettronicaEs/MOSpiccolo2.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 1279--1280
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1281--1284
+
+ []
+
+<img/elettronicaEs/transdiodo2.pdf, id=741, 888.31876pt x 1073.00874pt>
+File: img/elettronicaEs/transdiodo2.pdf Graphic file (type pdf)
+<use img/elettronicaEs/transdiodo2.pdf>
+Package pdftex.def Info: img/elettronicaEs/transdiodo2.pdf  used on input line 
+1306.
+(pdftex.def)             Requested size: 135.89174pt x 164.13705pt.
+[28 <./img/elettronicaEs/MOSampli.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 1314--1315
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1316--1319
+
+ []
+
+<img/elettronicaEs/transdiodo3.pdf, id=763, 1125.20375pt x 858.20625pt>
+File: img/elettronicaEs/transdiodo3.pdf Graphic file (type pdf)
+<use img/elettronicaEs/transdiodo3.pdf>
+Package pdftex.def Info: img/elettronicaEs/transdiodo3.pdf  used on input line 
+1341.
+(pdftex.def)             Requested size: 135.89174pt x 103.63506pt.
+[29 <./img/elettronicaEs/transdiodo2.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 1349--1350
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1351--1353
+
+ []
+
+<img/elettronicaEs/invertente4R.pdf, id=785, 563.10374pt x 285.065pt>
+File: img/elettronicaEs/invertente4R.pdf Graphic file (type pdf)
+<use img/elettronicaEs/invertente4R.pdf>
+Package pdftex.def Info: img/elettronicaEs/invertente4R.pdf  used on input line
+ 1358.
+(pdftex.def)             Requested size: 181.18439pt x 91.72287pt.
+[30 <./img/elettronicaEs/transdiodo3.pdf> <./img/elettronicaEs/invertente4R.pdf
+>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1363.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1363.
+ (./elettronica.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1363.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1363.
+
+Package rerunfilecheck Info: File `elettronica.out' has not changed.
+(rerunfilecheck)             Checksum: 62C71F3540741342287434090F01C536;1757.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1363.
+ ) 
+Here is how much of TeX's memory you used:
+ 21099 strings out of 492649
+ 380485 string characters out of 6129607
+ 469095 words of memory out of 5000000
+ 24451 multiletter control sequences out of 15000+600000
+ 18361 words of font info for 75 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 55i,12n,54p,936b,493s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
+/usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></u
+sr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
+/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
+ocal/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
+al/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local
+/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/te
+xlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texli
+ve/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
+2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2
+018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
+18/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2018
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on elettronica.pdf (30 pages, 3648132 bytes).
+PDF statistics:
+ 891 PDF objects out of 1000 (max. 8388607)
+ 682 compressed objects within 7 object streams
+ 121 named destinations out of 1000 (max. 500000)
+ 448 words of extra memory for PDF output out of 10000 (max. 10000000)
+

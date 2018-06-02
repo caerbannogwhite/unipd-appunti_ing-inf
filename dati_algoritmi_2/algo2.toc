@@ -1,0 +1,4 @@
+\contentsline {section}{\numberline {1}Teoria dell'NP-Completezza}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Introduzione}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Linguaggi Formali}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Classi di complessit\IeC {\`a}}{4}{subsection.1.3}

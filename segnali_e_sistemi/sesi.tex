@@ -1,0 +1,591 @@
+\documentclass[a4paper,portrait,12pt]{article}
+\usepackage[top=0.5in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{epstopdf}
+\usepackage{float}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usepackage{subfloat}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{eufrak}
+\usepackage{subfiles}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{csquotes}
+\usepackage{program}
+\usepackage{mathtools}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definizione}[section]
+
+\newtheorem{proposition}{Proposizione}
+\newtheorem{corollary}{Corollario}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+ 
+\begin{document}
+
+\title{Appunti Di Segnali E Sistemi}
+
+\maketitle
+\date
+\newpage
+
+\tableofcontents
+\newpage
+
+Appunti di segnali e sistemi presi principalmente dalle dispense di M. Pavon e L. Finesso e dal libro 
+\textit{Signals and Systems} di A. Oppenheim e A. Willsky.
+
+
+\section{Introduzione}
+
+Che cos'è un segnale? Un segnale è un qualunque fenomeno fisico che si evolve nel tempo, come per esempio la 
+posizione di un corpo in moto, oppure nello spazio: un'immagine digitale può essere trattata come un segnale
+bidimensionale e come tutti i segnali può essere elaborata, vedi algoritmo JPEG.\\
+In questi appunti si tratterà ovviamente solo di segnali appartenenti alla prima categoria. Si vedrà come
+rappresentarli matematicamente e come rappresentare anche i \textit{sistemi}, che trasformano segnali
+in altri segnali.\\
+Particolari sistemi, detti \textit{LTI}, restituiscono la convoluzione tra il segnale d'ingresso e la
+\textit{risposta impulsiva}, che caratterizza il sistema stesso. Questi hanno quindi una rappresentazione
+relativamente semplice.\\
+\textit{Molti} segnali possono invece essere rappresentati \textit{in forma di Fourier}, con le serie
+omonime nel caso siano periodici, o con la trasformata nel caso non lo fossero.\\
+Si parla anche di equazioni differenziali e alle differenze (linearei e a coefficienti costanti) e di come 
+queste si possano associare a dei sistemi. Con la trasformata di Laplace e con la trasformata Zeta è anche 
+possibile risolvere in modo rapido queste equazioni.  
+\bigskip
+
+\section{Segnali}
+
+Ho detto che un segnale è un fenomeno fisico che si evolve nel tempo, perciò quale migliore rappresentazione
+potrebbe esserci se non una funzione del tempo $x(t)$? Infatti così si rappresentano buona parte dei segnali
+ma non tutti. Il segnale $x(t)$ ha infatti come dominio $\mathbb{R}$ e va bene per rappresentare un 
+elettrocardiogramma oppure la tensione in uscita su un'ampificatore per chitarre. Ma un computer può 
+elaborare un tale segnale? Assolutamente no! Un comuputer elabora solamente segnali digitali, quindi che 
+hanno per dominio e codominio $\mathbb{Z}$.\\
+Comunque non ci occupa di segnali digirali in questi appunti ma di segnali a tempo discreto, quindi solo
+con dominio discreto. Con questi segnali si può rappresentare la temperatura media giornaliera 
+(\textit{analogica}!), oppure la popolazione di un paese nel corso degli anni.\\
+Ricapitolando:
+\begin{itemize}
+\item $x(t)$ rappresenta un generico segnale a tempo continuo, quindi $x : \mathbb{R} \mapsto \mathbb{R}$;
+\item $x(n)$ rappresenta un generico segnale a tempo discreto, quindi $x : \mathbb{Z} \mapsto \mathbb{R}$.
+\end{itemize}
+\bigskip
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|l|l||l|l|}
+\hline
+Area & $A_x = \int_{t_1}^{t_2}x(t)dt$ & Valore medio & $m_x = {1 \over t_2 - t_1}\int_{t_1}^{t_2}x(t)dt$\\
+\hline
+Energia & $E_x = \int_{t_1}^{t_2}\left|x(t)\right|^2dt$ & Potenza media & $P_x = {1 \over t_2 - 
+t_1}\int_{t_1}^{t_2}\left|x(t)\right|^2dt$\\
+\hline
+\end{tabular}
+\caption{Principali parametri dei segnali a tempo continuo.}
+\end{center}
+\end{table}
+
+I moduli sono necessari per i segnali \textit{complessi}. Spesso si definiscono i parametri per intervalli 
+infiniti, quindi fare il limite per $t_1 \to -\infty$ e per $t_2 \to \infty$. Per i parametri dei segnali 
+a tempo discreto, "sostiturire" gli integrali con delle sommatorie. Esempio, potenza media:
+\begin{equation}
+P_x = {1 \over n_2 - n_1 + 1}\sum_{n = n_1}^{n_2}\left|x(n)\right|^2
+\end{equation}
+Energia mutua tra due segnali:
+\begin{equation}
+E_{x,y} = \int_{-\infty}^{\infty}x(t)\,\overline{y(t)}dt
+\end{equation}
+dove $\overline{y(t)}$ è il complesso coniugato. Se $x = y$ allora $E_{x,y} = E_x$.\\
+Valgono le seguenti considerazioni su potenza ed energia (abbastanza banali).
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{l}
+$E_{\infty} < \infty \Rightarrow P_{\infty} = 0$\\
+$P_{\infty} > 0 \Rightarrow E_{\infty} = \infty$\\
+\end{tabular}
+\caption{Considerazioni riassuntive su potenza e energia.}
+\end{center}
+\end{table}
+
+L'insieme di tutti i segnali a energia finita è $L^2$ ed è definito sia per i segnali continui a supparto 
+limitato che illimitato. Per i segnali discreti si definisce solo per quelli a supporto illimitato. Vale la 
+disuguaglianza di Cauchy-Schwarz
+\begin{equation}
+\left|E^{x,y}\right| \le \sqrt{E_x E_y}
+\end{equation}
+Per la dimostrazione, calcolare l'energia del segnale $z(t) = x(t) + \alpha y(t)$.
+$L^2$ è uno spazio vettoriale su $\mathbb{C}$ e l'energia mutua tra due segnali può essere interpretata 
+come un \textit{prodotto scalare} in $L^2$.
+\bigskip
+
+
+\section{Trasformazioni nella variabile indipendente}
+
+Ecco le operazioni che si possono effettuare sulla variabile indipendente.
+\begin{itemize}
+\item \textit{Time shifting}: preso il segnale $x(t)$, il segnale trasformato $x(t-t_0)$ corrisponde a $x(t)$
+	traslato in avanti della quantità $t_0$.
+\item \textit{Time reversing}: preso il segnale $x[n]$, il segnale trasformato $x[-n]$ corrisponde ad una
+	simmetria rispetto all'asse $y$ di $x[n]$.
+\item \textit{Time scaling}: di cui il time reversing è solo un caso particolare, corrisponde ad un ampliamento
+	o restringimento del dominio del segnale di partenza $x(t)$ e si ottine con $x(\alpha t)$. 
+\end{itemize}
+\bigskip
+
+
+\section{Simmetrie}
+
+Un segnale a valori complessi con parte reale pari e parte immaginaria dispari gode di simmetria 
+\textit{hermitiana} mentre se ha parte reale dispari e parte immaginaria pari allora si dice che è
+\textit{anti-hermitiano}.
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|l||l|}
+\hline Parte pari & Parte dispari\\
+\hline \rule[-4mm]{0mm}{1cm} $x_p(t) = {x(t) + x(-t) \over 2}$ & $x_d(t) = {x(t) - x(-t) \over 2}$\\
+\hline
+\end{tabular}
+\caption{Parte pari e parte dispari di un segnale.}
+\end{center}
+\end{table}
+\bigskip
+
+
+\section{Segnali periodici}
+
+Un segnale $x(t)$ si dice periodico di periodo $T$ se vale $x(t) = x(t + T)$ per ogni $t$. Somme e prodotti
+di segnali periodici possono essere anch'essi periodici a patto che il rapporto tra i loro periodi sia un
+numero \textit{razionale}. Inolte, se si tratta di segnali a tempo discreto, il periodo deve essere 
+necessariamente un multiplo \textit{intero} del rapporto.
+
+\textbf{Combinazione armonica.} Una combinazione lineare (famiglia) di exponenzioali complessi si dice in 
+relazione armonica se sono tutti multipli di uno stesso periodo fondamentale $T_0$ e si scrive
+\begin{equation}
+\Phi_k(t) = e^{jk\omega_0t}
+\end{equation}
+\bigskip
+
+
+\section{Sistemi}
+
+I sistemi trasformano segnali in altri segnali. Una funzione che ha per dominio e codominio insiemi di 
+funzioni è detta \textit{operatore}. Esempi concreti possono essere il codificatore (encoder) e il 
+decodificatore (decoder).\\ 
+Alcuni sistemi vengono progettati per controllare altri sistemi, processi fisici o tecnologici. Sistemi 
+in catena aperta o chiusa (a feedback).\\
+Matematicamente, un sistema è una terna $(X,Y,\Sigma)$ dove $X$ e $Y$ sono famiglie di segnali e $\Sigma$ 
+è una mappa da $X$ a $Y$ quindi $\Sigma[x(t)] = y(t)$.\\
+Se $X$ è discreto e $Y$ è continuo o viceversa il sistema è detto \textit{ibrido}.
+\bigskip
+
+\textbf{Sistemi algebrici.} Detti anche statici o senza memoria (\textit{memoryless}), sono delle funzioni, 
+tipo la legge di Ohm, ovvero i loro output in un istante $t'$ dipendono solamente dall'input al tempo $t'$
+come ad esempio $\Sigma[x(t)] = f(t,x(t))$.\\ 
+Esempi di sistemi \textit{con} memoria sono invece il condensatore o il delay.
+\bigskip
+
+\textbf{Sistemi dinamici.} O non algebrici, sono trasforamazioni nella variabile indipendente. 
+La trasformazione più generale è $x(t) \mapsto x(\alpha t + \beta)$ con $\alpha,\beta \in \mathbb{R}$ e 
+$\alpha \neq 0$. Oppure sono sistemi di tipo integratore o sommatore come $y(t) = \int_{-\infty}^t 
+x(\tau)d\tau$ e $y(n) = \sum_{k=-\infty}^n x(k)$.
+\bigskip
+
+\textbf{Sistemi causali.} Un sistema si dice causale (non anticipativo) se $y(t)$ dipende 
+solo da $x(\tau)$ per $\tau \le t, \forall t$. I sistemi statici sono anche causali, l'integratore e il 
+sommatore sono causali se si integra o si somma fino a $t$.
+\bigskip
+
+\textbf{Sistemi tempo-invarianti.} Un sistema a tempo continuo (o discreto) si dice TI se una traslazione 
+temporale all'ingresso provoca un'uguale traslazione temporale all'uscita. Non definito per sistemi ibridi. 
+\begin{equation}
+\Sigma :x(t-T) \mapsto y(t-T),\forall T \in \mathbb{R}
+\end{equation}
+Il cambio di scala non è TI. Formalmente, un sistema è TI se \textit{commuta} con le traslazioni temporali, 
+ovvero se (anche per il caso discreto) $(\Sigma \circ U_T)[x(t)] = y(t - T) = (U_T \circ \Sigma)$ 
+dove $U_T$ è la traslazione di tempo $T$.
+\bigskip
+
+\textbf{Sistemi lineari.} Un sistema è lineare se possiede le proprietà di additività e omogeneità.
+\bigskip
+
+\textbf{Sistemi BIBO-stabili.} Un sistema si dice BIBO-stabile (ovvero Bounded Input Bounded Output) se
+\begin{equation}
+\exists M_x : \left|x(t)\right| \le M_x \, \forall t \Rightarrow \exists M_y : \left|y(t)\right| 
+\le M_y \, \forall t
+\end{equation}
+Per verificare la BIBO stabilità di un sistema basta considerare un generico segnale $x'(t)$, limitato
+$-B \le x'(t) \ge B$. Tenendo conto dei limiti superiore e inferiore di $x'(t)$, valutare l'uscita del
+sistema $y'(t)$ in funzione di $B$ e verificare che sia limitata.
+\bigskip
+
+
+\section{Sistemi LTI} 
+
+Perché i sistemi LTI sono così importanti? Molti fenomeni in natura possono essere descritti come sistemi LTI
+e questi sistemi sono descritti dettagliatamente.\\ 
+La loro proprietà più importante è la sovrapposizione degli effetti, o \textit{superposition}. Molti segnali
+possono essere descritti come sommatorie (combinazioni lineari) di impulsi. Sarà molto facile quindi trattare
+questi segnali in ingresso ad un sistema LTI, conoscendone la sua \textit{risposta impulsiva}.
+\bigskip
+
+\textbf{Risposta impulsiva e convoluzione.} Dato un sistema LTI a tempo discreto la sua risposta all'impulso 
+unitario si indica con $h[n]$. Quindi si ha che
+\begin{equation}
+y[n] = \sum_{k=-\infty}^{+\infty}x[n]h[n-k]
+\end{equation}
+Questa formula è nota come convoluzione a tempo discreto (in inglese nota come \textit{convolution sum} o 
+\textit{superposition sum} che forse rende un po' più l'idea di ciò che fa). L'esempio 2.1 a pagina 80
+del libro fornisce un buon modo per visualizzare la convoluzione.\\
+Per i segnali a tempo continuo la questione non è molto diversa, ma essendo la distanza tra un impulso e
+l'altro infinitesima si ha
+\begin{equation}
+y(t) = \int_{-\infty}^{+\infty}x(t-\tau)h(\tau)d\tau
+\end{equation}
+Questo è noto come \textit{integrale convoluzionale} e si indica spesso con la notazione 
+$y(y)=x(t) \ast y(t)$.\\
+Le principali proprietà della convoluzione sono:
+\begin{itemize}
+\item \textit{commutatività}, infatti $x(t) \ast h(t) = h(t) \ast x(t)$;
+\item \textit{distributività}, $x(t) \ast (h_1(t) + h_2(t)) = x(t) \ast h_1(t) + x(t) \ast h_2(t)$;
+\item \textit{associatività}, $x(t) \ast (h_1(t) \ast h_2(t)) = (x(t) \ast h_1(t)) \ast h_2(t)$;
+\item \textit{invertibilità}, per alcuni sistemi vale infatti $h_1(t) \ast h_2(t) = \delta (t)$ come ad 
+	esempio per la \textit{differenza prima} definita come $y[n] = x[n] - x[n-1]$, se $h_1[n] = u[n]$ e
+	$h_2[n] = \delta [n] - \delta [n-1]$ si ha $h_1[n] \ast h_2[n] = \delta [n]$.
+\item per quanto riguarda la \textit{stabilità}, se l'input è limitato per avere output limitato la risposta
+	impulsiva deve essere \textit{assolutamente integrabile}.
+\end{itemize}
+Per i sistemi senza memoria la risposta impulsiva è sempre nella forma
+\begin{equation}
+h[n] = K \delta [n]
+\end{equation}
+\bigskip
+
+\textbf{Risposta al gradino unitario.} Un altro segnale fondamentale è il gradino e per trovare la risposta
+a questo segnale per un sistema LTI basta usare $s(t) = h(t) \ast u(t)$ che equivale a $s(t) = 
+\int_{-\infty}^t h(\tau)d\tau$ da cui si ricava che
+\begin{equation}
+h(t) = {d s(t) \over dt} = s'(t)
+\end{equation}
+Bisogna infine aggiungere che i segnali a supporto finito sono densi in $l^1 = \{x \mid 
+\sum_{n=-\infty}^{+\infty}\left|x(n)\right|\} < \infty $ e quindi in $l^2 = \{x \mid 
+\sum_{n=-\infty}^{+\infty}\left|x(n)\right|^2 < \infty\}$.\\
+Inoltre se $z(t) = x(t) \ast y(t)$ allora $\parallel z \parallel_1 \le \parallel x \parallel_1 \cdot
+\parallel y \parallel_1$, perciò la convoluzion è ben definita in $l^1$. 
+\bigskip
+
+\textbf{Risposta in frequenza.} Si consideri un sistema convoluzionale e BIBO-stabile, ovvero la sua risposta
+impulsiva $h(t)$ è assolutamente integrabile. Si definisce \textit{risposta in frequenza} del sistema
+\begin{equation}
+H(j \omega) = \int_{-\infty}^{\infty} h(\tau) e^{-j\omega \tau} d\tau
+\end{equation}
+Se ne conclude che segnali del tipo $x(t) = c\,e^{j\omega t}$ sono $autofunzioni$ del sistema e quindi il
+segnale d'uscita sarà $y(t) = H(j\omega)\,c\,e^{j\omega t}$. Per le sinusoidi (essendo combinazioni di
+esponenziali complessi) vale
+\begin{equation}
+\cos(\omega t + \phi) \mapsto \left|H(j\omega)\right| \cos(\omega t + \phi + \angle H(j \omega))
+\end{equation}
+\bigskip
+
+
+\section{Serie di Fourier}
+
+Riprendendo l'ultimo argomento della sezione precedente possiamo dire che se l'input di un sistema LTI è 
+una combinazione linare di esponenziali complessi $x(t) = a_1e^{s_1t}+a_2e^{s_2t}+a_3e^{s_3t}$ con 
+$s_i\in\mathbb{C}$, per la sovrapposizione degli effetti e per la proprietà di
+$e^{s_it}$ di essere una autofunzione dei sistemi LTI, si ottiene come output 
+$y(t) = \sum_{i=1}^3 a_i\,H(s_i)\,e^{s_it}$,
+dove $H(s)$ è la risposta in frequenza del sistema considerato. Arrivati a questo punto ci si chiede quale
+classe di segnali può essere rappresentata con esponenziali complessi. 
+\bigskip
+
+\textbf{Coefficienti di Fourier.} (App. 111) Dato un segnale $x(t)$ (assolutamente integrabile) e una 
+famiglia di esponenziali in relazione armonica $\phi_k(t) = e^{jk\omega_0t}$ per $k\in\mathbb{Z}$, $a_k$ si 
+dice \textit{k-esimo coefficiente di Fourier} di $x$ rispetto a tale famiglia il valore dato da
+\begin{equation}
+a_k = {1 \over T}\int_0^Tx(t)\,\overline{\phi_k(t)}\,dt = {1 \over T}\int_0^Tx(t)\,e^{-j\omega_0kt}\,dt
+\end{equation}
+Come arrivare a questa formula? Partendo dal segnale $x(t)$ che può essere scritto come
+$x(t) = \sum_{k=-\infty}^{\infty}\,a_k\,e^{jk\omega_0t}$
+moltiplicando entrabe i lati per $e^{-jn\omega_0t}$,integrando in $dt$ nel periodo $[0,T]$, portando fuori 
+la sommatoria e i temini $a_k$ si ha che
+\begin{equation}
+\int_0^Te^{j(k-n)\omega_0t} = T \delta_{n,k} 
+\end{equation}
+dove $\delta_{n,k}$ è la \textit{delta di Kronecker} e risulta $0$ se $k\neq n$ e $T$ se $k = n$. Questa
+ultima equazione è molto utile per comprendere la proprietà di \textit{ortogonalità}.
+\bigskip
+
+\textbf{Teorema di Riesz-Fisher.} Sia $\{a_k\}_{k=-\infty}^{\infty}$ una successione di numeri 
+complessi per cui vale $\sum_{k=-\infty}^{\infty}\left|a_k\right|^2 < \infty$ (quindi $\{a_k\} \in l^2$). 
+Allora esiste un segnale $x$ definito su $[0,T)$ ad energia finita tale che
+\begin{equation}
+a_k = {1 \over T}\int_0^Tx(t)\,e^{-jk\omega_0t}\,dt
+\end{equation}
+\bigskip
+
+\textbf{Teorema di Dirichlet.} In breve, se $x(t)$ nel periodo $[0,T]$ 
+\begin{itemize}
+\item \textit{continuo a tratti}, quindi ha un numero finito di discontinuità
+\item esistono finiti i limiti destro e sinistro di $x(t)$ in $(0,T)$,
+\item che sia sempre differenziabile (ad eccezione dei punti di discontinuità dove comunque la derivata deve
+	essere finita),
+\end{itemize}
+allora
+\begin{equation}
+s_n (t) = \sum_{k=-N}^N a_k e^{jk{2 \pi \over T}t} \mapsto {x(t_-) + x(t_+) \over 2}
+\end{equation}
+Quindi se $x(t)$ è periodico, soddisfa le condizioni di Dirichlet ed è continuo si dice che è 
+\textit{sviluppabile in serie di Fourier}.
+\bigskip
+
+\textbf{Forme alternative della serie di Fourier.} Sotto le condizioni sopra descritte, per un segnale 
+\textit{reale} $x(t)$ vale
+\begin{equation}
+x(t) = a_0 + 2\sum_{k=1}^{\infty}A_k\,\cos(k\omega_0t+\theta_R)
+\end{equation}
+\bigskip
+
+\textbf{Teorema di Parseval.} Siano $x$ e $y$ segnali a energia finita in $[0,T)$ con 
+coefficienti di Fourier $a = \{a_k\}$ e $b = \{b_k\}$ allora
+\begin{equation}
+{1 \over T}\int_0^Tx(t)\,\overline{y(t)}\,dt = \sum_{k=-\infty}^{\infty}a_k\,\overline{b_k}
+\end{equation}
+Per $x = y$, il primo termine rappresenta la potenza del segnale sul periodo che equavale alla somme di 
+tutti i moduli al quadrato dei suoi coefficienti di Fourier.
+\bigskip
+
+\textbf{Spazi di Hilbert.} Sia $H$ uno spazio vettoriale complesso in cui è definita la mappa $H \times H
+\mapsto \mathbb{C}$ detta \textit{prodotto scalare}. Valgano le seguenti proprietà
+\begin{itemize}
+\item $\langle y,x \rangle = \overline{\langle x,y \rangle}$;
+\item $\langle x+y,z \rangle = \langle x,z \rangle + \langle y,z \rangle$;
+\item $\langle x,x \rangle \ge 0$, $\langle x,x \rangle = 0$ se e solo se $x = 0$.
+\end{itemize}
+Per $x \in H$ si definisce $\parallel x \parallel = \langle x,x \rangle^{1 \over 2}$ (è una norma). Valgono
+le disuguaglianze di Cauchy-Schwarz e quella triangolare.\\
+Inoltre si dice che $x_n$ tende a $x$ in $H$ se $\parallel x_n - x \parallel \to 0$. Esempi:
+\begin{itemize}
+\item $\mathbb{C}^n$ è uno spazio di Hilbert;
+\item $l^2$ è uno spazio di Hilbert con $\langle a,b \rangle_{l^2} = \sum_{k=-\infty}^{\infty} a_k 
+	\overline{b_k}$;
+\item $L^2(0,T)$ è uno spazio di Hilbert con $\langle a,b \rangle_{L^2} = {1 \over T} \int_0^T x(t) 
+	\overline{y(t)}dt$.
+\end{itemize}
+Quindi sia $x \in L^2$ e $a \in l^2$ la successione dei suoi coefficienti di Fourier, allora la mappa 
+$F_s : x \mapsto a$ è lineare e conserva il prodotto scalere quindi è un'\textit{isometria} (isomorfismo
+di spazi di Hilbert). Da teorema di Riesz-Fischer si deduce anche che $\{\phi_k (t)\}_{k=-\infty}^{\infty}$
+sono una base ortonormale di $L^2(0,T)$.  
+\bigskip
+
+\textbf{Risultato fondamentale.} Sia $x(t)$ periodico di periodo $T$ ad energia finita su $[0,T)$, quindi
+$x(t) = \sum_{k = -\infty}^{\infty}a_k\,e^{jk\omega_0t}$. Allora vale
+\begin{equation}
+y(t) = \int_{-\infty}^{\infty}h(\tau)x(t-\tau)d\tau = ... = \sum_{k = -\infty}^{\infty}a_k\,H(jk\omega_0)
+\,e^{jk\omega_0t}
+\end{equation}
+\textit{Awesome}! Si capisce subito che $y$ è ancora periodica di periodo $T$, a energia finita e i suoi 
+coefficienti di Fourier di $y(t)$ sono $b_k=H(jk\omega_0)\,a_k$. Questo apre la strada a manipolazioni 
+selettive delle armoniche.
+\bigskip
+
+\textbf{Segnali notevoli.} Il segnale reale chiamato \textit{onda quadra} e definito come 
+\[
+x(t) = \left\{ 
+	\begin{array}{ll}
+	1 & \left|t\right| < T_1\\
+	0 & T_1 < \left|t\right| < {T\over 2}\\
+	\end{array} 
+	\right.
+\]
+ha come coefficienti di Fourier i valori $a_0 = {2T_1 \over T}$ e $a_k = {\sin(k\omega_0 T_1) \over k \pi}$.
+Questo ultimo segnale è noto come $sinc(t)$.
+\bigskip
+
+
+\section{Filtri}
+In molte applicazioni si vuole cambiare le ampiezze delle varie componenti armoniche o eliminarne completamente
+alcune, magari in un intervallo $[\omega_1,\omega_2]$. Questo si ottiene con dei sistemi detti filtri.
+\bigskip
+
+
+\section{Equazioni differenziali e alle differenze}
+
+In questa sezione si tratterà brevemente delle equazioni differenziali lineari a coefficienti costanti e delle
+equazioni alle differenze lineari a coefficienti costanti.
+\bigskip
+
+\textbf{Equazioni differenziali lineari a coefficienti costanti.} Dato che è illegale scrivere ogni volta
+\textit{equazione differenziale lineare a coefficienti costanti}, d'ora in poi le chiamerò semplicemente EDLCC,
+anche se generalmente vengono dette \textit{EDO a coefficienti costanti} (oppure \textit{ODE}, nei testi
+anglosassoni). Dunque, le EDLCC si possono generalmente rappresentare con
+\begin{equation}
+\label{eqn:edlccgen}
+\sum_{k=0}^N a_k\,y^{(k)}(t) = \sum_{k=0}^M b_k\,x^{(k)} (t)
+\end{equation}
+e chiaramente se $y_1$ e $y_2$ sono soluzioni di~\eqref{eqn:edlccgen} allora anche $y_1 + y_2$ lo è, questo 
+per la proprietà di linearità. Inoltre, traslando di $t_0$ la funzione $x$ si ottiene un'eguale traslazione 
+su $y$. Se poi abbiamo $a_1 = -a_2$ e $y_1 = y_2$ si nota che la soluzione trovata può risolvere 
+\begin{equation}
+\label{eqn:edlccomo}
+\sum_{k=0}^N a_k\,y^{(k)}(t) = 0
+\end{equation}
+che che viene chiamata \textit{omogenea} della~\eqref{eqn:edlccgen} e $y_0$ è la sua soluzione, o meglio 
+\textit{una} delle sue soluzioni, dato che queste sono un insieme o meglio uno \textit{spazio vettoriale}.\\ 
+Ogni EDLCC ha per soluzione $y = y_p + y_0$ dove $y_p$ è una soluzione particolare mentre $y_0$ è uno 
+soluzione dell'omogenea associata. Ora basta considerare il solito esponeziale $e^p$ con $p \in \mathbb{C}$ 
+e osservare che
+\begin{equation}
+\sum_{k=0}^N a_k\,\{e^p\}^{(k)} = e^p \sum_{k=0}^N a_k\,p^k
+\end{equation}  
+dove l'ultima sommatoria, ovvero il polinomio $s(p) = a_Np^N + ... + a_1p + a_0$ è detto \textit{polinomio 
+associato} e per il teorema fondamentale dell'algebra ha esattamente $N$ radici distinte in $\mathbb{C}$.
+Tuttavia, se i coefficienti $a_k$ sono tutti reali le radici complesse compaiono a coppie di 
+complessi coniugati e questa è una bella notizia perché le soluzioni dell'omogenea sono quindi combinazioni
+lineari di semplici funzioni.
+\begin{itemize}
+\item $c\,e^{pt}$, per gli zeri $p$ distinti. Esempio:\\
+	EDLCC: $y'' - y' -6y = 0$\\
+	Polinomio associato: $s(p) = p^2 - p - 6 = (p + 2)(p - 3)$\\
+	Soluzione dell'omogenea: $y_0 = c_1e^{-2t} + c_2e^{3t}$
+\item $c\,t^r\,e^{pt}$, per gli zeri $p$ multipli. Esempio:\\
+	EDLCC: $y'' - 4y' +4 = 0$\\
+	Polinomio associato: $s(p) = p^2 - 4p + 4 = (p -2) (p-2)$\\
+	Soluzione dell'omogenea: $y_0 = c_1e^{2t} + c_2t\,e^{2t}$
+\item $\cos t$ e $\sin t$ per gli zeri $p$ complessi coniugati. Esempio:\\
+	EDLCC: $y'' + 2y' + 5 y=0$\\
+	Polinomio associato: $s(p) = p^2 + 2p + 5$\\
+	Soluzione dell'omogenea: $y_0 = c_1 e^{-t} \cos 2t + c_2 e^{-t} \sin 2t$
+\end{itemize}
+In tutti questi casi compare una costante $c$, da determinare quando vengono fornite le condizioni iniziali,
+in questo caso si parla di \textit{Problema di Cauchy}.
+\bigskip
+
+\textbf{EDLCC e sistemi LTI.} All'equazione~\eqref{eqn:edlccgen} è associato un unico sistema LTI e BIBO 
+stabile solo se il polinomio caratteristico non ha radici immaginarie. La risposta in frequenza 
+corrispondente a tale sistema si ottiene con
+\begin{equation}
+H(j\omega) = {\sum_{k=0}^n a_k (j\omega)^{(k)} \over \sum_{k=0}^m b_k (j\omega)^{(k)}}
+\end{equation}
+\bigskip
+
+\section{Trasformata di Fourier}
+Un segnale aperiodico $x(t)$ (con supporto finito) può essere pensato come un segnale periodico 
+$\tilde{x}(t)$ di periodo $T$ con $T \to \infty$ (quindi al diminuire della frequenza fondamentale).
+\bigskip 
+
+\textbf{Trasformata di Fourier a tempo continuo.} Sia $x(t)$ un segnale complesso, assolutamente integrabile 
+in $\mathbb{R}$, ovvero $\int_{-\infty}^{\infty}\left|x(t)\right|dt < \infty$ (quindi 
+$x \in L^1(-\infty,\infty)$). Allora la trasfornata di Fourier e la rispettiva antitrasformata sono date da:
+\begin{equation}
+\label{eqn:fouriertrans}
+X(j\omega) = \int_{-\infty}^{\infty}x(t) e^{-j\omega t}dt
+\end{equation}
+\begin{equation} 
+\label{eqn:fourieranti}
+x(t) = {1 \over 2\pi}\int_{-\infty}^{\infty} X(j\omega) e^{j\omega t} d\omega
+\end{equation}
+Essendo $x(t)$ assolutamente integrabile in $(-\infty,\infty)$ si deduce che $X(j\omega)$ è limitata, 
+continua e tende a $0$ per $\omega \to \pm \infty$.\\
+Le condizioni di Dirichlet forniscono una base sulla quale stabilire che segnali sono trasformabili e quali
+no, ovvero se $\tilde{x}(t)$ è uguale a $x(t)$:
+\begin{itemize}
+\item $x(t)$ assolutamente integrabile
+\item in ogni intervallo finito $x(t)$ deve avere un numero finito di massimi e minimi
+\item in ogni intervallo finito $x(t)$ deve avere un numero finito di discontinuità e inoltre queste 
+      devono essere finite
+\end{itemize}
+\bigskip
+
+\textbf{Teorema di Plancherel.} Siano $f$ e $g$ in $X_{1,2} = L^1(-\infty,\infty) \cap L^2(-\infty,\infty)$, 
+siano $F(j\omega)$ e $G(j\omega)$ le loro trasformate di Fourier allora vale
+\begin{equation}
+\label{eqn:plancherel}
+\langle f,g \rangle_{L^2} = \int_{-\infty}^{\infty} f(t)\overline{g(t)} dt = {1 \over 2\pi}
+\int{-\infty}^{\infty} F(j\omega)\overline{G(j\omega)}d\omega = \langle F,G \rangle_{L^2 \left({d\omega 
+\over 2\pi}\right)} 
+\end{equation}
+Se $x \in L^1(-\infty,\infty)$ allora la~\eqref{eqn:fouriertrans} definisce $X(j\omega)$ 
+\textit{puntualmente}. Se invece $x \in L^2$ la trasformata è un elemento di $L^2 \left({d\omega \over 2\pi}
+\right)$, quindi è un limite in media quadratica.\\
+Il teorema torna utile per calcolare l'energia del $sinc(t)$ conoscendo l'energia del $rect(t)$.
+\bigskip
+
+\textbf{Trasformata di Fourier per segnali periodici.} Partendo dalla trasformata $X(j\omega) = 2\pi\delta
+(\omega -\omega_0)$ si deduce che il segnale originale $x(t)$ doveva essere $e^{j\omega_0 t}$. Se anzichè 
+un singolo impulso si considera un treno di impulsi si capisce che il segnale di partenza doveva essere
+una combinazione lineare di sinusoidi e quindi un segnale periodico.
+\bigskip
+
+\textbf{Proprietà della trasformata.}
+\begin{itemize}
+\item la trasformata di Fourier è un operatore lineare
+\item per il time-shifting vale la relazione $x(t-t_0) \to e^{-j\omega t_0} X(j\omega)$
+\item simmetria del coniugato: $\bar{x}(t) \to \bar{X}(-j\omega)$
+\item per la derivazione vale ${d x(t) \over dt} \to j\omega X(j\omega)$
+\item per l'integrazione vale l'inverso (si divide per $j\omega$) ma le cose sono più delicate
+\item time-scaling $x(at ) \to {1\over \left|a\right|}X({j\omega \over a})$
+\end{itemize} 
+\bigskip
+
+\textbf{Teorema di convoluzione.} Si consideri un sistema LTI, BIBO stabile con ingresso $x(t)$ a energia 
+finita. Allora anche l'uscita $y(t)$ è ad energia finita e vale
+\begin{equation}
+\label{eqn:teoconv}
+Y(j\omega) = H(j\omega)\,X(j\omega)
+\end{equation}
+che rappresenta l'estensione ai segnali aperiodici della $b_k = H(j\omega_0 k)\,a_k$.
+\bigskip
+
+\section{Trasformata di Laplace.}
+
+La seguente definizione riassume chiaramente ciò di cui si tratterà in questa sezione.
+\begin{displayquote} \textit{La Trasformata di Laplace è un operatore matematico lineare che trasforma 
+qualcosa di difficile in qualcosa di estremamente complesso. Definita infatti una funzione $f(t)$ nel 
+dominio temporale, detto anche semplice, è possibile, mediante l'operatore di Laplace, passare ad una $F(s)$ 
+definita nel dominio complesso, detto anche della frequenza, che è di nome e di fatto molto più difficile. 
+I matematici la usano infatti per sboroneria e vanagloria in maniera del tutto inutile.}
+\end{displayquote}
+\hfill Da \textit{Nonciclopedia}\\
+Ma ad ingegneria non ci si lascia intimorire da simili sciocchezze.
+\bigskip
+
+\begin{comment}
+\section{Per l'esame}
+
+\begin{itemize}
+\item Dato un segnale, valutare se è periodico, pari, a valori reali (oppure calcolare periodo minimo, 
+serie di Fourier, l'uscita da un filtro MA) (6 pt)
+\item Data trasformata (di Fourier o Laplace), calcolare il segnale originale (4 pt)
+\item Dato un segnale e un tempo di campionamento dire se è possibile ricostruirlo (6 pt)
+\item Dato un sistema, dire se è causale, lineare, tempo invariante, BIBO stabil
+\item Dati segnali, calcolate area, energia, convoluzione e area convoluzione (6 pt)
+\item Dato un segnale calcolare coefficenti di Fourier
+\item Dato un sistema, calcolare l'uscita di un segnale d'ingresso dato
+\item Dati due segnali, tracciare il grafico della loro convoluzione, calcolare derivata generalizzata, 
+i coefficienti di Fourier (10 pt)
+\item Esercizio teorico su potenza e derivata
+\item Trovare trasformata di Fourier di due segnali (10 pt)
+\item Esercizio su campionamento segnale (8 pt)
+\item Dato problema da Cauchy, trovare funzione di trasferimento, capire se è BIBO stabile, determinare 
+risposte (10 pt)
+\item Data una equazione integrale, calcolare funzione di trasferimento
+\end{itemize}
+\end{comment}
+
+\end{document}

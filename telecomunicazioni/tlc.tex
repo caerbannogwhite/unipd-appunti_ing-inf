@@ -1,0 +1,221 @@
+\documentclass[a4paper,portrait,12pt]{article}
+\usepackage[top=0.5in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{epstopdf}
+\usepackage{float}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usepackage{subfloat}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{eufrak}
+\usepackage{subfiles}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{csquotes}
+\usepackage{program}
+\usepackage{mathtools}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definizione}[section]
+
+\newtheorem{proposition}{Proposizione}
+\newtheorem{corollary}{Corollario}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+ 
+\begin{document}
+
+\title{Appunti Di Telecomunicazioni}
+
+\maketitle
+\date
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Variabili aleatorie}
+
+Una \textit{funzione di distribuzione} di una v.a. $x$ fornisce una descrizione statistica completa di $x$. La 
+funzione di distribuzione vale
+\begin{equation}
+F_x(a) = P[x \le a]
+\end{equation}
+quindi per ogni $a$ $F_x$ indica la probabilità che $x$ valga meno di $a$. Valgono i seguenti limiti:
+\begin{equation}
+\lim_{a \to -\infty} F_x(a) = 0 \qquad \lim_{a \to \infty} F_x(a) = 1
+\end{equation}
+Si indica poi la \textit{densità di probabilità} con 
+\begin{equation}
+f_x(a) = {\partial F_x(a)\over \partial a}
+\end{equation}
+e valgono gli integrali
+\begin{equation}
+F_x(a) = \int_{-\infty}^a f_x(b)\,db \qquad \int_{-\infty}^{\infty} f_x(a)\,da = 1
+\end{equation}
+\bigskip
+
+\textbf{Variabile aleatoria uniforme.} Una v.a. uniforme si indica con $\mathcal{U}[a_1,a_2]$ e la sua 
+densità è un $rect$ di area unitaria.
+\bigskip
+
+\textit{Variabile aleatoria esponenziale unilatera.}
+\bigskip
+
+
+\section{Mezzi trasmissivi}
+
+In questa sezione ci si occupa di definire i pricipali parametri dei principali mezzi trasmissivi: 
+i \textit{cavi elettrici}, le \textit{fibre ottiche} e i \textit{ponti radio}.
+\bigskip
+
+\textbf{Cavi elettrici.} Solitamente in forma di doppi cavi sospesi ma spesso anche come \textit{cavo 
+coassiale}, sono regolati dalle due \textit{equazioni del telegrafista:}
+\begin{equation}
+\label{eqn:telegraf1}
+{\partial\,v(t,z) \over \partial\,z} = -l {\partial\,i(t,z) \over \partial\,t}
+\end{equation}
+\begin{equation}
+\label{eqn:telegraf2}
+{\partial\,i(t,z) \over \partial\,z} = -c {\partial\,v(t,z) \over \partial\,t}
+\end{equation}
+
+Da queste si possono ricavare le rispettive \textit{equazioni d'onda}, di cui se ne riporta solo una:
+\begin{equation}
+\label{eqn:onda1}
+{\partial^2\,v(t,z) \over \partial\,z^2} = lc {\partial^2\,v(t,z) \over \partial\,t^2}
+\end{equation}
+dove la quantità $v = 1/\sqrt{lc}$ è la \textit{velocità di propagazione}. La \ref{eqn:onda1} può essere
+risolta da funzioni del tipo $f(t-z/v)$ e $g(t+z/v)$ oppure dalla più generica
+\begin{equation}
+\label{eqn:ondasol}
+v(t,z) = f(t - {z\over v}) + g(t + {z\over v})
+\end{equation}
+che rappresenta onde che si propagano in versi opposti nel mezzo trasmissivo. Si ha poi che 
+\begin{equation}
+\label{eqn:fond}
+lc = \epsilon_0 \mu_0
+\end{equation}
+dove $\epsilon_0$ è la \textit{permittività dielettrica del vuoto} mentre $\mu_0$ è la \textit{permeabilità
+magnetica}. Da \ref{eqn:fond} si ottiene
+\begin{equation}
+\label{eqn:vluce}
+v = {1 \over \sqrt{\epsilon_0 \mu_0}} = 3 \cdot 10^8\,m/s
+\end{equation}
+che è chiaramente la velocità della luce e anche la velocità di propagazione di un campo magnetico. 
+Ovviamente di solito non si utilizza $\epsilon_0$ ma $\epsilon = \epsilon_0 n^2$ dove $n$ è l'\textit{indice
+di rifrazione del dielettrico}.\\
+
+Sempre da \ref{eqn:telegraf1} e da \ref{eqn:telegraf2} si ottiene
+\begin{equation}
+\label{eqn:impedenza}
+v(t,z) = \sqrt{l \over c} i(t,z)
+\end{equation}
+dove la quantità $Z_0 = \sqrt{l \over c}$ è l'\textit{impedenza caratteristica della linea}. Dalla fisica
+si può calcolare che la \textit{capacità per unità di lunghezza} $c$ del cavo coassiale vale 
+\begin{equation}
+\label{eqn:capacit_cavo}
+c = {2\pi\epsilon_0 \over \ln{r_o / r_i}}
+\end{equation}
+dove $r_o$ e $r_i$ rappresentano rispettivamente il raggio esterno del dielettrico e il raggio del conduttore
+interno. Da \ref{eqn:capacit_cavo} e da \ref{eqn:fond} si ottiene anche l'\textit{induttanza per unità di 
+lunghezza} $l$ e da questa poi l'impedenza della linea
+\begin{equation}
+\label{eqn:impedenza}
+Z_0 = {1 \over 2\pi} \sqrt{\mu_0 \over \epsilon_0} \ln{{r_o \over r_i}}
+\end{equation}
+
+Si passa ora a modellare delle linee trasmissive con eventuali perdite. Se si ha un segnale in ingresso 
+alla linea, indicato con la tensione $v_i(t) = v(t,z) = e^{i2\pi f_0 t}$ l'uscita corrispondente, 
+ad una distanza $z$ dall'ingresso, sarà data da $v(t,z) = e^{i2\pi f_0 (t-z/v)}$. La funzione di 
+trasferimento della linea risulta essere quindi
+\begin{equation}
+H(f) = e^{-i2\pi f L/v} = e^{-i\beta}
+\end{equation}
+dove $L$ è la lunghezza della linea e $\beta = 2\pi f L/v$.\\
+
+Per le linee con \textit{piccole} perdite si hanno l'impedenza e l'ammettenza d'ingresso che valgono
+rispettivamente $(r + i 2\pi f l)$ e $(g + i 2\pi f c)$ (solitamente vale $g = 0$). Con le \ref{eqn:telegraf1}
+e \ref{eqn:telegraf2} si ottiene
+\begin{equation}
+{\partial^2 V(z) \over \partial z^2} = \gamma^2 V(z)
+\end{equation}
+che è un'equazione differenziale armoniche e quindi le sue soluzioni sono $V(z) = V(0) e^{\pm i \gamma z}$ e
+\begin{equation}
+\gamma = \sqrt{(r + i 2\pi f l)(i 2\pi f c)}
+\end{equation}
+è la \textit{costante di propagazione} che può essere approssimata in $\gamma = \alpha + i\beta$ dove 
+$\alpha = {r\over 2} \sqrt{c \over l}$ e $\beta = 2\pi f \sqrt{lc}$. La funzione di trasferimento dell'intera 
+linea è data da
+\begin{equation}
+\label{eqn:tf_linea}
+H(f) = e^{-i2\pi f L/v} e^{-\alpha L}
+\end{equation}
+che presenta un \textit{elemento di ritardo} (l'esponenziale immaginario) e un \textit{elemento di 
+attenuazione} (la parte reale dell'esponenziale), che risulta
+\begin{equation}
+A_{dB} = -20 \log_{10} e^{-\alpha L} = 8,7 \alpha L
+\end{equation}
+quindi la linea presenta un'attenuazione di $8,7 \alpha dB/m$.\\
+
+Oltre alla dissipazione di energia c'è un altro interessante fenomeno da considerare chiamato \textit{effetto
+pelle}. In un cavo elettrico infatti il segnale non si propaga in tutto il conduttore, ma soltanto in 
+un sottile strato superficiale, inversamente proporzionale alla frequenza di trasmissione. Lo spessore vale
+\begin{equation}
+\delta = \sqrt{\rho \over \pi f \mu_0}
+\end{equation}
+dove $\rho$ è la resistività del conduttore. La resistenza per unità di lunghezza è data dalla somma delle
+resistenze dei due conduttori (interno ed esterno, per il cavo coassiale) cioè
+\begin{equation}
+r = \rho \left({1 \over 2\pi r_o \delta} + {1 \over 2\pi r_i \delta}\right) = 
+\sqrt{\rho f \mu_0 \over 4 \pi}\left({1\over r_o} + {1\over r_i}\right)
+\end{equation}
+Riprendendo la \ref{eqn:tf_linea} si trova che
+\begin{equation}
+H(f) = e^{-i 2\pi f L/v} e^{-K'L\sqrt{f}}
+\end{equation}
+dove $K' = K/2Z_0$, con $K$ costante di proporzionalità (data dalla geometria e dalla resistività della linea).
+Si ha quindi il solito elemento di ritardo ma questa volta c'è anche una distorsione dovuta dalla dipendenza 
+del modulo $H(f)$ da $f$ infatti
+\begin{equation}
+\left|H(f)\right| = e^{-K'L\sqrt{f}} = e^{-\sqrt{f/f_0}}
+\end{equation}
+\bigskip
+
+\textbf{Fibre ottiche.} Le fibre ottiche non sono altro che cavi di silice $\text{SiO}_2$ che consentono
+di trasmettere segnali luminosi. Ogni fibra è composta da un nucleo e da un mantello che hanno rispettivamente
+indici di rifrazione $n_1$ e $n_2$ con $n_1 \cong 1,5$ e $n_2 < n_1$. Si possono trasmettere frequenze
+nell'ordine di $10^{14}\,Hz$ e la velocità di trasmissione è data da ($v$ è la velocità della luce)
+\begin{equation}
+v' = {v \over n_1 - \lambda {dn_1 \over d \lambda}} \cong {v \over n_1} \cong 2\cdot 10^8 \, m/s
+\end{equation}
+Non tutti i segnali luminosi vengono trasmessi, solamente quelli il cui angolo di incidenza con la superficie
+del mantello è inferiore di un certo valore, ricavabile con la legge di Snell
+\begin{equation}
+n_1 \sin(\phi_i) = n_2 \sin(\phi_t)
+\end{equation}
+Nel tempo si sono susseguite tre tipologie di trasmissione che si differenziano per la lunghezza d'onda
+del segnale che viene trasmesso, queste sono
+\begin{itemize}
+\item \textit{prima finestra}, con $\lambda = 0,8\,\mu m$;
+\item \textit{seconda finestra}, con $\lambda = 1,35\,\mu m$;
+\item \textit{terza finestra}, con $\lambda = 1,55\,\mu m$.
+\end{itemize}
+\bigskip
+
+\textbf{Ponti radio.}
+\bigskip
+
+\end{document}
