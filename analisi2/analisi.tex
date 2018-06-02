@@ -1,0 +1,141 @@
+\documentclass[a4paper,portrait,12pt]{article}
+\usepackage[top=0.5in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{epstopdf}
+\usepackage{float}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usepackage{subfloat}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{eufrak}
+\usepackage{subfiles}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{csquotes}
+\usepackage{program}
+\usepackage{mathtools}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definizione}[section]
+
+\newtheorem{proposition}{Proposizione}
+\newtheorem{corollary}{Corollario}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+ 
+\begin{document}
+
+\title{Appunti Di Analisi II}
+
+\maketitle
+\date
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Formulario Analisi II}
+
+\subsection{Integrali}
+
+Qui sono condensati alcuni dei più importanti risultati di un corso di Analisi II per ciò che concerne 
+l'integrazione in più variabili con campi vettoriali (quindi flussi e circuitazioni).\\
+
+\textbf{Definizioni.} Dato un campo vettoriale $\mathbf{F} : \mathbb{R}^n \to \mathbb{R}^n$ la sua divergenza 
+è data da $\nabla \cdot \mathbf{F} = {\partial \over \partial x_1}F_1 + ... + {\partial \over \partial x_n}F_n$
+mentre il rotore si indica con $\nabla\times\mathbf{F}$. Data una curva piana 
+$\boldsymbol{\gamma} = (x(t),y(t))$ si definiscono il versore tangente positivo $\mathbf{T^+}(t) = 
+{(x'(t),y'(t)) \over \left\|\boldsymbol{\gamma}'(t)\right\|}$ e la sua normale esterna $\mathbf{n_e}(t) = 
+{(y'(t),-x'(t)) \over \left\| \boldsymbol{\gamma}'(t)\right\|}$.
+\bigskip
+
+\textbf{Integrale curvilineo di prima specie.} Data la curva $\gamma$ e una funzione $f$ con questo 
+integrale si ottiene l'area sottostante alla funzione $f$ dispsta secondo la curva. Utile per trovare 
+baricentro. Se $f(x) = 1$ si ottiene la lunghezza della curva.
+\begin{equation}
+\int_{\boldsymbol{\gamma}}f\,ds = \int_a^bf(\boldsymbol{\gamma}(t))\left\|\boldsymbol{\gamma}'(t)\right\|dt
+\end{equation}
+
+\textbf{Integrale curvilineo di seconda specie.} Dove $\omega$ è una formula differenziale e $ \mathbf{F}$ 
+un campo vettoriale.
+\begin{equation}
+\int_{\boldsymbol{\gamma}}\omega = \int_a^b\mathbf{F}(\mathbf{\gamma}(t))\cdot\boldsymbol{\gamma}'(t)dt
+\end{equation}
+
+\textbf{Formule di Green.} Utili nelle dimostrazioni con divergenza 
+\begin{equation}
+\iint_{\Omega}f_xdxdy = \int_{\partial \Omega^+} fdy
+\end{equation}
+\begin{equation}
+\iint_{\Omega}f_ydxdy = -\int_{\partial \Omega^+} fdy  
+\end{equation}
+
+\textbf{Divergenza nel piano.} L'operatore divergenza permette di calcolare il flusso del campo vettoriale 
+$\mathbf{v}$ uscente dalla superficie $\Omega$ (ovvero, passante attraverso il suo bordo $\partial \Omega$) 
+rispetto alla normale $\mathbf{n_e}$, con un integrale doppio (che può essere più semplice di quello 
+originale).
+\begin{equation}
+\iint_{\Omega}\nabla \cdot \mathbf{v}dxdy = \int_{\partial \Omega}\mathbf{v} \cdot \mathbf{n_e}ds = 
+\int_{\partial \Omega^+}\mathbf{v_1}dy - \mathbf{v_2}dx
+\end{equation}
+
+\textbf{Rotore nel piano.} Il rotore permette di calcolare la circuitazione del campo vettoriale $\mathbf{v}$ 
+lungo la curva $\partial \Omega$. $\mathbf{e_3}$ è il terzo versore della base canonica (il versore delle 
+"z" per intendersi).
+\begin{equation}
+\iint_{\Omega}\nabla \times \mathbf{v} \cdot \mathbf{e_3}dxdy = 
+\int_{\partial \Omega}\mathbf{v}\cdot\mathbf{T^+}ds = \int_{\partial \Omega^+}\mathbf{v_1}dx + \mathbf{v_2}dy
+\end{equation}
+
+\textbf{Divergenza nello spazio.} Utilizzata per calcolare il flusso di un campo vettoriale uscente da un 
+solido, quindi passante attraverso la superficie $\partial \Omega$ (senza bordo) che lo racchiude, rispetto 
+alla normale di quest'ultima.
+\begin{equation}
+\iiint_{\Omega}\nabla\cdot\mathbf{v}dx dy dz = \iint_{\partial \Omega}\mathbf{v}\cdot\mathbf{n_e}dS
+\end{equation}
+
+\textbf{Teorema di Stokes.} In poche parole, "la circuitazione è uguale al flusso del rotore" e quindi si 
+passa alla divergenza del rotore (nella speranza che derivando, le cose si semplifichino).
+\begin{equation} 
+\int_{\gamma^+}(v_1dx + v_2dy + v_3dz) = \iint_{\partial \Omega}(\nabla\times\mathbf{v})\cdot\mathbf{n^+}dS = 
+\iiint_{\Omega}\nabla\cdot(\nabla\times\mathbf{v})dxdydz
+\end{equation}
+
+\section{Prontuario Matematico}
+
+\subsection{Serie e sommatorie}
+Nelle sommatorie si assume che $\sum_{i = 0}^n = 0 + 1 + ... + n$. 
+\begin{center}
+$\sum_{i = 0}^n k^i = {k^{n+1} - 1 \over k - 1}$ con $k \in \mathbb{R} > 0, k \neq 1$
+\end{center}
+
+\subsection{Trigonometria e Complessi}
+\begin{center}
+$e^{a x} = \sum_{k = 0}^{\infty}{a^k \over k!}$\qquad
+$\sin x = \sum_{k = 0}^{\infty}{x^{2k+1} \over (2k+1)!}(-1)^k$\qquad
+$\cos x = \sum_{k = 0}^{\infty}{x^{2k} \over (2k)!}(-1)^k$
+\end{center}
+Formula di Eulero: 
+\begin{center}
+$e^{ix} = \cos x + i\sin x$
+\end{center}
+Formule di prostaferesi:
+\begin{center}
+$\sin \theta \sin \phi = 1/2(\cos (\theta - \phi) - \cos (\theta + \phi))$\\
+$\cos \theta \cos \phi = 1/2(\cos (\theta - \phi) - \cos (\theta + \phi))$\\
+$\cos \theta \sin \phi = 1/2(\sin (\theta + \phi) - \sin (\theta - \phi))$
+\end{center}
+
+\end{document}
