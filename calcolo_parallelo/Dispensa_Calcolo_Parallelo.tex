@@ -343,7 +343,189 @@ Naturalmente bisogna osservare che la prima proprietà non è soddisfatta.
 Se $m_A > m_B$ lo split dev’essere modificato spostando l’indice in $A$ verso sinistra e l’indice in $B$ verso destra, se $m_A < m_B$ l’operazione è analoga ma contraria. Di quanto vanno spostati questi indici?
 Sfrutto la ricerca binaria per trovare gli indici adatti.
 Se $A$ e $B$ hanno la stessa lunghezza il risultato sarà bilanciato.
-Tuttavia non essendo $A$ e $B$ della stessa lunghezza, la ricerca binaria procede dividendo a metà solamente la stringa più corta e spostando l’indice sulla più lunga della stessa quantità.
+Tuttavia non essendo $A$ e $B$ della stessa lunghezza, la ricerca binaria procede dividendo a metà solamente la stringa più corta e spostando l’indice sulla più lunga della stessa quantità.\\
 
+Tuttavia questa ricerca binaria ha un problema, è un algoritmo sequenziale e inoltre il risultato de confronto ci dice dove andare a prendere i dati, considerazione dipendente dell‘input.
+Questo causa problemi visto che Batcher aveva in mente di realizzare un circuito.
+Infatti gli algoritmi che più si apprestano ad essere realizzati con circuiti cablati sono quelli che presentano lo stesso cdag per ogni input.
+L'idea di Batcher per eliminare quest‘incertezza sull‘esito dei confronti e la seguente: invece di svolgere una ricerca binaria intelligente si svolgono una serie di confronti tutti contemporaneamente.
+Nel momento in cui il valore trovato in $A$ è maggiore dell'elemento in $B$ ho individuato, effettuo lo
+scambio tra $A$ e $B$ di tutti quegli elementi di $A$ che sono maggiori degli elementi di $B$.\\
+
+In questo modo ottengo automaticamente, senza ulteriore elaborazione, due sequenze $A$ e $B$ in cui $A_i > B_j$ per ogni $i,j$.
+Per effettuare questi confronti posso sfruttare l’idea iniziale di Batcher, se io concateno $A$ con $B$ rovesciato ottengo una sequenza molto semplice e di confronti come illustrato in figura.\\
+
+A questo punto posso risolvere i sottoproblemi ricorsivamente.\\
+
+Se si va a provare si nota un problema da superare.
+Chiamiamo \textit{saliscendi} una sequenza che comincia con una porzione crescente e diventa poi decrescente.
+Quando si procede ricorsivamente su una sequenza di questo tipo non ho la garanzia che i due sottoproblemi che ricavo siano anch’esse sequenze saliscendi.
+Ma il buon Batcher scoprì che quando l’input è un saliscendi, la sequenza viene spezzata in una rotazione di saliscendi.
+
+\begin{definition}
+L’operazione \textit{Left Cyclìc Shift} si definisce come:
+\begin{align*}
+SHIFT_j(x_0,x_1,...,x_{N-1}) \hat{=} (x_j,...,x_{N-1},x_0,...,x_{j-1})
+\end{align*}
+\end{definition}
+
+\begin{definition}
+Una sequenza $(x_0,...,x_{N-1}$ si dice \textit{bitonica} se esite una sua rotazione che è in forma saliscendi, $j \in \{0,...,N-1\}$ tale che ponendo $(y_0, y_1,...,y_{N-1}) = SHIFT_j(x_0,...,x_{N-1})$ si ha che esiste un $i \in \{0,...N-1\}$ tale che $y_0 \le y_1 \le ... \le y_i \ge y_{i+1} \ge y_{i+2} \ge y_{N-1}$.
+\end{definition}
+
+\begin{definition}
+Sia $N$ pari, sia $\underbar{x} = (x_0,...,x_{N-1})$, COMPARISON-EXCHANGE è l'operazione che confronta e scambia direttamente due elementi della sequenza. Si tratta di un'operazione primitiva in molti algoritimi di sorting.
+\end{definition}
+
+Si nota che tutti gli elementi di $L_{\underbar{x}} \le U_{\underbar{x}}$.
+Se effettuo lo shift su una sequenza bitonica allora gli
+elementi che saranno confrontati dal comparatore saranno gli stessi, sebbene in posizione diverse.
+Cioè elementi che nella figura precedente erano confrontati dal comparatore saranno ancora accoppiati se la sequenza viene shiftata.
+L’idea è dunque di applicare ricorsivamente le comparazioni sulle due nuove sequenze $L_{\underbar{x}}$ e $U_{\underbar{x}}$ ottenute dal precedente comparatore.
+Tale rete è il BITONIC-MERGE con input di 8 elementi.
+
+\begin{proposition}
+Se $\underbar{x}$ è bitonica, allora:
+\begin{itemize}
+\item $\max{L_{\underbar{x}}} \le \min{U_{\underbar{x}}}$
+\item $\max{L_{\underbar{x}}}$ e $\min{U_{\underbar{x}}}$ sono sequenze bitoniche
+\end{itemize}
+\end{proposition}
+
+\textit{Osservazione.} Il principio di induzione matematica dice che se $P(O)$ vale e inoltre $\forall n, P(n) \Rightarrow P(n+1)$ allora $\forall n, P(n)$ vale.
+Tale principio è un assioma.
+Se $Q(n) \Rightarrow P(n)$, ovvero $Q(n)$ è affermazione più
+generale di $P(n)$, allora dimostrare che $Q$ è vera per ogni $n$ mi dimostra che, transitivamente, anche $P$
+è vera per ogni $n$ (non vale il viceversa).
+In certi casi può valere la pena puntare a dimostrare l’ipotesi $Q(n)$ piuttosto che $P(n)$, rafforzando così l’ipotesi induttiva.
+Nel caso in esame:
+\begin{itemize}
+\item $P(n) = $ "tutte le sequenze saliscendi sono ordinabili";
+\item $Q(n) = $ "tutte le sequenze bitoniche sono ordinabili".
+\end{itemize}
+Numero di confronti che l’algoritmo svolge (caso $N$ potenza di $2$) è: $C_{BM} (N) = \frac{N}{2} \log_2{N}$.
+Il cammino critico dell’algoritmo è: $L_{BM}(N) = \log_2(N)$.
+Il parallelismo è dunque $P^{\star} = \frac{N}{2}$, un valore ottimale.
+Tuttavia il problema è che $C_{BM}$ è elevato per essere solamente relativo alla componente MERGE dell’algoritmo, c’è dunque un costo da pagare per ottenere questo livello di parallelismo.
+
+\begin{proposition}[Floyd]
+In un cdag per il merging il numero di confronti è almeno $\frac{1}{4} N \log_2 N$.
+\end{proposition}
+
+D’algoritmo ha una struttura statica, questo significa che il grafo che rappresenta i confronti (attraverso
+il quale si può realizzare l’algoritmo cablato) non dipende dall’input. Se tale grafo invece varia in
+funzione dell’input allora si dice che l’algoritmo ha una struttura dinamica, come ad esempio per
+l’algoritmo di ricerca binaria, dove primo confronto è indipendente dall’input, tuttavia il secondo e i
+successivi dipendono dal valore dell’input.
+
+\begin{proposition}[Bilardi-Nicolau '86]
+ADAPTIVE-BITONIC-MERGE ha un numero di confronti $C_{ABM} = O(N)$ ed un cammino critico $L_{ABM} = O(\log_2 N)$.
+\end{proposition}
+
+Per quanto riguarda il SORT, invece, se vado a contare il numero dei confronti:
+
+\begin{gather*}
+C_{BS}(N) = \frac{N}{2} \frac{\log_2 N (\log_2 N + 1)}{2}\\
+L_{BS}(N) = L_{BM}(2) + ... + L_{BM}(N) = \frac{\log_2 N (1 + \log_2 N)}{2}
+\end{gather*}
+
+\begin{proposition}[AKS '83]
+Si è trovata una rete AKS che è in grado di svolgere il SORTING con:
+\begin{gather*}
+C_{AKS}(N) = O(N \log_2 N)\\
+L_{AKS}(N) = O(\log_2 N)
+\end{gather*}
+\end{proposition}
+
+Tuttavia la notazione $O$ grande nasconde una costante di fronte a $N \log N$ che è stato stimato essere oltre il migliaio, dunque per tutti gli scopi pratici il BITONIC-SORTING è migliore.
+
+Mettendo assieme le due componenti dell’algoritmo che abbiamo visto possiamo osservare com’è strutturata la rete per fare il BITONIC—SORT:\\
+
+\begin{definition}
+Sia $B(N)$ il numero di permutazioni bitoniche di $\{0,1,...,N-1\}$.
+\begin{align*}
+&B(1) = 1\\
+&B(2) = 2 = 2!\\
+&B(3) = 6 = 3!\\
+&B(4) \le 4!
+\end{align*}
+\end{definition}
+
+Vediamo allora se riusciamo a catalogare tutti i saliscendi e poi vediamo le loro rotazioni.
+Quest’idea è buona ma bisogna considerare che alcuni elementi vengono conteggiati più volte.
+Si cerca allora di bloccare il maggior numero di elementi possibili: se la sequenza è $\{0,...,N-1\}$, un suo saliscendi comincerà con l’elemento $0$ e la fase di salita terminerà sul numero $N-1$.\\
+
+Se io stabilisco quali elementi sono presenti nella porzione di sequenza tra l’elemento $0$ e l’elemento $N-1$ (nell’insieme $S$) allora ho identificato univocamente tale stringa, poichè so che tali elementi si configureranno necessariamente in ordine crescente e i rimanenti elementi si ordineranno in maniera decrescente successivamente all’elemento $N-1$.\\
+Allora:
+\begin{gather*}
+B(N) = N \cdot 2^{N-2}
+\end{gather*}
+
+Potrei avere che due rotazioni in $S_1$ e in $S_2$ mi danno la stessa sequenza, dunque considerando che io posso sommare le cardinalità di due insiemi solo se la loro intersezione è vuota, allora devo dimostrare questo fatto.
+L’unico modo di ottenere due rotazioni uguali è di ruotare le sequenze lo stesso numero di volte, altrimenti il risultato avrebbe l’elemento $0$ in posizioni diverse.
+Tuttavia se le due sequenze sono state ruotate lo stesso numero di volte, allora è banale che le due sequenze devono essere identiche per poter avere la rotazione di indice $i$ identica.
+E’ dunque allora lecito sommare le cardinalità.\\
+
+\textit{Osservazione.} Le sequenze bitoniche sono in numero inferiore alle permutazioni totali, che sono invece
+$N!$.
+La differenza tra la rappresentazione binaria di queste due grandezze è di questo tipo:
+\begin{gather*}
+\log_2 N! = N \log_2 N - 0(N)\\
+\log_2 B(N) = \log_2 N + (N - 2)
+\end{gather*}
+In realtà il BITONIC-MERGE è in grado di ordinare molte più sequenze di quelle bitoniche.
+
+\begin{proposition}
+Il BITONIC-MERGE$(N)$ ordina $2^{C_{BM}(N)}$ permutazioni distinte, dove $C_{BM} (N) = \frac{1}{2} N \log_2 N$.
+\end{proposition}
+\begin{proof}
+La dimostrazione viene lasciata per esercizio al lettore.
+\end{proof}
+
+Supponiamo di prendere la rete del BITONIC-MERGE, ci si chiede: tale rete ordina o no tutte le permutazioni possibili?
+
+\begin{proposition}[0-1 Principle]
+Se una rete di comparator-exchanger ordina tutte le sequenze in $\{0,1\}^N$, allora ordina tutte le sequenze.
+\end{proposition}
+
+
+\subsection{Problema del routing}
+
+Il \textit{problema dell’instradamento} o \textit{routing} è un problema che prima ancora di presentarsi nel calcolo si è presentato nell’ambito della telefonia.
+Esso può essere suddiviso in vari sottoproblemi, tra cui una una distinzione molto nota è:
+
+\begin{itemize}
+\item \textbf{routing off-line}, il sistema che deve instradare i pacchetti conosce in anticipo sorgenti e destinazioni dei pacchetti e può dunque svolgere un lavoro di pianificazione;
+\item \textbf{routing on-line}, tutto è determinato in tempo reale, destinazioni, sorgenti e contenuto dei messaggi.
+\end{itemize}
+
+L’algoritmo che studieremo principalmente è nato nel campo della telefonia dalle ricerche condotte negli anni 60 da Benes, che lavorava nei Bell Labs.
+Supponiamo di avere una situazione in cui ho $N$ terminali di ingresso e di uscita.
+Il problema può essere così schematizzato:\\
+
+Supponiamo il problema con le seguenti restrizioni (permutation routing):
+\begin{itemize}
+\item Term$(i)$ ha un pacchetto per Term$(\pi(i))$;
+\item $\pi$ è una permutazione.
+\end{itemize}
+Ogni terminale in ingresso ha uno e un solo pacchetto da inviare ad un terminale di uscita (questo è un caso specifico del problema generale studiato da Benes).
+Se la centralina me la devo costruire io, come la costruisco?
+Benes prese come mattone elementare per costruire questa rete di routing l’interruttore o switch binario, un dispositivo a due ingressi, due uscite e uno stato binario $S$:\\
+
+\begin{itemize}
+\item Se $S=0$ allora l'input in $a$ esce in $c$ e l'input in $b$ esce in $d$.
+\item Se $S=1$ allora l'input in $a$ esce in $d$ e l'input in $b$ esce in $c$.
+\end{itemize}
+
+Gli output sono dunque rappresentati dalle equazioni:
+\begin{gather*}
+\left\{\begin{array}{l}c = Sb + (1 - S) a\\d = Sa + (1 - S) b\end{array}\right
+\end{gather*}
+
+L’idea di Benes è dunque di costruire la rete di permutazione con tali switch.\\
+
+\textit{Osservazione.} Si noti la somiglianza tra i comparator-exchanger (vedi capitolo bitonic sort) e gli switch.
+I primi possono essere visti come degli switch in grado di autoconfigurarsi dinamicamente in base all’input.
+Un modo per fare una rete di permutazioni è quello di mettere gli interruttori disposti secondo una rete che svolge l’ordinamento.
 
 \end{document}
