@@ -1,2 +1,0 @@
-\contentsline {section}{\numberline {1}Variabili aleatorie}{3}{section.1}
-\contentsline {section}{\numberline {2}Mezzi trasmissivi}{3}{section.2}
