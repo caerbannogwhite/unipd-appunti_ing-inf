@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Appunti Di Information Retrieval}
+\author{Massimo Meneghello}
+\date{March 2018}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduzione}
+Per poter reperire dei documenti è necessario prima di tutto poter rappresentare il loro contenuto informativo in modo conciso. Questo passo è reso possibile dall'\textbf{analisi del testo} che deve poter essere effettuata in modo \textbf{automatico}, \textbf{rapido}, \textbf{affidabile} e \textbf{consistente}.\\
+Esistono due principali approcci all'analisi del testo:
+\begin{itemize}
+\item l'approccio statistico;
+\item l'approccio linguistico.
+\end{itemize}
+Il primo di questi approcci è stato quello più utilizzato e studiato fin dagli albori della disciplina. Le prime osservazioni riguardanti un'analisi statistica dei testi sono state proposte da \textit{Hans Peter Luhn}, prima, e in seguito formalizzate da \textit{George Kingsley Zipf}.\\
+Luhn si era reso conto infatti che:
+\begin{itemize}
+\item la distribuzione delle parole non è uniforme in un testo;
+\item poche parole compaiono molto di frequente;
+\item molte parole compaiono raramente.
+\end{itemize}
+La distribuzione è quindi \textbf{asimmetrica} - \textit{skew distribution}.
+A Zipf si deve la formulazione di varie leggi empiriche che mettono in relazione la \textbf{frequenza} di una parola con la sua \textbf{forma} e il suo \textbf{significato}. La più nota è la legge che porta il suo nome, la \textbf{Legge di Zipf} appunto.
+\begin{equation}
+r \times f = costante
+\end{equation}
+dove $f$ è il valore della frequenza di una parola in un testo (o in un campione di testi) mentre $r$ è il rango di quella parola dopo che tutte le parole sono state ordinate per frequenze decrescenti. Si ottiene quindi un andamento iperbolico della frequenza sul rango.\\
+Si può anche pensare di riscrivere la legge di Zipf in termini probabilistici (in questo caso le frequenze assolute con cui una parola compare diventano le probabilità che una parola ha di comparire all'interno di un testo).\\
+La scelta dei descrittori che permettono di \textbf{discriminare meglio il contenuto informativo di un testo} - \textit{resolving power} - si basa sulle osservazioni di Luhn e sulla legge di Zipf.\\
+Una volta fissate una soglia inferiore di cut-off - \textit{lower cut-off} - e una soglia superiore di cut-off - \textit{upper cut-off} - si considerano solamente i descrittori che hanno rango compreso tra queste due soglie.
+Operando in questo modo si escludono:
+\begin{itemize}
+\item i descrittori che hanno frequenze troppo elevate, chiamati anche \textit{stop words}, che portano poca informazioni sul contenuto dei singoli documenti;
+\item i descrittori che hanno frequenze troppo basse, che invece costituiscono rumore.
+\end{itemize}
+
+
+\section{Indicizzazione}
+
+
+
+\section{Valutazione Dei Sistemi Di Reperimento}
+Per poter valutare un IRS è necessario disporre dei \textbf{giudizi di rilevanza}, ovvero dei valori associati a ciascuna coppia documento-topic. Esistono più metodi per la creazione di questi giudizi:
+\begin{itemize}
+\item \textbf{giudizi completi}, per ogni documenti si giudica la sua rilevanza relativamente ad ogni topic (lavoro troppo oneroso);
+\item \textbf{campionamento casuale}, i giudizi vengono assegnati soltanto ad un campione casuale di documenti, per ogni topic;
+\item \textbf{campionamento basato sugli esperimenti dei partecipanti}, è il metodo utilizzato da TREC ed ormai divenuto stardard per tutte le campagne di valutazione, noto anche come \textbf{pooling}.
+\end{itemize}
+
+Per poter dare una definizione formale del pooling è necessario introdurre alcuni concetti. Si definiscono:
+\begin{align}
+&D = \{d_1, ..., d_n\} \text{un insieme di documenti}\\
+&T = \{t_1, ..., t_m\} \text{un insieme di topic}
+\end{align}
+Dato un numero naturale $N\in\mathbb{N}^+$ detto \textit{lunghezza della run}, una \textbf{run} è definita come
+\begin{align}
+R: &T \to D^N\\
+   &t \mapsto \mathbf{r_t} = (d_1, ..., d_N)
+\end{align}
+
+\end{document}
+

@@ -1,0 +1,151 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Appunti di Network Modeling}
+\author{massimo.meneghello93}
+\date{June 2017}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+%my packages
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Nozioni di Probabilità}
+Sia $X$ una variabile aleatoria (d'ora in poi \textit{v.a.} o \textit{r.v.}, da \textit{random variable}), si definiscono la \textit{media} (o valore atteso) e la \textit{varianza} di $X$ come
+\begin{equation}
+    E[X] = \sum_{i = -\infty}^{+\infty} x_i P(X = x_i)
+    \label{rv:mean}
+\end{equation}
+\begin{equation}
+    E[(X-\mu)^2] = E[X^2] - E[X]^2
+    \label{rv:varicance}
+\end{equation}
+dove $\mu = E[X]$. Date due v.a. $X, Y$ si definisce invece \textit{covarianza} tra le due il valore
+\begin{equation}
+    E[(X-\mu_X)(Y-\mu_Y)] = E[XY] - \mu_X\mu_Y
+    \label{rv:covariance}
+\end{equation}
+Tale valore risulta nullo se $X, Y$ non sono correlate, mentre se $X, Y$ sono indipendenti si ha che $E[XY] = E[X]E[Y]$. L'indipendenza tra variabili implica la non correlazione (tuttavia non è vero il contrario).\\
+Sia $\{B_i\}_{i=1}^{\infty}$ una famiglia (numerabile) di insiemi a due a due disgiunti, tali che $\bigcup_{i=1}^{\infty}B_i = \Omega$. Per la \textit{legge di probabilità totale} risulta
+\begin{equation}
+    P(A) = \sum_{i=1}^{\infty}P(A|B_i)P(B_i)
+    \label{rv:total_prob}
+\end{equation}
+Funzione caratteristica
+\begin{equation}
+    \Phi = \int_{-\infty}^{+\infty} e^{i\lambda t} dF(\lambda) = E[e^{itX}]
+\end{equation}
+
+
+\section{Catene di Markov}
+
+Sia $S = \{1,2,...,n\}$ un insieme di stati.
+La \textit{Markov property} stabilisce
+\begin{equation}
+    P(X_{n+1} = j | X_n = i_n, ..., X_0 = i_0) = P(X_{n+1} = j | X_n = i_n) = P_{i_n j}^{n,n+1}
+\end{equation}
+
+\subsection{First Step Analysis}
+Sia $\mathbf{P}$ una \textit{matrice di Markov} (o \textit{matrice di transizione}) nella forma
+\[
+    \mathbf{P} = \left( \begin{array}{cc}
+    \mathbf{Q} & \mathbf{R} \\
+    \mathbf{0} & \mathbf{I} \end{array} \right)
+\]
+dove $\mathbf{Q}$ è la matrice di Markov relativa ai \textit{transient states} (o \textit{TSs}), $\mathbf{R}$ è la matrice che specifica le probabilità di passare da un TS a un \textit{absorbing state} (o \textit{AS}), $\mathbf{0}$ è una matrice di zeri e infine $\mathbf{I}$ è una matrice identità. Se $N$ è il numero totale degli stati nelle catena rappresentata da $\mathbf{P}$ e $r$ è il numero di TS, allora $\mathbf{P}$ è una matrice $N \times N$ e $\mathbf{Q}$ una matrice $r \times r$.\\
+Si vuole calcolare la probabilità che una catena finisca in un AS $k$ sapendo che lo stato iniziale è $i$, con $0 \le i \le r-1$. Questo si può esprimere con
+\begin{equation}
+    u_i = U_{ik} = \text{Pr}\{\text{Absorption in k} | X_0 = i\}
+\end{equation}
+che viene calcolato nel seguente modo
+\begin{equation}
+    U_{ik} = P_{ik} +  \sum_{j=0}^{r-1}P_{ij}U_{ij}
+\end{equation}
+Ci si chiede poi quanto tempo impiega in media una catena per terminare in un AS. A questo scopo è necessario definire
+\begin{equation}
+    T = \min\{n \ge 0 : X_n \ge r\}
+\end{equation}
+\begin{equation}
+    w_i = E[\sum_{n=0}^{T-1}g(X_n) | X_0 = i] = g(i) +\sum_{j=0}^{r-1}P_{ij}w_j
+\end{equation}
+dove $g(i)$ è una metrica associata alla visita dei TS, $i = 0,1,...,r-1$.
+
+\subsection{Comunicazione tra Stati}
+Si osserva che
+\begin{align*}
+    P_{ij}^{n+m} & = P\{X_{n+m} = j | X_0 = i\} 
+    \\&= \sum_{k=0}^{+\infty} P\{X_{n+m} = j, X_n = k | X_0 = i\} 
+    \\&= \sum_{k=0}^{+\infty} P\{X_{n+m} = j | X_n = k, X_0 = i\} P\{X_n = k | X_0 = i\} 
+    \\&= \sum_{k=0}^{+\infty} P_{jk}^m P_{ki}^n. 
+\end{align*} 
+
+Lo stato $j$ si dice accessibile dallo stato $i$ se per qualche $n \ge 0, P_{ij}^n > 0$. Due stati $i, j$ accessibili uno dall'altro si dicono \textit{comunicanti}.\\ 
+
+\newtheorem{Prop4.2.1}{Proposizione}
+\begin{Prop4.2.1}
+La comunicazione è una relazione di equivalenza. Valgono quindi:
+\begin{enumerate}
+    \item $i \leftrightarrow i$ (riflessività);
+    \item se $i \leftrightarrow j$, allora $j \leftrightarrow i$ (simmetria);
+    \item se $i \leftrightarrow j$ e $j \leftrightarrow k$, allora $i \leftrightarrow k$ (transitività).
+\end{enumerate}
+\end{Prop4.2.1}
+
+\begin{proof}
+Mentre le prime due proprietà discendono banalmente dalla definizione di comunicazione per la $3$ si procede come segue. Dall'ipotesi sappiamo che esistono $n, m$ tali che $P_{ij}^{(n)} > 0$ e $P_{jk}^{(m)} > 0$, quindi 
+\[P_{ik}^{(n+m)} = \sum_{r = 0}^{+\infty}P_{ir}^{(n)}P_{rk}^{(m)} \ge P_{ij}^{(n)}P_{jk}^{(m)} > 0\]. Similmente si può mostrare anche che $P_{ki}^s > 0$
+\end{proof}
+
+Due stati che comunicano sono detti appartenenti alla stessa \textit{classe}. Una catena di Markov si dice \textit{irriducibile} se è composta da una sola classe, ovvero tutti gli stati appartenenti alla catena comunicano tra di loro.\\
+
+Sia $d(i)$ il periodo dello stato $i$, definito come il più grande intero tale che $P_{ii}^n=0$ quando $n$ non è divisibile da $d(i)$. (se $P_{ii}^n = 0$ per ogni $n > 0$ allora si definisce il periodo di $i$ come infinito mentre se $d(i) = 1$ lo stato è detto \textit{aperiodico}). Si dimostra che la periodicità è una proprietà di classe ovvero, tutti gli stati che comunicano tra loro hanno lo stesso periodo.
+
+\newtheorem{Prop4.2.2}{Proposizione}
+\begin{Prop4.2.2}
+Se $i \leftrightarrow j$, allora $d(i) = d(j)$.
+\end{Prop4.2.2}
+
+\begin{proof}
+Siano $m$, $n$ tali che $P_{ij}^m$.
+\end{proof}
+
+\subsection{Concetti Chiave}
+Per qualunque stato $i$ e $j$ si definisce $f_{ij}^n$ la probabilità che partendo in $i$, il primo passaggio in $j$ avvenga al tempo $n$. Per una definizione più formale si ha,
+\begin{align*}
+& f_{ij}^0 = 0\\
+& f_{ij}^n = P\{X_n = j, X_k \neq j, k = 1,...,n-1 | X_0 = i\}
+\end{align*}
+Sia poi
+\[
+    f_{ij} = \sum_{n = 1}^{\infty} f_{ij}^n.
+\]
+$f_{ij}$ indica la probabilità che si abbia un passaggio in $j$ partendo da $i$. Quindi, se $i \neq j$, $f_{ij}$ è positivo se e solo se $j$ è accessibile dallo stato $i$. $j$ è detto stato \textit{ricorrente} se $f_{jj} = 1$, negli altri casi è detto \textit{di transizione}.  
+
+
+\section{Modello per Sincronizzazione}
+
+Sia $S$ una sequenza di simboli per la sincronizzazione allora
+\[P[\text{random data sequence} = \text{sync sequence}] = 2^{-\left|S\right|} = P[\text{false alarm}] = P_{fa} \]
+è la probabilità di ricevere la sequenza per errore.\\
+
+Diversamente la probabilità di ricevere la sequenza corretta considerando un possibile errore di trasmissione sul simbolo $\epsilon$ sarà \begin{math} P[\text{correct detection} | \text{sync}] = P[\text{all bits in $S$ are correct}] = (1 - \epsilon)^{\left|S\right|} = P_C\end{math}.\\
+
+Partendo da queste considerazioni vorremmo che $S$ non sia troppo lunga per non sprecare spazio per la comunicazione, ma nemmeno troppo corta per evitare falsi allarmi.
+
+Un possibile sistema per un modello di sincronizzazione può assumere i seguenti stati:
+\begin{itemize}
+    \item $H$ (Hunt), il sistema legge bit per bit fino a quando il lock non viene trovato oppure legge $N$ bit non trovando il lock;
+    \item $L_k$ (Lock), la sincronizzazione è stata trovata e confermata ulteriormente $k-1$ volte;
+    \item $L = L_{k_L}$, sincronizzazione accettata
+\end{itemize}
+
+
+
+\end{document}
