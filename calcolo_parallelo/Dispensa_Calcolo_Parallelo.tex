@@ -59,26 +59,26 @@ Il grado di parallelismo è il parallelismo potenziale, cioè un valore tale per
 
 \subsection{Esempi di algoritmi paralleli}
 
-\textbf{Somma di due vettori:}
-\begin{align}
+\subsubsection{Somma di due vettori}
+\begin{align*}
 &c = a + b\\
 &a, b, c \in \mathbb{R}^n
-\end{align}
+\end{align*}
 
-\subfile{figs/1.1.1_array_sum.tex}
+\subfile{figs/1.1_array_sum.tex}
 
 Tale algoritmo è parallelizzabile se considero $a,b$ vettori con $n$ elementi, allora con $n$ addizionatori posso sommare gli $n$ elementi ottenendo il vettore $c$ con una sola operazione per ogni addizionatore.\\
 $P_{MAX} = N$ (il livello di parallelismo è $N$)\\
 
 Cammino più lungo per arrivare da un input ad un output: si osserva il grafo che rappresenta le operazioni concorrenti per arrivare all’output e si identificano i cammini critici (nel caso precedente tutti i cammini hanno lunghezza $L = 1$).\\
 
-\textbf{Somma componenti di un vettore:}
+\subsubsection{Somma componenti di un vettore}
 \begin{align*}
 &x = (x_0,x_1,...,x_{n-1})\\
 &S = \sum_{j=0}^{N-1}x_j
 \end{align*}
 
-\subfile{figs/1.1.2_array_sum_comp.tex}
+\subfile{figs/1.2_array_sum_comp.tex}
 
 \begin{program}
 S \gets x_0
@@ -91,7 +91,7 @@ Secondo questo schema l’algoritmo permette l’utilizzo concorrente di un nume
 Tuttavia il problema può essere affrontato in modi diversi, ad esempio la seguente soluzione permette
 di sfruttare $P_{MAX} = N / 2$ processori, con cammini critici di lunghezza $L = \log(N)$.
 
-\subfile{figs/1.1.3_array_sum_comp2.tex}
+\subfile{figs/1.3_array_sum_comp2.tex}
 
 Il fatto che i due grafi precedenti relativi al problema della somma delle componenti del vettore producano lo stesso risultato è dovuto alla proprietà associativa dell’addizione. Tale proprietà vale per i numeri reali ma si deve considerare non applicabile a numeri floating point.\\
 
@@ -107,6 +107,11 @@ Per $1 \le P \le N/2$\\
 Divido il vettore in blocchi di $N/P$ sottovettori. Faccio poi sommare i blocchi di $N/P$ ad un singolo processore seguendo lo schema sequenziale (idea di un tipo, poi il prof la deve impestare un po’ perchè questa idea potrebbe non essere generalizzabile).
 Prendo le operazioni del primo stadio e le divido in gruppi da $P$, ottenendo il segunte schema:
 
+\subsubsection{Moltiplicazione di matrici}
+\begin{gather*}
+C = AB\ \text{con}\ A,B\ \text{matrici}\ n\times n\\
+c_{ij} = \sum_{h=0}^{n-1}A_{ih}B_{hj}
+\end{gather*}
 Tale operazione è un insieme di $n^2$ di prodotti interni, già questo evidenzia un grado $N^2$ di parallelismo.
 A sua volta un prodotto interno consiste di $N$ moltiplicazioni.\\
 Senza entrare troppo nei dettagli, posso ottenere $L = 1 + \log_2(N)$.
@@ -127,29 +132,62 @@ Questo algoritmo esibisce dunque un altissimo grado di parallelismo.
 Vogliamo ora generalizzare i concetti visti precedentemente.
 
 \theoremstyle{definition}
-\begin{definition}
-Computation DAG (CDAG)
+\begin{definition}[CDAG]
+Si definisce \textit{Computation DAG} (CDAG) la quaterna
 \begin{align*}
-C = (I, V, 0,E)
+\mathcal{C} = (I, V, O, E)
 \end{align*}
-$I$: insieme dei nodi di ingresso\\
-$V$: insieme dei nodi di operazione\\
-$O$: insieme dei nodi di uscita\\
-$O \subseteq I + V$\\
-$I \cap V = \emptyset$\\
-$E \subseteq (I + V) \times V$ : insieme delle dipendenze funzionali\\
-$P_1$: ogni vertice in $I + V$ è su almeno un cammino $a\longrightarrow b$ con $a \in I$ e $b \in O$
+dove:
+\begin{itemize}
+\item $I$, insieme dei nodi di ingresso;
+\item $V$, insieme dei nodi di operazione;
+\item $O$, insieme dei nodi di uscita;
+\item $E \subseteq (I + V) \times V$, insieme degli archi o \textit{dipendenze funzionali}.
+\end{itemize}
+e valgono le seguenti relazioni:
+\begin{itemize}
+\item $O \subseteq (I + V)$;
+\item $I \cap V = \emptyset$;
+\item ogni vertice in $I + V$ è su almeno un cammino $a\longrightarrow b$ con $a \in I$ e $b \in O$.
+\end{itemize}
 \end{definition}
-Spesso si aggiungono delle proprietà che non appartengono strettamente alla definizione ma sono ragionevolmente utili.
 
-Una volta definito questo grafo, bisogna determinare quanto veloce esso può essere eseguito con il numero di risorse fornite.
+Un CDAG modella l'esecuzione di un algoritmo parallelo.\\
+
+Un \textit{planning} identifica il modo in cui viene gestito il flusso di un programma. Possiamo avere:
+\begin{itemize}
+\item planning \textit{statico}, determinato in fase di compilazione;
+\item planning \textit{dinamico}, migliore del planning statico e affidato alla macchina in fase di esecuzione (esempio, previsione dei salti condizionati).
+\end{itemize}
+
+Una volta definito un CDAG, bisogna determinare quanto veloce esso può essere eseguito con il numero di risorse fornite.
+
 Ci si chiede inoltre quale sia il minimo numero di processori per poter risolvere il grafo in un determinato numero di passi, potenzialmente il numero minimo.
-E‘ importante inoltre considerare quale sia un numero ragionevole di processori $P^{\star}$ per avere un valore di spreco entro il coeffic1ente 2 ed avvicinarsi il più possibile al numero minimo di passi di risoluzione.\\
+\'E importante inoltre considerare quale sia un numero ragionevole di processori $P^{\star}$ per avere un valore di spreco entro il coeffic1ente $2$ ed avvicinarsi il più possibile al numero minimo di passi di risoluzione.
+Per fare ciò, sono necessarie alcune ipotesi semplificative:
+\begin{itemize}
+\item ogni operazione viene eseguita in un ciclo;
+\item il risultato di tale operazione è accessibile al ciclo successivo.
+\end{itemize}
+
+In questo caso l'approccio \textit{greedy} è ottimale. Infatti il modo migliore per eseguire le operazioni è la \textbf{greedy schedule}, ovvero: eseguire tutto ciò che è possibile eseguire in un dato istante.
+
+\begin{definition}[Greedy Schedule]
+Si definisce \textit{greedy schedule} del CDAG $\mathcal{C}$ la $L-upla$
+\begin{gather*}
+\left(V_0,V_1,\hdots,V_L\right)
+\end{gather*}
+tale che
+\begin{itemize}
+\item $V_0 = I$;
+\item $V_k = \left\{y \in V - \left(V_0 + V_1 +...+ V_{k-1}\right)\ :\ \forall x (x,y) \in E\ \Rightarrow\ x \in \left(V_0 + V_1 + ... + V_{k-1}\right)\right\}$
+\end{itemize}
+\end{definition}
 
 Si inizia cercando di svolgere il calcolo più velocemente possibile: si considera il caso in cui tutti gli input siano disponibili, ci si pone allora il problema di quali operazioni sia possibile svolgere su di essi.
 Tali operazioni sono rappresentate da $V_1$. $V_2$ è invece l’insieme delle operazioni che possono essere eseguite se gli operandi sono in $V_0$ e in $V_1$ ma almeno un operando dev’essere in $V_1$, altrimenti $V_2$ sarebbe stata eseguita prima di $V_1$.
 Questa proprietà vale per ogni $V_i$ e $V_{i+1}$. 
-Arriverà ad un certo punto a $V_L$ dove il processo termina in quanto non vi sono più operazioni i cui operandi sono in stadi già sistemati.\\
+Arriverà ad un certo punto a $V_L$ dove il processo termina in quanto non vi sono più operazioni i cui operandi sono in stadi già sistemati.
 
 \begin{align*}
 P_1 \to \sum_{j=0}^L V_j = I + V
@@ -159,10 +197,10 @@ Siccome il grafo non ha cicli, i cammini sono tutti di lunghezza finita e dunque
 Oggi si è definita una procedura per scomporre il grafo in pezzi, senza considerare gli input tali pezzi sono $L$.
 
 \begin{proposition}
-Se $(V_0,V_1,...,V_L)$ è la \textit{Greedy Schedule} di $C$ allora $L$ è la massima lunghezza di un cammino di $C$.
+Se $(V_0,V_1,...,V_L)$ è la \textit{Greedy Schedule} di $\mathcal{C}$ allora $L$ è la massima lunghezza di un cammino di $C$.
 \end{proposition}
 \begin{proof}
-Sia una quantità $L$ definita attraverso la Greedy Schedule e si definisce un’altra quantità $M$ come la lunghezza massima di un cammino di $C$, si verifica che tali grandezze coincidono: $* M \ge L$.
+Sia una quantità $L$ definita attraverso la Greedy Schedule e si definisce un’altra quantità $M$ come la lunghezza massima di un cammino di $\mathcal{C}$, si verifica che tali grandezze coincidono: $* M \ge L$.
 Se io costruisco un cammino di lunghezza $L$, dato che $M$ è il cammino di lunghezza massima allora questa relazione è necessariamente vera.
 Dalla Greedy Schedule si ricava che se un nodo appartiene allo stadio $i$, esso ha almeno un predecessore nello stadio $i-1$.
 Di conseguenza esiste dallo stadio $L$ un cammino di lunghezza $L$ e termina allo stadio $V_0$ (per costruzione).
@@ -204,7 +242,9 @@ Per esempio nel caso di due catene indipendenti gli ordinamenti possibili per ge
 Questo valore si ricava dal fatto che per identificare la catena finale è sufficiente indicare quali posizioni sono occupate da nodi $a$ e quali da nodi $b$, poichè l‘ordinamento tra i nodi $a$ e $b$ è univoco.
 
 A causa del numero esponenziale di differenti ordinamenti che si possono generare il problema di trovare la schedule ottima è computazionalmente difficile.
-L’ordinamento topologico in sè può essere ricavato in tempo lineare.
+L’ordinamento topologico in sè può essere ricavato in tempo lineare.\\
+
+Definisco $P_{MAX} = \max_{i=1}^L \abs{V_i}$ come la cardinalità dello stadio della greedy schedule che ha il maggior numero di nodi.
 
 \begin{definition}
 $T(P)$ è il tempo minimo per eseguire il cdag $C$ con $P$ processori.
@@ -214,7 +254,7 @@ Nei casi $P=1$ e $P=P_{MAX}$ è facile capire quanto vale mentre per gli altri v
 \begin{itemize}
 \item $T(P) \ge L$
 \item $T(P) \ge \frac{\abs{V}}{P}$
-\item $T(P) \ge \max{L,\frac{\abs{V}}{P}} \ge \frac{1}{2}(\frac{\abs{V}}{P} + L)$
+\item $T(P) \ge \max \left(L,\frac{\abs{V}}{P}\right) \ge \frac{1}{2}\left(\frac{\abs{V}}{P} + L\right)$
 \item $T(P) \le T_{GREEDY \mid P} = \sum_{j=1}^{L} \ceil{\frac{\abs{V_j}}{P}} \le \sum_{j=1}^{L}(\frac{\abs{V_j}}{P} + 1) = \frac{\abs{V}}{P} + L$
 \end{itemize}
 
@@ -222,7 +262,7 @@ Non si può essere certi dell’ottimalità della Greedy Schedule, tuttavia essa
 Unendo i lower e gli upper bound precedentemente ricavati si ottiene la formula:
 
 \begin{align*}
-\frac{1}{2}(\frac{\abs{V}}{P} + L) \le T(P) < \frac{\abs{V}}{P} + L
+\frac{1}{2}\left(\frac{\abs{V}}{P} + L\right) \le T(P) < \frac{\abs{V}}{P} + L
 \end{align*}
 
 E’ conveniente definire $P^{\star} = \frac{\abs{V}}{L}$ (in generale minore di $P_{MAX}$ anche se ci sono casi in cui $P^{\star} = P_{MAX}$).
