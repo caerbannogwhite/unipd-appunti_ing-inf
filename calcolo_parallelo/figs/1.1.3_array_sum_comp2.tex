@@ -1,68 +1,18 @@
-\ovalbox{
-\begin{tikzpicture}[level/.style={sibling distance=60mm/#1}]
-
-\node [circle,draw] (z){$+$}
-  child {node [circle,draw] (a) {$+$}
-    child {node [circle,draw] (b) {$+$}
-      child {node {$\vdots$}
-        child {node [circle,draw] (d) {$x_0$}}
-        child {node [circle,draw] (e) {$x_1$}}
-      } 
-      child {node {$\vdots$}}
-    }
-    child {node [circle,draw] (g) {$+$}
-      child {node {$\vdots$}}
-      child {node {$\vdots$}}
-    }
-  }
-  child {node [circle,draw] (j) {$+$}
-    child {node [circle,draw] (k) {$+$}
-      child {node {$\vdots$}}
-      child {node {$\vdots$}}
-    }
-  child {node [circle,draw] (l) {$+$}
-    child {node {$\vdots$}}
-    child {node (c){$\vdots$}
-      child {node [circle,draw] (o) {$x_{n-2}$}}
-      child {node [circle,draw] (p) {$x_{n-1}$}
-        child [grow=right] {node (q) {} edge from parent[draw=none]
-          child [grow=right] {node (q) {} edge from parent[draw=none]
-            child [grow=up] {node (r) {} edge from parent[draw=none]
-              child [grow=up] {node (s) {} edge from parent[draw=none]
-                child [grow=up] {node (t) {} edge from parent[draw=none]
-                  child [grow=up] {node (u) {} edge from parent[draw=none]}
-                }
-              }
-            }
-            child [grow=down] {node (v) {}edge from parent[draw=none]}
-          }
-        }
-      }
-    }
-  }
-};
-
-\path (a) -- (j) node [midway] {};
-\path (b) -- (g) node [midway] {};
-\path (k) -- (l) node [midway] {};
-\path (k) -- (g) node [midway] {};
-\path (d) -- (e) node [midway] {};
-\path (o) -- (p) node [midway] {};
-\path (o) -- (e) node [midway] {};
-\path (q) -- (r) node [midway] {};
-\path (s) -- (r) node [midway] {};
-\path (s) -- (t) node [midway] {};
-\path (s) -- (l) node [midway] {};
-\path (t) -- (u) node [midway] {};
-\path (z) -- (u) node [midway] {};
-\path (j) -- (t) node [midway] {};
-\path (y) -- (x) node [midway] {};
-\path (v) -- (y) node [midway] {};
-\path (q) -- (v) node [midway] {};
-\path (e) -- (x) node [midway] {};
-\path (o) -- (x) node [midway] {};
-\path (y) -- (w) node [midway] {};
-\path (v) -- (w) node [midway] {};
-\path (r) -- (c) node [midway] {};
-
-\end{tikzpicture}}
+\begin{gather*}
+\begin{array}{c}
++\\
+\nearrow\ \nwarrow\\
+x_0\qquad x_1
+\end{array}
+\begin{array}{c}
++\\
+\nearrow\ \nwarrow\\
+x_2\qquad x_3
+\end{array}
+\hdots
+\begin{array}{c}
++\\
+\nearrow\ \nwarrow\\
+x_{N-2}\qquad x_{N-1}
+\end{array}
+\end{gather*}
