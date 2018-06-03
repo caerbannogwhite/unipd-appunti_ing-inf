@@ -671,6 +671,8 @@ Equivalentemente ogni semigruppo finito è isomorfo ad un gruppo di funzioni dov
 \begin{definition}[Problema del prefisso]
 INPUT: $(x_0,x_1,...,x_{N-1} \in A^N$\\
 OUTPUT: $(y_0,y_1,...,y_{N-1}) \in A^N$ dove $y_j = x_0x_1...x_j$, con $j=0,1,...,N-1$\\
+\end{definition}
+
 In maniera equivalente posso anche dire che $y_0 = x_0$ e $y_j = y_{j-1}x_j$ (un prefisso è uguale al prefisso precedente dopo aver applicato $\bullet$ per l'$x$ attuale).\\
 
 In un grafo rappresentante un cdag che tratta operazioni non comrnutative bisogna specificare l’ordine degli operandi all’ingresso di un’operazione.
@@ -686,7 +688,177 @@ Bisogna trovare un cdag per il calcolo di tutti gli $y$ con profondità logaritm
 Se l’unico obbiettivo è il cammino critico posso andare alla definizione e per ogni prodotto fare un albero a sè, se il numero non è una potenza di due non verrà un albero bilanciato ma non è un gran problema, la profondità sarà $\floor{\log n}$.
 Ottengo in questo modo un grafo di questo tipo con:
 
-\end{definition}
+\begin{gather*}
+\abs{V} = 1 + 2 + ... + N-1 = \frac{N(n-1)}{2} = \binom{N}{2}\\
+L = \log_2 N
+\end{gather*}
 
+Questo algoritmo mostra che sebbene si sprechi sul piano del lavoro aggiuntivo non c’è motivo per pensare che non sia possibile affrontare in modo parallelo questo problema.
+Una domanda che ci possiamo fare è: se si hanno a disposizione tutti i valori interni di quell’albero, invece di andare per gli altri $y$ a ripetere il calcolo da capo, è possibile comporre in qualche modo i risultati parziali di $y_7$ per ottenere i prefissi precedenti?
+Supponiamo di volere $y_4$, si evidenzia dal grafo che $y_3$ è disponibile e moltiplicandolo per $x_4$ si ottiene $y_4$.
+Per calcolare $x_6$, si nota che si sta praticamente raccogliendo tutti gli elementi che stanno alla sinistra del cammino di $x_7$.
+Percorrendo tale cammino si incontrano un certo numero di alberi sinistri che originano da esso i quali, con un’opportuna composizione, producono la soluzione per $x_6$.
+
+Ogni prefisso $y_j$ si può ottenere in questo modo e la lunghezza del cammino critico è al più logaritmica.
+Abbiamo constatato dunque che mentre nel grafo relativo all’esecuzione sequenziale i risultati intermedi erano sempre disponibili, in quello parallelo no ma è possibile ottenerli in modo relativamente semplice.
+Tale grafo ha dunque costo:
+
+\begin{gather*}
+\abs{V} \le N \log_2 N\\
+L \le 2 \log_2 N\\
+L \le \log_2 N + \log_2\log_2 N
+\end{gather*}
+
+Se mentre si costruisce l’albero in parallelo si accumulano dei risultati parziali in parallelo all‘alberone è possibile ottenere un cammino critico:
+
+\begin{gather*}
+L \le \log_2 N
+\end{gather*}
+
+Non è introdotto dunque nessun ritardo globale rispetto al calcolo senza considerare i parziali.\\
+
+Ci si rende tuttavia conto che il numero di operazioni da $N$ dell’algoritmo sequenziale passa a $N \log N$ e ci si chiede se questo fattore $\log N$ possa essere tutto o in parte rieparmiato.\\
+
+\textit{Osservazione.} La descrizione dello stato di una macchina a stati finiti può essere associato al problema del calcolo dei prefissi.
+E’ dunque interessante costruire un sistema al quale dando un segnale di input di durata potenzialmente infinita produce costantemente un output.
+Una prima rappresentazione grafica di questo sistema è la seguente:\\
+
+Si osserva che se si aggiunge una linea ideale (tratteggiata) si ottiene un albero totalmente simmetrico a quello iniziale.
+Questo albero è stato chiamato in letteratura \textit{Twisted Refiected Tree} (TRT) (Bilardi, Preparata).
+Questa rappresentazione non costituisce una greedy schedule, bensì permette di trattare segnali infiniti mettendo un buffer tra uno stadio e quello successivo.
+
+\begin{gather*}
+\abs{V} = (N - 1) + (N - 1) + N = O(N)\\
+L \le 2 \log_2 N
+\end{gather*}
+
+Il circuito si dice \textit{pipelinable}.
+Osserviamo cosa significa il simbolo:\\
+
+Il circuito, privo di questo elemento, è in grado di calcolare tutti i prefissi di un singolo fronte di input.
+Se vogliamo invece calcolarli per un segnale infinito questo elemento fa l’accumulo dei prefissi del fronte.
+Il fronte immediatamente successivo dovrà acquisire, per calcolare i suoi prefissi, tutti quelli del fronte precedente.
+Questo avviene tramite il buffer che funge anche da radice del secondo albero ed è in grad di temporizzare correttamente il segnale.
+Questa tecnica ci permette di trattare anche segnali molto
+lunghi.
+Questo elemento circuitale è dunque in grado di svolgere il prodotto tra semigruppi, esegue cioè ciclicamente il prodotto tra il nuovo fronte e quelli precedenti, che poi propaga a tutte le foglie del secondo albero, così da rendere validi tutti i nuovi prefissi calcolati.
+Il grafo precedente lo possiamo dunque vedere con o senza questo elemeneto, ed esso rappresenterebbe rispettivamente il cdag di un algoritmo per il calcolo dei prefissi ed un sistema dinamico in grado di calcolare prefissi con segnali finiti e infiniti.
+
+
+\subsection{Macchine a stati finiti}
+
+La macchina a stati finiti o \textit{Finite State Machine} (FSM) è il modello più realistico di un sistema dinamico che è possibile realizzare in ingegneria.\\
+
+La macchina è così definita:
+\begin{itemize}
+\item $M = (\Sigma, Q \Gamma, \delta, \eta, q_0)$
+\item $u(t) \in \Sigma$
+\item $q(t) \in Q$, si ossevi che $q(t)$ è la funzione che determina l'output e ha la proprietà di avere memoria
+\item $z(t) \in \Gamma$
+\item $\delta\ :\ Q \times \Sigma \to Q$
+\item $\eta\ :\ Q \times \Sigma \to \Gamma$
+\end{itemize}
+
+\begin{gather*}
+q(t+1) = \delta(q(t), u(t))\\
+z(t) = \eta(q(t),n(t))
+\end{gather*}
+
+Esistono differenze tra le definizioni delle macchine a stati finiti. Si distinguono infatti:
+\begin{itemize}
+\item FSM di Melay, $z(t) = \eta(q(t),n(t))$
+\item FSM di Moore $z(t) = \eta(q(t))$
+\end{itemize}
+
+E’ possibile dimostrare che per ognuna FSM di Melay ne esiste una equivalente di Moore.
+La funz1one $z(t)$ nel DFA (Deterministic Finite-State Automaton) vista nel corso di informatica teorica è:
+
+\begin{gather*}
+\eta(q) = 
+\left\{\begin{array}{l}
+1\qquad q \in F\\
+0\qquad q \notin F
+\end{array}\right
+\end{gather*}
+
+La DFA è dunque un caso particolare di FSM.
+
+\subsubsection{Evoluzione di una FSM}
+
+INPUT: $q_0 = (u_0, u_1, ..., u_{N-1}) \in \Sigma^N$\\
+OUTPUT: $(q_1, ..., q_N) = (q(1), ..., q(N)) \in Q^N$\\
+s.t. $q(0) = q_0$, $q(t) = \delta(q(t), u_t)$\\
+
+Questo è un problema tipico di teoria dei sistemi, ad esempio nei circuiti elettrici l’analisi viene fatta con segnali in forma analitica.
+Questo tipo di analisi è differente: si basa sull’analisi dello stato di un sistema che ha in input un segnale rappresentato come sequenza di campioni.
+Si cerca ora dunque un algoritmo di tipo parallelo che produce l’output della macchina a partire dall’input, poiché se, basandosi sulla definizione, si applica un singolo cambiamento ad ogni istante temporale, si ottiene un cammino critico $N\cdot k$.
+Per velocizzare l’operazione si utilizza il ragionamento
+fatto per il calcolo dei prefissi.
+
+Se un elemento particolare $a \in \to \Sigma$, è possibile definire $\delta_a(q) = \delta(q,a)$.
+Riscrittura della formula della transizione di stato in funzione della sola variabile q.
+CasoN=2 =
+\begin{gather*}
+\delta_a\ :\ Q \to Q
+\end{gather*}
+
+Riscrittura della formula della transizione di stato in funzione della sola variabile $q$.\\
+
+Caso $N=2,\ \Rightarrow u_0, u_1$
+\begin{gather*}
+q_1 = \delta(q_0,u_0) = \delta_{n_0}(q_0)\\
+q_2 = \delta(q_1,u_1) = \delta_{n_1}(q_1)=\delta_{u_1}(\delta_{u_0}(q_0)) = (\delta_{u_0} \circ \delta_{u_1})(q_0)
+\end{gather*}
+dove
+\begin{gather*}
+f(g(x)) = (g \circ f)(x)\\
+S = \langle A, \circ \rangle
+\end{gather*}
+
+Con $A = Q^Q$ e la funzione $f\ :\ Q \to Q$
+\begin{gather*}
+q_{t+1} = (\delta_{u_0} \circ \delta_{u_1} \circ ... \circ \delta_{u_t})(q_0)\qquad t = 1,...,N
+\end{gather*}
+
+
+\subsubsection{FSM per l'addizione binaria}
+
+La macchina prende in input due sequenze di bit dove $a_0$ e $b_0$ sono le cifre meno significative.
+Gli insiemi della macchina:
+\begin{itemize}
+\item $\Sigma = \{00,01,10,11\} = \{0,1\}^2$
+\item $Q = \{0,1\}$
+\item $\Gamma = \{0,1\}$
+\item $\delta(q,u) = \delta(q,(a,b)) = TH_2(q,a,b) = qa+qb+ab$, dove $TH_2$ è la funzione soglia che è uguale a $1$ se $k$ o più elementi sono $= 1$
+\item $\eta(q,u) = \eta(q,(a,b)) = q \oplus a \oplus b$
+\end{itemize}
+
+Si osserva ora il semigruppo $M$:
+\begin{gather*}
+M = (\Sigma,Q,\Gamma,\delta,\eta)
+\end{gather*}
+
+Esso si ottiene dal gruppo di generatori $\delta_u\ :\ u \in \Sigma$. $M$ è il semigruppo generato da $\delta_u\ :\ u \in \Sigma$.
+
+\begin{center}
+\begin{tabular}{c|c c c}
+$q$ & $\delta_{00}$ & $\delta_{01} = \delta_{10}$ & $\delta_{11}$ \\ \hline
+$0$ & $0$ & $0$ & $1$ \\
+$1$ & $0$ & $1$ & $1$ \\
+\end{tabular}
+\end{center}
+
+Se nel sommare si arriva in una colonnina in cui entrambi in numeri sono entrambi zero allora sicuramente quella colonna non genera riporto.
+
+Se si comincia a moltiplicare (comporre) fra loro questi generatori si ottengono dei generatori:
+
+\begin{center}
+\begin{tabular}{c|c c c}
+$f\ \mid \ g$ & $\delta_{00}$ & $\delta_{01} = \delta_{10}$ & $\delta_{11}$ \\ \hline
+$\delta_{00}$ & $\delta_{00}$ & $\delta_{00}$ & $\delta_{11}$ \\
+$\delta_{01} = \delta_{10}$ & $\delta_{00}$ & $\delta_{01}$ & $\delta_{11}$ \\
+$\delta_{11}$ & $\delta_{00}$ & $\delta_{11}$ & $\delta_{11}$ \\
+\end{tabular}
+\end{center}
 
 \end{document}
