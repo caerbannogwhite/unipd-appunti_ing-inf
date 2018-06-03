@@ -519,7 +519,10 @@ Benes prese come mattone elementare per costruire questa rete di routing l’int
 
 Gli output sono dunque rappresentati dalle equazioni:
 \begin{gather*}
-\left\{\begin{array}{l}c = Sb + (1 - S) a\\d = Sa + (1 - S) b\end{array}\right
+\left\{\begin{array}{l}
+c = Sb + (1 - S) a\\
+d = Sa + (1 - S) b
+\end{array}\right
 \end{gather*}
 
 L’idea di Benes è dunque di costruire la rete di permutazione con tali switch.\\
@@ -527,5 +530,163 @@ L’idea di Benes è dunque di costruire la rete di permutazione con tali switch
 \textit{Osservazione.} Si noti la somiglianza tra i comparator-exchanger (vedi capitolo bitonic sort) e gli switch.
 I primi possono essere visti come degli switch in grado di autoconfigurarsi dinamicamente in base all’input.
 Un modo per fare una rete di permutazioni è quello di mettere gli interruttori disposti secondo una rete che svolge l’ordinamento.
+
+\textit{Osservazione.} Una rete per l’ordinamento può essere adattata per eseguire il permutation routing on-line, tant’è vero che in molti router vi sono pezzi della rete di Batcher.\\
+
+Si desidera ottimizzare il numero di commutazioni, il numero degli switch e la lunghezza dei cammini
+critici. Il problema off—line è più facile del problema on-line e c’è dunque qualche speranza in più di trovare soluzioni più efficienti per tale problema.
+Ma quanto può essere piccolo il numero di interruttori affinchè si possano produrre tutte le permutazioni in output?
+Una rete in grado di eseguire il sorting può essere adattata per fare il routing, ma non è vero il viceversa.
+I due problemi sono collegati e la riduzione si effettua dunque dal routing al sorting, non viceversa.
+In questo caso il problema più difficile è l’ordinamento e, di conseguenza, l’upper bound dell’algoritmo di Batcher varrà anche per il problema del routing.
+Non si può invece affermare il viceversa.
+Se si possiede una rete di interrutori che può generare tutte le permutazioni, essa automaticamente diventa un codice che assegna ad ogni permutazione una o più stringhe binarie (nel caso la stessa si possa ottenere con configurazioni diverse di interruttori).
+Si può dunque a questo punto osservare che il numero di configurazioni possibili è $N!$.
+
+\begin{proposition}
+Una rete con $S$ interruttori ha $2^S$ configurazioni.
+Se la rete può realizzare tutte le permutazioni, allora:
+\begin{gather*}
+2^S \ge N! \Rightarrow S \ge \log_2 N! = N \log_2 N - O(N)
+\end{gather*}
+\end{proposition}
+
+\textit{Osservazione.} Quel limite inferiore al numero di interruttori non può essere stretto, non è cioè possibile verificare tale relazione con un’uguaglianza nei casi $N \neq 2$ in quanto $N!$ contiene fattori diversi da $2$.
+Si vedrà tuttavia che la rete di Benes si avvicina molto a questo lower bound.
+Problema del cammino critico: si osserva che la rete di Benes ha un cammino critico dell’ordine di $\log N$.
+Si prende un terminale; quando il cammino che origina da tale terminale attraversa un interruttore, il pacchetto che lo percorre si può trovare in due punti distinti della rete.
+Dopo aver attraversato due interruttori il pacchetto può essere in quattro distinti posti della rete.
+Se si guardano i punti raggiungibili da un terminale di ingresso, se si attraversarsano $k$ interruttori, il numero di terminali d’uscita che è possibile raggiungere è al più $2^k$.
+In una rete di permutazioni, $2^k \ge N$ (poiché è necessario poter raggiungere tutte le possibili permutazioni dell’input).
+
+\begin{gather*}
+k \ge \log_2 N\\
+L_{SN}(N) \ge \log_2 N
+\end{gather*}
+
+Una rete di Benes è ricorsivamente definita come uno stadio di comparatori tra gli ingressi in due sottoreti di $N/2$ elementi ed uno stadio di comparatori tra le uscite.
+Dove $BN(2)$ coincide con il caso base, ossia lo switch binario.
+Si prenda ora come esempio una rete di Benes con $8$ input ($BN(8)$):\\
+
+Si osserva che la prima metà della rete, detta $\Omega(N)$ è isomorfa a $BM(N)$, ossia BITONIC-MERGE.
+
+\begin{gather*}
+\left\{\begin{array}{l}
+S_{BN}(N) = 2S_{BN}(N/2) + N\\
+S_{BN}(2) = 1
+\end{array}\right \Rightarrow S_{BN}(N) = N \log_2 N - \frac{N}{2}
+\end{gather*}
+
+La lunghezza del cammino critico è:
+
+\begin{gather*}
+\left\{\begin{array}{l}
+L_{BN}(N) = L_{BN}(\frac{N}{2} + 2)\\
+L_{BN}(2) = 1
+\end{array}\right \Rightarrow L_{BN}(N) = 2 \log_2 N - 1
+\end{gather*}
+Da $L$ si può ricavare $S$, osservando che ad ogni stadio vi sono $N/2$ interruttori, cioè $S_{BN}(N) = S_{BN}(N) \frac{N}{2}$.
+
+\begin{gather*}
+BN(N) \approx \Omega(N)\Omega^{-1}(N)
+\end{gather*}
+
+Se, invece, $\Omega(N)\Omega(N)$ sia una rete di permutazione non si sa dimostrare, sebbene le simulazioni mostrano che la risposta potrebbe essere positiva, esso è tuttora un problema aperto.
+
+\begin{proposition}
+$\forall N = 2^d$, $BN(N)$ realizza $N!$ permutazioni distinte.
+\end{proposition}
+
+\begin{proof}
+Per induzione. Caso base: $d = 1$, $N = 2$.\\
+Passo induttivo:
+\begin{itemize}
+\item ipotesi induttiva: $BN(\frac{N}{2})$ realizza tutte le $\frac{N}{2}!$ permutazioni
+\item tesi: (con esempio)
+\end{itemize}
+Il primo interruttore può essere configurato a piacere, in questo caso come passante.
+Con questa configurazione il valore $7$ dev’essere fatto uscire necessariamente nel $4^{\circ}$ pin e quindi l’uscita corrispondente dev’essere incrociante.
+Si deve poi proseguire controllando quali input sono necessari alle varie uscite e di conseguenza che configurazione devono avere gli interruttori.
+Giunto al piu n. $5$ ricade nella scelta del primo pin che ho già compiuto. 
+\end{proof}
+
+\begin{itemize}
+\item L'algoritmo configura il primo e l'ultimo stadio
+\item Assegna permutazioni alle due sottorete $BN(\frac{N}{2})$
+\end{itemize}
+
+Il tempo di configurazione è il seguente:
+
+\begin{gather*}
+T_{CONF}(N) = 2 T_{CONF}\left(\frac{N}{2}\right) + O(N) = O(N\log N)
+\end{gather*}
+
+Questo risultato non può essere migliorato poichè, considerando tempo costante per la configurazione di ogni interruttore, essi sono $n\log n$ ed è necessario configurarli tutti.
+Si osserva che l’algoritmo di Benes è difficilmente parallelizzabile:
+
+\begin{gather*}
+SW_{PERM}(N) \ge \log_2(N!) = N \log_2 N - (\log_2 e) N + o(N)\\
+SW_{BN}(N) = N \log_2 N - \frac{1}{2}N
+\end{gather*}
+
+Togliendo il primo switch (ovvero settandolo come passante) otterremmo:
+
+\begin{gather*}
+SW_{BN}(N) = N \log_2 N - 0.5(N) - \left(1+2+2^2+...+2^{\log_2 N - 2}\right)
+\end{gather*}
+dove
+\begin{gather*}
+\left(1+2+2^2+...+2^{\log_2 N - 2}\right) = \frac{1-2^{\log_2N - 1}}{1-2} = \frac{N}{2} - 1\\
+SW_{BN} (N) = N\log N - N + 1
+\end{gather*}
+
+$\forall i, \pi(i) = i$ (permutazione identica), $BN(N)$ realizza $\ge 2^{N/2 (\log_2 N - 1)}$
+
+\subsection{Problema del calcolo dei prefissi}
+
+\begin{definition}
+Data una sequenza di $n$ numeri, vogliamo calcolare la somma di ciascun prefisso di lunghezza $k$.
+\end{definition}
+
+Il calcolo dei prefissi è un problema assolutamente banale se affrontato in modo sequenziale e, prima dell'avvento del calcolo parallelo, è stato trascurato.\\
+
+\textit{Osservazione.} Dal punto di vista analitico la somma è l'integrale definito mentre la somma di prefissi è l'integrale indefinito.\\
+
+Per semplificare le cose assumeremo che l'universo degli operandi sia definito.\\
+
+Consideriamo il semigruppo $S = \langle A,\bullet \rangle$, dove $A$ è un insieme, mentre un’operazione binaria su $A$ è tale che $A \times A \to A$, è associativa, cioè $\forall a,b,c \in A, (a \bullet b) \bullet c = a \bullet (b \bullet c)$.\\
+
+Esempi:
+\begin{itemize}
+\item $\langle \mathbb{Z},+ \rangle$, $\langle \mathbb{Z}, \cdot \rangle$ sono semigruppi
+\item $\langle B, \vee \rangle$, $\langle B, \wedge \rangle$, $\langle B, \oplus \rangle$ dove $B = $ boolean
+\end{itemize}
+
+Un’operazione che ci risulterà molto utile è la composizione di funzioni.
+
+\begin{proposition}[Cayley] Ogni gruppo finito è isomorfo ad un gruppo di permutazioni. Le permutazioni sono funzioni invertibili che si possono comporre tra loro e formano un gruppo.
+Equivalentemente ogni semigruppo finito è isomorfo ad un gruppo di funzioni dove l’operazione è la composizione di funzioni.
+\end{proposition}
+
+\begin{definition}[Problema del prefisso]
+INPUT: $(x_0,x_1,...,x_{N-1} \in A^N$\\
+OUTPUT: $(y_0,y_1,...,y_{N-1}) \in A^N$ dove $y_j = x_0x_1...x_j$, con $j=0,1,...,N-1$\\
+In maniera equivalente posso anche dire che $y_0 = x_0$ e $y_j = y_{j-1}x_j$ (un prefisso è uguale al prefisso precedente dopo aver applicato $\bullet$ per l'$x$ attuale).\\
+
+In un grafo rappresentante un cdag che tratta operazioni non comrnutative bisogna specificare l’ordine degli operandi all’ingresso di un’operazione.
+Se si vuole fare sequenzialmente l’operazione per un prefisso $y$, è necessario trattare anche i prefissi di lunghezza inferiore che sono risultati parziali.
+La situazione tuttavia cambia con il calcolo parallelo.
+Una prima soluzione parallela per il problema è la seguente:\\
+
+Questo algoritmo è un ottimo algoritmo parallelo, se ho un numero di processori pari a $N/2$ posso eseguire l’algoritmo come evidenziato nella greedy schedule anche se il parallelismo reale è inferiore.
+Sul cammino evidenziato dal grafico si vede che solo $y_1,y_3$ e $y_7$ sono validi prefissi, poichè sono gli unici che sono influenzati da $x_0$.
+Ci si pone la domanda, quanto posso tenere piccolo il cammino critico se voglio avere tutti i valori
+intermedi come output?
+Bisogna trovare un cdag per il calcolo di tutti gli $y$ con profondità logaritmica.
+Se l’unico obbiettivo è il cammino critico posso andare alla definizione e per ogni prodotto fare un albero a sè, se il numero non è una potenza di due non verrà un albero bilanciato ma non è un gran problema, la profondità sarà $\floor{\log n}$.
+Ottengo in questo modo un grafo di questo tipo con:
+
+\end{definition}
+
 
 \end{document}
