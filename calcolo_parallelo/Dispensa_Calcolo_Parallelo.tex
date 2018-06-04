@@ -901,4 +901,130 @@ $\delta_{11}$ & $\delta_{00}$ & $\delta_{11}$ & $\delta_{11}$ \\
 \end{tabular}
 \end{center}
 
+Se questi risultati tra generatori avessero dato risultati al di fuori di quelli sopra illustrati la tabella sarebbe stata estesa.
+L’estensione della tabella pitagorica può continuare finchè vengono aggiunti elementi di un nuovo tipo.
+\begin{itemize}
+\item $\delta_{00} \equiv R$, \textbf{carry reset}
+\item $\delta_{01} \equiv P$, \textbf{carry propagate}
+\item $\delta_{11} \equiv S$, \textbf{carry set}
+\end{itemize}
+Il semigruppo viene chiamato \textit{semigruppo dei riporti}, o semìgruppo carry.
+$00$ è un carry reset perchè che ci sia o meno un riporto che viene da destra, muovendosi da destra verso sinistra nel modo più naturale di svolgere le operazioni, da lì in poi non c’è riporto in nessun caso, quindi anche se non si conosce cosa ci sia alla destra di una posizione $00$ si è comunque certi che quella posizione non dà riporto.
+\'E dunque possibile cominciare a lavorare a sinistra di quella posizione senza sapere quello che c’è a destra, tali punti permettono di decomporre il problema.
+Dal punto di vista statistico questa sequenza si ripete quindi è possibile parallelizzare idealmente l’operazione di addizione.
+Questo in pratica non avviene perchè è necessario possedere una procedura deterministica.
+Paradossalmente il propagate è quello che rende difficile la parallelizzazione dell’addizione.
+Si dice paradossalmente poichè è proprio la funzione identità a causare il problema.
+\begin{gather*}
+\forall X\in R,S,P\quad XR = R,\quad XS = S,\quad XP = X
+\end{gather*}
+Ora, in possesso di questo semigruppo, l’impianto matematico è completo ma è fondamentale ora sintetizzare l’algoritmo con porte logiche booleane e il primo passo è quello di scegliere la rappresentazione.
+Siccome si hanno tre elementi ed è necessario utilizzare una lunghezza fissa, servono 2 bit per rappresentarli.
+Come scegliere questa rappresentazione?
+Innanzitutto è fondamentale passare da $u$ a $\delta_u$ per fare questo è possibile rappresentare $\delta_u$ direttamente con i bit di $u$. Cioè $00$ per $\delta_{00}$ o $R$ e $11$ per $\delta_{11}$ o $S$. $P$ è invece problematico; la cosa più semplice che si può fare è rappresentare l‘identità in due modi diversi, cioè sia $10$ che $01$ sono rappresentazioni legali per $\delta_{01}$. Non è vietato rappresentare un elemento del semigruppo in due modi diversi.
+Si è fatta una scelta semplice e banale, ora bisogna considerare le conseguenze e realizzare dei moltiplicatori di semigruppo.
+Cos’è un moltiplicatore carry-save?
+Se invece di rappresentare i numeri binari con il numero minimo di cifre possibili essi si rappresentano con una certa ridondanza, cioè ad ogni posizione binaria invece di associare un bit se ne associano due, oltre a sprecare un buon numero di bit, l’operazione di somma non ha effetti a propagazione illimitata.
+Cioè per sapere quanto vale l’operazione di somma in una determinata posizione si dovrebbe analizzare un numero costante di posizioni dell’input.
+Questa operazione ha un cammino critico anche più piccolo del sommatore che si sta cercando di realizzare.
+L'idea è allora di usare questo formato per costruire un albero della somma in cui ogni sottoinsieme ha complessità costante e il totale è logaritmico.
+Il risultato in forma carry-safe si converte nella forma "normale" con una semplice operazione di somma.
+Questo è un esempio in cui una rappresentazione ridondante apparentemente inefficiente facilita invece l‘operazione.
+
+
+\subsubsection{Sistesi di funzioni booleane}
+
+Si scrive la tabella di verità e usando le mappe di Karnaugh si ricavano delle funzioni booleane semplificate:\\
+
+Si noti che le $D_i$ sono le \textbf{don't care condition}.
+Nel casi centrali del $P$ non è importante come i bit
+vengono disposti, tuttavra è fondamentale che siano uno il complementare dellaltro.
+Allora $\bar{D}_i$ è il complementare di $D_i$.
+
+
+\subsection{Discrete Fourier Transform}
+
+Si immagina di avere un anello $A(+,\cdot)$, con $\omega$ radice principale di ordine $N$, se
+\begin{itemize}
+\item $\omega^N = 1$
+\item $\omega^1,\omega^2,\hdots,\omega^{N-1} \neq 1$
+\item $\sum_{j=0}^{N-1} \omega^{ij} = \left\{\begin{array}{l r}N & i = 0\\0 & i \neq 0\end{array}\right$
+\end{itemize}
+
+
+\subsubsection{Algoritmo FFT}
+
+L’algoritmo per il calcolo della DFT proposto da Cooley-Tukey nel 1965, ma anticipato in un manoscritto di Gauss riportato alla luce solo negli anni ’80, è una strategia Divide\&Conquer per il calcolo della trasformata e richiede che il numero $N$ sia fattorizzabile ($N = pq$).
+Se $N$ è un numero primo questo algoritmo non dà nessun vantaggio.
+\begin{itemize}
+\item Si dispone l’input in una matrice $p \times q$ row major.
+\item Si esegue la trasformata delle colonne $F(w^q)$.
+\item Si moltiplica per il \textit{twiddle factor} (la casella di indice $i,j$ va moltiplicata per $\omega^{ij}$).
+\item Si esegue la trasformata delle righe.
+\end{itemize}
+
+L’algoritmo è di interesse nel caso generale di $N = pq$ ma per comodità sarò trattato il caso $N = 2^d$.
+Le potenze di due sono i numeri più fattorizzabili, ma proprio per questo possiamo andare a scegliere $p$ e $q$ in tanti modi diversi.
+Il caso più tipico è quello $p = 2$ e $q = N/2$ e il suo simmetrico $p = N/2$, $q = 2$.
+Si osserva come esempio il caso $N = 8$:\\
+
+\begin{gather*}
+F_2(\omega^{N/2}) = F_2(-1) = 
+\left[\begin{array}{r r}1 & 1\\1 & -1\end{array}\right]
+\left[\begin{array}{r}a\\b\end{array}\right]
+=
+\left[\begin{array}{r}a+b\\a-b\end{array}\right]
+\end{gather*}
+
+La permutazione eseguita dalla prima fase del circuito FFT è detta UNSHUFFLE poichè ripristina l’ordinamento degli input.
+Nelle prossime lezioni sarà presentata una rete detta shuffle-exchanger basata sulla stessa operazione.
+Questo tipo di rete oggi non va per la maggiore ma era considerata fino agli anni 80 la rete ideale per connettere tra loro più processori.
+Si cerca di capire cosa succede nella rete di unshuflle osservando gli input in base 2:
+\begin{gather*}
+h\ \longrightarrow\ UNSHAFFLE(h)\\
+\begin{array}{c c c c c c c}
+0 & 0 & 0 & \longrightarrow & 0 & 0 & 0\\
+0 & 0 & 1 & \longrightarrow & 1 & 0 & 0\\
+0 & 1 & 0 & \longrightarrow & 0 & 0 & 1\\
+0 & 1 & 1 & \longrightarrow & 1 & 0 & 1\\
+1 & 0 & 0 & \longrightarrow & 0 & 1 & 0\\
+1 & 0 & 1 & \longrightarrow & 1 & 1 & 0\\
+1 & 1 & 0 & \longrightarrow & 0 & 1 & 1\\
+1 & 1 & 1 & \longrightarrow & 1 & 1 & 1\\
+\end{array}
+\end{gather*}
+
+Si nota che quest’operazione coincide con una rotazione ciclica verso destra di una posizione.
+Come ci si convince che questa regola non funziona solo nel caso $N=8$?
+In pratica abbiamo preso gli elementi in posizione pari da mettere sopra e quelli dispari da mettere sotto.
+Essa infine è una bit-permutation.
+In che modo l’unshufile è una bit permutation?
+Si e partiti da una permutazione di numeri e se si
+guarda la loro rappresentazione binaria si osservano tutte le stringhe di lunghezza $\log_2 N$.
+Non tutte le permutazioni hanno la caratteristica di poter essere descritte dalla permutazione di singoli bit.
+Le permutazioni che sono bit-permutation sono in effetti rare.
+Le permutazioni sui bit sono $\frac{(\log_2 N)!}{N!}$
+
+
+\section{Modelli di rappresentazione per reti}
+
+Il modello cdag finora analizzato prende in considerazione solo il numero di processori (risorse) a disposizione ed è dunque un modello semplificato e idealizzato.
+Esso non considera in effetti aspetti importanti come l’architettura dei processori e il tempo impiegato per le comuniczioni, in particolare tra risorse diverse.
+Il modello finora utilizzato è un buon modo per entrare nell’ottica del calcolo parallelo sebbene semplificato.\\
+
+Nei modelli dove il costo delle comunicazioni è significativo, questo generalmente fa si che si debba stare molto più attenti a come mappare l’algoritmo sul sistema di calcolo o anche cambiare l’ordine di
+algoritmi diversi.
+Di fatto la maggior parte degli algoritmi ottimizzati per le comunicaziooni non sono stati pensati in quel modo, bensì con un modello idealizzato e poi adattati.
+\'E meglio dunque pensare all’algoritmo cercando di estrarne il massimo del parallelismo possibile e poi realizzarne un'implementazione ottimizzata.
+Ci sono tuttavia dei casi in cui nel momento in cui si introduce il vincolo delle comunicazioni ci si trova costretti a rivedere totalmente i progetto iniziale.
+Si parlerà ora di qualche modello di calcolo un po’ più realistico.
+Vi sono molti modelli distinti poiché essi perseguono spesso obbiettivi diversi:
+\begin{itemize}
+\item avere modelli molto accurati
+\item avere modelli molto portabili, cioè catturare i vincoli essenziali in modo tale che essi valgano su più macchine possibili, analogamente a quello che si fa nella progettazione degli algoritmi sequenziali ad alto livello
+\end{itemize}
+Ci si concentra ora su un modello dove ogni nodo ha risorse di calcolo e risorse di memoria.
+
+\subsection{Multiprocessore distribuito}
+
 \end{document}
