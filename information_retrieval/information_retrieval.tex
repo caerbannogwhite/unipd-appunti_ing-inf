@@ -14,6 +14,8 @@
 
 \maketitle
 
+\tableofcontents
+
 \section{Introduzione}
 Per poter reperire dei documenti è necessario prima di tutto poter rappresentare il loro contenuto informativo in modo conciso. Questo passo è reso possibile dall'\textbf{analisi del testo} che deve poter essere effettuata in modo \textbf{automatico}, \textbf{rapido}, \textbf{affidabile} e \textbf{consistente}.\\
 Esistono due principali approcci all'analisi del testo:
@@ -45,7 +47,61 @@ Operando in questo modo si escludono:
 
 
 \section{Indicizzazione}
+L'indicizzazione si compone di 4 fasi principali, da eseguire sequenzialmente ma non tutte indispensabili ai fini di rappresentare il contenuto informativo di un documento. Scopo dell'indicizzazione è proprio quello di fornire una rappresentazione più compatta e facilmente utilizzabile di un documento, grazie all'estrazione dei suoi descrittori.
 
+\subsection{Analisi Lessicale}
+L'analisi lessicale ha come fine l'estrazione dei \textit{token}, ovvero i potenziali descrittori di un documento. Questa fase è fortemente influenzata dalla lingua nella quale i documenti sono scritti, poiché questa influisce nei caratteri di separazione, nella punteggiatura, nella codifica del documento, nella rappresentazione della date.
+
+\subsection{Rimozione Delle Stop Word}
+Le stop word sono parole con scarso contenuto informativo, solitamente a carattere funzionale (aricoli, pronomi, preposizioni, congiunzioni). In questa fase possono essere utilizzate delle liste precompilate (implementate solitamente per mezzo di tabelle hash) oppure si preparano dei modelli statistici.\\
+La rimozione delle stop word influisce sostanzialmente nella dimensione dell'indice, infatti pur essendo solitamente meno di un centinaio di elementi, ad esse sono associate delle \textit{posting list} molto voluminose.\\
+Tuttavia è sempre bene chiedersi quali possano essere gli effetti di questa fase. Un esempio molto noto riguarda la celebre frace \textit{To be or not to be}, che difficilmente potrebbe essere ricostruita dopo la rimozione delle stop word.
+
+\subsection{Stemming}
+Lo stemming (da \textit{stem}, radice) è quella fase che permette di catturare le relazioni sussistenti tra le varie forme di un termine. In particolare, si occupare di ricondurre le parole alla loro radice semantica.\\
+I due principali approcci con i quali si esegue questa fase sono:
+\begin{itemize}
+\item \textbf{algoritmico}, un programma decide se due parole sono semanticamente connesse;
+\item \textbf{basato su dizionario}, uno o più dizionari preparati in precedenza, mantegono le relazioni esistenti fra i vari termini.
+\end{itemize}
+Il più famoso stemmer algoritmico è il \textit{Porter Stemmer}, creato per la lingua inglese.\\
+Le principali problematiche relative a questa fase riguardano la creazione di uno stemmer per ciascuna lingua o, seguendo il secondo approccio, la creazione e l'aggiornamento dei dizionari.\\
+Bisogna poi assicurarsi che lo stemmer non rimuova o non lasci troppa informazione in un termine: questi effetti prendono il nome di \textit{over-stemming} e \textit{under-stemming}.
+
+\subsection{Composizione Dei Termini}
+Un problema frequente che i sistemi di reperimento dell'informazione devono affrontare è la ricerca di query costituite da pochi termini (solitamente due o tre), per i quali l'utente si attende come risultato quei documenti che contengono proprio quelle frasi.\\
+Ci si pone dunque il problema di cosa sia una frase e di quali frasi è bene mantenere traccia. Tuttavia questa fase è strettamente legata al modello di reperimento che viene utilizzato dall'IRS.
+
+\subsection{Struttura Dati}
+La struttura dati che viene generata al termine dell'indicizzazione prende il nome di \textbf{inverted index}, sebbene con questo nome si indica spesso una famiglia di strutture con caratteristiche simili.\\
+L'indice serve alla memorizzazione dell'elenco dei termini, o \textit{feature}, presenti nei documenti. Ogni termine possiede la sua \textbf{inverted list} (o \textbf{posting list}), che mantiene le informazioni relative a quel termine.\\
+La posting list contine solitamente gli identificatori dei documenti che contengono quel termine, più ulteriori informazioni (spesso dipendenti dal modello) che permettono di calcolare lo \textbf{score} più efficientemente. Una tipica scelta per la posting list è quella di assciare all'identificatore del documento la frequenza relativa del termine.
+
+
+\section{Modello Booleano}
+Un modello di reperimento dell'informazione è un insieme di costrutti che sono stati ideati e poi formalizzati allo scopo di rendere possibile:
+\begin{itemize}
+\item la rappresentazione del contenuto dei documenti;
+\item la rappresentazione delle interrogazioni;
+\item la realizzazione degli algoritmi di reperimento dei documenti in risposta ad un'interrogazione.
+\end{itemize}
+Nel modello booleano le interrogazioni permettono all'utente di esprimere la propria esigenza informativa per mezzo di propozioni booleane:
+\begin{itemize}
+\item un termine $x$ rappresenta una proposizione booleana atomica ed è resa vera da tutti i documenti che contengono quel termine;
+\item $x\;OR\;y$ rappresenta una proposizione composta resa vera da tutti i documenti che contengo il termine $x$ oppure il termine $y$;
+\item $x\;AND\;y$ rappresenta una proposizione composta resa vera da tutti i documenti che contengo sia il termine $x$ che il termine $y$;
+\item $NOT\;x$ rappresenta una proposizione composta resa vera da tutti i documenti che non contengono il termine $x$.
+\end{itemize}
+Nel modello booleano la funzione di reperimento associa all'interrogazione l'insieme dei documenti che soddisfano la proposizione indicata. Tuttavia, questa funzione non consente di ordinare i documenti secondo la loro rilevanza.
+
+\subsection{Livello Di Coordinamento}
+
+
+
+\section{Modello Probabilistico}
+
+
+\section{Modello Vettoriale}
 
 
 \section{Valutazione Dei Sistemi Di Reperimento}
@@ -57,15 +113,64 @@ Per poter valutare un IRS è necessario disporre dei \textbf{giudizi di rilevanz
 \end{itemize}
 
 Per poter dare una definizione formale del pooling è necessario introdurre alcuni concetti. Si definiscono:
-\begin{align}
-&D = \{d_1, ..., d_n\} \text{un insieme di documenti}\\
-&T = \{t_1, ..., t_m\} \text{un insieme di topic}
-\end{align}
+\begin{align*}
+&D = \{d_1, ..., d_n\} \: \text{un insieme di documenti}\\
+&T = \{t_1, ..., t_m\} \: \text{un insieme di topic}
+\end{align*}
 Dato un numero naturale $N\in\mathbb{N}^+$ detto \textit{lunghezza della run}, una \textbf{run} è definita come
-\begin{align}
-R: &T \to D^N\\
-   &t \mapsto \mathbf{r_t} = (d_1, ..., d_N)
-\end{align}
+\begin{align*}
+R :\: & T \to D^N\\
+      & t \mapsto \mathbf{r_t} = (d_1, ..., d_N)
+\end{align*}
+tale che $\forall t \in T, \forall j,k \in [1,N] : j \neq k \implies \mathbf{r_t}[j] \neq \mathbf{r_t[k]}$ dove $\mathbf{r_t}[j]$ indica il $j-esimo$ elemento del vettore $\mathbf{r_t}$.\\
+Fornito un valore $k$ detto \textbf{profondità del pool}, si selezionano i \textbf{top-k} elementi di ciascuna run e si considera quindi l'insieme unione dei documeti ottenuti (il valore solitamente utilizzato è $k=100$). Infine si creano i giudizi di rilevanza soltanto per i documenti dell'insieme così definito.\\
+I documenti non giudicati vengono di solito giudicati non rilevanti (non sempre è così però).\\
+A questo punto è lecito porsi due questioni:
+\begin{itemize}
+\item la valutazione dei sistemi usando un pool (e non un insieme completo) di giudizi di rilevanza è stabile?
+\item il pooling penalizza i sistemi le cui run non sono state incluse nel pool e/o i sistemi che utilizzano metodologie molto differenti da quelli utilizzati per la creazione del pool? 
+\end{itemize}
+La prima questione l'accento sulla \textbf{completezza} del pool. Tuttavia le ricerche condotte hanno mostrato che pur aggiungedo al pool documenti oltre la posizione $k-esima$, si possono trovare alcuni documenti rilevanti dopo questa posizione, ma non abbastanza da influenzare significativamente la valutazione. Inoltre, i topic con molti documenti rilevanti tendono ad avere molti documenti rilevanti anche dopo la posizione $k-esima$.\\
+La seconda questione considera invece il problema della \textbf{robustezza} del pool. Per testare la robustezza del pooling è stato messo in pratica un esperimento su di un gruppo di run (utilizzate per i giudizi di rilevanza di TREC). Ogni volta che una run doveva essere valutata si escludevano (indicandoli come \textit{non rilevanti}) i giudizi di rilevanza ottenuti da tale run.\\
+Con questo test è stato possibile mostrare che:
+\begin{itemize}
+\item la qualità del pool non influenza in modo significativo la qualità della collezione di test;
+\item le collezioni delle campagne di valutazione sono \textit{unbaiased} verso i sistemi che non vengono utilizzati per la creazione dei giudizi di rilevanza;
+\item le prestazioni delle run valutate con il pool oiginale erano mediamente più alte delle prestazioni con il pool ridotto.
+\end{itemize}
+Una \textbf{collezione di test} è definita come una tripla:
+\begin{align*}
+\mathcal{C} = \{D, T, GT\}
+\end{align*}
+dove $D$ è l'insieme dei documenti, $T$ è l'insieme dei topic e $GT$ è il \textbf{ground truth} della collezione.\\
+Sia $REL$ un insieme finito di \textbf{gradi di rilevanza} e sia $\preceq$ una relazione d'ordine totale su $REL$ tale che $(REL, \preceq)$ sia un insieme totalmente ordinato.\\
+Dato un insieme $T$ di topic e un insieme $D$ di documenti, il ground truth è una funzione:
+\begin{align*}
+GT :\: &T \times D \to 	   REL\\
+       &(t, d)     \mapsto rel
+\end{align*}
 
+\subsection{Misure Con Rilevanza Binaria}
+Data una run $R(t) = \mathbf{r}_t$, il \textbf{relevance score} della run è una funzione
+\begin{align*}
+\hat{R}:&\;T \times D^N \to REL^N\\
+	    &\;(t,\mathbf{r}_t) \mapsto \hat{\mathbf{r}}_t = (rel_1, rel_2, ..., rel_N)
+\end{align*}
+dove
+\begin{align*}
+\hat{\mathbf{r}}_t[j] = GT(t, \mathbf{r}_t[j])
+\end{align*}
+Sia $W\subset\mathcal{Z}$, $REL$ 
+
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[scale=1.7]{universe}
+%\caption{The Universe}
+%\label{fig:universe}
+%\end{figure}
+
+%\section{Conclusion}
+%``I always thought something was fundamentally wrong with the universe'' \citep{adams1995hitchhiker}
+%\bibliographystyle{plain}
+%\bibliography{references}
 \end{document}
-
