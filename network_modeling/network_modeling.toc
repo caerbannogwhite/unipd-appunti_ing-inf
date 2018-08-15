@@ -1,0 +1,21 @@
+\contentsline {section}{\numberline {1}Catene di Markov}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Processi di Markov}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Analisi di Primo Passo}{3}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Catene di Markov speciali}{5}{subsection.1.3}
+\contentsline {subsubsection}{\numberline {1.3.1}Catena di Markov a due stati}{5}{subsubsection.1.3.1}
+\contentsline {subsubsection}{\numberline {1.3.2}Passeggiata casuale unidimensionale}{5}{subsubsection.1.3.2}
+\contentsline {subsubsection}{\numberline {1.3.3}Success Runs}{5}{subsubsection.1.3.3}
+\contentsline {subsection}{\numberline {1.4}Tempi di primo passaggio}{5}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Comportamento asintotico delle catene di Markov}{6}{subsection.1.5}
+\contentsline {subsection}{\numberline {1.6}La classificazione degli stati}{7}{subsection.1.6}
+\contentsline {subsubsection}{\numberline {1.6.1}Periodicit\IeC {\`a} di una catena di Markov}{7}{subsubsection.1.6.1}
+\contentsline {subsubsection}{\numberline {1.6.2}Stati ricorrenti e stati transitori}{7}{subsubsection.1.6.2}
+\contentsline {subsection}{\numberline {1.7}Teorema Fondamentale delle Catene di Markov}{8}{subsection.1.7}
+\contentsline {section}{\numberline {2}Processi Di Poisson}{9}{section.2}
+\contentsline {subsection}{\numberline {2.1}Processi di Poisson}{9}{subsection.2.1}
+\contentsline {section}{\numberline {3}Processi di Rinnovamento}{11}{section.3}
+\contentsline {subsection}{\numberline {3.1}Equazioni di Rinnovamento}{11}{subsection.3.1}
+\contentsline {section}{\numberline {4}Protocolli}{11}{section.4}
+\contentsline {subsection}{\numberline {4.1}ALOHA}{11}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Go-Back-N}{11}{subsection.4.2}
+\contentsline {section}{\numberline {5}Per Esame}{12}{section.5}

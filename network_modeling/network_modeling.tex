@@ -1,151 +1,593 @@
 \documentclass{article}
-\usepackage[utf8]{inputenc}
 
-\title{Appunti di Network Modeling}
+\usepackage[top=0.5in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{epstopdf}
+\usepackage{float}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usepackage{subfloat}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{eufrak}
+\usepackage{subfiles}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{csquotes}
+\usepackage{program}
+\usepackage{mathtools}
+\usepackage{boxedminipage}
+
+\newtheorem{definizione}{Definizione}[section]
+\newtheorem{proposizione}{Proposizione}[section]
+\newtheorem{corollario}{Corollario}[section]
+\newtheorem*{dimostrazione*}{Dimostrazione}
+\newtheorem{dimostrazione}{Dimostrazione}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+\newcommand*{\QED}{\hfill\ensuremath{\Box}}
+
+\title{Appunti di Network Modeling New}
 \author{massimo.meneghello93}
 \date{June 2017}
-
-\usepackage{natbib}
-\usepackage{graphicx}
-
-%my packages
-\usepackage{amsmath}
-\usepackage{amsthm}
 
 \begin{document}
 
 \maketitle
-
-
-\section{Nozioni di Probabilità}
-Sia $X$ una variabile aleatoria (d'ora in poi \textit{v.a.} o \textit{r.v.}, da \textit{random variable}), si definiscono la \textit{media} (o valore atteso) e la \textit{varianza} di $X$ come
-\begin{equation}
-    E[X] = \sum_{i = -\infty}^{+\infty} x_i P(X = x_i)
-    \label{rv:mean}
-\end{equation}
-\begin{equation}
-    E[(X-\mu)^2] = E[X^2] - E[X]^2
-    \label{rv:varicance}
-\end{equation}
-dove $\mu = E[X]$. Date due v.a. $X, Y$ si definisce invece \textit{covarianza} tra le due il valore
-\begin{equation}
-    E[(X-\mu_X)(Y-\mu_Y)] = E[XY] - \mu_X\mu_Y
-    \label{rv:covariance}
-\end{equation}
-Tale valore risulta nullo se $X, Y$ non sono correlate, mentre se $X, Y$ sono indipendenti si ha che $E[XY] = E[X]E[Y]$. L'indipendenza tra variabili implica la non correlazione (tuttavia non è vero il contrario).\\
-Sia $\{B_i\}_{i=1}^{\infty}$ una famiglia (numerabile) di insiemi a due a due disgiunti, tali che $\bigcup_{i=1}^{\infty}B_i = \Omega$. Per la \textit{legge di probabilità totale} risulta
-\begin{equation}
-    P(A) = \sum_{i=1}^{\infty}P(A|B_i)P(B_i)
-    \label{rv:total_prob}
-\end{equation}
-Funzione caratteristica
-\begin{equation}
-    \Phi = \int_{-\infty}^{+\infty} e^{i\lambda t} dF(\lambda) = E[e^{itX}]
-\end{equation}
-
+\tableofcontents
+\newpage
 
 \section{Catene di Markov}
 
-Sia $S = \{1,2,...,n\}$ un insieme di stati.
-La \textit{Markov property} stabilisce
-\begin{equation}
-    P(X_{n+1} = j | X_n = i_n, ..., X_0 = i_0) = P(X_{n+1} = j | X_n = i_n) = P_{i_n j}^{n,n+1}
-\end{equation}
 
-\subsection{First Step Analysis}
-Sia $\mathbf{P}$ una \textit{matrice di Markov} (o \textit{matrice di transizione}) nella forma
-\[
-    \mathbf{P} = \left( \begin{array}{cc}
-    \mathbf{Q} & \mathbf{R} \\
-    \mathbf{0} & \mathbf{I} \end{array} \right)
-\]
-dove $\mathbf{Q}$ è la matrice di Markov relativa ai \textit{transient states} (o \textit{TSs}), $\mathbf{R}$ è la matrice che specifica le probabilità di passare da un TS a un \textit{absorbing state} (o \textit{AS}), $\mathbf{0}$ è una matrice di zeri e infine $\mathbf{I}$ è una matrice identità. Se $N$ è il numero totale degli stati nelle catena rappresentata da $\mathbf{P}$ e $r$ è il numero di TS, allora $\mathbf{P}$ è una matrice $N \times N$ e $\mathbf{Q}$ una matrice $r \times r$.\\
-Si vuole calcolare la probabilità che una catena finisca in un AS $k$ sapendo che lo stato iniziale è $i$, con $0 \le i \le r-1$. Questo si può esprimere con
-\begin{equation}
-    u_i = U_{ik} = \text{Pr}\{\text{Absorption in k} | X_0 = i\}
-\end{equation}
-che viene calcolato nel seguente modo
-\begin{equation}
-    U_{ik} = P_{ik} +  \sum_{j=0}^{r-1}P_{ij}U_{ij}
-\end{equation}
-Ci si chiede poi quanto tempo impiega in media una catena per terminare in un AS. A questo scopo è necessario definire
-\begin{equation}
-    T = \min\{n \ge 0 : X_n \ge r\}
-\end{equation}
-\begin{equation}
-    w_i = E[\sum_{n=0}^{T-1}g(X_n) | X_0 = i] = g(i) +\sum_{j=0}^{r-1}P_{ij}w_j
-\end{equation}
-dove $g(i)$ è una metrica associata alla visita dei TS, $i = 0,1,...,r-1$.
+\subsection{Processi di Markov}
 
-\subsection{Comunicazione tra Stati}
-Si osserva che
+\begin{definizione}
+Un processo di Markov $\{X_t\}$ è un processo aleatorio con la proprietà che, noto il valore di $X_t$, i valori di $X_s$ per $s > t$ non sono influenzati dai valori di $X_u$ per $u < t$.
+\end{definizione}
+
+In termini formali la \textit{proprietà di Markov} afferma che
+$$
+P[X_{n+1} = j \mid X_0 = i_0,\hdots,X_{n-1} = i_{n-1}, X_n = i] = P[X_{n+1} = j \mid X_{n} = i]
+$$
+Gli stati che un processo di Markov può assumere sono spesso indicati con gli interi positivi $0,\,1,\,\hdots$. La \textit{probabilità di transizione ad un passo} (cioè la probabilità che trovandosi in uno stato $i$ all'istante $n$-esimo, all'istante successivo ci si trovi nello stato $j$) è definita come
+$$
+P_{ij}^{n,n+1} = P[X_{n+1} = j \mid X_n = i] = P_{ij}
+$$
+Considerando tutti le possibili probabilità di transizione ad un passo si ottiene la \textit{matrice di Markov} relativa al processo
+$$
+P=
+\left[\begin{array}{c c c c}
+P_{00}&P_{01}&P_{02}&\hdots\\
+P_{10}&P_{11}&P{12}&\hdots\\
+\vdots&\vdots&\vdots&\\
+P_{i0}&P_{i1}&P_{i2}&\hdots\\
+\vdots&\vdots&\vdots&
+\end{array}\right]
+$$
+per la quale devono valere
+\begin{align}
+P_{i,j} \ge 0\qquad i,j = 0,1,2,\hdots\\
+\sum_{j = 0}^{\infty} P_{ij} = 1 \qquad i = 0,1,2,\hdots
+\end{align}
+Un processo di Markov è completamente definito dalla sua matrice. Sia $P[X_0 = i] = p_i$, allora, grazie alla proprità di Markov possiamo eseguire la seguente computazione
 \begin{align*}
-    P_{ij}^{n+m} & = P\{X_{n+m} = j | X_0 = i\} 
-    \\&= \sum_{k=0}^{+\infty} P\{X_{n+m} = j, X_n = k | X_0 = i\} 
-    \\&= \sum_{k=0}^{+\infty} P\{X_{n+m} = j | X_n = k, X_0 = i\} P\{X_n = k | X_0 = i\} 
-    \\&= \sum_{k=0}^{+\infty} P_{jk}^m P_{ki}^n. 
-\end{align*} 
-
-Lo stato $j$ si dice accessibile dallo stato $i$ se per qualche $n \ge 0, P_{ij}^n > 0$. Due stati $i, j$ accessibili uno dall'altro si dicono \textit{comunicanti}.\\ 
-
-\newtheorem{Prop4.2.1}{Proposizione}
-\begin{Prop4.2.1}
-La comunicazione è una relazione di equivalenza. Valgono quindi:
-\begin{enumerate}
-    \item $i \leftrightarrow i$ (riflessività);
-    \item se $i \leftrightarrow j$, allora $j \leftrightarrow i$ (simmetria);
-    \item se $i \leftrightarrow j$ e $j \leftrightarrow k$, allora $i \leftrightarrow k$ (transitività).
-\end{enumerate}
-\end{Prop4.2.1}
-
-\begin{proof}
-Mentre le prime due proprietà discendono banalmente dalla definizione di comunicazione per la $3$ si procede come segue. Dall'ipotesi sappiamo che esistono $n, m$ tali che $P_{ij}^{(n)} > 0$ e $P_{jk}^{(m)} > 0$, quindi 
-\[P_{ik}^{(n+m)} = \sum_{r = 0}^{+\infty}P_{ir}^{(n)}P_{rk}^{(m)} \ge P_{ij}^{(n)}P_{jk}^{(m)} > 0\]. Similmente si può mostrare anche che $P_{ki}^s > 0$
-\end{proof}
-
-Due stati che comunicano sono detti appartenenti alla stessa \textit{classe}. Una catena di Markov si dice \textit{irriducibile} se è composta da una sola classe, ovvero tutti gli stati appartenenti alla catena comunicano tra di loro.\\
-
-Sia $d(i)$ il periodo dello stato $i$, definito come il più grande intero tale che $P_{ii}^n=0$ quando $n$ non è divisibile da $d(i)$. (se $P_{ii}^n = 0$ per ogni $n > 0$ allora si definisce il periodo di $i$ come infinito mentre se $d(i) = 1$ lo stato è detto \textit{aperiodico}). Si dimostra che la periodicità è una proprietà di classe ovvero, tutti gli stati che comunicano tra loro hanno lo stesso periodo.
-
-\newtheorem{Prop4.2.2}{Proposizione}
-\begin{Prop4.2.2}
-Se $i \leftrightarrow j$, allora $d(i) = d(j)$.
-\end{Prop4.2.2}
-
-\begin{proof}
-Siano $m$, $n$ tali che $P_{ij}^m$.
-\end{proof}
-
-\subsection{Concetti Chiave}
-Per qualunque stato $i$ e $j$ si definisce $f_{ij}^n$ la probabilità che partendo in $i$, il primo passaggio in $j$ avvenga al tempo $n$. Per una definizione più formale si ha,
-\begin{align*}
-& f_{ij}^0 = 0\\
-& f_{ij}^n = P\{X_n = j, X_k \neq j, k = 1,...,n-1 | X_0 = i\}
+P[X_0 = i_0, X_1 = i_1,\hdots,X_n = i_n] &= P[X_0 = i_0,X_1 = i_1, \hdots,X_{n-1} = i_{n-1}] \cdot \\
+&\qquad P[X_n = i_n \mid X_0 = i_0, X_1 = i_1, \hdots, X_{n-1} = i_{n-1}]\\
+&= P[X_0= i_0, X_1 = i_1,\hdots,X_{n-1} = I_{n-1}] \cdot P_{i_{n-1}i_n}\\
+&= p_iP_{i_0i_1}P_{i_1i_2}\hdots P_{i_{n-1}i_n}
 \end{align*}
-Sia poi
-\[
-    f_{ij} = \sum_{n = 1}^{\infty} f_{ij}^n.
-\]
-$f_{ij}$ indica la probabilità che si abbia un passaggio in $j$ partendo da $i$. Quindi, se $i \neq j$, $f_{ij}$ è positivo se e solo se $j$ è accessibile dallo stato $i$. $j$ è detto stato \textit{ricorrente} se $f_{jj} = 1$, negli altri casi è detto \textit{di transizione}.  
+Analizziamo ora la probabilità di transizione compiendo $n$ passi.
+$$
+P_{ij}^{(n)} = P[X_{n+m} = j \mid X_{m} = i] = P[X_n = j \mid X_0 = i]
+$$
+L'ultima uguaglienza deriva dalla \textit{proprietà di omogeneità} dei processi di Markov.
+\begin{proposizione}
+\label{mc_matrice_transizione_n_passi}
+La matrice di transizione a $n$ passi soddisfa
+$$
+P_{ij}^{(n)} = \sum_{k = 0}^{\infty} P_{ik}\,P_{kj}^{(n-1)}
+$$
+dove
+$$
+P_{ij}^{(0)} =
+\left\{\begin{array}{c l}
+1 &\quad\text{se}\;i = j\\
+0 &\quad\text{altrimenti}
+\end{array}
+$$
+\end{proposizione}
+\begin{dimostrazione*}
+\begin{align*}
+P_{ij}^{(n)} &= P[X_{n+m} = j \mid X_m = i] = P[X_n = j \mid X_0 = i]\\ 
+&= \sum_{k = 0}^{\infty} P[X_n = j, X_1 = k \mid X_0 = i]\\
+&=\sum_{k = 0}^{\infty} P[X_n = j \mid X_1 = k, X_0 = i]\cdot P[X_1 = k \mid X_0 =i]\\
+&=\sum_{k =0 }^{\infty} P[X_n = j \mid X_1 = k] \cdot P[X_1 = k \mid X_0 = i]\\
+&=\sum_{k = 0}^{\infty} P_{ik}\,P_{kj}^{(n-1)}
+\end{align*}
+\QED
+\end{dimostrazione*}
 
+\subsection{Analisi di Primo Passo}
 
-\section{Modello per Sincronizzazione}
+Consideriamo la seguente matrice di Markov
+\begin{align*}
+P = \left[\begin{array}{c c c}
+1 & 0 & 0\\
+\alpha & \beta & \gamma\\
+0 & 0 & 1
+\end{array}
+\right]
+\end{align*}
+con $\alpha,\,\beta\,,\gamma > 0$ e $\alpha + \beta + \gamma = 1$.
+Vogliamo trovare i valori di
+\begin{gather*}
+u = P[X_T = 0 \mid X_0 = 1]\\
+v = E[T \mid X_0 = 1]
+\end{gather*}
+dove $T = \min\{n \ge 0\,:\,X_n = 0,\,X_n = 2\}$, quindi vogliamo conoscere qual è la probabilità che il processo resti intrappolato nello stato $0$ sapendo che lo stato iniziale è $1$ e vogliamo anche conoscere quanto tempo dovremmo attendere affinché questo accada (valore atteso).\\
 
-Sia $S$ una sequenza di simboli per la sincronizzazione allora
-\[P[\text{random data sequence} = \text{sync sequence}] = 2^{-\left|S\right|} = P[\text{false alarm}] = P_{fa} \]
-è la probabilità di ricevere la sequenza per errore.\\
+Conoscendo la scomposizione vista in \ref{mc_matrice_transizione_n_passi} osserviamo che
+\begin{align*}
+u &= P[X_T = 0 \mid X_0 = 1] = P_{10}^{(T)}\\
+&= \sum_{k = 0}^2 P_{1k}\,P_{k0}^{(T-1)}\\
+&= P_{10}\,P_{00}^{(T-1)} + P_{11}\,P_{10}^{(T-1)} + P_{12}\,P_{20}^{(T-1)}\\
+&= \alpha\,(1) + \beta\,(u) + \gamma\,(0)\\
+&= \alpha + \beta u = \frac{\alpha}{1-\beta} = \frac{\alpha}{\alpha + \gamma}
+\end{align*}
+Abbiamo anche utilizzata l'uguaglianza $P_{ij}^{(T)} = P_{ij}^{(T-1)}$. Mentre per il valore atteso degli istanti impiegati abbiamo
+\begin{align*}
+v &= 1 + \alpha\,(0) + \beta\,(v) + \gamma\,(0)\\
+&= 1 + \beta v\\
+&= \frac{1}{1 - \beta} = \frac{1}{\alpha + \gamma}
+\end{align*}\\
 
-Diversamente la probabilità di ricevere la sequenza corretta considerando un possibile errore di trasmissione sul simbolo $\epsilon$ sarà \begin{math} P[\text{correct detection} | \text{sync}] = P[\text{all bits in $S$ are correct}] = (1 - \epsilon)^{\left|S\right|} = P_C\end{math}.\\
-
-Partendo da queste considerazioni vorremmo che $S$ non sia troppo lunga per non sprecare spazio per la comunicazione, ma nemmeno troppo corta per evitare falsi allarmi.
-
-Un possibile sistema per un modello di sincronizzazione può assumere i seguenti stati:
+In generale possiamo avere matrici di Markov come la seguente, di dimensione $(N+1) \times (N+1)$:
+\begin{align}
+\label{mc_matrice_QR}
+P = \left[\begin{array}{c c}
+\textbf{Q} & \textbf{R}\\
+\textbf{O} & \textbf{I}
+\end{array}\right]
+\end{align}
+dove \textbf{O} è una matrice $(N-r+1)\times r$ di zeri e \textbf{I} è una matrice identità $(N-r+1)\times(N-r+1)$.
+In questa matrice possiamo riconoscere due tipi di stati (le cui definizioni formali verrano fornite successivamente):
 \begin{itemize}
-    \item $H$ (Hunt), il sistema legge bit per bit fino a quando il lock non viene trovato oppure legge $N$ bit non trovando il lock;
-    \item $L_k$ (Lock), la sincronizzazione è stata trovata e confermata ulteriormente $k-1$ volte;
-    \item $L = L_{k_L}$, sincronizzazione accettata
+    \item \textit{transient}, cioè gli stati da $0,\hdots,r-1$ per i quali vale $P_{ij}^{(n)} \to 0$ quando $n \to \infty$ per $0\le i,j < r$;
+    \item \textit{absorbing}, gli stati da $r,\hdots,N$ per i quali $P_{ii} = 1$ per $r \le i \le N$.
 \end{itemize}
+Otteniamo
+\begin{align*}
+u_i = U_{ik} &= P[\text{Assorbimento in k} \mid X_0 = i] \quad \text{per} \quad 0 \le i < r\\
+&= P_{ik} + \sum_{j = 0}^{r-1} P_{ij}U_{jk}
+\end{align*}
+mentre il tempo medio di assorbimento vale
+\begin{align*}
+v_i = 1 + \sum_{j = 0}^{r-1}P_{ij}\,v_j \quad \text{per} \quad 0 \le i < r
+\end{align*}
+Dall'$n$-esima potenza della matrice di Markov è possibile calcolare
+\begin{itemize}
+    \item il numero medio di visite su uno stato $j$
+    \item il tempo medio fino all'assorbimento della catena
+    \item la probabilità di assorbimento in uno stato $k$.
+\end{itemize}
+Tutte questo dipende dallo stato iniziale $X_0 = i$. L'$n$-esima potenza della matrice \ref{mc_matrice_QR} è facilmente ottenibile
+\begin{align}
+P^{n} = \left[\begin{array}{c c}
+\textbf{Q}^{n} & (\textbf{I}+\textbf{Q}+\textbf{Q}^2+\hdots+\textbf{Q}^{n-1})R\\
+\textbf{O} & \textbf{I}
+\end{array}\right]
+\end{align}
+Forniamo un'interpretazione per $P^n$:
+\begin{align*}
+W_{ij}^{(n)} &= \text{numero medio di visite allo stato $j$ in $n$ passi partendo dallo stato $i$}\\
+&= E\left[\sum_{l=0}^n\textbf{1}\{X_l = j\} \mid X_0 = i\right] \text{ma poiché } E[\textbf{1}\{X_l = j\} \mid X_0 = i] = P_{ij}^{(l)}\\
+&= \sum_{l=0}^n E[\mathbf{1}\{X_l = j\} \mid X_0 = i]\\
+&= \sum_{l=0}^n P_{ij}^{(n)}
+\end{align*}
+Abbiamo quindi trovato che
+\begin{align*}
+W^{(n)} &= \textbf{I} + \textbf{Q} + \textbf{Q}^2 + \hdots + \textbf{Q}^{n-1}\\
+&= \textbf{I} + \textbf{Q}\,(\textbf{I} + \hdots + \textbf{Q}^{n-1})\\
+&= \textbf{I} + \textbf{Q}\,W^{(n-1)}
+\end{align*}
+Passando al limite otteniamo
+\begin{align*}
+W_{ij} = \lim_{n\to \infty} W_{ij}^{(n)} = E[\text{visite totali a $j$ }\mid X_0= i] \quad 0 \le i,j < r
+\end{align*}
+mentre in forma matriciale si ottiene
+\begin{align*}
+W = \textbf{I} + \textbf{Q}\,W
+\end{align*}
+e quindi
+\begin{align}
+\label{mc_matrice_fondamentale_Q}
+W = (\textbf{I} - \textbf{Q})^{-1}
+\end{align}
+che è detta \textit{matrice fondamentale associata a Q}.
+
+\subsection{Catene di Markov speciali}
+
+\subsubsection{Catena di Markov a due stati}
+
+Sia data la matrice
+\begin{align*}
+P = \left[\begin{array}{c c}
+1 - a & a\\
+b & 1-b
+\end{array}\right] \quad \text{con} \quad 0 < a,b < 1
+\end{align*}
+allora l'$n$-esima potenza di $P$ vale 
+\begin{align*}
+P^{(n)} = \frac{1}{a+b}\left[\begin{array}{c c}
+b & a\\
+b & a
+\end{array}\right] + \frac{(1 -a - b)^n}{a+b}
+\left[\begin{array}{c c}
+a &-a\\
+-b & b
+\end{array}\right] \quad \text{per} \quad n \ge 0
+\end{align*}
+che può essere facilmente dimostrato per induzione.
+
+\subsubsection{Passeggiata casuale unidimensionale}
+
+\subsubsection{Success Runs}
+
+\subsection{Tempi di primo passaggio}
+
+Si è interessati nel conoscere quanto tempo è necessario (in media) per raggiungere uno stato $j$ partendo da uno stato $i$.
+\begin{gather*}
+\theta_{ij} = \text{numero di transizioni per raggiungere $j$ da $i$ per la prima volta}\\
+P[\theta_{ij} = n] = f_{ij}(n) = P[X_n = j,\,X_m \neq j,\,m = 1,\,\hdots,\,n-1 \mid X_0 = i] 
+\end{gather*}
+Abbiamo la relazione ricorsiva
+\begin{align*}
+f_{ij}(n) = \left\{\begin{array}{l c}
+P_{ij} & n = 1\\
+\sum_{k\neq j} P_{ik}f_{kj}(n-1) & n > 1
+\end{array}
+\end{align*}\\
+
+\begin{boxedminipage}{\textwidth}
+\textbf{IMPORTANTE.} Per calcolare la il valore atteso del tempo di primo passaggio tra 2 stati $i$ e $j$ usiamo
+\begin{align*}
+E[\theta_{ij}] &= P_{ij} + \sum_{k \neq j}\,P_{ik}\,(1+E[\theta_{kj}])\\
+&= 1 + \sum_{k \neq j} \, P_{ik}\, E[\theta_{kj}] \quad \forall\,i,j
+\end{align*}
+Questo comporta la risoluzione di un sistema di equazioni. In particolar modo, se si vuole calcolare $E[\theta_{ii}]$ tutte le variabili nella parte destra non sono note. Tuttavia, come vi vedrà più avanti alla proposizione \ref{mc_teorema_limite_fondamentale} abbiamo che
+\begin{align*}
+E[\theta_{ii}] = m_i = \lim_{n\to\infty}\frac{1}{P_{ii}^{(n)}} = \frac{1}{\pi_i}
+\end{align*}
+Per calcolare il secondo momento (necessario per trovare la varianza) del tempo di primo passaggio usiamo
+\begin{gather*}
+E[\theta_{ij}^2] = 2\,E[\theta_{ij}] - 1 + \sum_{k \neq j}P_{ik}\,E[\theta_{kj}^2]\\
+Var(\theta_{ij}) = E[(\theta_{ij} - E[\theta_{ij}])^2] = E[\theta_{ij}^2] - E[\theta_{ij}]^2
+\end{gather*}
+\end{boxedminipage}
+
+\subsection{Comportamento asintotico delle catene di Markov}
+
+\begin{definizione}
+Una catena di Markov si dice \textit{regolare} se la $k$-esima potenza della matrice $P$ associata alla catena ha tutti elementi strettamente positivi, quindi se
+$$
+P_{ij}^{(k)} > 0\quad \forall\,i,j
+$$
+\end{definizione}
+La caratteristica più importante di questa catena è l'esistenza di una distribuzione di probabilità al limite
+$$
+\pi = (\pi_0,\hdots,\pi_N) \text{ con } \pi_j > 0 \quad \forall\,j \text{ e } \sum_j \pi_j = 1
+$$
+che è indipendente dallo stato iniziale della catena.\\
+
+\begin{boxedminipage}{\textwidth}
+\textbf{IMPORTANTE.} Questi concetti sono utili per conoscere come evolve una catena di Markov all'infinito, quindi per sapere dove in che stato potremmo trovarla.
+\begin{proposizione}
+Sia $P$ una matrice di probabilità di transizione regolare con stati $0,1,\hdots,N$. Allora la distribuzione limite $\vec{\pi} = (\pi_0,\hdots,\pi_N)$ è l'unica soluzione non negativa del sistema
+$$
+\left\{\begin{array}{l}
+\pi_j = \sum_{k=0}^N \pi_k P_{kj}\qquad j = 0,\hdots,N\\
+\sum_{k=0}^N \pi_k = 1
+\end{array}
+$$
+con $\pi_k = \lim_{n \to \infty} P_{ik}^{(n-1)}$.
+\end{proposizione}
+Risolvendo questo sistema di $N+1$ incognite e $N+2$ equazioni (un'equazione è ridondante e può essere rimossa)otteniamo il vettore $\vec{\pi}$ che ci permette di conoscere
+\begin{align*}
+\lim_{n\to\infty} P^n = \left[\begin{array}{c c c c}
+\pi_0 & \pi_1 & \hdots & \pi_N\\
+\pi_0 & \pi_1 & \hdots & \pi_N\\
+\vdots & \vdots & & \vdots\\
+\pi_0 & \pi_1 & \hdots & \pi_N
+\end{array}\right]
+\end{align*} 
+\end{boxedminipage}
+
+\subsection{La classificazione degli stati}
+Lo stato $j$ è detto \textit{raggiungibile} dallo stato $i$ ($i \to j$) se $P_{ij}^{(n)} > 0$ per qualche $n \ge 0$. Due stati sono detti \textit{comunicanti} ($i \leftrightarrow j$) se $i$ è raggiungibile da $j$ e viceversa.
+
+\begin{proposizione}
+Il concetto di \textit{comunicazione} è una relazione di equivalenza.
+\end{proposizione}
+\begin{dimostrazione*}
+Si dimostrano le proprietà di una relazione di equivalenza.
+\begin{enumerate}
+    \item \textbf{proprietà riflessiva}, $i \leftrightarrow i$ vale perché $P_{ii}^{(0)} = 1$
+    \item \textbf{proprietà simmetrica}, $i \leftrightarrow j \Rightarrow j \leftrightarrow i$
+    \item \textbf{proprietà transitiva}, $i \leftrightarrow k$ e $k \leftrightarrow j \Rightarrow i \leftrightarrow j$, infatti se $i \leftrightarrow k$ e $k \leftrightarrow j$ allora esitono $n,m$ tali che $P_{ik}^{(n)} > 0$ e $P_{kj}^{(m)} > 0$, quindi $P_{ij}^{(n+m)} = \sum_{r=0}^{\infty} P_{ir}^{(n)}P_{rj}^{(m)} \ge P_{ik}^{(n)}P_{kj}^{(m)} > 0$
+\end{enumerate}
+\QED
+\end{dimostrazione*}
+Una catena di Markov è detta \textit{irriducibile} se tutti gli stati comunicano tra di loro (quindi se tutti gli stati appartendono a un'unica classe di equivalenza).
+
+\subsubsection{Periodicità di una catena di Markov}
+
+\begin{proposizione}
+\label{mc_periodo_prop_classe}
+Se $i \leftrightarrow j$ allora $d(i) = d(j)$ (il periodo è una proprietà di classe).
+\end{proposizione}
+\begin{dimostrazione*}
+Sia $S_i = \{s > 0 : P_{ii}^{(s)} > 0\}$. Allora esistono $m,n$ tali che
+\begin{gather*}
+P_{ij}^{(m)} > 0,\quad P_{ji}^{(n)} > 0\\
+\forall\,s \in S_i,\, P_{ii}^{(s)} > 0\\
+P_{jj}^{(n+s+m)} = \sum_{h,k}\,P_{jh}^{(n)}\,P_{hk}^{(s)}\,P_{kj}^{(m)} \ge P_{ji}^{(n)}\,P_{ii}^{(s)}\,P_{ij}^{(m)} > 0
+\end{gather*}
+Se $s \in S_i$ allora $n + s + m \in S_j$. Analogamente $P_{ii}^{(2s)} \ge (P_{ii}^{(s)})^2 > 0$. Quindi $n+2s+m \in S_j$ e di conseguenza $n+s+m$ è multiplo intero di $n+2s+m$.
+$$
+n+2s+m -n-s-m = s \in S_j
+$$
+Se $s \in S_i$ allora è multiplo di $d(j)$. Quindi $d(j)$ è divisore comune di $S_i$, $d(i)$ è MCD di $S_i$. Ma allora $d(i)$ è multiplo di $d(j)$. Per simmetria $d(j)$ multiplo di $d(i)$ quindi $d(i) = d(j)$.
+\QED
+\end{dimostrazione*}
+
+\subsubsection{Stati ricorrenti e stati transitori}
+
+\begin{proposizione}
+\begin{gather*}
+i \text{ ricorrente } \Leftrightarrow \sum_{n=1}^{\infty} P_{ii}^{(n)} = \infty\\
+i \text{ transitorio } \Leftrightarrow \sum_{n=1}^{\infty} P_{ii}^{(n)} < \infty
+\end{gather*}
+\end{proposizione}
+
+\begin{proposizione}
+\label{mc_i_comm_j_ricor}
+Se $i \leftrightarrow j$ e $i$ ricorrente, allora anche $j$ è ricorrente.
+\end{proposizione}
+\begin{dimostrazione*}
+Dall'ipotesi $i \leftrightarrow j$ sappiamo che esistono $m, n \ge 1$ tali che
+$$
+P_{ij}^{(n)} > 0,\quad P_{ji}^{(m)} > 0
+$$
+Sia $l > 0$. Sapendo che
+$$
+P_{jj}^{(m+n+l)} = \sum_{h,k} P_{jh}^{(m)}\,P_{hk}^{(l)}\,P_{kj}^{(n)} \ge P_{ji}^{(m)}\,P_{ii}^{(l)}\,P_{ij}^{(n)} 
+$$
+Sommando otteniamo
+$$
+\sum_{n=1}^{\infty} P_{jj}^{(n)} \ge \sum_{l =1}^{\infty} P_{jj}^{(m+n+l)} \ge P_{ji}^{(m)}\,P_{ij}^{(n)}\,\sum_{l=1}^{\infty} P_{ii}^{(l)} = \infty
+$$
+(La sommatoria diverge perché $i$ è ricorrente)
+\QED
+\end{dimostrazione*}
+
+\subsection{Teorema Fondamentale delle Catene di Markov}
+
+Ricordiamo che
+\begin{align*}
+f_{ii}^{(n)} &= P[X_n = i, X_m \neq i, m = 1,\hdots,n-1 \mid X_0 = i]\\
+&= P[R_i = n \mid X_0 = i] \quad \text{ con } \quad R_i = \min\{n \ge 1\;;\; X_n = i\}
+\end{align*}
+La durata media tra due visite è quindi definita come
+\begin{gather}
+m_i = E[R_i \mid X_0 = i] = \sum_{n = 1}^{\infty} n \, f_{ii}^{(n)}
+\end{gather}
+\begin{definizione}
+Se $m_i < \infty$ allora $i$ si dice \emph{ricorrente positivo} ($\pi_i > 0$) mentre se $m_i = \infty$ allora $i$ si rice \emph{ricorrente nullo} ($\pi_i = 0$). 
+\end{definizione}
+
+\begin{proposizione}
+\label{mc_teorema_limite_fondamentale}
+Consideriamo una catena di Markov aperiodica, irriducibile, ricorrente. Sia $P_{ii}^{(n)}$ la probabilità di essere nello stato $i$ alla transizione $n$-esima per $n=0,1,2,\hdots$ e sia dato lo stato iniziale $X_0 = i$ (per convenzione si assume $P_{ii}^{(0)} = 1$). Sia $f_{ii}^{(n)}$ la probabilità di primo ritorno allo stato $i$ nella stansizione $n$-esima, dove $f_{ii}^{(0)} = 0$. Allora
+\begin{align}
+\lim_{n\to \infty} P_{ii}^{(n)} = \frac{1}{\sum_{n=0}^{\infty} n\,f_{ii}^{(n)}} = \frac{1}{m_i}
+\end{align}
+Sotto le medesime condizioni abbiamo anche che
+\begin{align}
+\lim_{n\to\infty} P_{ji}^{(n)} = \lim_{n\to\infty} P_{ii}^{(n)}\quad \forall\,j
+\end{align}
+\end{proposizione}
+
+\begin{proposizione}
+\label{mc_numero_finito_di stati}
+In una catena di Markov con un numero finito di stati deve esserci almeno uno stato ricorrente positivo.
+\end{proposizione}
+\begin{dimostrazione*}
+(Per assurdo) Supponiamo che tutti gli stati siano transitori o ricorrenti nulli, quindi
+$$
+1 = \sum_{j=0}^N P_{ij}^{(n)}\quad \forall\,n,\,i
+$$
+Per $n \to \infty$:
+$$
+1 = \lim_{n \to \infty} \sum_{j=0}^N P_{ij}^{(n)}=\sum_{j=0}^N \lim_{n\to \infty} P_{ij}^{n} = 0
+$$
+Assurdo.
+\QED
+\end{dimostrazione*}
 
 
+\newpage
+\section{Processi Di Poisson}
+
+
+La distribuzione di Poisson con parametro $\mu > 0$ è data da
+\begin{align}
+\label{pp_distribuzione_poisson}
+p_k = e^{-\mu}\,\frac{\mu^k}{k!}\quad \text{ per } k = 0,1,\hdots
+\end{align}
+Media e varianza di una variabile aleatoria di Poisson sono date da
+\begin{gather*}
+E[X] = \mu\\
+E[X^2] = \mu^2 + \mu\\
+Var(X) = E[(X - E[X])^2] = E[X^2] - E[X]^2 = \mu  
+\end{gather*}
+
+\begin{proposizione}
+\label{pp_somma_due_poisson}
+Siano $X$ e $Y$ due variabili aleatorie (indipendenti) con distribuzione di Poisson, rispettivamente di parametro $\mu$ e $\lambda$. Allora $Z = X + Y$ è una variabile aleatoria di Poisson con con parametro $\mu + \lambda$.
+\end{proposizione}
+\begin{dimostrazione}
+\begin{align*}
+P[X + Y = n] &= \sum_{k=0}^n\,P[X=k,Y=n-k]\\
+&= \sum_{k=0}^n\,P[X = k]\,P[Y = n-k]\\
+&= \sum_{k = 0}^n\,e^{-\mu}\frac{\mu^k}{k!}\,e^{-\lambda}\frac{\lambda^{n-k}}{(n-k)!}\\
+&= e^{-(\mu+\lambda)}\frac{1}{n!}\sum_{k=0}^n\,\frac{n!}{k!(n-k)!}\mu^k\lambda^{n-k}\\
+&= e^{-(\mu+\lambda)}\,\frac{(\mu+\lambda)^n}{n!}
+\end{align*}
+\QED
+\end{dimostrazione}
+
+\subsection{Processi di Poisson}
+
+\begin{definizione}
+Un processo di Poisson di intensità $\lambda > 0$ è un processo stocastico a valori interi $\{X(t)\,;\,t \ge 0\}$ per il quale
+\begin{enumerate}
+    \item per ogni valore di tempo $t_0 = 0 < t_1 < \hdots < t_n$, il gli incrementi del processo
+    $$
+    X(t_1) - X(t_0), \hdots, X(t_n) - X(t_{n-1})
+    $$
+    sono variabili aleatorie indipendenti;
+    \item per $s \ge 0$ e $t > 0$ la variabile aleatoria $X(s+t) - X(s)$ ha distribuzione di Poisson
+    $$
+    P[X(s+t) - X(s) = k] = e^{-\lambda\,t}\,\frac{(\lambda\,t)^k}{k!} \quad \text{ per } k=0,1,\hdots
+    $$
+    \item $X(0) = 0$
+\end{enumerate}
+\end{definizione}
+
+\begin{boxedminipage}{\textwidth}
+\begin{proposizione}
+Sia $X(t)$ un processo di Poisson con $\lambda > 0$. Allora
+\begin{gather}
+P[X(u) = k \mid X(t) = n] = \frac{n!}{k!\,(n-k)!} \left(\frac{u}{t}\right)^k\left(1-\frac{u}{t}\right)^{n-k}
+\end{gather}
+con $0<u<t$ e $0\le k \le n$.
+\end{proposizione}
+Una proprietà significativa
+\begin{align}
+P[X_1(t) = k \mid X_1(t) + X_2(t) = n] = \frac{n!}{k!(n-k)!}\left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^k\left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)^{n-k}
+\end{align}
+\end{boxedminipage}
+\bigbreak
+\begin{boxedminipage}{\textwidth}
+\textbf{IMPORTANTE.} Supponiamo di fornire un servizio al quale arrivano richeste secondo una distribuzione di Poisson con parametro $\lambda$. Ogni richiesta ha durata $Y_1,Y_2,\hdots$, variabili aleatorie con funzione di distribuzione comune $G(y) = P[Y_k \le y]$. Gli arrivi sono invece regolati dalle variabili $W_1,W_2,\hdots$ \textit{che possiamo far diventare variabili aleatorie uniformi}.\\
+Sia $M(t)$ una variabile che conta le richieste attive in un dato istante $t$ con $M(0) = 0$ e sia $X(t)$ il numero totale di richieste arrivate fino all'istante $t$. Allora
+\begin{align*}
+M(t) &= \sum_{k=1}^{X(t)} \textbf{1}\{W_k + Y_k \ge t\}
+\end{align*}
+Sia
+\begin{align*}
+p &= P[U_k + Y_k \ge t] = \frac{1}{t}\int_0^t P[Y_k \ge t - u]\,du\\
+&= \frac{1}{t}\int_0^t [1-G(t-u)]\,du = \frac{1}{t} \int_0^t [1-G(z)]\,dz
+\end{align*}
+Conoscendo il numero $n$ di richieste totali fino all'istante $t$, la probabilità condizionata fornisce
+\begin{align*}
+P[M(t) = m \mid X(t) = n] = \frac{n!}{m!(n-m)!} p^m (1-p)^{n-m}
+\end{align*}
+mentre
+\begin{align*}
+P[M(t) = m] = e^{-\lambda\,p\,t}\frac{(\lambda\,p\,t)^m}{m!}
+\end{align*}
+Il numero di richieste esistenti al tempo $t$ è un processo di Poisson con media
+\begin{align*}
+E[M(t)] &= \lambda\,p\,t\\
+&= \lambda \int_0^t [1-G(z)]\,dz
+\end{align*}
+\end{boxedminipage}
+
+
+\newpage
+\section{Processi di Rinnovamento}
+
+
+\subsection{Equazioni di Rinnovamento}
+
+\begin{definizione}
+Sia $a(t)$ una funzione nota, $F(t)$ funzione di distribuzione della variabile aleatoria $X$. Allora
+\begin{align*}
+A(t) = a(t)+\int_0^tA(t-x)\,dF(x)
+\end{align*}
+è detta \emph{equazione di rinnovamento}.
+\end{definizione}
+
+\begin{proposizione}
+\label{pr_proposizione_soluzione_equazione_rinnovamento}
+Sia $a(t)$ una funzione limitata. Allora
+\begin{align*}
+A(t) = a(t)+\int_0^tA(t-x)\,dF(x)
+\end{align*}
+ha un'unica soluzione $A$ limitata su un intervallo finito e questa è
+\begin{align*}
+A(t) = a(t)+\int_0^ta(t-x)\,dM(x)
+\end{align*}
+con $M(t) = \sum_{k=1}^{\infty} F_k(t)$ è la funzione di rinnovamento.
+\end{proposizione}
+
+Grazie al risultato della proposizione \ref{pr_proposizione_soluzione_equazione_rinnovamento} possiamo dimostrare questa importante relazione
+\begin{align*}
+E[S_{N(t) + 1}] &= E[X_1 + X_2 + \hdots + X_{N(t) + 1}]\\
+&= E[\sum_{i = 1}^{N(t) + 1} X_i]\\
+&\vdots\\
+&= \mu\,E[M(t) + 1]\quad \text{ con } \mu = E[X_1]
+\end{align*}
+dove le $X_1,X_2,\hdots$ sono variabili aleatorie \emph{indipendenti e identicamente distribuite} mentre $N$ è un valore casuale.
+Usando l'argomento di rinnovamento possiamo infatti scrivere
+\begin{align*}
+A(t) &= E[S_{N(t) + 1}]\\
+&=\int_0^{\infty}E[S_{N(t)+1}] \mid X_1 = x]\,dF(x)\\
+&=\int_0^t [x + A(t-x)]\,dF(x) + \int_t^{\infty}x\,dF(x)\\
+&=\int_t^{\infty}x\,dF(x)+\int_0^tA(t-x)\,dF(x)\\
+&=E[X_1]+\int_0^tA(t-x)\,dF(x)\\
+&=E[X_1]+\int_0^tE[X_1]\,dM(t) \quad \text{ per il teorema \ref{pr_proposizione_soluzione_equazione_rinnovamento}}\\
+&=E[X_1][M(t) + 1]
+\end{align*}
+
+\section{Protocolli}
+
+\subsection{ALOHA}
+
+\subsection{Go-Back-N}
+
+
+\newpage
+\section{Per Esame}
+
+
+\begin{itemize}
+    \item \textbf{Dimostrare che il periodo è una proprietà di classe:} vedi proposizione \ref{mc_periodo_prop_classe}.
+
+    \item \textbf{Dimostrare che se $i \leftrightarrow j$ e $i$ ricorrente, allora anche $j$ è ricorrente:} vedi proposizione \ref{mc_i_comm_j_ricor}.
+
+    \item \textbf{Dimostrare che in una catena di Markov con un numero finito di stati non possono esserci stati ricorrenti nulli:}
+    \begin{dimostrazione*}
+    Suppongo che esista uno stato ricorrente nullo. Allora deve esistere una classe ricorrente nulla con un numero finito di stati ma questo è impossibile per il teorema \ref{mc_numero_finito_di stati}.
+    \end{dimostrazione*}
+
+    \item \textbf{Dimostrare che se $X$ e $Y$ sono due variabili aleatorie con distribuzione di Poisson, rispettivamente di parametri $\mu$ e $\lambda$ allora $X+Y$ è una variabile di Poisson con parametro $\mu + \lambda$:} vedi proposizione \ref{pp_somma_due_poisson}.
+
+    \item \textbf{Dimostrare che $E[S_{N(t) + 1}] = E[X_k]\,[M(t) + 1]$ con $E[X_1] = \mu$:} la dimostrazione è resa possibile dalla proposizione \ref{pr_proposizione_soluzione_equazione_rinnovamento} e segue la dimostrazione del teorema.
+\end{itemize}
 
 \end{document}
