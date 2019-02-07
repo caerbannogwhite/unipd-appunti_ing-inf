@@ -1,0 +1,735 @@
+\documentclass[a4paper,portrait,12pt]{article}
+\usepackage[top=0.5in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{epstopdf}
+\usepackage{float}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usepackage{subfloat}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{eufrak}
+\usepackage{subfiles}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{csquotes}
+\usepackage{program}
+\usepackage{mathtools}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definizione}[section]
+
+\newtheorem{proposition}{Proposizione}
+\newtheorem{corollary}{Corollario}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+ 
+\begin{document}
+
+\title{Appunti Di Robotica Autonoma}
+
+\maketitle
+\date
+\newpage
+
+\tableofcontents
+\newpage
+
+
+
+\section{Per Esame}
+
+
+
+Il compito avrà una durata di circa 1 ora e ci saranno una decina di domande a cui rispondere.
+\begin{enumerate}
+\item Quali di queste rappresentazioni non soffrono del fenomeno di gimbal lock, anche definito come l'allineamento di due assi rotanti verso la stessa direzione.
+Si ricorda che tale blocco causa la perdita di un grado di libertà corrispondente all'asse bloccato:
+\begin{itemize}
+\item Angoli di Eulero
+\item Roll, Pitch, Yaw
+\item Quaternioni
+\end{itemize}
+
+\item Spiegare cosa si intende per cinematica di un robot manipolatore, con particolare attenzione alla distinzione tra cinematica diretta e cinematica inversa.
+
+\item Quali paradigmi per la programmazione di architetture software per gestire il comportamento di un robot conosci?
+\begin{itemize}
+\item ...
+\item ...
+\item ...
+\end{itemize}
+
+\item Spiegare il significato del termine “robot olonomo”
+\item Spiegare il significato del termine "subsumption architecture”
+\item In robotica cosa significa “SLAM”? Definire lo "SLAM problem”.
+\item Quali delle seguenti affermazioni sono vere per un Fiducial Marker?
+\begin{itemize}
+\item Incorpora molte informazioni
+\item Vuole essere robusto a diverse illuminazioni e a occlusioni
+\item Può essere solo di forma quadrata
+\end{itemize}
+
+\item Dare le definizioni dei seguenti termini:
+\begin{enumerate}
+\item Accuracy
+\item Precicion
+\item Repeatability
+\item Resolution
+\end{enumerate}
+
+\item Cosa si intende per localizzazione probabilistica? Descrivere una tecnica per la localizzazione probabilistica.
+
+\item Descrivere le architetture per robot \textbf{reactive} e \textbf{deliberative}.
+
+\item Quanti gradi di libertà possiede il robot synchro drive e perché.
+
+\item Elencare quattro tipi di sensori per la localizzazione indoor.
+
+\end{enumerate}
+
+
+
+\section{Locomozione}
+
+
+
+La locomozione è l'atto di muoversi da un posto ad un altro, per farlo si richiede al dispositivo di interagiere fisicamente con l'ambiente circostante.
+La locomozione ha a che vedere con le forze e con i meccanismi e gli attuatori che le generano.
+
+Molti concetti relativi alla locomozione sono ispirati a processi naturali, anche se molto spesso è difficile imitarli.
+La locomozione per rotolamento non è presente in natura ma è ancora la più efficiente (soprattutto in ambienti ingegnerizzati), per questo molti sistemi utilizzano ancora le ruote e i cingoli.\\
+
+Come generare il moto?
+\begin{itemize}
+\item Progettazione manuale.
+\item Progettazione basata sul controllo.
+\item Algoritmi di apprendimento, per trovare i migliori parametri.
+\item Movimenti ottenuti da dati umani.
+\end{itemize}
+
+Il movimento di un camminatore bipede, si può modellare con un poligono che ruota.
+Il passo di un bipede $d$ (cioè la distanza tra i suoi piedi nella fase di moto mentre sono entrambi a terra) rappresenta il lato del poligono, mentre la lunghezza delle gambe $l$, il raggio.
+Più il passo si accorcia, più il poligono tende a somigliare ad un cerchio.  
+
+\subsection{Gradi di Libertà}
+\textbf{Gradi di libertà} (\emph{degrees of freedom}) per robot:
+\begin{itemize}
+\item un corpo rigido che trasla e ruota in una dimensione ha un DOF (ad esempio un treno);
+\item un corpo rigido che trasla e ruota in un piano a due dimensioni ha 3 DOF (2 di traslazione e 1 di rotazione);
+\item un corpo rigido che trasla e ruota in 3 dimensioni ha 6 DOF (3 di traslazione e 3 di rotazione, come un robot volante).
+\end{itemize}
+
+Un robot si dice \emph{olonomo} se è in grado di muoversi istantaneamente in ogni direzione dello spazio dei suoi gradi di libertà.
+I robot olonomi esistono, ma richiedono molti motori o una progettazione inusuale.
+
+
+
+\section{Dinamica}
+
+
+
+La \textbf{dinamica} è lo studio delle leggi fisiche necessarie per il moto dei corpi costituenti il robot.
+$f$ indica la forza distribuita sul piede caratterizzante il contatto tra piede e suolo.
+$\vec{R}$, forza risultante
+$ZMP$, punto di applicazione di $\vec{R}$ (centro di pressione)
+
+$CoM$, \emph{Center of Mass}: punto nello spazio dove si concentra l’intera massa del corpo
+Sia dato un robot di massa M con N link di massa $m_j$
+$1 \le j \le N$
+- posizione del CoM del corpo j nel riferimento locale
+- Posizione di j nel riferimento assoluto: (posizione e orientazione)
+\begin{align*}
+c_j = p_j + \vec{R} \cdot c_j
+\end{align*}
+- posizione del CoM globale del robot:
+\begin{align*}
+c = \sum_{j=1}^N m_j c_j /M
+\end{align*}
+
+punto situato nell’intersezione tra la linea di
+gravità passante per il centro di massa e il
+suolo
+
+Si tende un elastico attorno ai piedi del robot al livello della superficie di contatto
+\textbf{Poligono di sostentamento}superficie risultante
+
+\begin{table}
+\centering
+\begin{tabular}{p{.5\linewidth}p{.5\linewidth}}
+\textbf{Immobilità} & \textbf{Moto}\\
+ZMP e proiezione del CoM coincidono & ZMP e proiezione del CoM possono trovarsi in punti diversi
+\end{tabular}
+\end{table}
+
+ZMP è sempre all'interno del poligono di sostentamento.\\
+La proiezione del CoM può usicire.
+
+$M$ massa totale del robot\\
+$\vec{c} = [x,y,z]^T$ posizione del CoM\\
+$P = [P_x, P_y, P_z]^T$ quantità di moto\\
+$L = [L_x, L_y, L_z]^T$ movimento cinetico\\
+
+\begin{align*}
+\dot{c} = \mathcal{P} / M \text{La quantità di movimento è il prodotto tra la massa totale del robot e la velocità del suo CoM}\\
+\dot{\mathcal{P}} = f_{all} = Mg + f\text{La quantità di movimento dipende dalla risultante delle forze esterne applicate al robot.}\\
+\dot{\mathcal{L}} = \tau_{all} = c \times Mg + \tau \text{Il momento cinetico dipende dal momento risultante delle forze esterne}
+\end{align*}
+
+1. Quando un robot è immobile in piedi, la variazione di quantità del movimento è 
+nulla e le forze di gravità si equilibriano con le forze di reazione del suolo
+2. Se le forze di reazione scompaiono, la quantità di movimento aumenta 
+rapidamente verso il basso a cause della forza di gravità caduta libera
+
+1. Dato un robot immobile, questo momento si dovrà equilibrare con quello 
+generato dalla forza peso
+2. Nel caso in cui questo equilibrio non avvenga, il momento di reazione del suolo 
+aumenta rapidamente caduta libera
+
+Il calcolo della posizione dello ZMP a seconda dei
+movimenti effettuati dal robot può essere effettuato
+secondo due procedimenti:
+\begin{enumerate}
+\item Analitico
+\item Approssimato
+\end{enumerate}
+
+\subsubsection{Procedimento Analitico}
+
+\begin{align*}
+\tau_p = \dot{\mathcal{L}} - c \times Mg + (\dot{\mathcal{P}} - Mg) \times p\\
+p_x = \frac{Mgx + p_z\dot{\mathcal{P}}_x - \dot{\mathcal{L}}_y}{Mg \dot{\mathcal{P}}_z}\\
+p_y = \frac{Mgx + p_z\dot{\mathcal{P}}_y - \dot{\mathcal{L}}_x}{Mg \dot{\mathcal{P}}_z}
+\end{align*}
+
+\subsubsection{Procedimento Approssimato}
+
+\begin{enumerate}
+\item Si rappresenta il robot in tutto il suo insieme come
+un’unica massa puntiforme
+\item Si calcola la quantità di movimento ed il momento
+cinetico all’origine
+\begin{align*}
+\mathcal{P} = M \dot{c}\\
+\mathcal{L} = c \times M \dot{c}
+\end{align*}
+\item Si calcolano le corrispondenti derivate
+\begin{align*}
+\left[\begin{array}{c}
+\dot{\mathcal{P_x}}\\
+\dot{\mathcal{P_y}}\\
+\dot{\mathcal{P_z}}\\
+\end{array}\right]
+=
+\left[\begin{array}{c}
+M\ddot{x}\\
+M\ddot{y}\\
+M\ddot{z}\\
+\end{array}\right]
+\end{align*}
+\item Si inseriscono i valori trovati nelle espressioni di px e py del
+procedimento analitico
+\begin{align*}
+p_x = x - \frac{(z - p_z)\ddot{x}}{\ddot{z}+g}\\
+p_x = y - \frac{(z - p_z)\ddot{y}}{\ddot{z}+g}
+\end{align*}
+\item Lo ZMP è definito sotto la direzione delle forze di reazione del
+suolo e di quelle inerziali. I valori di queste ultime si ottengono
+ponendo $\ddot{z} = 0$ e $p_z
+= 0$
+\begin{align*}
+p_x = x - \frac{z}{g}\ddot{x}\\
+p_y = y - \frac{z}{g}\ddot{y}
+\end{align*}
+\end{enumerate}
+
+\subsection{Marcia Bipede}
+
+Requisiti:
+1. ZMP all’interno del poligono di sostentamento
+2. CoM sempre alla stessa altezza
+Il robot viene modellato come:
+1. LIP-3D (Linear inverted pendulum 3D)
+2. Carrello sul tavolo\\
+(da completare, vedi slide)
+
+
+
+\section{Cinematica}
+
+
+
+\subsection{Cinematica del Robot Mobile}
+
+
+
+\subsection{Cos'è la Cinematica}
+Un robot può essere modellato come un sistema fisico composto da corpi rigidi, detti anche \textbf{collegamenti} (\emph{link}), connessi tra loro da \textbf{giunti} (\emph{joint}). Una \textbf{posa} (\emph{pose}) rappresenta \emph{la posizione e l'orientazione} di un corpo rigido.
+
+La \textbf{cinematica} è lo studio delle relazioni matematiche tra posizioni dei collegamenti e angoli dei giunti.
+La cinematica dei robot descrive quindi la posa, la velocità, l'accelerazione e le derivate di ordine superiore che corpi che compongono il meccanismo.\\
+
+Per controllare il movimento del robot dobbiamo definire la posizione e l'orientamento di ciascuno dei suoi segmenti.
+Per questo scopo abbiamo:
+\begin{itemize}
+\item Il sistema di riferimento assoluto;
+\item Il sistema di riferimento relativo.
+\end{itemize}
+
+\subsection{Il Robot nel Mondo}
+
+\subsubsection{Sistema di Riferimento Assoluto}
+
+\begin{enumerate}
+\item Sia dato un robot nella sua posizione iniziale.
+\item Fissare un punto sul terreno sottostante.
+\item Tracciare il sistema di riferimento partendo da questo punto.
+\end{enumerate}
+Otteniamo le coordinate del mondo $\Sigma_w$ (il mondo in cui si muove il robot).
+La posizione e l'orientamento sono assoluti se espressi nelle coordinate del mondo.
+
+\subsubsection{Sistema di Riferimento Relativo}
+
+\begin{itemize}
+\item Il sistema di riferimento non è fissato al suolo ma ad un segmento (un corpo rigido di cui è composto il robot).
+\item L'orignine si trova nell'asse di rotazione del segmento.
+\item L'orientazione degli assi (del sistema di riferimento) ri riferisce ai movimenti che i segmento può eseguire.
+\end{itemize}
+Le coordinate locali sono $\Sigma_a$.
+Si tratta della posa di un corpo espressa relativamente ad un altro corpo (ad esempio, la posizione di una mano relativamente alla posizione della spalla).
+
+\subsubsection{Traslazione}
+
+La traslazione è uno spostamento nel quale nessun punto del corpo rigido resta nella sua posizione iniziale e tutte le linee rette del corpo rimangono parallele alla loro orientazione iniziale. 
+
+\subsubsection{Rotazione}
+
+La rotazione è uno spostamento nel quale almeno un punto del corpo rigido rimane nella sua posizione iniziale e non tutte le linee nel corpo restano parallele alla loro orientazione iniziale.\\
+
+Siano dati:
+\begin{align*}
+(\hat{x}_i, \hat{y}_i, \hat{z}_i) \text{ vettore base del frame }i\\
+(\hat{x}_j, \hat{y}_j, \hat{z}_j) \text{ vettore base del frame }j\\
+\end{align*}
+La matrice di rotazione che si ottiene è:
+\begin{align*}
+R_i^j = \left(
+\begin{array}{ccc}
+\hat{x}_i\cdot\hat{x}_j & \hat{y}_i\cdot\hat{x}_j & \hat{z}_i\cdot\hat{x}_j \\
+\hat{x}_i\cdot\hat{y}_j & \hat{y}_i\cdot\hat{y}_j & \hat{z}_i\cdot\hat{y}_j \\
+\hat{x}_i\cdot\hat{z}_j & \hat{y}_i\cdot\hat{z}_j & \hat{z}_i\cdot\hat{z}_j \\
+\end{array}\right)
+\end{align*}
+Assi del sistema di riferimento:
+\begin{align*}
+e_{ax} = \left[
+\begin{array}{c}
+1\\
+0\\
+0
+\end{array}\right]
+e_{ay} = \left[
+\begin{array}{c}
+0\\
+\cos{\theta}\\
+\sin{\theta}
+\end{array}\right]
+e_{ax} = \left[
+\begin{array}{c}
+0\\
+-\sin{\theta}\\
+\cos{\theta}
+\end{array}\right]
+\end{align*}
+Le rotazioni possono essere espresse con matrici $3\times 3$.
+Le matrici di rotazione si possono combinare con semplici moltiplicazioni matriciali.
+\begin{align*}
+R_i^k = R_j^k \cdot R_i^j
+\end{align*}
+
+\subsubsection{Angoli di Eulero}
+
+$(\phi, \theta, \psi)$: ciascun angolo rappresenta una rotazione su un asse di un frame di coordinate in movimento.
+La location dell'asse di tutte le successive rotazioni dipende dalla rotazione precedente.\\
+
+Esempio. Nel sistema $Z-Y-X$ sono dati:
+\begin{itemize}
+\item $i$ frame in movimento
+\item $j$ frame fisso
+\item inizialmente i frame coincidono
+\end{itemize}
+Allora
+\begin{itemize}
+\item $\phi$, implica una rotazione sull'asse $Z$ del frame $i$
+\item $\theta$, implica una rotazione sull'asse $Y$ del frame $i$
+\item $\psi$, implica una rotazione sull'asse $X$ del frame $i$
+\end{itemize}
+
+\subsubsection{Roll-Pitch-Yaw}
+
+Traducibile con: rollaggio, picchiata, imbardata.
+Ogni angolo rappresenta una rotazione attorno ad un asse di un frame di riferimento \textbf{fisso}.\\
+
+Esempio. Nel sistema $X-Y-Z$ sono dati:
+\begin{itemize}
+\item $i$ frame in movimento
+\item $j$ frame fisso
+\item inizialmente i frame coincidono
+\end{itemize}
+Allora
+\begin{itemize}
+\item $\phi$, implica una rotazione roll sull'asse fisso $X$
+\item $\theta$, implica una rotazione pitch sull'asse $Y$
+\item $\psi$, implica una rotazione yaw sull'asse $Z$
+\end{itemize}
+
+Gli angoli di Eulero e il sistema RPY hanno una singolarità: il\textbf{blocco del giunto cardanico} (meglio noto come \emph{gimbal lock}).
+Consiste nella perdita di un DOF in uno spazio a tre dimensioni che avviene quando gli assi di due dei tre giunti si trovano in una configurazione parallela.
+
+\subsubsection{I Quaternioni}
+
+\begin{align*}
+\vec{\epsilon} = \epsilon_0 + \epsilon_1 i + \epsilon_2 j + \epsilon_3 k\\
+ii = jj = kk = -1\\
+ij = k,\; jk = i,\; ki = j\\
+ji = -k,\; kj = -i,\; ik = -j
+\end{align*}
+Gli $\epsilon$ sono scalari mentre $i,j,k$ sono operatori.
+I quaternioni \emph{non soffrono di singolarità}.\\
+
+Posizione:
+\begin{align*}
+\vec{p} = (p_x, p_y, p_z)^T \Rightarrow p = p_x i + p_y j + p_z k
+\end{align*}
+
+Rotazione:
+\begin{itemize}
+\item $\vec{\epsilon}\vec{p}\vec{\tilde{\epsilon}}$ esegue una rotazione del vettore $\vec{p}$ sulla direzione $(\epsilon_1, \epsilon_2, \epsilon_3)^T$.
+\item $\epsilon_0$ è l'angolo di rotazione.
+\item $\epsilon_1, \epsilon_2, \epsilon_3$ sono gli assi di rotazione.
+\end{itemize}
+
+\subsubsection{Trasformazioni Omogenee}
+Siano
+\begin{itemize}
+\item $p_h$, la posizione della mano rispetto alle coordinate del mondo $\Sigma_w$
+\item $r = p_h^a$ la posizione della mano rispetto alla spalla nelle sue coordinate inizali $\Sigma_a$
+\item $r'= R_a r$
+\end{itemize}
+Segue la matrice di una trasformata omogenea:
+\begin{align*}
+T_a = \left[\begin{array}{cc}
+R_a & p_a\\
+0\;0\;0 & 1
+\end{array}\right]
+\end{align*}
+\'E possibile definire un sistema di coordinate locali in un altro sistema di coordinate locali.
+Ad esempio, si può esprimere la posizione della mano relativamente alla spalla, sfruttando la posizione nota della mano rispetto al gomito.
+Otteniamo una catena di trasformate.
+
+
+\subsection{La Cinematica dei Giunti del Robot}
+
+
+I collegamenti che costituiscono il corpo del robot si considerano perfettamente rigidi e le loro superfici geometricamente perfette.
+I giunti collegano più corpi rigidi.
+La \textbf{cinematica dei giunti} (\emph{joint kinematics}) studia il moto tra due corpi.
+
+\begin{itemize}
+\item Moto di \textbf{rivoluzione} (\emph{revolute}): un link ruota attorno ad un altro, c'è un solo asse di rotazione (1 DOF). Esempio: le cerniere delle porte.
+\item Moto \textbf{prismatico}: un link scivola su un altro (1 DOF). Esempio: pistone idraulico.
+\item Moto \textbf{cilindrico}: un link scivola e ruota sull'altro, è l'unione dei due precedenti moti (2 DOF).
+\item Moto \textbf{elicoidale} (\emph{helical}): ad esmpio, una vite.
+\item Moto \textbf{sferico}: si ottiene dal contatto di due superfici sferiche congruenti (una interna e l'altra esterna). Consente di ruotare su tutti gli assi (3 DOF).
+\item Moto \textbf{planare}: si ottene dal contatto di due superfici piane (3 DOF).
+\end{itemize}
+
+
+\subsection{Problemi Relativi alla Cinematica}
+
+\subsubsection{Cinematica Diretta}
+
+La \textbf{cinematica diretta} (\emph{forward kinematics}) è il calcolo delle configurazioni dei segmenti in funzione dei valori degli angoli dei giunti (associati a tali segmenti).
+\begin{center}
+Angoli dei giunti $\Rightarrow$ Posizione e orientazione (posa) dei collegamenti.
+\end{center}
+
+\subsubsection{Cinematica Inversa}
+
+La \textbf{cinematica inversa} (\emph{inverse kinematics}) è il calcolo degli angoli dei giunti partendo dalle posizioni e dalle orientazioni dei segmenti.
+\begin{center}
+Posizione e orientazione (posa) dei collegamenti $\Rightarrow$ Angoli dei giunti.
+\end{center}
+
+Due diversi approcci:
+\begin{itemize}
+\item approccio analitico, che comporta troppi calcoli ed è troppo oneroso (calcolo di tutti gli angloli).
+\item appriccio numerico, cinematica differenziale (Jacobiana per calcolare la correzione).
+\end{itemize}
+
+\subsubsection{Cinematica Differenziale}
+
+La cinematica differenziale è la relazione tra le velocità dei giunti e degli end-effector (velocità sia angolare che lineare).
+La \textbf{Jacobiana} è la struttura matriciale che definisce questa relazione.\\
+
+Si ricorda la relazione che definisce lo Jacobiano geometrico
+\begin{align*}
+\vec{v} = \vec{J}(q)\dot{q}
+\end{align*}
+I valori di $q$ per coi la matrice $\vec{J}$ diminuisce di rango prendono il nome di \textbf{singolarità cinematiche}.
+In presenza di singolarità cinematiche si ha:
+\begin{itemize}
+\item perdita di mobilità (non è possibile imporre leggi del moto arbitrarie);
+\item possibilità di infinite soluzioni al problema cinematico inverso;
+\item velocità elevate nello spazio dei giunti (nell'intorno di singolarità).
+\end{itemize}
+
+Le singolarità possono essere:
+\begin{itemize}
+\item \textbf{ai confini} dello spazio di lavoro raggiungibile;
+\item \textbf{all'interno} dello spazio di lavoro.
+\end{itemize}
+Le ultime sono le più problematiche perché ci si può incorrere con traiettorie pianificate nello spazio operativo.\\
+
+Disaccoppiamento di singolarità:
+\begin{itemize}
+\item calcolo delle singolarità della struttura portante;
+\item calcolo delle singolarità del polso.
+\end{itemize}
+
+\subsection{Convenzioni di Denavit e Hartenberg}
+???
+
+
+\subsection{Cinematica del Robot Mobile}
+
+La cinematica del robot mobile è simile alla cinematica del robot manipolatore: lo scopo è quello di descrivere il comportamento meccanico del robot per la progettazione e il controllo.
+I robot mobili possono muoversi senza limiti nel loro ambiente (non c'è un modo diretto per misurare la posizione del robot).
+
+Per prima cosa, è necessario comprendere come i vincoli delle ruote influiscano nel movimento.
+Le ipotesi che vengono generalmente utilizzate sono:
+\begin{itemize}
+\item movimento in un piano orizzontale;
+\item le ruote non sono deformabili;
+\item moto di puro rotolamento (niente scivolamento o slittamento);
+\item assi di sterzata ortogonali alla superficie;
+\item le ruote sono tenute insieme da un supporto rigido e non deformabile (il telaio).
+\end{itemize}
+
+Dato un robot con $M$ ruote
+\begin{itemize}
+\item ogni ruota impone 0 o più vincoli al moto del robot;
+\item soltano le ruote fisse e le ruote standard orientabili (\emph{steerable standard wheels}) impongono vincoli.
+\end{itemize}
+
+La manovrabilità del robot è la combinazione
+\begin{itemize}
+\item della mobilità disponibile sui vincoli di slittamento;
+\item libertà addizionali date dallo sterzo.
+\end{itemize}
+
+Tre ruote sono sufficienti per garantire stabilità statica ad un robot e avere ruote in più significa doverle sincronizzare.
+\begin{itemize}
+\item Grado di manovrabilità: $\delta_m$.
+\item Grado di sterzatura: $\delta_s$.
+\item Manovrabilità del robot: $\delta_M = \delta_m + \delta_s$. 
+\end{itemize}
+
+Il \textbf{grado di libertà} (\emph{degree of freedom}, DOF) è l'abilità del robot nel raggiungere varie pose.
+
+Le velocità del robot raggiungibili in modo indipendente sono dette \textbf{grado di liberta differenziabile} (\emph{differentiable degree of freedom}, DDOF) e si indica con $\delta_m$.
+Quindi il DDOF rappresenta l'abilità del robot nell'eseguire diversi percorsi.
+\begin{align*}
+DDOF \le \delta_m \le DOF
+\end{align*}
+
+\subsection{Controllo Cinematico}
+
+L'obiettivo del controllore cinematico è di seguire una traiettoria descritta dalla sua posizione e / o profili di velocità in funzione del tempo.
+Il controllo del movimento non è così semplice perché i robot mobili sono in genere sistemi non olonomi.
+La maggior parte dei controller non considera la cinematica del sistema.
+
+\subsubsection{Controllo Open Loop}
+Nel \textbf{controllo a ciclo aperto} (\emph{open loop control}) la traiettoria, o percorso, è divisa in segmenti di forma ben definita: linee rette e archi di circonferenza.
+
+Il problema in questo caso consiste nel calcolare una traiettoria che sia più liscia (\emph{smooth}) possibile.
+Precalcolare una traiettoria fattibile in questo modo non è sempre facile, bisogna limitare la velocità e l'accelerazione del robot al fine di mantenerlo in pista.
+Non si adatta se l'ambiente circostante cambia e le traiettorie risultanti di solito non sono lisce.
+
+
+
+\section{Percezione}
+
+
+
+(Da slide 4a - Percezione, sensori) I sensori senguono la seguente classificaizione.
+\begin{itemize}
+\item Cosa?
+	\begin{itemize}
+	\item Sensori \textbf{propriocettivi}: misurano valori interni al robot (ad esempio, la velocità del motore, il carico sulle ruote).
+	\item Sensori \textbf{esterocettivi}: misurano informazioni relative all'ambiente esterno, nel quale il robot è immerso (ad esempio, la distanza da un oggetto). 
+	\end{itemize}
+\item Come?
+	\begin{itemize}
+	\item Sensori \textbf{passivi}: energia arriva dall'ambiente (bumper).
+	\item Sensori \textbf{attivi}: emettono energia e misurano la reazione dell'ambiente (sonar).
+	\end{itemize}
+\end{itemize}
+
+\subsection{Caratterizzazione dei Sensori}
+
+\subsubsection{Performance dei Sensori}
+\begin{itemize}
+\item \textbf{Il Range dinamico.} Rapporto tra il limite inferiore e il limite superiore, di solito espresso in decibel (ad esempio, la potenza misutarata tra $1\,mW$ e $20\,W$).
+\item \textbf{Il Range.} Considerando il limite superiore.
+\item \textbf{La Risoluzione.} Intesa come la differenza minima tra due valori.
+Per i sensori digitali è di solito la risoluzione del dispositivo A/D (ad esempio $5V / 255 \rightarrow 8\,bit$).
+\item \textbf{La Linearità.} Intesa come la variazione dell'output in funzione dell'input (deve avere le proprietà di una funzione lineare).
+Questa proprietà è meno importante quando il segnale è trattato con il computer.
+\item \textbf{Banda e frequenza.} La velocità con la quale il sensore fornisce il flusso di letture.
+Il limite superiore generalmente dipende dal sensore e dal tasso di acquisizione.
+\end{itemize}
+
+\subsubsection{Caratteristiche per Ambienti Reali}
+\begin{itemize}
+\item \textbf{La Sensitività.} Il rapporto tra il cambiamento dell'output e il cambiamento dell'input.
+Generalmente, nel mondo reale il sensore ha un'elevata sensibilità.
+\item \textbf{La Cross-Sensitivity.} La sensibilità ad altri parametri ambientali.
+Influenza di altri sensori attivi.
+\item \textbf{Errore, Accuratezza.} La differenza tra l'output del sensore e il valore reale.
+\item \textbf{Errori sistematici.} (o deterministici) Causati da fattoric che teoricamente possono essere modellati. 
+\item \textbf{Errori Casuali.} (o non-deterministici) Sui quali non è possibile fare alcuna predizione.
+\item \textbf{Precisione.} Riproducibilità dei risultati dei sensori.
+\end{itemize}
+
+Nel mondo reale, le misurazioni cambiano e sono soggette ad errori, dovuti ad esempio a cambiamenti d'illuminazione, pareti riflettenti, superfici che assorbono luce o suoni.
+
+I sensori vengono modellati su distribuzioni di probabilità (errori casuali).
+Si hanno poche informazioni sulle cause degli errori, quindi questi possono essere considerati con delle curve Gaussiane.\\
+
+Esempi di sensiori (vedi slide): encoder, inclinometri, bussole, giroscopi.
+
+
+
+\section{Localizzazione}
+
+Per prima cosa è necessario chiedersi se serve veramente localizzare un robot.
+Ad esempio si può definire un comportamento del robot che gli comunichi di evitare gli ostacoli, seguire sempre una parete (destra o sinistra), determinare se l'area scoperta è quella di arrivo.
+
+In alternativa si definisce la \emph{map based navigation}.
+\begin{itemize}
+\item \emph{Global localization}: al robot non è fornita la sua posizione iniziale, che deve essere stimata da zero.
+\item \emph{Posizion tracking}: il robot conosce la sua posizione iniziale e deve soltanto considerare gli errori di odometria quando si muove.
+\end{itemize}
+
+La localizzazione viene fatta per mezzo di
+\begin{itemize}
+\item sensori esterni, punti di riferimento (artificiali), beacon (ad esempio punti altamente riflettenti con un laser che li indentifica oppure beacon colorati e fotocamera omnidirezionale);
+\item odometria;
+\item localizzazione basata su mappa, senza sensori esterni o punti di riferimento artificiali, solamente con i sensori di bordo.
+\end{itemize}
+
+
+\subsection{Localizzazione Basata su Mappe}
+
+Si consideri un robot mobile in un ambiente conosciuto, non appena inizia a muoversi da una posisione nota, può tenere traccia dei suoi spostamenti con l'odometria.
+Ingredienti:
+\begin{itemize}
+\item teoria delle probabilità, propagazione degli errori;
+\item rappresentazione della credenza, discreta continua;
+\item modello di moviemento, modello odometrico;
+\item sensori, modelli per la misurazione.
+\end{itemize}
+Conoscere la posizione esatta (ad esempio con un GPS) spesso non è sufficiente.
+
+Il rumore nel segnale fornito dai sensori è spesso influenzato dall'ambiente o da altre misurazioni (ad esempio, altri sensori a ultrasuoni).
+Il rumore riduce drasticamante l'utilità delle informazioni che si ottengono.
+La soluzione sta nell'effettuare misurazioni multiple e usare metodi che permettano di unire queste misurazioni (metodi temporali o multi sensore).\\
+
+Odometria e dead reckoning:
+\begin{itemize}
+\item l'aggiornamento della posizione è basato su sensori propriocettivi;
+\item odometria: solo sensori ruota;
+\item dead reckoning: anche i sensori di direzione 
+\end{itemize}
+Il movimento del robot, rilevato con encoder ruota e/o i sensori di direzione sono integrati nella posizione.
+%Pro: semplice, facile
+%Contro: gli errori sono integrati -> non associati
+L'utilizzo di ulteriori sensori di direzione (ad esempio il giroscopio) potrebbe aiutare a ridurre gli errori cumulativi, ma i problemi principali rimangono.
+
+\begin{itemize}
+\item Gli errori deterministici possono essere eliminati con una corretta calibrazione del sistema.
+\item Gli errori non deterministici devono essere descritti da modelli di errore e porteranno sempre a una stima di posizione incerta.
+\end{itemize}
+
+Le principali fonti di errore sono:
+\begin{itemize}
+\item Risoluzione limitata durante l'integrazione (incrementi di tempo, risoluzione della misurazione);
+\item Disallineamento delle ruote (deterministico);
+\item Diametro della ruota ineguale (deterministico);
+\item Variazione nel punto di contatto della ruota;
+\item Contatto del pavimento ineguale (scivoloso, non planare).
+\end{itemize}
+
+Classificazione degli errori:
+\begin{itemize}
+\item \textbf{errore di portata} (\emph{range error}): relativo alla lunghezza del percorso (distanza) che il robot ha compiuto; 
+\item \textbf{errore di rotazione} (\emph{turn error}): simile al precedente, ma per le rotazioni;
+\item \textbf{errore di deriva} (\emph{drift error}): la differenza nell'errore delle ruote causa un errore nell'orientamento angolare del robot.
+\end{itemize}
+
+\begin{table}
+\begin{tabular}{cc}
+\begin{minipage}{.5\linewidth}
+Caso continuo:
+\begin{itemize}
+\item Precisione legata dai dati del sensore
+\item Stima di posa ipotetica in genere
+\item Perso quando divergenti (per singola ipotesi)
+\item Rappresentazione compatta e in genere ragionevole in potenza di elaborazione.
+\end{itemize}
+\end{minipage}
+&
+\begin{minipage}{.5\linewidth}
+Caso discreto:
+\begin{itemize}
+\item Precisione vincolata dalla risoluzione della discretizzazione
+\item Stima di posa ipotetica in genere
+\item Mai perso (quando le divergenze convergono in un'altra cella)
+\item È necessaria memoria importante e potenza di elaborazione.
+\end{itemize}
+\end{minipage}
+\end{tabular}
+\end{table}
+
+
+\subsection{SLAM}
+
+Il problema del \emph{Simultaneous Location And Mapping} (SLAM) è definito come segue.
+Un robot mobile vaga per un ambiente sconosciuto, partendo da una posizione con coordinate note.
+Il suo moto è incerto, rendendo gradualmente più difficile determinare le sue coordinate globali.
+Mentre si muove, il robot può percepirne l'ambiente.
+Il problema SLAM consiste nel costruire una mappa dell'ambiente mentre si determina contemporaneamente la posizione del robot rispetto a questa mappa.\\
+
+I principali paradigmi dello SLAM sono:
+\begin{itemize}
+\item \emph{Extended Kalman Filters} (EKF): storicamente è stato il primo approccio e anche il più influente.
+Si proponeva di utilizzare un vettore di singoli stati e un insieme di caratteristiche dell'ambiente con associata una matrice di covarianza, che rappresenta l'incertezza nelle stime.
+\item \emph{Graph-Based Optimization Techniques}: questo paradigma considera il robot e i landmark come nodi in un grafo, mentre ogni coppia di luoghi è tenuta insieme da un arco rappresentante le informazioni dell'odometria.
+Esistono altri archi che connettono i luoghi con i landmark.
+\item \emph{Particle Methods}: si basa sui particle filter che sono diventati popolari solo ddi recente.
+\end{itemize}
+
+\end{document}

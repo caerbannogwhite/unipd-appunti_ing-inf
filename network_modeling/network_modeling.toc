@@ -1,0 +1,44 @@
+\contentsline {section}{\numberline {1}Concetti di Probabilit\IeC {\`a}}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Distribuzioni Importanti}{3}{subsection.1.1}
+\contentsline {subsubsection}{\numberline {1.1.1}Distribuzione Esponenziale}{3}{subsubsection.1.1.1}
+\contentsline {section}{\numberline {2}Catene di Markov}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Processi di Markov}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Analisi di Primo Passo}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Catene di Markov speciali}{7}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Catena di Markov a due stati}{7}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Passeggiata casuale unidimensionale}{7}{subsubsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.3}Success Runs}{7}{subsubsection.2.3.3}
+\contentsline {subsection}{\numberline {2.4}Tempi di primo passaggio}{7}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Comportamento asintotico delle catene di Markov}{8}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}La classificazione degli stati}{9}{subsection.2.6}
+\contentsline {subsubsection}{\numberline {2.6.1}Periodicit\IeC {\`a} di una catena di Markov}{9}{subsubsection.2.6.1}
+\contentsline {subsubsection}{\numberline {2.6.2}Stati ricorrenti e stati transitori}{9}{subsubsection.2.6.2}
+\contentsline {subsection}{\numberline {2.7}Teorema Fondamentale delle Catene di Markov}{10}{subsection.2.7}
+\contentsline {section}{\numberline {3}Processi di Poisson}{11}{section.3}
+\contentsline {subsection}{\numberline {3.1}Distribuzione di Poisson}{11}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Processi di Poisson}{11}{subsection.3.2}
+\contentsline {section}{\numberline {4}Processi di Rinnovamento}{14}{section.4}
+\contentsline {subsection}{\numberline {4.1}Definizione di Processi di Rinnovamento e Concetti Correlati}{14}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Processi di Poisson Come Processi di Rinnovamento}{14}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Comportamento Asintotico dei Processi di Rinnovamento}{14}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Equazioni di Rinnovamento}{15}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Stopping Time}{16}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Teorema Elementare di Rinnovamento}{16}{subsection.4.6}
+\contentsline {section}{\numberline {5}Altri Concetti Utili all'Analisi}{18}{section.5}
+\contentsline {subsection}{\numberline {5.1}Processi Semi-Markoviani}{18}{subsection.5.1}
+\contentsline {section}{\numberline {6}Analisi di Code e Protocolli}{19}{section.6}
+\contentsline {subsection}{\numberline {6.1}Coda M/G/1}{19}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Coda G/M/1}{19}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Esempi di Protocolli di Livello 2 e 4}{19}{subsection.6.3}
+\contentsline {subsubsection}{\numberline {6.3.1}Protocollo 1}{19}{subsubsection.6.3.1}
+\contentsline {subsubsection}{\numberline {6.3.2}Protocollo 2}{20}{subsubsection.6.3.2}
+\contentsline {subsection}{\numberline {6.4}ALOHA}{20}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.5}Go-Back-N}{20}{subsection.6.5}
+\contentsline {section}{\numberline {7}Per Esame}{22}{section.7}
+\contentsline {subsection}{\numberline {7.1}Soluzioni Esercizi}{22}{subsection.7.1}
+\contentsline {subsubsection}{\numberline {7.1.1}Compito 22 settembre 2005}{22}{subsubsection.7.1.1}
+\contentsline {subsubsection}{\numberline {7.1.2}Compito 14 luglio 2006}{22}{subsubsection.7.1.2}
+\contentsline {subsubsection}{\numberline {7.1.3}Compito 12 dicembre 2006}{23}{subsubsection.7.1.3}
+\contentsline {subsubsection}{\numberline {7.1.4}Compito 09 luglio 2007}{24}{subsubsection.7.1.4}
+\contentsline {subsubsection}{\numberline {7.1.5}Compito 09 luglio 2007}{24}{subsubsection.7.1.5}
+\contentsline {subsection}{\numberline {7.2}Dimostrazioni}{25}{subsection.7.2}

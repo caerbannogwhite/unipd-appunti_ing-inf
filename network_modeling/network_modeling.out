@@ -1,0 +1,44 @@
+\BOOKMARK [1][-]{section.1}{Concetti di Probabilit\340}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Distribuzioni Importanti}{section.1}% 2
+\BOOKMARK [3][-]{subsubsection.1.1.1}{Distribuzione Esponenziale}{subsection.1.1}% 3
+\BOOKMARK [1][-]{section.2}{Catene di Markov}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{Processi di Markov}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.2}{Analisi di Primo Passo}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.3}{Catene di Markov speciali}{section.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Catena di Markov a due stati}{subsection.2.3}% 8
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Passeggiata casuale unidimensionale}{subsection.2.3}% 9
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Success Runs}{subsection.2.3}% 10
+\BOOKMARK [2][-]{subsection.2.4}{Tempi di primo passaggio}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.5}{Comportamento asintotico delle catene di Markov}{section.2}% 12
+\BOOKMARK [2][-]{subsection.2.6}{La classificazione degli stati}{section.2}% 13
+\BOOKMARK [3][-]{subsubsection.2.6.1}{Periodicit\340 di una catena di Markov}{subsection.2.6}% 14
+\BOOKMARK [3][-]{subsubsection.2.6.2}{Stati ricorrenti e stati transitori}{subsection.2.6}% 15
+\BOOKMARK [2][-]{subsection.2.7}{Teorema Fondamentale delle Catene di Markov}{section.2}% 16
+\BOOKMARK [1][-]{section.3}{Processi di Poisson}{}% 17
+\BOOKMARK [2][-]{subsection.3.1}{Distribuzione di Poisson}{section.3}% 18
+\BOOKMARK [2][-]{subsection.3.2}{Processi di Poisson}{section.3}% 19
+\BOOKMARK [1][-]{section.4}{Processi di Rinnovamento}{}% 20
+\BOOKMARK [2][-]{subsection.4.1}{Definizione di Processi di Rinnovamento e Concetti Correlati}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.2}{Processi di Poisson Come Processi di Rinnovamento}{section.4}% 22
+\BOOKMARK [2][-]{subsection.4.3}{Comportamento Asintotico dei Processi di Rinnovamento}{section.4}% 23
+\BOOKMARK [2][-]{subsection.4.4}{Equazioni di Rinnovamento}{section.4}% 24
+\BOOKMARK [2][-]{subsection.4.5}{Stopping Time}{section.4}% 25
+\BOOKMARK [2][-]{subsection.4.6}{Teorema Elementare di Rinnovamento}{section.4}% 26
+\BOOKMARK [1][-]{section.5}{Altri Concetti Utili all'Analisi}{}% 27
+\BOOKMARK [2][-]{subsection.5.1}{Processi Semi-Markoviani}{section.5}% 28
+\BOOKMARK [1][-]{section.6}{Analisi di Code e Protocolli}{}% 29
+\BOOKMARK [2][-]{subsection.6.1}{Coda M/G/1}{section.6}% 30
+\BOOKMARK [2][-]{subsection.6.2}{Coda G/M/1}{section.6}% 31
+\BOOKMARK [2][-]{subsection.6.3}{Esempi di Protocolli di Livello 2 e 4}{section.6}% 32
+\BOOKMARK [3][-]{subsubsection.6.3.1}{Protocollo 1}{subsection.6.3}% 33
+\BOOKMARK [3][-]{subsubsection.6.3.2}{Protocollo 2}{subsection.6.3}% 34
+\BOOKMARK [2][-]{subsection.6.4}{ALOHA}{section.6}% 35
+\BOOKMARK [2][-]{subsection.6.5}{Go-Back-N}{section.6}% 36
+\BOOKMARK [1][-]{section.7}{Per Esame}{}% 37
+\BOOKMARK [2][-]{subsection.7.1}{Soluzioni Esercizi}{section.7}% 38
+\BOOKMARK [3][-]{subsubsection.7.1.1}{Compito 22 settembre 2005}{subsection.7.1}% 39
+\BOOKMARK [3][-]{subsubsection.7.1.2}{Compito 14 luglio 2006}{subsection.7.1}% 40
+\BOOKMARK [3][-]{subsubsection.7.1.3}{Compito 12 dicembre 2006}{subsection.7.1}% 41
+\BOOKMARK [3][-]{subsubsection.7.1.4}{Compito 09 luglio 2007}{subsection.7.1}% 42
+\BOOKMARK [3][-]{subsubsection.7.1.5}{Compito 09 luglio 2007}{subsection.7.1}% 43
+\BOOKMARK [2][-]{subsection.7.2}{Dimostrazioni}{section.7}% 44

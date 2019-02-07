@@ -1,0 +1,1893 @@
+\documentclass[a4paper,portrait,12pt]{article}
+\usepackage[top=0.5in]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{epstopdf}
+\usepackage{float}
+\usepackage{fancybox}
+\usepackage{tikz}
+\usepackage{subfloat}
+\usepackage{subcaption}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage{eucal}
+\usepackage{eufrak}
+\usepackage{subfiles}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{csquotes}
+\usepackage{program}
+\usepackage{mathtools}
+\usepackage[shortlabels]{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definizione}[section]
+
+\newtheorem{proposition}{Proposizione}
+\newtheorem{corollary}{Corollario}
+
+\providecommand{\abs}[1]{\lvert#1\rvert}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+ 
+\begin{document}
+
+\title{Appunti Di Gestione Strategica Delle Organizzazioni}
+
+\maketitle
+\date
+\newpage
+
+\tableofcontents
+
+
+
+\newpage
+\section{Per Esame}
+
+
+
+Database di domande suddivise in categorie, il compito viene formato in maniera automatica (Tutti diversi).
+Le domande sono:
+\begin{itemize}
+\item 2 su parte iniziale economia generale
+\item 4 su bilancio (sapere dove vanno le voci di bilancio, esempi di conto economico e SP)
+\item 1 sulla formazione di bilancio (data situazione iniziale contabilizzare le variazioni)
+\item 1 sugli indici di bilancio
+\item 2/3 su MdC, punti di pareggio ecc
+\item 2/3 sugli investimenti (cash flow, flusso di progetto)
+\end{itemize}
+
+12 domande circa.
+
+Alcune a risposta multipla, ad inserimento di termini, risposta numerica (esercizi di calcolo), associazione (tra risposte e domanda relativa).
+Maggior parte stanno su numerica, (bilancio ecc..).
+Nessuna su Organizzazione Aziendale.
+
+
+
+\newpage
+\section{Elementi di Economia}
+
+
+\subsection{Breve Storia Economica}
+
+Rivoluzioni industriali:
+\begin{enumerate}
+\item \textbf{Prima rivoluzione industriale} (1750-1800): le principale innovazioni sono state la \emph{macchina a vapore} e gli \emph{avanzamenti tecnologici nel settore tessile} (ad esempio, l'introduzione della spoletta mobile).
+La macchina a vapore sotituisce la il lavoro umano e animale in molti settori (anche in quello agricolo, con l'introduzione della trebbia a vapore) e porta all'invenzione delle locomotive.
+Si inizia a distiguere tra \emph{labour intensive} (produzione che richiede lavoro, ad esempio il tessile) e \emph{capital intensive} (produzione che richiede molti investimenti, ad esempio automobilistico).
+\item \textbf{Seconda rivoluzione industriale} (1850-1900): le principali innovazioni sono il \emph{processo Bessemer} (per la produzione dell'acciaio), il \emph{motore elettrico} e l'\emph{automobile} (con Ford inizia la produzione di automobili di massa).
+\item \textbf{Terza rivoluzione industriale} (1950-1980): computer, information technology.
+\item \textbf{Quarta rivoluzione industriale} (2000-): internet, internet of things.
+\end{enumerate}
+
+In questo periodo storico, nuove economie stanno emergendo o ri-emergendo, come la Cina e l'India.
+In questi Paesi non ci sono soltanto lavoratori con basse skill, si sta investendo molto sull'istruzione e possono già affrontare la produzione di prodotti sofisticati.
+
+
+\subsection{I Sistemi Produttivi}
+
+I 4 principali tipi di produzione sono:
+\begin{enumerate}
+\item \textbf{Job Shop} (copisteria): volumi bassi ma prodotti/servizi altamente customizzati, risorse flessibili, tempi di processo anche lunghi, bassi investimenti.
+\item \textbf{Batch Processing} (negozio di vestiti).
+\item \textbf{Flow Shop - Production Line} (linea di assemblaggio auto): alta standardizzazione, alta velocità, alti investimenti, bassa flessibilità
+\item \textbf{Continous Flow} (raffineria).
+\end{enumerate}
+
+Classificazione dei sistemi produttivi basata sul flusso di produzione:
+\begin{itemize}
+\item one of a kind
+\item batch production
+\item continous flow
+\end{itemize}
+
+Classificazione basata sulla relazione con il mercato:
+\begin{itemize}
+\item make to stock
+\item make to order
+\item assembled to order
+\item engineered to order
+\end{itemize}
+
+\subsection{Matrici di Prodotto-Processo}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{p{.13\linewidth}|p{.23\linewidth}|p{.23\linewidth}|p{.23\linewidth}}
+& Alta customizzazione, alto margine per prodotto, volumi bassi & \textbf{Prodotto} & Bassa customizzazione, basso margine per prodotto, volumi alti\\
+\hline
+Flessibilità & Tutti i produttori agli esordi & &\\
+\hline
+\textbf{Processo} & & GM con la strategia multi-brand &\\
+\hline
+Flusso continuo & & Toyota, Just-In-Time & Ford Model T, stabilimento di Baton Rouge\\
+\hline
+\end{tabular}
+\end{center}
+\caption{Matice di prodotto-processo per l'industria automobilistica.}
+\end{table}
+
+
+\subsection{Libero Mercato}
+
+
+Nel libero mercato ogni scambio vien fatto su base volontaria, in ciascuno dei quali gli agenti in gioco \emph{si scambiano una proprietà}.
+
+Il libero mercato, pur sembrando caotico, è guidato dalla cosiddetta \emph{mano invisibile} (cit. \emph{Adam Smith}) la quale fa si che vengano prodotte una quatità e una varità giuste di beni e servizi.
+Specializzandosi in ciò che sa fare meglio, l'uomo riesce a produrre un bene con costi sempre più bassi (questo implica che se tutti si specializzassero, i costi di tutti i beni si ridurrebbero di conseguenza).
+
+In questo, Smith vedeva l'\emph{efficienza del mercato}: la mano invisibile porta i produttori e i consumatori a scegliere (egoisticamente) cosa produrre e cosa comprare, ma questo dovrebbe portare a risultati ottimi per la società nel suo complesso.\\
+
+Il \textbf{mercato} è il luogo (fisico o meno) in cui si incontrano la domanda e l'offerta.
+Questo opera attraverso il sistema dei prezzi.
+
+Possono esistere diversi tipi di mercato.
+
+\subsubsection{Concorrenza Monopolistica}
+\begin{itemize}
+\item Molte piccole imprese.
+\item I prodotti sono differenziati (ciascuna impresa fa un prodotto diverso).
+\item Le imprese sono \emph{price makers} (cioè sono le imprese a determinare il prezzo del loro prodotto, non i consumatori)
+\item Barriere all'entrata molto basse.
+\end{itemize}
+
+\subsubsection{Oligopolio}
+\begin{itemize}
+\item Il settore (o il mercato) è dominato da un ristretto numero di imprese.
+\item Sussiste un'interdipendeza tra le imprese in gioco (sono in qualche modo relazionate)
+\item Queste possono produrre prodotti differenziati (ad esempio automobili) o indifferenziati (petrolio).
+\item Le barriere in entrata sono molto elevate (alti investimenti, si tratta di economie di scala).
+\item Le imprese sono consapevoli che le loro azioni (ad esempio la modifica dei prezzi) hanno conseguenze sugli altri giocatori.
+Per questo motivo l'oligopolio può essere caratterizzato dalla \emph{collusione} (esempio compagnie telefoniche) o dalla \emph{competizione} dei giocatori.
+\end{itemize}
+
+\subsubsection{Monopolio}
+\begin{itemize}
+\item In un monopolio c'è un unico fornitore in un determinato settore.
+\item Barriere d'ingresso (invalicabili).
+\item Il monopolista non deve tener conto del mercato (qualunque cosa faccia, il mercato è costretto ad adeguarsi).
+\item Monopoli naturali (economie di scala), monopoli legali (licenze governative, ad esempio autostrade o estrazioni di materie prime).
+\end{itemize}
+
+\subsection{Fallimenti del Mercato}
+
+Alcuni beni o servizi non vengono valutati efficacemente dal mercato.
+Questi sono ad esempio l'ambiente, la salute, l'istruzione, i beni pubblici.
+
+Di seguito abbiamo alcuni dei \emph{fallimenti del mercato}.
+
+\subsubsection{Potere di Mercato}
+Il mercato funziona bene se i prezzi si formano i regime di concorrenza quindi, la formazione di monopoli rappresenta un'inefficieza.
+Il monopolista può infatti fissare i prezzi a suo vantaggio.
+
+Esempi di recenti monopoli li abbiamo con \emph{Google} e \emph{Intel} che dominano i loro settori e per questo vengono sanzionati dagli organi antitrust.
+
+\subsubsection{Esternalità}
+Ci sono dei costi che molto spesso produttori e consumatori non considerano e per questo non incidono sul costo dei prodotti.
+Tuttavia questi costi, alla lunga, risultano significativi per la società nel complesso.
+
+Queste \emph{conseguenze esterne} degli agenti nel mercato prendono il nome di \textbf{esternalità}.
+Possiamo avere esternalità positive (come l'informazione o le scoperte scientifiche) e esternalità negative (come l'inquinamento).
+
+Per esempio, l'uso dell'automobile produce congestione e inquinamento (esternalità negative), tuttavia il costo di un'auto non include i costi per coprire queste esternalità.
+Per questo si rendono necessari dei disincentivi economici nell'uso dell'auto (o anche degli incentivi per utilizzare i mezzi pubblici).
+
+Questo per quanto riguarda le esternalità positive, basti pensare ad un prodotto o servizio che non sarebbe stato disponibile senza una scoperta scientifica, resa possibile da enti (pubblici) che svolgono ricerca di base.
+
+\subsubsection{Beni Pubblici}
+Ad esempio l'istruzione, la difesa, la salute.
+In tutti questi casi il mercato non valuta in modo adeguato il valore di questi beni.
+
+\subsubsection{Asimmetrie Informative}
+Queste si presentano quando un soggetto ha maggiori informazioni riguardo una particolare transazione (ad esempio nel'acquisto di auto o immobili).
+Esempio, il mercato dei \emph{bidoni} (auto molto inquinanti) che porta a circoli viziosi.
+
+
+\subsection{Economia e Benessere}
+
+Il \textbf{prodotto interno lordo} (PIL) è il valore di mercato di tutti i beni e servizi \emph{finali} che sono stati prodotti in un \emph{Paese} in un dato periodo.
+Misurandosi in un intervallo temporale, il PIL è una \emph{misura di flusso}.
+La ricchezza si misura invece in un dato istante.
+
+Generalmente, il PIL si utilizza per valutare il benessere delle persone in un dato Paese.
+Tuttavia questa semplicistica analisi presenta grossi limiti.\\
+
+Il tasso di crescita del PIL si può scomporre in:
+\begin{itemize}
+\item tasso di variazione della popolazione complessiva;
+\item tasso di variazione della popolazione che rientra nell'età tale da poter lavorare (ufficialmente tra i 15 e i 64 anni);
+\item tasso di variazione della quota di popolazione che è effettivamente occupata;
+\item tasso di variazione del prodotto per occupato (cioè la produttività del lavoro).
+\end{itemize}
+
+La \textbf{produttività del lavoro} dipende dalle abilità professionali dei lavoratori che sono influenzate dall'istruzione e dall'addestramento ricevuti.
+Sono poi importanti la qualità tecnologica degli strumenti utilizzati e la qualità delle procedure impiegate nel lavoro.\\
+
+Tuttavia il PIL fatica a misurare entità come
+\begin{itemize}
+\item la \emph{digitalizzazione}, ad esempio, quanto è importate Wikipedia
+\item il \emph{surplus del consumatore}, cioè quanto il consumatore sarebbe disposto a pagare per un oggetto (quanto vale in termini di benessere l'abbassamento del prezzo dei computer?)
+\item gli \emph{asset intangibili}, come la proprietà intellettuale, il capitale organizzativo (procedure, tecniche di produzione, modelli di business), il capitale umano, i contenuti generati dagli utenti (YouTube)
+\end{itemize}
+
+Cosa invece il PIL non misura: il lavoro domestico, l'economia sommersa, la qualità della vita.
+Ci sono altre misure oltre al PIL...
+
+
+
+\newpage
+\section{L'Industria Automobilistica}
+
+
+
+Definita come \emph{"L'industria delle industrie"} da Peter Drucker.
+
+%\subsection{Le Origini}
+%\begin{itemize}
+%\item Agli esordi si trattava di un prodotto artigianale
+%\item Design modulare
+%\item Telaio e carrozzeria (realizzati in legno) erano prodotti da diversi fornitori
+%\item Ford (1903) e Modello N (1906)
+%\end{itemize}
+
+\subsection{Ford Motor Company}
+
+Caratteristiche:
+\begin{itemize}
+\item Intercambiabilità delle parti (viene ampiamente introdotta la standardizzazione dei pezzi).
+\item Modello T (1908) definita \emph{la macchina per le masse}, prima auto a basso costo.
+\item Perché il nero? Le fasi di pittura e asciugatura erano più rapide (cambiare colore implica spendere più tempo).
+\item Meccanica dozzinale (all'osso), ma vengono fatte molte sperimentazioni.
+\end{itemize}
+
+\noindent
+Il sistema di produzione Ford:
+\begin{itemize}
+\item Il tempo di assemblaggio passa da 12h e 28' a 5h 50' e infine a 2h 40'.
+\item Tempo di produzione da 21 a 14 giorni.
+\item L'aumento della produttività comporta costi decrescenti costanti.
+\item Il giorno lavorativo passa da 10 a 8 ore (ma si introducono i turni per non fermare mai la produzione).
+\end{itemize}
+
+\subsubsection{Curva di Apprendimento}
+La \textbf{curva di apprendimento} (detta anche \emph{funzione di avanzamento}) mostra che i costi di produzione diminuiscono all'aumentare del volume (numero di unità prodotte).\\
+
+\textbf{Nota.} Questo avviene perché le maestranza acquisiscono conoscenza durante il processo, conoscenza che alla lunga porta a un notevole incremento della produzione. 
+
+\subsubsection{Curva dell'Esperienza}
+La \textbf{curva dell'esperienza} segue la diminuzione dei costi totali di una linea di prodotti per periodi di tempo prolungati all'aumentare del volume.
+Comprende una gamma più ampia di costi che dovrebbero diminuire rispetto alla curva di apprendimento, ma non tiene conto di eventuali modifiche alla progettazione di prodotti o processi introdotte durante il periodo di considerazione.\\
+
+(da Wiki) Negli studi di strategia aziendale, la \textbf{curva di esperienza} è la rappresentazione grafica della relazione che lega l'andamento del costo medio unitario del bene prodotto al volume di produzione cumulata.\\
+
+Viene aumentato il livello di integrazione verticale (Ford include anche la produzione del vetro per le auto).
+
+Quota di mercato (1921): 55,7\% per Ford e 12,3\% per GM.
+
+\subsubsection{I Principi della Gestione Scientifica}
+Scritto da Frederick Taylor, considerato \emph{il padre della gestione scientifica}.
+\begin{itemize}
+\item Pubblicato nel 1911.
+\item Prima di Taylor, il lavoro era eseguito da abili artigiani \emph{autonomi} che avevano imparato a produrre dopo un lungo apprendistato.
+\item La \emph{gestione scientifica} ha portato via gran parte di questa autonomia dei mestieri qualificati che vengono convertiti in una \emph{serie di lavori semplificati}.
+Queste mansioni possono essere eseguite anche da lavoratori non qualificati che possono facilmente essere addestrati per tali compiti.
+\end{itemize}
+
+\noindent
+Lo \textbf{shop system} di Frederick Taylor utilizzava i seguenti passaggi:
+\begin{itemize}
+\item Vengono determinate le abilità, la forza e le capacità di apprendimento di ciascun lavoratore.
+\item Sono condotti studi cronometrati per impostare con precisione l'output standard per lavoratore su ciascuna attività.
+\item Per organizzare la produzione vengono utilizzate le specifiche del materiale, i metodi di lavoro e le sequenze di routing.
+\item I supervisori vengono accuratamente selezionati e formati.
+\item Vengono avviati sistemi di pagamento incentivante.
+\end{itemize}
+
+\subsubsection{La Gestione Scientifica presso Ford}
+Negli anni '20, le operazioni alla Ford Motor Company incarnato gli elementi chiave della gestione scientifica:
+\begin{itemize}
+\item Parti intercambiabili.
+\item Progetti con prodotti standardizzati.
+\item Linee di assemblaggio meccanizzate.
+\item Specializzazione del lavoro.
+\item Bassi costi di produzione.
+\end{itemize}
+
+\subsubsection{Produzione di Massa}
+\begin{itemize}
+\item Sviluppa il modo migliore per fare ogni lavoro.
+\item Seleziona l'individuo migliore per la posizione.
+\item Assicurare che il lavoro venga svolto in modo prescritto attraverso la formazione e aumentando le retribuzioni per quei lavoratori che seguono le procedure correnti.
+\item Dividere gli sforzi lavorativi tra i dipendenti in modo che le attività come la pianificazione, l'organizzazione e il controllo siano le responsabilità principali dei dirigenti piuttosto che dei singoli lavoratori.
+\end{itemize}
+
+\subsection{General Motors}
+
+Fondata da William Durant nel 1908 come holding che nel tempo acquisisce Buick, Oldsmobile, Cadillac.
+
+\textbf{Integrazione verticale}: perché? Si ha l'integrità del prodotto.
+Perché no? Problemi finanziari (diventa difficile da gestire).
+%Aiuto finanziario da Du Pont
+%Alfred P. Sloan nominato amministratore delegato (1920)
+
+Economie di scala tra i segmenti.
+Condivisione di design e componenti tra i marchi.
+\textbf{Segmentazione del mercato}, lo slogan di GM infatti è
+\emph{"Un'auto per ogni borsa e scopo"}.
+Chevrolet si piazza su una fascia bassa del mercato (\textbf{low end}) mentre Cadillac in fascia alta (\textbf{high end}).
+
+%Tecnologia di produzione
+%Corpo: dalla tecnologia di stampaggio del legno a quella del metallo
+%Owen si è asciugato
+%Tempo di trasmissione ridotto da settimane a un giorno
+
+\subsubsection{Fasi nell'Evoluzione dell'Industria Automobilistica}
+\begin{itemize}
+\item Mercato di classe (prima del 1908).
+\item Mercato di massa (con Ford).
+\item Mercato di massa, preso da Ford e di classe (con varietà, con GM) coesistono.
+\end{itemize}
+
+
+\subsection{Tesla}
+La missione di Tesla è di accelerare la transizione verso l'energia sostenibile attraverso veicoli elettrici sempre più convenienti (oltre alla generazione e allo stoccaggio di energia rinnovabile).\\
+
+%\texxtbf{Tesla Roadster}: auto sportiva ad alte prestazioni ad alimentazione elettrica.
+%Zero emissioni
+%Raggio di 250 miglia con una singola carica
+%Può accelerare da 0 a 60 mph in 4,0 secondi.
+
+%Il 1 ° febbraio 2017, la società ha cambiato il suo nome da Tesla Motors a Tesla.
+Alla fine di marzo 2017, Tesla ha annunciato che Tencent Holdings Ltd. (al momento \emph{la società più preziosa della Cina}) aveva acquistato una partecipazione del 5\% in Tesla per 1,8 miliardi di dollari.
+
+
+\subsection{Autonomous Driving con Mobileye}
+Abbiamo capito presto che la fotocamera dovrebbe essere il sensore principale.
+Abbiamo iniziato a sviluppare il rilevamento dei veicoli da una singola videocamera nel 2000, quando l'industria riteneva che il radar fosse primario.
+Abbiamo iniziato a sviluppare il rilevamento dei pedoni nel 2002 quando l'industria non stava nemmeno contemplando la necessità.
+Mobileye è stato il primo a lanciare una Pedestrian Collision Function nel 2010.\\
+
+Siamo stati i primi a lanciare Forward Collision Warning (FCW) per il rilevamento di veicoli con licenza nel 2011.
+Nel 2013, siamo stati i primi a lanciare l'Autonomous Emergency Braking (AEB) sui veicoli utilizzando solo l'elaborazione della telecamera.
+Nel 2013, siamo stati i primi a introdurre Adaptive Cruise Control (ACC), che ha regolato attivamente la velocità di un veicolo per mantenere una distanza di sicurezza durante la guida in autostrada, da una fotocamera.\\
+
+Acquisizione da parte di Intel per 15 miliardi: si scuote settore automobilistico senza conducente
+L'affare in contanti di 63,54 dollari per azione è il più grande acquisto al mondo di una società focalizzata esclusivamente sul settore della guida autonoma.
+Mobileye rappresenta il 70\% del mercato globale per sistemi avanzati di assistenza alla guida e anticollisione.
+
+\subsection{Waymo}
+Stiamo lavorando per automobili completamente automotore che rendono sicuro e facile per tutti di andare in giro.
+Il nostro viaggio è iniziato con Google nel 2009 e siamo diventati Waymo nel 2016.
+
+\subsection{I Sei Livelli di Guida Autonoma}
+Nel gennaio 2014, SAE International ha emesso uno standard che definisce sei livelli di guida autonoma:
+\begin{enumerate}
+\item \textbf{Nessuna automazione.} L'umano fa tutto il lavoro, anche se ci sono avvertenze che si aprono, come una luce di Check Engine.
+\item \textbf{Assistenza alla guida.} Il veicolo può essere d'aiuto con lo sterzo o la velocità in determinate circostanze, ma l'uomo è ancora pienamente responsabile della guida.
+\item \textbf{Automazione parziale.} In determinate circostanze, il veicolo può prendere il controllo della direzione e della velocità, ma l'uomo è ancora pienamente responsabile della guida.
+\item \textbf{Automazione condizionale.} I manubri del veicolo si prendono cura della velocità e controllano la strada. L'umano è ancora tenuto a prendere il sopravvento quando il sistema ha bisogno di aiuto.
+\item \textbf{Alta automazione.} Il veicolo può praticamente fare tutto, anche se il guidatore umano non risponde quando gli viene richiesto dal sistema.
+\item \textbf{Automazione completa.} Il veicolo fa assolutamente tutto ciò che un guidatore umano potrebbe fare.
+\end{enumerate}
+
+%\subsection{Sommario}
+%\begin{itemize}
+%\item Sistema di produzione Ford
+%\item Gestione scientifica (significato)
+%\item Elementi chiave della gestione scientifica
+%\item Curva di apprendimento
+%\item Curva dell'esperienza
+%\item Economie di scala
+%\item Integrazione verticale
+%\item General Motors
+%\item Tesla
+%\item Autonomous Driving
+%\end{itemize}
+
+
+\subsection{Da Ford a Toyota: la Lean Production}
+
+\subsubsection{Il Contesto}
+\begin{itemize}
+\item \textbf{Economico}
+	\begin{itemize}
+	Le condizioni del dopoguerra portarono il Giappone ad essere \emph{un paese privo di capitale significativo}, così che il Giappone dovette affidarsi principalmente alla produzione della propria tecnologia.
+	\end{itemize}
+
+\item \textbf{Culturale}
+	\begin{itemize}
+	\item \textbf{Azienda organizzata come una comunità:} impiego a vita, accesso a strutture aziendali, retribuzioni basate sull'anzianità.
+	\item Come ritorno, i dipendenti devono essere più flessibili e promuovere attivamente gli interessi dell'azienda (anche a sacrificarsi per questa).
+	\item Implicazioni: la manodopera diventa un costo fisso (straodinari non pagati o pagati come orario normale).
+	\end{itemize}
+	
+\item \textbf{Differenze di paese}
+	\begin{itemize}
+	\item \emph{Carriere} occidentali contro \emph{comunità} giapponese.
+	\item Concentrarsi sulla crescita a lungo termine (Giappone) rispetto ai profitti a breve termine (Occidente).
+	\item Ulteriori relazioni interpersonali con dipendenti, fornitori e clienti.
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Toyota}
+Fondata nel 1937 dalla famiglia \emph{Toyoda}.
+Gli affari furono relativamente infruttuosi fino a quando Eiji Toyoda non introdusse il \emph{Toyota Production System} dopo aver studiato lo stabilimento Ford di Rouge a Detroit nel 1950.
+Il direttore di produzione, Taiichi Ohno, ha aiutato con successo Toyoda a migliorare la sua azienda utilizzando questo nuovo metodo di produzione e modalità di pensiero.\\
+
+\subsubsection{Metodi Pull e Push per il Work Flow}
+\begin{itemize}
+\item \textbf{Push Logic:} la produzione dell'articolo inizia prima delle esigenze del cliente.
+Esempio: un buffet in cui il cibo viene preparato in anticipo.
+\item \textbf{Pull Logic:} la domanda del cliente attiva la produzione del servizio o dell'oggetto.
+Esempio: un ristorante in cui il cibo viene preparato solo al momento dell'ordine.
+\end{itemize}
+I \emph{sistemi lean} (snelli) utilizzano la logica di pull per il flusso di lavoro.
+
+\subsubsection{Just-in-Time (JIT)}
+Obiettivo: adeguare la produzione alla domanda giornaliera
+Aumento della pena quotidiana piccoli lotti di produzione riduzione del tempo di produzione.\\
+
+Caratteristiche della \textbf{lean production} (produzione snella):
+\begin{itemize}
+\item Meno tempo, inventario, spazio, manodopera e denaro
+\item Eliminare gli sprechi, semplificare le procedure e accelerare la produzione.
+\end{itemize}
+Toyota è riuscita a ridurre notevolmente i tempi di consegna e i costi utilizzando il TPS (Toyota Production System), migliorando allo stesso tempo la qualità.\\
+
+\textbf{Nota.} Con la lean production il work flow è più simile a quello di una raffineria: c'è un'unica pipe-line dove il prodotto scorre, non ci sono accumuli (ad esempio di semilavorati).
+Tutto questo comporta numerose difficoltà: con la produzione snella \emph{vengono a galla} (vedi esempio barca su slide) tutti quei problemi che con la produzione di massa sono nascosti, ad esempio le scorte in magazzino (poco spazio per il magazzino implica che deve essere rifornito regolarmente, quindi serve anche un rapporto di fiducia con i fornitori).
+
+\subsubsection{Metodi}
+
+\begin{enumerate}
+\item \textbf{Kanban.}
+
+	\begin{itemize}	
+	\item Il kanban è una carta specifica (o un altro dispositivo).
+	\item Raccogli solo il numero e il tipo di componenti richiesti dal processo.
+	\item Necessario per ottenere il just-in-time.
+	\item Un contenitore vuoto (un kanban) viene inviato a monte dopo un'istanza di domanda.
+	\item È un segnale per riempirlo con un numero specifico di parti o inviare una carta con informazioni dettagliate sulla posizione della parte.
+	\item Invece di utilizzare sofisticate tecniche di pianificazione del computer, questo è un sistema semplice, efficace e visivo di gestione e garanzia del flusso del prodotto e del sistema di produzione JIT.
+	\item Le carte kanban limitano il lavoro in eccesso.
+	\item Kanban significa letteralmente \emph{carta visiva}, \emph{cartello} o \emph{tabellone}.
+	\item Toyota ha originariamente utilizzato le carte Kanban per limitare la quantità di scorte accumulate nel \emph{work in progress}. 
+	\item Le carte Kanban agiscono come \emph{una forma di valuta} che rappresenta il modo in cui Work in Progress (WIP) è consentito in un sistema.
+	\end{itemize}
+	
+\item \textbf{Kaizen.} Filosofia del miglioramento continuo
+coinvolgendo tutti (dirigenti e lavoratori).
+
+\item \textbf{Poka-Yoke.} Sistemi che rendano impossibile il fare errori: il termine iniziale era infatti \emph{baka-yoke}, che significa \emph{a prova di stupido}.
+Migliorare la qualità e l'affidabilità.
+Può eliminare errori umani e meccanici.
+
+\item \textbf{Jidoka.} Jidoka prevede il rilevamento automatico di errori o difetti durante la produzione.
+Aiuta a rilevare un problema prima e ad evitare la diffusione di cattive pratiche (\emph{automazione con un tocco umano}).
+Quattro principi:
+\begin{enumerate}
+\item Rileva l'anomalia.
+\item Stop.
+\item Correggere o correggere la condizione immediata.
+\item Esaminare la causa principale e installare una contromisura.
+\end{enumerate}
+
+\end{enumerate}
+
+\subsubsection{Eliminazione degli Sprechi}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{l|p{0.65\linewidth}}
+Sovrapproduzione & Produzione non necessaria per mantenere un elevato utilizzo\\
+\hline
+Attesa & Eccesso di macchina inattiva e operatore e tempo di attesa inventario\\
+\hline
+Trasporti & Movimento eccessivo dei materiali e maneggevolezza multipla\\
+\hline
+Over-processing & Fabbricazione aggiuntiva di valore aggiunto e altre attività\\
+\hline
+Inventario in eccesso & Archiviazione di inventario in eccesso\\
+\hline
+Movimento in eccesso & Movimenti inutili di dipendenti\\
+\hline
+Rottami e rilavorazione & Rottami di materiali e rilavorazioni a causa della scarsa qualità
+\end{tabular}
+\caption{The Seven Wastes (Muda).}
+\end{table}
+
+
+\subsubsection{Coinvolgimento e Reti dei Fornitori}
+\begin{itemize}
+\item Contratti di fornitura a lungo termine
+\item Produzione sincronizzata
+\item Certificazione del fornitore
+\item Carichi misti e consegne frequenti
+\item Orari di consegna precisi
+\item Consegna standardizzata e sequenziata
+\item Individuazione nelle immediate vicinanze del cliente
+\end{itemize}
+
+Nella \emph{Lean Production Supply Chain} i fornitori sono organizzati in livelli funzionali:
+\begin{itemize}
+\item Fornitori di primo livello: hanno lavorato insieme in un team di sviluppo prodotto
+\item Secondo livello: reso singole parti
+\end{itemize}
+Viene incoraggiata la cooperazione e la comunicazione tra i fornitori di primo livello.
+Le operazioni di rifornimento interne si sono trasformate in una rete di \emph{società fornitrici di primo livello quasi indipendenti}.\\
+
+Partecipazioni incrociate sostanziali tra Toyota e fornitori, nonché tra i fornitori stessi, anche se ogni fornitore è una società indipendente.
+Cross-condivisione del personale: Toyota invia il personale ai fornitori per compensare un maggiore carico di lavoro.
+Toyota trasferisce i senior manager ai fornitori per le prime posizioni.
+
+
+
+\newpage
+\section{Il Modello Economico Finanziario}
+
+
+
+\subsection{Fonti di Finanziamento}
+
+\subsubsection{Fonti di Finanziamento Interne}
+Le \textbf{fonti interne} sono costituite dal \textbf{capitale proprio} (il capitale dell'imprenditore e dei soci), per questo motivo si dice anche \emph{capitale di rischio}.
+Viene remunerato con gli utili ma può anche subire l'effetto delle perdite se le cose non vanno bene (remunerazione \emph{flessibile} nel tempo).
+
+\subsubsection{Fonti di Finanziamento Esterne}
+Il \textbf{capitale di terzi} (terzi rispetto ai soci) è costituito spesso dal denaro degli istituti di credito e per questo è anche detto \emph{capitale di credito} o \emph{di prestito}.
+Deve essere remunerato con gli interessi sul prestito (guadagni per le banche) e deve essere restituito entro un tempo prestabilito.
+
+Questo capitale è costituito da debiti che possono essere:
+\begin{itemize}
+\item \emph{operativi} o di funzionamento, questi debiti sono connessi all'attività operativa dell'azienda (ad esempio, aquisti e produzione) ed è solitamente costituito da \textbf{debiti verso i fornitori} dell'azienda stessa (vengono remunerati \emph{implicitamente} dal prezzo della merce);
+\item \emph{finanziari} o di finanziamento, sono legati alla raccolta di capitale per finanziare degli immobilizzi (o \emph{asset}) ad esempio l'acquisto di un nuovo macchinario che l'azienda con le sue fonti non può permettersi (ma che potrà ripagare nel tempo); questi debiti vengono remunerati \emph{esplicitamente} con gli \emph{oneri finanziari} (interessi sul debito).
+\end{itemize} 
+
+
+\subsection{Impieghi del Capitale}
+
+Il capitale (una volta ottenuto) viene investito nella produzione, cioè nell'aquisto di fattori produttivi (\emph{gestione caratteristica o tipica}) oppure in altri investimenti (\emph{gestione extra caratteristica}).\\
+
+\begin{itemize}
+\item Il \textbf{capitale proprio} e il \textbf{capitale di terzi} si traducono in \textbf{mezzi monetari} che consentono \textbf{investimenti nella produzione} o \textbf{altri investimenti}.
+\item In un secondo momento gli \textbf{investimenti nella produzione}, attraverso la \emph{vendita di prodotti e/o servizi} diventano \textbf{mezzi monetari} mentre gli \textbf{altri investimenti} lo diventato tramite \emph{altri proventi}.
+\item Ottenuti i \textbf{mezzi monetari}, l'azienda può ripagare il \textbf{capitale di terzi} con gli \emph{interessi} e il \textbf{capitale proprio} con \emph{utili o perdite}. 
+\end{itemize}
+
+La ripartizionde del capitale tra capitale proprio e di terzi dipende da vari fattori:
+\begin{itemize}
+\item la rischiosità del business;
+\item il grado di maturità del business (un'azienda matura è in grado di auto finanziarsi);
+\item politiche fiscali;
+\item strategie aziendali.
+\end{itemize}
+
+I \textbf{fattori produttivi} di dividono tra:
+\begin{itemize}
+\item fattori ad utilità pluriennale, come macchinari impianti e attrezzature;
+\item e fattori ad utilità semplice, ad esempio i materiali.
+\end{itemize}
+
+Gli altri investimenti vengono fatti in beni non legati all'attività produttiva come ad esempio immobili non necessari alla produzione o partecipazioni finanziarie in altre attività.\\
+
+\subsection{Il Bilancio}
+
+Il bilancio d'esercizio è composto da
+\begin{itemize}
+\item \textbf{Conto Economico},
+\item \textbf{Stato Patrimoniale},
+\item \textbf{Nota Integrativa}
+\end{itemize}
+e i princilpali destinatari del bilancio sono
+\begin{itemize}
+\item il management, per capire la situazione dell'azienda e prendere decizioni sul futuro andamento;
+\item i soci e/o gli azionisti;
+\item i creditori finanziari, per decidere se l'azienda sarà in grado di ripagare i debiti;
+\item l'amministrazione tributaria, per le tasse;
+\item i partner commerciali e i fornitori, per comprendere se l'azienda in questione sarà in grado di ripagare per la merce o se continuerà a produrre i suoi beni.
+\end{itemize}
+
+\subsection{Lo Stato Patrimoniale}
+
+Lo \textbf{stato patrimoniale} (\emph{balance sheet}) presenta la situazione finanziaria dell'azienda in un dato istante.
+Le tre parti di cui lo stato patrimoniale si compone sono:
+\begin{itemize}
+\item l'\textbf{attivo} (\emph{assets}), ciò che l'azienda ha;
+\item il \textbf{passivo} (\emph{liabilities}), ciò che l'azienda deve a qualcuno;
+\item il \textbf{netto} (\emph{equity}), ciò il valore dell'azienda.
+\end{itemize}
+L'equazione fondamentale del bilancio attesta che
+\begin{align*}
+Attivo - Passivo = Netto \Rightarrow Attivo = Passivo + Netto\\
+%&Assets - Liabilities = Worth \Rightarrow Assets = Liabilities + Worth
+\end{align*}
+la quale deve sempre essere bilanciata.
+Questo ad esempio implica che aggiungendo un asset (ad esempio un macchinario, riportato con il suo costo) anche il netto e/o le passività devono crescere della stessa quantità.
+Al termine di ogni operazione il totale delle attività deve essere uguale al totale delle passività più il netto.
+
+\subsubsection{Il Patrimonio Attivo}
+
+Il patrimonio attivo indica tutto ciò che un'impresa possiede: denaro contante, conti correnti, scorte, macchinari, edifici.
+Questa sezione comprende anche i diritti (con un valore monetario) che la società ha nei confronti di altri soggetti (ad esempio, i clienti della socità che non hanno ancora pagato per i prodotti/servizi ricevuti).\\
+
+Le attività sono raggruppate nello stato patrimoniale secondo le loro caratteristiche:
+\begin{itemize}
+\item \textbf{attività liquide}, cassa e conti conrrenti;
+\item \textbf{attività meno liquide}, crediti verso clienti e scorte di magazzino;
+\item \textbf{attività produttive}, impianti e macchinari.
+\end{itemize}
+Si può notare come queste siano ordinate per liquidità decrescente ovvero, in alto si trovano le attività che sono già convertite in contante mentre scendendo verso il basso si trovano quelle attività la cui conversione in liquidità risulta sempre più difficile.
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r|l}
+ & \textbf{Current Assets}\\
+\hline
+A & Cash\\
+B & Account Receivable\\
+C & Inventories\\
+D & Prepaid Expenses\\
+\hline
+A + B + C + D = E & \textbf{Current Assets}\\
+ & \\
+ & \textbf{Non-Current Assets}\\
+\hline
+F & Other Assets\\
+ & \\
+G & Fixed Assets at Cost\\
+H & Accumulated Depreciation\\
+\hline
+G - H = I & \textbf{Net Fixed Assets}\\
+ & \\
+\hline
+E + F + I = J & \textbf{Total Assets}\\
+\hline
+\end{tabular}
+\caption{Struttura del patrimonio attivo}
+\end{table}
+
+\subsubsection{Attività Circolanti}
+
+Le \textbf{attività circolanti} (\emph{current assets}) rappresentano tutti quei beni che ci si aspetta verranno convertiti in liquidità entro 12 mesi.
+La liquidità di un'attività è rappresentata dalla sua \textbf{cassa} e i \textbf{conti correnti} (\emph{cash}).\\
+
+I \textbf{crediti dai clienti} (\emph{accounts receivable}) rappresentano il denaro che  i clienti, ai quali l'azienda ha mandato la merce, dovranno pagare (anche questo si prevede entro 12 mesi, ma non è specificato con presione).\\
+
+Le \textbf{rimanenze di magazzino} (\emph{inventories}) sono tutto ciò che ricade nei sequenti sottogruppi:
+\begin{itemize}
+\item materie prime, materiale grezzo;
+\item semilavorati (\emph{work-in-progress inventory});
+\item prodotti finiti.
+\end{itemize}
+
+I \textbf{risconti attivi} (\emph{prepaid expenses}) riguardano tutti quei costi che l'azienda ha già pagato ma per servizi che non sono stati ancora ricevuti (interamente), ad esempio assicurazioni (che solitamente si pagano annualmente) oppure noleggi o bollette per servizi (internet, luce, etc.).
+Queste sono attività correnti non perché possono essere convertite in denaro, ma perché l'impresa non dovrà usare denaro per pagarle nel prossimo futuro.\\
+
+Il \textbf{ciclo delle attività circolanti} è il seguente:
+\begin{enumerate}
+\item con il \emph{denaro contante} si possono aquistare \emph{materiali grezzi};
+\item dopo la lavorazione, i materiali diventano prodotti finiti che vengono venduti, diventanto \emph{crediti verso i clienti};
+\item i \emph{crediti} divetano \emph{denaro contante}.
+\end{enumerate}
+
+\subsubsection{Attività non Circolanti}
+
+Con il termine \textbf{attività non circolanti} (\emph{non-current assets}) ci si riferisce a tutte le attività che non verranno convertite in denaro durante il normare svolgersi degli affari.
+Queste includono le \emph{altre immobilizzazioni} (\emph{other assests} o \emph{intangible assets}) che rappresentano tutti quegli investimenti che non riguardano direttamente la produzione o investimenti intangibili come \emph{brevetti}, \emph{copyright} e \emph{brand}.
+
+Ci sono poi le \textbf{immobilizzazioni} (\emph{fixed assets at cost} o \emph{PP\&E} che sta per \emph{Property, Plant and equipment}) che sono quelle attività possedute da un'azienda non per fare un ricavo diretto (dalla vendita) ma che servono per la produzione di beni e servzi, ad esempio terreni, impianti, edifici, macchinari.\\
+
+L'\textbf{ammortamento} (\emph{depreciation}) (che va messo sul conto economico) è una convenzione contabile che riporta il calo del valore utile di un asset fisso (come un macchinario) a causa dell'usura dovuta all'uso e al passare del tempo.è...
+Il \textbf{fondo di ammortamento} è la somma di tutte le spese di ammortamento considerate nel corso degli anni da quando l'attività è stata acquisita per la prima volta (presa a conto economico).
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{r|l}
+ & \textbf{Liabilities}\\
+\hline
+K & Accounts Payable\\
+L & Accrued Expenses\\
+M & Current Portion of Debt\\
+N & Income Taxes Payable\\
+\hline
+K + L + M + N = O & \textbf{Current Liabilities}\\
+ & \\
+E - O = X & Working Capital\\
+P & Long-Term Debt\\
+O + P = Y & Total Liabilities\\
+ & \\
+ & \textbf{Equity}\\
+\hline
+Q & Capital Stock\\
+R & Retained Earnings\\
+\hline
+Q + R = S & \textbf{Shareholders' Equity}\\
+ & \\
+\hline
+O + P + S = T & \textbf{Total Liabilities \& Equity}\\
+\hline
+\end{tabular}
+\caption{Struttura del patrimonio passivo e netto.}
+\end{table}
+
+
+\subsubsection{Le Passività}
+Con \textbf{passività} (\emph{liabilities}) si indicano tutte le obbligazioni economiche di un'impresa come il denaro che deve ai prestatori, ai fornitori, ai dipendenti.
+A questi si aggiungono i debiti commerciali verso i fornitori di materiali, attrezzature e servizi acquistati a credito.
+
+Ci sono poi spese dovute ai dipendenti (salari non ancora pagati) e altri (come avvocati o interessi per debiti verso le banche).
+Anche le imposte sul reddito non ancora pagate cadono sotto questa voce.
+
+Le varie voci che costituiscono il patrimonio passivo possono essere raggruppate
+\begin{itemize}
+\item per soggetti verso cui il denaro va resituito;
+\item per termine del debito, cioè se va restituito entro 12 mesi o oltre.
+\end{itemize}
+
+Il \textbf{capitale circolante} (\emph{current liabilities}) è la quantità di denaro con cui l'impresa deve "lavorare" a breve termine.
+
+Con un sacco di capitale circolante, sarà facile pagare gli obblighi finanziari correnti, ad esempio le fatture scadenti nei prossimi 12 mesi.
+
+Il debito a lungo termine è qualsiasi prestito alla società da rimborsare più di 12 mesi dopo la data dello stato patrimoniale (ad esempio i mutui per terreni e fabbricati e le cosiddette ipoteche chattel per macchinari e attrezzature).
+
+Le passività totali di un'azienda sono la somma delle sue passività correnti e del suo debito a lungo termine.
+
+\subsubsection{Patrimonio Netto}
+
+Il \textbf{patrimonio netto} (\emph{Equity} o \emph{capital stock}) è la quantità di denaro originale alla quale i proprietari hanno contribuito con i loro investimenti. A questa bisogna sommare le eventuali aggiunte che sono state investire nell'attività dagli \textbf{azionisti} (\emph{shareholders}).
+
+Gli \textbf{utili non redistribuiti} sono i profitti fatti dall'azienda che non sono stati redistribuiti tra gli azionisti e quindi vanno ad aumentare il capitale della stessa.
+
+Il patrimonio netto è il valore dell'azienda per i suoi proprietari. È solo la somma dell'investimento effettuato nello stock della società più eventuali utili (meno eventuali perdite) meno i dividendi che sono stati pagati agli azionisti.
+
+
+\subsection{Il Conto Economico}
+
+%\begin{table}[H]
+%\centering
+%\begin{tabular}{p{.5\linewidth}|p{.5\linewidth}}
+%\textbf{Costi} & \textbf{Ricavi}\\
+%\hline
+%\textbf{Fattori Produttivi Aquistati} & \textbf{Vendita di Beni e Servizi}\\
+%\end{tabular}
+%\end{table}
+%\begin{align*}
+%Ricavi - Costi = Reddito \text{ (Utile o Perdita)}
+%\end{align*}
+
+Il \textbf{conto economico} riporta tutte le attività di produzione e vendita di una certa attività in un periodo di tempo (solitamente un anno).
+Altri modi per chiamarlo sono \emph{income statement}, \emph{profit and loss statement}, \emph{earning statement} o solo \emph{P\&L}.
+
+Il conto economico è un prospetto importate per conoscere lo stato di salute di un'impresa, quindi per conoscere la sua \emph{redditività} (o \emph{profitability}).\\
+
+La struttura del Conto Economico (in inglese):
+\begin{table}[H]
+\centering
+\begin{tabular}{r|p{.5\linewidth}}
+ & \textbf{Operating Income}\\
+\hline
+1 & Net Sales\\
+2 & Const of Goods Sold\\
+\hline
+1-2=3 & \textbf{Gross Margin}\\
+ & \\
+4 & Sales and Marketing\\
+5 & Research and Development\\
+6 & General and Administrative\\
+\hline
+4+5+6 = 7 & \textbf{Operating Expenses}\\
+ & \\
+3 - 7 = 8 & \textbf{Income from Operations}\\
+& \\
+ & \textbf{Non Operating (i.e. Financial) Income}\\
+\hline
+9 & Net Interest Income\\
+10 & Income Taxes\\
+\hline
+8 + 9 - 10 = 11 & \textbf{Net Income}\\
+\hline 
+\end{tabular}
+\end{table}
+
+Il conto economico non riporta i movimenti del denaro ma piuttosto, la generazione di obbligazioni da pagare in futuro.
+Ricavi e costi sono riportati quando la merce viene spedita e il cliente è quindi obbligato a pagarla, non quando il pagamento avviene effettivamente.\\
+
+Le normali attività di un'azienda (quelle legate alla produzione e vendita di prodotti) sono dette \textbf{operation}.
+
+Il \textbf{totale delle vendite} (\emph{net sales} o \emph{revenues}) indica quanto l'azienda ha ricavato dalla vendita dei suoi prodotti. 
+I \textbf{costi} sono invece il totale di quanto l'azienda ha speso per comprare o produrre le merci, come le materie prime, i salari dei dipendenti, i costi di produzione.
+
+Il \textbf{margine lordo} (\emph{gross margin}) è il totale che risulta sottraendo i costi legati alla produzione delle marci vendute dal ricavo delle vendite totali.
+
+Le \textbf{spese operative} (\emph{operating expenses}) si riferiscono invece alle spese relative allo sviluppo, alla vendita e in generale a tutto ciò che riguarda gli aspetti amministrativi.
+Sono anche dette \emph{sales, general and administrative expenses} (o in breve \emph{SG\&A expenses}).
+
+Il \textbf{risultato} (o \textbf{reddito}) \textbf{operativo} (\emph{income from operations}) si riferisce all'ammontare che risulta quando si sono tolte tutte le spese dalle vendite.
+A questo bisogna poi sottrarre gli \emph{oneri finanziari} (\emph{net interest income}) e le tasse sul reddito.
+
+Alla fine si ottiene il \textbf{risultato} (o \textbf{reddito}) \textbf{netto}, che può essere un utile o una perdita.
+
+
+\subsection{Il Rendiconto Finanziario}
+
+Il \textbf{rendiconto finanziario} (\emph{cash flow statement}) tiene traccia dei movimenti del denaro, o cassa (\emph{cash}), di un business relativi ad un periodo temporale.
+(vedi slide 09)
+
+
+\newpage
+\section{Bilancio Riclassificato}
+
+
+Si tratta di ordinare e raggruppare le voci dello stato 
+patrimoniale per consentire una più adeguata lettura 
+\emph{finanziaria}.
+Le voci dell’attivo vengono ordinate per \textbf{liquidità degli 
+asset decrescente} (crescente).
+Le voci del passivo vengono ordinate per \textbf{esigibilità 
+dei debiti decrescente} (crescente).
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{ll}
+\begin{minipage}[t]{.5\linewidth}
+\textbf{Attività Circolanti}\\
+Attività o investimenti a ciclo di utilizzo veloce
+destinati a trasformarsi in liquidità entro l’anno.
+\begin{itemize}
+\item Cassa 
+\item Banche e c/c attivi
+\item Crediti verso clienti
+\item Scorte a magazzino
+\item Ratei e risconti attivi
+\item (meno) Fondo svalutazione crediti
+\end{itemize}
+
+\textbf{Attività Immobilizzate}
+Investimenti a medio-lungo termine.
+\begin{itemize}
+\item Immobilizzazioni materiali
+Impianti macchinari attrezzature
+(meno) Fondo di ammortamento I.Mat.
+\item Immobilizzazioni immateriali
+Spese di costituzione della società, costi di ricerca
+e sviluppo, brevetti, marchi, avviamento.
+(meno) Fondo di ammortamento I.Imm.
+\item Immobilizzazioni finanziarie
+Partecipazioni e titoli
+\end{itemize}
+\end{minipage}
+
+&
+
+\begin{minipage}[t]{.5\linewidth}
+\textbf{Passività Circolanti}\\
+Debiti di funzionamento e finanziamento a breve scadenza.
+\begin{itemize}
+\item Debiti verso fornitori
+\item Debiti a breve verso banche
+\item Fondo imposte
+\item Ratei e Risconti passivi
+\item Quote in scadenza di debiti a M/L termine
+\end{itemize}
+
+\textbf{Passività a M/L termine}\\
+Debiti a medio-lungo termine.
+\begin{itemize}
+\item Mutui
+\item Obbligazioni
+\item Fondo TFR
+Il Fondo TFR è un debito nei confronti del personale.
+Non è una posta rettificativa.
+\end{itemize}
+
+\textbf{Patrimonio Netto}
+\begin{itemize}
+\item Capitale sociale
+Valore nominale dei versamenti effettuati da parte dei soci.
+\item Riserva da sovrapprezzo azioni
+Differenza tra valore effettivo della sottoscrizione e valore 
+nominale delle azioni.
+\item Riserva legale
+Utili accantonati per legge.
+\item Riserve statutarie
+\item Utile/perdita dell’esercizio
+\end{itemize}
+\end{minipage}
+\end{tabular}
+\end{center}
+\end{table}
+
+%Documenti di bilancio
+%Il bilancio d’esercizio è composto da:
+%Stato Patrimoniale
+%Conto Economico
+%Nota integrativa
+
+\subsection{Bilancio: formato legale}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{cc}
+\begin{minipage}[t]{.5\linewidth}
+\textbf{Attivo Patrimoniale}
+\begin{enumerate}[A)]
+\item Crediti verso soci per versamenti ancora dovuti
+\item Immobilizzazioni
+	\begin{itemize}
+	\item Immobilizzazioni immaterali
+	\item Immobilizzazioni materali
+	\item Immobilizzazioni finanziarie
+	\end{itemize}
+\item Attivo circolante
+	\begin{itemize}
+	\item Rimanenze 
+	\item Crediti
+	\item Attività finanziarie (non immobilizzate)
+	\item Disponibilità liquide
+	\end{itemize}
+\item Ratei e Risconti attivi
+\end{enumerate}
+\end{minipage}
+
+&
+
+\begin{minipage}[t]{.5\linewidth}
+\textbf{Passivo Patrimoniale}
+\begin{enumerate}[A)]
+\item Patrimonio netto
+\item Fondi per rischi e oneri
+\item Trattamento di fine rapporto di lavoro subordinato
+\item Debiti, con separata indicazione, per ciascuna 
+voce, degli importi esigibili oltre l’esercizio successivo
+\item Ratei e risconti passivi
+\end{enumerate}
+\end{minipage}
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection{Riclassificazione del Conto Economico}
+
+Si tratta anche in questo caso di riordinare le voci del conto economico in modo tale da consentire di evidenziare il contributo delle varie operazioni di gestione al risultato netto (utile o perdita).
+In questo caso si abbandona l’esposizione a sezioni contrapposte e si introduce una esposizione \emph{scalare} in cui le voci compaiono con il proprio segno.
+
+\subsubsection{Il conto economico riclassificato secondo ricavi e costo del venduto}
+
+\begin{tabular}{l}
+Ricavi di vendita - Costo del venduto = Risultato Lordo\\
+- Costi commerciali, amministrativi e generali = Risultato Operativo Caratteristico $(Ro')$\\
++/- Proventi e oneri diversi = Risultato Operativo Globale $(Ro)$\\
+- Oneri finanziari = Risultato Ordinario $(Ro - OF)$\\
++/- Componenti straordinari = Risultato prima delle imposte\\
+- Accantonamento imposte = Risultato netto\\
+\end{tabular}
+
+\subsubsection{Conto economico scalare}
+Si evidenziano in tal modo alcuni risultati intermedi
+che sono il frutto di altrettante componenti della 
+gestione complessiva.
+Possiamo quindi fare riferimento a varie \emph{gestioni}.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{lcl}
+Gestione caratteristica & $\rightarrow$ & Risultato Operativo Caratteristico $(Ro')$\\
+$+$ Gestione Extra-caratteristica & $\rightarrow$ & Risultato Operativo Globale $(Ro)$\\
+$+$ Gestione finanziaria & $\rightarrow$ & Risultato Ordinario $(Ro - OF)$\\
+$+$ Gestione straordinaria & $\rightarrow$ & Risultato prima delle imposte\\
+$+$ Gestione fiscale & $\rightarrow$ & Risultato netto
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsubsection{Il conto economico a valore aggiunto}
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{cl}
+& Ricavi di vendita (Fatturato)\\
++/- & Variazione delle rimanenze\\
++ & Costi capitalizzati\\
+= & Valore della produzione caratteristica\\
+\hline
+- & Acquisti di materiali\\
++/- & Variazione rimanenze di materiali\\
+- & Costi industriali e generali\\
+= & Valore aggiunto\\
+\hline
+- & Costo del personale\\
+= & Margine Operativo (\textbf{EBITDA})\\
+\hline
+- & Ammortamenti\\
+= & Risultato Operativo (\textbf{EBIT})\\
+\hline
+%Conto economico (cont.)
+%& Risultato Operativo\\
++/- & Proventi e oneri diversi\\
+= & Risultato Operativo Globale\\
+\hline
+- & Oneri finanziari\\
+= & Risultato Ordinario\\
+\hline
++/- & Componenti straordinari\\
+= & Risultato prima delle imposte\\
+\hline
+- & imposte\\
+= & Risultato netto
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsection{Analisi del Bilancio}
+
+L'analisi del bilancio consiste nell'evidenziare alcuni rapporti o quozienti, detti anche \emph{indici}, con i quali iterpretare alcune caratteristiche della gestione e della struttura patrimoniale.
+
+\subsubsection{Analisi della Redditività Netta}
+
+\textbf{Redditività del capitale proprio, \emph{Return On Equity} (ROE).}
+Esprime il rendimento del capitale di rischio dell'impresa.
+Si esprime solitamente in termini percentuali.
+\begin{align*}
+ROE = \frac{\text{Risultato Netto}}{\text{Patrimonio Netto}} = \frac{\text{Net Income}}{\text{Equity}}
+\end{align*}\\
+
+\textbf{Redditività del capitale investito, \emph{Return On Investment} (ROI).}
+Esprime il rendimento dell'intero capitale impiegato.
+Si esprime solitamente in termini percentuali.
+\begin{align*}
+ROI = \frac{\text{Risultato Operativo}}{\text{Attività Nette}} = \frac{\text{Income From Operations}}{\text{Net Assets}}
+\end{align*}\\
+
+\textbf{Rapporto di indebitamento.}
+Forma diretta:
+\begin{align*}
+\frac{\text{Capitale di Terzi}}{\text{Patrimonio Netto}}
+\end{align*}
+
+Forma indiretta:
+\begin{align*}
+\frac{\text{Capitale di Terzi + Patrimonio Netto}}{\text{Patrimonio Netto}} = \frac{\text{Attività Nette}}{\text{Patrimonio Netto}}
+\end{align*}\\
+
+\textbf{Onerosità del capitale di credito.}
+Comprende oneri espliciti destinati alla remunerazione del capitale di credito e oneri impliciti da debiti di funzionamento.
+Assume il significato di \emph{tasso medio di remunerazione del capitale di credito complessivo}.
+\begin{align*}
+\frac{\text{Oneri Finanziari}}{\text{Capitale di Terzi}}
+\end{align*}\\
+
+\textbf{Leva finanziaria.}
+Si può far leva sul rapporto di indebitamento per migliorare la redditività netta.
+L'impresa può utilizzare l'indebitamento per migliorare la redditività netta (ROE).
+Occorre però vedere se esiste un effetto amplificativo del ROI.
+\begin{align*}
+\frac{\text{Risultato Netto}}{\text{Patrimonio Netto}} = \frac{\text{Risultato Operativo}}{\text{Attività Nette}} \times \frac{\text{Attività Nette}}{\text{Patrimonio Netto}} \times \frac{\text{Risultato Netto}}{\text{Risultato Operativo}}
+\end{align*}
+
+\begin{align*}
+ROE = ROI \times \text{Leva Finanziaria}
+\end{align*}
+
+\subsubsection{Analisi della Redditività Operativa}
+
+\textbf{Redditività delle Vendite, \emph{Return On Sales} (ROS).}
+\'E un indice di efficienza aconomica che migliora al diminuire dei costi imputabili alla gestione caratteristica.
+Si esprime solitamente in termini percentuali.
+\begin{align*}
+ROS = \frac{\text{Risultato Operativo}}{\text{Vendite Nette}}
+\end{align*}\\
+
+\textbf{Rotazione del capitale investito.}
+Esprime il numero di volte in cui il capitale investito \emph{produce} il fatturato nel periodo.
+Esprime quindi una velocità di rigiro (\emph{turnover}) del capitale.
+Si esprime solitamente in termini unitari.
+\begin{align*}
+\text{Rotazione} = \frac{\text{Vendite Nette}}{\text{Assets}}
+\end{align*}\\
+
+\textbf{Rotazione dei Crediti.}
+Indica il numero di volte in cui i crediti si rinnovano nel periodo.
+\begin{align*}
+\text{Rotazione crediti} = \frac{\text{Vendite Nette}}{\text{Crediti verso Clienti}}
+\end{align*}\\
+
+\textbf{Rotazione dei Debiti.}
+Indica il numero di volte in cui i debiti si rinnovano nel periodo.
+\begin{align*}
+\text{Rotazione debiti} = \frac{\text{Acquisti}}{\text{Debiti verso Fornitori}}
+\end{align*}
+
+\subsubsection{Analisi della Struttura Finanziaria}
+
+\textbf{Autonomia finanziaria.}
+\'E il reciproco del rapporto di indebitamento.
+Anch'esso è esprimibile in forma indiretta.
+\begin{align*}
+\frac{\text{Patrimonio Netto}}{\text{Capitale di Terzi}}
+\end{align*}\\
+
+\textbf{Capitale circolante netto.}
+Esprime la quota di impieghi in attività correnti che si trova coperta da fonti di un medio-lungo periodo.
+\begin{align*}
+CCN = \text{Attività Circolanti} - \text{Passività Circolanti}
+\end{align*}\\
+
+\subsubsection{Analisi della Liquidità}
+
+\textbf{Liquidità generale (\emph{current ratio}).}
+Segnala l'attitudine dell'impresa a coprire le uscite derivanti dall'estinzione di debiti a breve termine con le liquidità provenienti dalle attività circolanti.
+\begin{align*}
+\frac{\text{Attività Circolanti}}{\text{Passività Circolanti}}
+\end{align*}\\
+
+\textbf{Dutata dei crediti e durata dei crediti.}
+\begin{align*}
+\text{Dutata Crediti} = \frac{\text{Crediti verso Clienti}}{\text{Vendite Nette}} \times 360 \quad \text{Dutata Debiti} = \frac{\text{Debiti verso Fornitori}}{\text{Acquisti}} \times 360
+\end{align*}
+
+
+\newpage
+\section{Il Caso Zara}
+
+
+
+
+Zara è diventato un caso di studio per la Harvard Business School.
+Il suo modello di business è molto interessante e merita degli approfondimenti: tutto sembra coerente e funziona bene.
+Inoltre, questo modello si rispecchia anche nel bilancio.
+
+\subsection{Marketing}
+Il target ideale di Zara sono i giovani che risiedono in grandi aree urbane.
+Questo ha risvolti positivi anche nella sua strategia di non investire in pubblicità (ritenuta troppo costosa), puntanto sulla diffusione per passaparola.
+
+I clienti di Zara sono quindi soggetti a cambiare gusti molto rapidamente e visitano spesso i negozi.
+
+Nei negozi viene creata una sorta di scarsità artificiale che mira a influenzare l'acquisto dei suoi prodotti (compra subito che potresti non trovarlo più).
+Per le poche rimanenze non si fanno sconti o svendite: la merce viene spostata e rivenduta altrove.
+Zara investe molto sul brand, in questo modo la sua merce può costare di più.
+
+La location dei negozi è fondamentale, questi si trovano tutti in zone centrali, molto frequentate e in vista.
+Inoltre, Zara possiede tutti gli immobili dei negozi e per questo una grossa fetta del capitale finisce in questa voce.
+%posizionamento nella mappa prezzo/fashion: percezione del cliente che ha per l'azienda (la mappa è fatta dal mercato)
+
+\subsection{Produzione}
+
+Nonostante si occupino si settori completamente diversi, Zara ha una partnership con Toyota dalla quale ha appreso il metodo \emph{just-in-time} JIT: produrre la quantità giusta al momento giusto.
+
+L'invenduto di Zara è molto basso e si aggira sul 2-3\%, mentre per gli altri produttori arriva anche a più del 10\%.\\
+
+Mentre i grandi della moda, come Armani, seguono una \emph{logica push}, cioè spingono il mercato nella direzione da loro scelta (se vuoi un armani in questa stagione non hai molte alternative), Zara segue invece una \emph{logica pull}, che si adegua bene al metodo JIT.
+
+Zara ha puntato molto sull'\emph{integrazione verticale}: tutto viene fatto internamente, progettazione, produzione, distribuzione e vendita.
+In questo modo, Zara tiene d'occhio tutti i pezzi della \emph{catena del valore} ma questo serve anche per non avere ritardi sulle consegne, mantenendo bassi i tempi di produzione.
+
+Questa logica (seguita ad esempio anche da Apple, è l'opposto dell'\emph{esternalizzazione} della produzione, nella quale si hanno molti fornitori.
+
+Zara effettua tanti cicli di produzione brevi durante l'anno (si passa da 4 a 6 stagioni).
+Il design dei capi avviene in un periodo che va dalle 4 alle 5 settimane (molto breve), dopo che degli osservatori sono andati a vedere cosa stanno facendo i leader del settore (come Armani): anche per questo il marchio Zara viene considerato fashion.
+Tuttavia i suoi prodotti sono fatti per essere indossati una decina di volte poiché la qualità è volutamente medio-bassa.
+Le rimanenzene sono solitamente molto basse e questo implica anche un basso capitale circolante.
+%il settore abbigliamento è molto labor intensive (per la cucitura è difficile introddurre macchine), altri reparti sono automatizzati
+%zara: la maggior parte del personale si trova nei negozi 
+
+
+\subsection{Vendite}
+
+Per quanto riguarda la distribuzione, c'è un flusso costante di \emph{stock keeping unit} (SKU) dai magazzini ai negozi (che vengono riforniti almeno 1 o 2 volte la settimana).
+%negozi fisici e virtuali
+
+Il feedback dai negozi è molto rapido: questo è possibile grazie ad una tecnologia semplice e diffusa (ad esempio, palmari) e sistemi standardizzati per le segnalazioni.
+Avendo tutto sotto controllo, l'inventario dei negozi viene fatto velocemente ogni sera.\\
+
+
+La sede principale è sempre rimasta La Coruna, in Galizia.
+Se la produzione fosse stata trasferita in Cina, la merce avrebbe impiegato troppo per arrivare e si sarebbe perso il JIT.
+
+\subsection{Competitor}
+
+\subsubsection{GAP}
+
+\subsubsection{H\&M}
+
+\subsubsection{Benetton}
+\begin{itemize}
+\item Il modello di business di Benetton si basa sulla vendita di lane e maglioni disponibili in tanti colori.
+\item Innovazione importante: ha introdotto il \emph{tinto in prodotto finito}, la decisione sul colore di un capo viene ritardata il più possibile (il colore è una variabile molto importante, ci si può infatti chiedere che colore andrà via questa settimana e agire di conseguenza).
+\item Tutti i negozi di Benetton sono in licenza (\emph{franchise}) ad un imprenditore privato, tuttavia lo standard viene definito da Benetton.
+La poca merce viene tutta e bene esposta in negozio (non serve un magazzino).
+\item A differenza di GAP e H\& M, che esternalizzano la produzione, Benetton affida ad altri la vendita dei prodotti.
+Zara invece controlla il ciclo del prodotto dalla progettazione alla vendita (\emph{integrazione verticale}).
+\item Il modello è ormai vecchio e ora funziona meglio Zara.
+\end{itemize}
+
+
+
+\newpage
+\section{Costi e Prezzi}
+
+\subsection{Costi}
+
+\subsubsection{Le Distinte Base}
+Una \textbf{distinta base} (\emph{bill of materials}), o struttura del prodotto, è un elenco delle materie prime, dei sottoinsiemi, degli assemblaggi intermedi, dei sottocomponenti, delle parti e delle quantità necessarie per ottenere il prodotto finito.
+
+Una distinta base è il nocciolo per ogni processo manifatturiero, poiché si trovano tutte le informazioni necessarie per assemblare una parte.
+Questa è principalmente utilizzata per stimare i costi, ma anche per controllare le scorte in magazzino e tracciare dove vengono usate le parti.
+
+\subsubsection{I Costi Fissi}
+I costi fissi sono quei \emph{costi che non sono influenzati dalle variazioni delle attività} (entro un certo intervallo).
+Tipicamente, questi costi includono le assicurazioni, i salari per la gestione e l'amministrazione, gli interessi sul capitale di prestito.
+
+Quando si verificano maggiori cambiamenti nell'utilizzo delle risorse, o quando sono coinvolti l'espansione o l'ampliamento di un impianto, i costi fissi possono esserne influenzati.
+
+\subsubsection{I Costi Variabili}
+I costi variabili sono quei costi che \emph{dipendono dai livelli di produzione} come ad esempio le materie prime o i salari non fissi.
+
+\subsubsection{I Costi Marginali}
+I costi marginali mostrano il costo relativo alla produzione di un'unità addizionale per un dato livello di produzione.
+
+Questi sono particolarmente nel settore del software.
+Infatti, mentre i costi per lo sviluppo di un software sono molto elevati, il costo associato ad una copia (quindi un'ulteriore unità del prodotto) sono irrilevanti.
+
+\subsubsection{I Costi Diretti}
+Sono tutti quei \emph{costi che possono essere misurati e assegnati ad una lavorazione o una attività specifica}, come i costi di manodopera e materiale direttamente associati ad un prodotto.
+
+\subsubsection{I Costi Indiretti}
+Sono i \emph{costi difficilmente associabili a una specifica attività lavorativa}.
+Solitamente si allocano con specifiche formule (ad esempio, proporzionalmente al numero di ore che un'attività ha richiesto).
+Questi possono essere ad esempio i costi per i macchinari in comune, le forniture e la manutenzione.
+
+\subsubsection{I Costi Standard}
+Sono i costi pianificati per unità di produzione, stabiliti in anticipo rispetto alla produzione effettiva.
+Vengono sviluppati con le ore di lavoro diretto, i materiale e altri costi già stabiliti per unità.
+
+I costi standard giocano un roulo chiave nel controllo dei costi e nelle altre funzioni manageriali.
+Alcuni degli utilizzi sono:
+\begin{itemize}
+\item stima dei futuri costi di manifattura;
+\item misura delle prestazioni operative, comparando i costi effettivi con i costi standard per unità;
+\item preparare offerte su prodotti o servizi richiesti dai clienti;
+\item stabilire il valore del lavoro e delle scorte.
+\end{itemize}
+
+Un costo che comporta l'uscita di denaro è chiamato \textbf{cash cost} (e risulta nel \emph{cash flow}).
+Questo è necessario per distinguerli dai \emph{non-cash cost}, anche detti \textbf{book cost}.
+
+I book cost sono costi che implicano un pagamento ma un recupero da spese passate.
+Il miglior esempio di book cost è l'ammortamento dei macchinari o degli immobili.
+
+\subsection{Pricing e Curva della Domanda}
+(slide)
+
+\subsection{Il Punto di Break-Even}
+
+Due ipotesi.
+\begin{enumerate}[A.]
+\item Il prezzo unitario $p$ per un prodotto o un servizio \emph{può essere rappresentato indipendentemente dalla domanda}.
+\item Il prezzo unitario $p$ per un prodotto o servizio \emph{è indipendente dalla domanda}.
+\end{enumerate}
+
+Nella prima ipotesi, il \textbf{punto di break-even} ($BEP$) si ha quando i ricavi sono uguali ai costi.
+Prima del $BEP$ l'azienda ha delle perdite, quando viene raggiutni si fanno degli utili.\\
+
+\textbf{Esempio.}
+\begin{itemize}
+\item Prezzo unitario $p = 20$
+\item Costi fissi $FC = 1500$
+\item Costi variabili $VC = 10$ 
+\end{itemize}
+
+\begin{align*}
+&BEP \Rightarrow TR = TC \Rightarrow p \cdot BEQ = FC + VC \cdot BEQ\\
+&BEQ = 150\\
+&BEP = (150, 3000)
+\end{align*}
+dove $BEQ$ è la \emph{break-even quantity}, cioè il numero di unità che devono essere vendute per raggiungere il $BEP$.\\
+
+Seconda ipotesi... (slide)
+
+\subsection{Margine di Contribuzione}
+
+Il \textbf{margine di contribuzione} (CM) si definisce come
+\begin{align*}
+&CM = p - VC
+\end{align*}
+Questa metrica serve per valutare le differenti aree di un'impresa, per determinare quale prodotto o servizio enfatizzare (margine più elevato).
+
+Margini negativi o bassi indicano che la linea di prodotto potrebbe non essere molto profittevole.
+L'obiettivo è quello di massimizzare il margine di contribuzione.
+Questo viene utilizzato per:
+\begin{itemize}
+\item prendere decisioni sul prezzo;
+\item analizzare l'impatto a diversi livelli di vendita;
+\item risolvere colli di bottiglia.
+\end{itemize}
+Se le risorse sono limitate, bisogna allocarle verso i prodotti più profittevoli.
+\begin{align*}
+profit &= p \cdot Q - (FC + VC)\\
+&= revenues - (FC + VC)\\
+BEP \Rightarrow profit = 0\\
+Q = \frac{FC}{CM}
+\end{align*}
+
+\subsection{Come Ridurre i Costi}
+
+\subsubsection{La Curva di Apprendimento}
+La \textbf{curva di apprendimento} (\emph{learning curve}) si riferisce all'effetto che l'apprendimento ha avuto sulla produttività del lavoro, questo si traduce in una relazione tra il numero cumulativo di unità prodotte $X$ e il tempo medio (o costo del lavoro) per unità $Y$.
+
+Maggiore è il numero di unità prodotte per lavoratore, minore è il tempo che il lavoratore dovrà produrre le seguenti unità (ha imparato a farlo più velocemente e meglio): minor tempo si traduce in minori costi di manodopera.
+
+L'equazione della curva è
+\begin{align*}
+Y = a X^{\frac{\log b}{\log 2}}
+\end{align*}
+dove $a$ è il tempo (o il costo del lavoro) per unità e $b$ è il \emph{tasso di apprendimento}.
+
+\subsubsection{La Curva di Esperienza}
+La \textbf{curva di esperienza} (\emph{experience curve}) si riferiesce all'effetto che l'esperienza fornisce ad un business.
+Questo significa che maggiore è il volume comulativo di produzione $X$, minore è il costo per unità prodotta $C$.
+
+Il concetto è correlato all'output totale di qualunque funzione aziendale (produzione, marketing o distribuzione).
+
+La sua equazione è
+\begin{align*}
+C_n = C_1 X^{-a}
+\end{align*}
+dove $C_1$ è il costo della prima unità prodotta e $a$ è il \emph{tasso di esperienza}.
+
+
+\subsubsection{Economie di Scala e di Scopo}
+Le economie di scala si verificano qialndo l'aumento della produzione si traduce in un calo del costo medio di produzione.
+\begin{center}
+aumento volumi di produzione $\Rightarrow$ riduzione costo medio
+\end{center}
+
+Le economie di scopo si verificano quando i costi medi sono ridotti introducento un altro prodotto nel nostro portafoglio che può condividere alcune delle infrastrutture o know-how, riducento così il costo medio complessivo del prodotto.
+\begin{center}
+introduzione nuovo prodotto $\Rightarrow$ riduzione costo medio complessivo
+\end{center}
+
+
+
+\newpage
+\section{Investimenti}
+
+
+
+Qual è la scelta migliore tra queste opzioni?
+\begin{enumerate}
+\item Ricevere 10.000 euro al momento.
+\item Ricevere 2.000 euro all'anno per i prossimi 10 anni.
+\end{enumerate}
+
+I tre principali fattori che ci permettono di valutare la scelta sono i seguenti.
+\begin{enumerate}
+\item \textbf{Inflazione:} l'inflazione riduce il potere d'acquisto (valore) nel tempo.
+Con un'inflazione del 5\% all'anno, un dollaro ricevuto a un anno da oggi,
+consentirà di acquistare merce per un valore attuale di 0.95 dollari.
+\item \textbf{Rischio:} c'è la possibilità  di non ricevere un dollaro in futuro.
+\item \textbf{Costo opportunità:} prestando un dollaro a qualcun altro, avete si perde l'opportunità di utilizzarlo.
+Questa opportunità ha un valore che rende il dollaro di oggi più importante rispetto a quello di domani.
+\end{enumerate}
+
+Questi tre concetti sono i driver di calcolo per il valore attuale (\emph{present value}, PV) e il valore futuro (\emph{future value}, FV) utilizzati nel \emph{capital budgeting}.
+
+%I calcoli del valore attuale sono utilizzati nel business per confrontare i flussi di cassa (denaro speso e ricevuto) in momenti diversi in futuro.
+%La conversione dei flussi di cassa in valori attuali mette questi diversi investimenti e rendimenti su una base comune e rende l'analisi del capital budgeting più significativa e utile nel processo decisionale.
+
+Il modello più applicato del \emph{valore temporale del denaro} è il \textbf{compounding}, cioè il processo di calcolo del valore futuro del denaro posseduto nel presente, dato un determinato tasso di interesse.
+
+Questa formula è utilizzata per determinare quanti soldi saranno presenti in un conto $FV$ dopo $y$ anni se ora l'ammontare è $PV$, ricevendo interessi ad un tasso annuo $i$:
+$$
+FV = PV \cdot (1 + i)^y
+$$
+
+Se si desidera calcolare il valore attuale $PV$ dato un valore futuro $FV$ da ricevere in $y$ anni, utilizzando il tasso di sconto $d$ all'anno, l'equazione risulta:
+$$
+PV = \frac{FV}{(1+d)^y}
+$$
+Lo sconto è il processo di calcolo del valore attuale del denaro da ricevere in futuro.
+Scontare i flussi di cassa futuri del progetto (valori futuri) in valori attuali sarà importante quando valuteremo finanziariamente progetti di capitale alternativi.\\
+
+Interesse semplice
+$$
+I = (P) (N) (i)
+$$
+dove:
+\begin{itemize}
+\item $P$, importo principale prestato o preso in prestito
+\item $N$, numero di periodi di interesse (ad esempio anni)
+\item $i$, tasso di interesse per periodo di interesse
+\end{itemize}
+
+Ogni volta che l'onere di interessi per qualsiasi periodo di interesse (un anno, per esempio) si basa sul capitale rimanente più eventuali interessi accumulati fino all'inizio di tale periodo, l'interesse è detto \textbf{composto} (\emph{compounding interest}).
+
+\begin{table}
+\begin{center}
+\begin{tabular}{p{1.5cm}|p{3cm}p{3cm}p{3cm}}
+\hline
+& $(1)$ & $(2) = (1) \cdot 10\%$ & $(3) = (1) + (2)$ \\
+Periodo & Totale posseduto all'inizio del periodo & Ammontare degli interessi nel periodo & Totale posseduto al termine del periodo\\
+\hline
+1 & 1000 & 100 & 1100\\
+2 & 1100 & 110 & 1210\\
+3 & 1210 & 121 & 1331\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+La seguente notazione è utilizzata nelle formule per i calcoli degli interessi composti:
+\begin{itemize}
+\item $i$, tasso di interesse effettivo per periodo;
+\item $N$, numero di periodi di capitalizzazione (interessi);
+\item $P$, somma del denaro attuale; il valore equivalente di uno o più flussi finanziari in un momento temporale detto \emph{presente};
+\item $F$, futura somma di denaro; il valore equivalente di uno o più flussi finanziari in un momento temporale detto \emph{futuro};
+\item $A$, flussi finanziari di fine periodo (o valori equivalenti di fine periodo) in una serie uniforme che continua per un determinato numero di periodi, a partire dalla fine del primo periodo e proseguendo fino all'ultimo periodo.
+\end{itemize}
+
+\subsection{Diagrammi di Cash-Flow}
+
+Il diagramma di \emph{cash-flow} (flusso di cassa) utilizza diverse convenzioni:
+\begin{enumerate}
+\item La linea orizzontale è una scala temporale, con la progressione del tempo che si sposta da sinistra a destra. Le etichette del periodo (ad esempio, anno, trimestre, mese) possono essere applicate ad intervalli di tempo anziché a punti sulla scala temporale.
+Si noti che la fine del Periodo 2 coincide con l'inizio del Periodo 3.
+Quando viene utilizzata la convenzione sul flusso di cassa di fine periodo, i numeri dei periodi vengono inseriti alla fine di ciascun intervallo di tempo.
+
+\item Le frecce indicano i flussi di cassa e sono collocati alla fine del periodo.
+Le frecce verso il basso rappresentano le spese (flussi di cassa o deflussi di cassa negativi) e le frecce verso l'alto rappresentano le entrate (flussi di cassa positivi o flussi finanziari in entrata).
+
+\item Il diagramma del flusso di cassa dipende dal punto di vista.
+Il flusso di cassa visto dal prestatore (ad esempio, una società di carte di credito).
+Se le direzioni di tutte le frecce fossero state invertite, il problema sarebbe stato schematizzato dal punto di vista del mutuatario.
+\end{enumerate}
+
+(Esempi e altro su slide)
+
+
+\subsection{Net Present Value}
+
+L'analisi del \textbf{valore attuale netto} (\emph{net present value}, NPV) tenta di rispondere alla domanda:
+\begin{center}
+"Qual è il valore \emph{una tantum} di questo progetto in dollari attuali?"
+\end{center}
+L'analisi NPV consente di \emph{confrontare il valore finanziario di progetti alternativi} in modo standardizzato.
+NPV tiene conto del valore temporale del denaro calcolando il valore attuale dei flussi di cassa futuri del progetto.
+NPV è una misura diretta del valore aggiunto atteso per l'azienda dall'esecuzione del progetto.
+
+Il NPV di un progetto proposto è la somma di tutti i flussi di cassa previsti dal progetto nel tempo, scontati da un tasso appropriato per portarli ad un valore attuale.
+Se il NPV di un progetto è \textbf{positivo}, si prevede che il progetto aumenti il valore del business di tale importo.\\
+
+Equazione standard del NPV:
+$$
+NPV = -C_0 + \sum_{y=1}^N \frac{C_y}{(1+d)^y}
+$$
+Esempio con un tasso di sconto del 12\%:
+\begin{align*}
+NPV &= -725 + \frac{300}{(1+0.12)} + \frac{450}{(1+0.12)^2} + \frac{500}{(1+0.12)^3}\\
+&= 258
+\end{align*}
+
+%Il NPV di un progetto proposto è il valore dei benefici in denaro futuri meno i costi, tutti rideterminati in termini di denaro di oggi.
+%Nell'analisi NPV, i flussi in entrata e in uscita rilevanti sono scontati per calcolare il valore attuale per ciascuno e quindi aggiunti.
+%Il NPV risultante è una stima di quanto il progetto aumenterà la ricchezza dell'azienda.
+
+Se il NPV è positivo, il progetto aggiungerà valore, mentre un progetto con NPV negativo non dovrebbe mai essere perseguito.
+Se dobbiamo scegliere tra diverse alternative di progetto, il progetto con l'NPV più alto fornirà il valore più alto all'azienda.
+
+Il NPV può essere calcolato per lo stesso esempio utilizzando tassi di sconto diversi che vanno dal 5\% al 35\%.
+%Il valore NPV di un progetto è maggiore quando si utilizza un tasso di sconto basso poiché il valore calcolato dei flussi di cassa futuri è maggiore se scontato di meno.
+%L'NPV di un progetto è inferiore quando si utilizza un alto tasso di sconto poiché il valore calcolato dei flussi di cassa futuri è inferiore se scontato di più.
+
+Il \textbf{tasso di rendimento interno} (\emph{internal rate of return}, IRR) di un progetto è il tasso di sconto che rende il valore attuale dei flussi di cassa futuri uguale all'investimento iniziale.
+Quindi l'IRR è quel punto in cui NPV è pari a 0.\\
+
+Nell'esempio precedente, utilizzando un tasso di sconto del 12\%, abbiamo calcolato $NPV = 258$.
+Con un tasso di sconto del 5\%, il NPV sarebbe $> 400$, mentre con un tasso di sconto del 35\%, il NPS sarebbe negativo (il progetto ci costerebbe più di quanto farebbe guadagnare).
+Quindi l'IRR nell'esempio è del 30\% (con il quale $NPV = 0$).
+%L'IRR è spesso frainteso come la redditività annuale dell'investimento del progetto, ma questo livello di rendimento è solo il caso in cui i flussi di cassa derivanti dal progetto possono essere investiti allo stesso tasso dell'IRR, il che è raro che sia il caso.
+
+\begin{table}[h]
+\begin{tabular}{cc}
+\begin{minipage}[t]{.5\linewidth}
+\textbf{Vantaggi}
+\begin{itemize}
+\item Il NPV è una misura diretta del valore aggiunto dii un progetto.
+\item Confrontare il valore dei progetti alternativi è facile: basta selezionare il progetto con il valore NPV più alto.
+\end{itemize}
+\end{minipage}
+&
+\begin{minipage}[t]{.5\linewidth}
+\textbf{Svantaggi}
+\begin{itemize}
+\item Il tasso di sconto necessario per il calcolo può essere difficile da stimare.
+\end{itemize}
+\end{minipage}
+\end{tabular}
+\caption{Confronto NPV.}
+\end{table}
+
+\begin{table}[h]
+\begin{tabular}{cc}
+\begin{minipage}[t]{.5\linewidth}
+\textbf{Vantaggi}
+\begin{itemize}
+\item L'IRR mostra l'efficienza dell'uso del capitale in una forma facile da comprendere.
+\item Il calcolo dell'RR è valido senza dover stimare il tasso di sconto.
+\end{itemize}
+\end{minipage}
+&
+\begin{minipage}[t]{.5\linewidth}
+\textbf{Svantaggi}
+\begin{itemize}
+\item L'IRR calcola solo un ritorno percentuale (non un valore), quindi trascura la scala del progetto e non fornisce una misura del valore finale per l'azienda.
+\item L'IRR può rendere un piccolo progetto più attraente rispetto ad un grande progetto (un progetto molto piccolo potrebbe avere un IRR molto alto ma anche un NPV basso e poco attraente).
+\end{itemize}
+\end{minipage}
+\end{tabular}
+\caption{Confronto IRR.}
+\end{table}
+
+\subsubsection{Previsione del flusso di cassa}
+
+Il vero fondamento dell'analisi NPV è la previsione accurata dei flussi di cassa associati a un progetto.
+Stimare accuratamente gli importi e i tempi di tutti i flussi di cassa in entrata e in uscita del progetto può essere complicato.
+I flussi di cassa previsionali richiedono una comprensione dettagliata del business e del progetto in analisi, delle sue variabili di input e dei risultati attesi.\\
+
+Dobbiamo stimare l'ammontare e la tempistica degli investimenti originali, le variazioni del capitale circolante e i costi e le spese correnti.
+Dobbiamo capire le esigenze, i desideri e le condizioni del mercato dei clienti per prevedere correttamente i ricavi.
+Inoltre, l'attuale e futuro contesto finanziario, i tassi attesi di inflazione, il rischio del progetto e le considerazioni fiscali hanno un ruolo in ciascuno.\\
+
+Inoltre, ciascuno di questi elementi del flusso di cassa deve essere sequenziato in modo che l'analisi NPV corrisponda correttamente al valore temporale del denaro.
+
+I flussi di cassa totali utilizzati in un'analisi NPV dovrebbero provenire da dichiarazioni finanziarie proforma ben preparate sviluppate per il progetto.
+I flussi di cassa totali del progetto per un periodo possono essere calcolati come:
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{cl}
+& Proventi da operazioni\\
++ & Deprezzamento\\
+- & Tasse\\
+- & Spese in conto capitale\\
+- & Aumento del capitale circolante\\
+= & Flusso di cassa totale\\
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsubsection{Selezione del Tasso di Sconto}
+
+Anche la selezione del tasso di sconto appropriato è difficile. Il tasso minimo di sconto sarebbe pari al costo medio ponderato del capitale della società.
+Quindi un \emph{premio di rischio} dovrebbe essere aggiunto se c'è un aumento del rischio nel progetto relativo al rischio intrinseco associato alla società.
+
+I venture capitalist aggiungono un premio per il rischio del 30\% o più ai progetti delle società startup.
+
+Un premio di rischio più modesto compreso tra il 5\% e il 15\% potrebbe essere più appropriato per un progetto di espansione per un'azienda consolidata.
+
+\subsubsection{Analisi di Sensibilità}
+
+In un'analisi di sensitività, le variabili vengono sistematicamente cambiate per vedere come viene influenzato l'NPV o l'IRR risultante.
+Se la modifica di un'ipotesi comporta un grande cambiamento nel valore del progetto calcolato, allora è una variabile importante da ottenere.\\
+%Se cambiare un'ipotesi si traduce in un piccolo cambiamento, allora è meno importante.\\
+
+%Analisi di scenario
+Nell'analisi degli scenari, si potrebbe voler considerare tutte le ipotesi finanziarie da una prospettiva conservativa e vedere come sono influenzati i flussi di cassa.
+Ad esempio, supponiamo che tutto costerà di più e richiederà più tempo rispetto alle proiezioni originali.
+Spesso è utile preparare tre serie di dichiarazioni proforma:
+\begin{itemize}
+\item uno con ipotesi conservative (pessimistiche),
+\item uno con ipotesi realistiche (la più probabile),
+\item uno con ipotesi ottimistiche.
+\end{itemize}
+
+
+\subsection{Il Periodo di Rimborso}
+
+
+Il \textbf{periodo di rimborso} (\emph{payback period}, PbP) si riferisce al periodo di tempo richiesto per la restituzione di un investimento per rimborsare la somma dell'investimento originale.
+PbP più brevi sono ovviamente preferibili a PbP più lunghi (sempre che tutti gli altri siano uguali).
+
+Il PbP come misura è facile da calcolare ed è intuitivamente comprensibile.
+Tuttavia, i calcoli ignorano il valore temporale del denaro e i flussi di cassa che si verificano dopo la fine del PbP.
+Come metodo di analisi del budget capital ha serie limitazioni.
+
+
+\subsection{Valore del Business}
+
+
+Quanto vale un'attività dopo un periodo di operazioni?
+Una buona domanda, una di particolare interesse per gli azionisti della compagnia.
+Esistono diversi metodi di valutazione aziendale.
+
+\subsubsection{Valore di Libro}
+
+Il \textbf{valore di libro} rappresenta il valore al quale le attività vengono trasferite sui \emph{libri} dell'azienda.
+Il valore contabile di una società è definito come il suo totale attivo meno le sue passività correnti e meno eventuali debiti a lungo termine.\\
+
+Per esempio, un'attività con asset per $3.029.419$, con passività correnti per $502.536$ e un debito a lungo di $800.000$, avrà un valore di:
+\begin{align*}
+3.029.419 - 502.536 - 800.000 = 1.726.883
+\end{align*}
+
+\subsubsection{Valore di Liquidazione}
+
+Il \textbf{valore di liquidazione} è ciò che gli asset della società porteranno a una vendita forzata.
+Normalmente il valore di liquidazione di un'azienda in corso ha poca rilevanza dal momento che il valore di un'attività operativa è molto maggiore del suo valore di liquidazione.
+
+%per esempio. Inizia con il valore contabile dell'azienda e poi sottrai ciò che abbasserebbe tale importo se, ad esempio, potessimo ottenere solo 10 centesimi sul dollaro per l'inventario e 50 centesimi sul dollaro per i macchinari.
+%Utilizzando queste ipotesi, il valore di liquidazione della Società sarebbe inferiore a 500.000 dollari.
+
+\subsubsection{Multipli di Prezzo}
+
+Valore per multipli di prezzo o \emph{price-earnings multiple}.
+La società in esempio ha in portafoglio 200.000 azioni e ha ottenuto un utile netto di 251.883 dollari l'anno scorso.
+La divisione del reddito netto per il numero di azioni in circolazione dà un reddito netto di 1,26 dollari per azione.
+Se supponiamo che aziende simili a quella in esempio stiano attualmente vendendo con guadagni pari a 12 volte quelli della società, allora questa	 vale
+\begin{align*}
+1,26 \cdot 12 \cdot 200.000 = 3.024.000
+\end{align*}
+
+\subsubsection{Valore di Mercato}
+
+Se le azioni della società sono quotate in borsa, il valore di mercato è facile da calcolare.
+Altrimenti, vendere un'azienda non quotata è come vendere una casa.
+Il business vale quanto è possibile guadagnare dall'attività.
+%Acquisizione di partecipazioni da parte di una società più grande. Percentuale di capitale sociale in cambio di una somma di denaro. Es. 4\% per 1 milione di dollari.
+
+\subsubsection{Flusso finanziario attualizzato}
+
+Il metodo di valutazione del flusso di cassa scontato è il metodo più sofisticato (e il più difficile) da utilizzare per valutare l'attività.
+Con questo metodo, è necessario stimare tutti gli afflussi di denaro agli investitori nel tempo (dividendi e vendite di azioni) e quindi calcolare un NPV utilizzando un tasso di sconto ipotizzato.
+
+%Flusso di cassa per ogni singolo periodo
+%Proventi da operazioni
+%+ Deprezzamento
+%- Le tasse
+%- Spese in conto capitale
+%- Aumento del capitale circolante
+%= Flusso di cassa totale
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{ll}
+Valore contabile & 1.726.883\\
+Valore di liquidazione & 467.877\\
+Guadagni di prezzo multipli & 3.024.000\\
+Valore di mercato & Per vendere a chi?\\
+Flusso di cassa scontato & Complesso da calcolare
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\subsection{Fonti e Costi del Capitale}
+
+
+\subsubsection{Banche}
+
+Le banche non concederanno prestiti a meno che non siano sicure che saremo in grado di rimborsare ciò che dobbiamo.
+L'ammontare del capitale azionario (il totale delle azioni) nel business agisce come ammortizzatore di sicurezza per la banca: gli azionisti perderanno tutto prima che la banca perda un centesimo.
+
+In generale, il debito è una forma di finanziamento economica quando si riesce ad ottenerlo.\\
+
+Le banche stabiliscono il tasso di interesse sui prestiti con due componenti.
+Aggiungono l'attuale rendimento di prestito \emph{privo di rischio} dai titoli di stato a un \emph{premio di rischio} in base a quanto rischiosi giudicano la società.
+
+Ad esempio, se i titoli di stato stanno cedendo il 4\% e la nostra banca ci considera un rischio moderato (che giustifica un ulteriore 4\% come premio di rischio), il nostro tasso di interesse totale sarà dell'8\% per un prestito.
+
+\subsubsection{Capitale Azionario}
+
+La società in esempio ha attualmente 200.000 azioni in circolazione.
+Possediamo 50.000 azioni dei fondatori che abbiamo ottenuto a buon mercato a 1 dollaro per azione.
+Gli investitori Venture possiedono 150.000 azioni per le quali hanno pagato 10 dollari per azione.\\
+
+\textbf{Valutazione pre-money.}
+Attualmente, una valutazione prudente per l'azienda (basata su un multiplo di 12 volte guadagni) sarebbe di circa 3 milioni (quindi, circa 15 dollari per azione).
+Questo valore totale di 3 milioni e 15 dollari per azione è ciò che si intende per valutazione \emph{pre-money} dell'azienda, il totale dell'azienda valore stimato prima della vendita di azioni aggiuntive.\\
+
+\textbf{Valutazione post-money.}
+Stiamo cercando di raccogliere 800.000 dollari di nuovo capitale azionario.
+Subito dopo aver raccolto questo importo, il cosiddetto valore \emph{post-money} della società sarà:
+\begin{align*}
+&3.000.000 \text{valore della società pre-money}\\
+&+ 800.000 \text{nuovo investimento}\\
+&3.800.000 \text{valore aziendale post-money}\\
+\end{align*}
+
+%Il valore post-money della società è solo il valore pre-money più la quantità di nuovi fondi raccolti.
+%Ora arriviamo al vero punto di negoziazione con l'impresa capitalista.
+%Quante nuove azioni di capitale investono il venture capitalist per investire 800.000 nelle azioni della Società?
+%E poi, cosa importante, quanta parte della società possediamo ancora dopo il finanziamento?
+
+\subsubsection{Diluizione}
+Diluizione significa quanto meno una percentuale della società totale possediamo dopo aver emesso più azioni.
+Un venture capitalist ci ha offerto 800.000 in nuovi equity con una valutazione pre-money di 2,5 milioni.
+Riteniamo che questa valutazione sia bassa e contrasta con un'offerta di emissione di titoli con una valutazione di 3,5 milioni di pre-money.
+Ora dobbiamo calcolare quante nuove azioni vorremmo rilasciare per chiudere questo accordo.
+Possiamo determinare quanto \emph{diluitiva} questa offerta sarà alla nostra percentuale di proprietà.\\
+
+Delle attuali 200.000 azioni in circolazione, possediamo 50.000 azioni e i venture capitalist ne possiedono 150.000.
+Pertanto, possediamo il 25\% della società.
+Dopo che la società avrà distribuito più azioni ai venture capitalist, possediamo ancora le nostre 50.000 azioni originali, ma saranno proprietarie di 150.000 azioni più molte nuove azioni che la società deve emettere per indurre il venture capitalist per scambiare il nuovo titolo per 800.000 dollari di capitale.\\
+
+La negoziazione che stiamo conducendo con il venture capitalist riguarda la valutazione pre-money dell'azienda da utilizzare per calcolare il prezzo delle azioni della nuova offerta.
+La tabella Equity Ownership e Dilution mostra come pre-market la valutazione e il prezzo dell'azione di offerta avranno ripercussioni sulla percentuale e sulla proprietà della nostra impresa e del venture capitalist.
+Dopo la negoziazione, abbiamo diviso la differenza di valore e concordato un prezzo delle azioni di 15 dollari con un valore pre-money di 3 milioni della società.\\
+
+\subsubsection{Proprietà Azionaria e Diluizione}
+
+%Costo del Capitale proprio
+Quanto costa vendere più equity?
+Non esiste un tasso di "interesse" esplicito collegato alle azioni ordinarie, ma gli investitori di venture capital si aspettano un ottimo ritorno sull'investimento.
+Gli investitori hanno pagato inizialmente 10 dollari per azione e abbiamo stimato che il prezzo delle azioni è aumentato a circa 15 dollari in due anni.
+Pertanto, questo aumento di valore rappresenta un rendimento annuo del 22,5\%.
+
+
+
+\newpage
+\section{Strategia}
+
+La \emph{mission} di una società rappresenta lo scopo fondamentale per il quale l'organizzazione esiste.\\
+
+La \emph{vision} di un'azienda rappresenta invece l'aspirazione alla quale si mira.\\
+
+I \emph{goal} sono quei pochi (tre o quattro) obiettivi chiave che un'organizzazione si è imposta di raggiungere.\\
+
+La \emph{strategia} per un'azienda sono tutti quei piani a lungo termine che permetteranno di ragiungere i risultati.
+Ogni obiettivo aziendale dovrebbe avere alcune strategie che consentono di realizzarlo.\\
+
+Molte \emph{azioni} coordinate si rendono spesso necessarie per realizzare una strategia.\\
+
+Le \emph{tattiche} sono attività quotidiane che le persone in azienda svolgono per compiere un'azione a sostegno di una strategia.
+
+\subsection{Rischio}
+In termini finanziari, il rischio è la probabilità che il rendimento effettivo di un investimento sia inferiore al previsto.
+
+Il rischio può essere sia \emph{intrinseco} (ci sono molti prodotti da smaltire per un problema di qualità) sia \emph{estrinseco} (una società concorrente ha fatto un prodotto simile).\\
+
+L'\emph{incertezza} è non sapere cosa porterà il futuro e può essere anche peggiore del rischio.
+Conoscendo il rischio, ci si può premunire adottando misure per mitigare le conseguenze negative del rischio.\\
+
+Una \emph{minaccia} è un evento potenziale con una probabilità molto bassa ma un alto impatto negativo.
+
+%Si può acquistare un'assicurazione contro gli incendi ma non si può fare nulla se un cliente importate fallisce e non può ripagare.
+
+\subsection{Analisi SWOT}
+
+\emph{SWOT} è un acronimo che sta per:
+\begin{itemize}
+\item \textbf{Strengths}, punti di forza: risorse o capacità controllate o disponibili per l'azienda che la mettono in una situazione di vantaggio.
+\item \textbf{Weakenesses}, debolezze: limitazione o mancanza di risorse o capacità rispetto ad aziende concorrenti (che mettono il soggetto in una situazione di svantaggio).
+\item \textbf{Opportunities}, opportunità: che opportunità esistono nell'ambiente, tali da poter dare un impulso all'organizzazione?
+\item \textbf{Threats}, minacce: fattori esterni, al di fuori del controllo di un'organizzazione, che possono metterla in una situazione di rischio.
+Questa potrebbe trarre beneficio dall'avere più piani contingenti.
+\end{itemize}
+L'analisi SWOT è una tecnica attraverso la quale i manafer creano una rapida panoramica della situazione strategica di un'azienda.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{c|c|c}
+   & Fattori interni & Fattori esterni \\
+   \hline
+ + & Strengths & Opportunities \\
+ \hline
+ - & Weakenesses & Threats \\
+\end{tabular}
+\end{center}
+\end{table}
+
+Dove reperire le informazioni necessarie per fare una buona analisi?
+Da relazioni annuali, pubblicazioni del settore, ricerche di mercato, fiere, domande di brevetto, rapporti governativi, comunicati stampa.\\
+
+Un'analisi SWOT può enfatizzare eccessivamente i punti di forza interni e minimizzare le minacce esterne.
+Può anche essere statica e rischia di ignorare le mutevoli circostanze.
+
+Può risultare molto soggettiva.
+
+
+
+%\newpage
+%\section{Innovazione: Tecnologie e Mercato}
+%
+%
+%
+%I limiti tecnologici di un'azienda possono essere elevati e di solito si basano su:
+%\begin{itemize}
+%\item contesto culturale;
+%\item risorse disponibili; 
+%\item limiti fisici di un determinato contesto (esempio navi).
+%\end{itemize}
+%
+%\subsection{Curve S delle Tecnologie}
+%
+%Queste curve rappresentano il tasso di miglioramento e il tasso di diffusione nel mercato di una tecnologia.
+%\begin{itemize}
+%\item nella fase iniziale, la tecnologia migliora lentamente in quanto si ha poca conoscenza a riguardo;
+%\item la curva si impenna nel periodo di maturità, cioè quando nuove nozioni, sia tecnologiche che aziendali, sono state apprese;
+%\item si assesta quando si arriva ad un punto di stallo, che solitamente è rappresentato da un limite fisico della tecnologia.
+%\end{itemize}
+%Ogni nuova curva comincia con un periodo di turbolenza, seguito da un rapido miglioramento e quindi rendimenti decrescenti.
+%Alla fine si ha una \textbf{discontinuità tecnologica}, nella quale una nuova tecnologia sostituisce la precedente.\\
+%
+%%Le tecnologie non sempre raggiungo il loro limite:
+%%\begin{itemize}
+%%\item possono essere rimpiazzate da nuove tecnologie discontinue (tali tecnologie soddisfano un mercato simile per mezzo di una nuova conoscenza: tipo da dischi in vinile  compact disk);
+%%\item tecnologie discontinue inizialmente hanno una bassa performance (automobili crescevano lentamente rispetto alle carrozze a cavalli).
+%%\end{itemize}
+%
+%\subsection{Cicli Tecnologici}
+%
+%La tecnologia \emph{procede in modo ciclico}: ogni discontinuità inaugura un periodo di turbolenza e incertezza fino al raggiungimento di un design dominante, inaugurando un’era di cambiamento incrementale.
+%
+%Durante l’era del cambiamento incrementale le imprese spesso cessano di investire sulla conoscenza di progetti alternativi e si concentrano sullo sviluppo di applicazioni sul design dominante.
+%Questo spiega in parte perché le imprese affermate hanno spesso difficoltà a riconoscere e reagire di fronte a una tecnologia discontinua.
+%
+%Le imprese possono essere riluttanti ad adottare nuove tecnologia perché il miglioramento delle prestazioni è inizialmente lento e costoso e possono essere necessari investimenti significativi.
+%
+%Mentre la mappatura con la curva S delle tecnologie è utile per ottenere una profonda comprensione del suo tasso di miglioramento o limiti, l'utilizzo come strumento prescritto è limitato.
+%\begin{itemize}
+%\item I veri limiti della tecnologia possono essere sconosciuti.
+%\item La curva S può essere influenzata da cambiamenti di mercato, tecnologie dei componenti o tecnologie complementari.
+%\item Le aziende che seguono il modello delle curva S troppo da vicino potrebbero finire in una commutazione tecnologica o troppo presto o troppo tardi.
+%\end{itemize}
+%
+%\subsection{Come Predire i Cambiamenti}
+%
+%\begin{itemize}
+%\item \textbf{Delphi Model}: chiedere a un gruppo di esperti del settore (comitato, questionario strutturato).
+%	\begin{itemize}
+%	\item \emph{vantaggi}: gli esperti sono spesso anni avanti;
+%	\item \emph{svantaggi}: a volte hanno poca conoscenza delle possibili applicazioni, possono essere entusiasti.
+%	\end{itemize}
+%\item \textbf{Trend Extrapolation}: il futuro è spesso molto simile al passato, ma quali parametri bisogna predire? technologies esaustive, predizione del processo nelle tecnologie complementari.
+%\end{itemize}
+%
+%L’evoluzione del mercato avviene sopra ad un ciclo di vita:
+%\begin{itemize}
+%\item segmentazione del mercato;
+%\item \emph{crossing the chasm}: gli \emph{early adopter} voglio un agente di cambiamento tecnico, la \emph{early majority} vuole un miglioramento della produttività per le operazioni esistenti;
+%\item nuovo mercato, nuovi bisogni: \emph{il dilemma dell'innovatore}.
+%\end{itemize}
+%
+%Le idee chiave sono:
+%\begin{itemize}
+%\item \textbf{Unicità}. Controllare la conoscenza generata dall’innovazione, se una particolare innovazione o la conoscenza su cui poggia può essere completamente controllato o protetto allora l’impresa può essere in grado di mantenere una posizione unica (fonte di potere contrattuale)
+%RISORSE: proprietà intellettuale (copyrights), segretezza della conoscenza 
+%(difficile da mantenere), velocità (difficile da lavorare))
+%\item \textbf{Asset complementari}. Controllare gli asset che massimizzano il profitto dall’innovazione 
+%( TIPI: COMPETENCIES -> ciò che puoi fare (servizi, capacità manifatturiere), RESOURCES -> 
+%cosa che ti appartiene (marca, canali di distribuzione, relazioni))
+%\end{itemize}
+
+
+\end{document}
