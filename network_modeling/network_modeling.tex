@@ -43,116 +43,363 @@
 
 \newcommand*{\QED}{\hfill\ensuremath{\Box}}
 
-\title{Appunti di Network Modeling}
-\author{massimo.meneghello93}
+\title{Appunti di Network Modeling\\
+\vspace{1cm}
+\large
+Dalle lezioni di Michele Zorzi (Unipd)}
+%\author{massimo.meneghello93}
 \date{June 2018}
 
 \begin{document}
 
 \maketitle
 \tableofcontents
+
+
+
 \newpage
+\section{Prontuario Esame}
 
+\subsection{Probabilità}
 
-\section{Concetti di Probabilità}
+\subsubsection{Probabilità Condizionata}
+\begin{align*}
+Pr[A\mid B] = \frac{Pr[A,B]}{Pr[B]}\\
+Pr[A\mid B, C] = \frac{Pr[A,B\mid C]}{Pr[B\mid C]}
+\end{align*}
 
+\subsubsection{Regola di Bayes}
+\begin{align*}
+Pr[B\mid A] = \frac{Pr[A\mid B]Pr[B]}{Pr[A]}
+\end{align*}
 
-\subsection{Distribuzioni Importanti}
+\subsubsection{Legge della Probabilità Totale}
+\begin{align*}
+Pr[A] = \sum_i Pr[A\mid B_i] Pr[B_i]
+\end{align*}
 
 \subsubsection{Distribuzione Esponenziale}
-
-Una variabile aleatoria non negativa $T$ ha distribuzione esponenziale di parametro $\lambda >0$ se la funzione di densità di probabilità è
+Una variabile aleatoria non negativa $X$ ha distribuzione esponenziale di parametro $\lambda >0$ se la funzione di densità di probabilità è
 \begin{align*}
-f_T = \left\{\begin{array}{l l}
-\lambda e^{-\lambda t} & \text{ per } t \ge 0\\
-0 & \text{ per } t < 0
-\end{array}
+f_X(x) = \begin{cases}
+\lambda e^{-\lambda x} 	& \text{ per } x \ge 0\\
+0 						& \text{ per } x < 0
+\end{cases}
 \end{align*}
 e con funzione di distribuzione
 \begin{align*}
-F_T(t) = P[T<t] = \left\{\begin{array}{l l}
-1- e^{-\lambda t} & \text{ per } t \ge 0\\
-0 & \text{ per } t < 0
-\end{array}
+Pr[X \le x] = F_X(x) = \begin{cases}
+1 - e^{-\lambda x} 	& \text{ per } x \ge 0\\
+0 					& \text{ per } x < 0
+\end{cases}
 \end{align*}
 Valore atteso e varianza
 \begin{gather*}
 E[T] = \frac{1}{\lambda}\\
 Var(T) = \frac{1}{\lambda^2}
 \end{gather*}
+Per due variabili aleatorie con distribuzione esponenziale valgono
+\begin{gather*}
+E[\min\left\{\xi(\alpha),\xi(\beta)\right\}] = \frac{1}{\alpha + \beta}\\
+E[\max\left\{\xi(\alpha),\xi(\beta)\right\}] = \frac{1}{\alpha} + \frac{1}{\beta} - \frac{1}{\alpha + \beta}
+\end{gather*}
+
+\subsubsection{Distribuzione Uniforme}
+La funzione di densità di probabilità di una variabile aleatoria $X$ uniformemente distribuita è
+\begin{align*}
+f_X(x) = \begin{cases}
+\frac{1}{b-a} 	& \text{ per } x \in [a,b]\\
+0 				& \text{ altrimenti }
+\end{cases} 
+\end{align*}
+mentre la funzione di distribuzione è data da
+\begin{align*}
+Pr[X \le x] = F(x) = \begin{cases}
+0 					& \text{ se } x \le a\\
+\frac{x - a}{b - a} 	& \text{ se } a < x \le b\\
+1 					& \text{ se } x > b
+\end{cases}
+\end{align*}
+
+\subsubsection{Distribuzione Geometrica}
+Calcola la probabilità che il primo successo richieda la ripetizione di $k$ prove indipendenti, ciascuna con probabilità $p$.
+\begin{align*}
+Pr[X=k] &= p(1-p)^{k-1}\\
+E[X] &= \frac{1}{p}\\
+Var(X) &= \frac{1-p}{p^2}
+\end{align*}
+
+
+\subsection{Processi di Poisson}
+
+Sia $X(t) = X_1(t) + X_2(t)$. Per $0 < s \le t$ e $0 \le k \le n$ vale
+\begin{gather*}
+Pr[X_1(s) = k \mid X(t) = n] = \binom{n}{m} \left( \frac{\lambda_1 s}{t(\lambda_1 + \lambda_2)} \right)^k \left(1 - \frac{\lambda_1 s}{t(\lambda_1 + \lambda_2)}\right)^{n-k}
+\end{gather*}
+Per $0 < s \le t$ e per $0 \le k \le n$ vale
+\begin{align*}
+Pr[X(t) &= n \mid X_1(s) = k] = Pr[X_1(t) + X_2(t) - X_1(s) = n-k]\\
+&= \frac{e^{-(t(\lambda_1 + \lambda_2) - s\lambda_1)} (t(\lambda_1 + \lambda_2) - s\lambda_1)^{n-k}}{(n-k)!}
+\end{align*}
+Per $0 < s \le t$ e per $0 \le k \le n$ vale
+\begin{align*}
+Pr[X(s) = n \mid X_1(t) = k] = \sum_{v=0}^k Pr[X(s) = n \mid X_1(s) = v] Pr[X_1(s) = v \mid X_1(t) = k]
+\end{align*}
+\begin{align*}
+Pr[X_1(s) + X_2(s) = n \mid X_2(t) = k] = \sum_{v=0}^k Pr[X_1(s) + X_2(s) = v] Pr[X_2(s) = n \mid X_2(t) = k]
+\end{align*}
+
+
+\subsection{Coda M/G/$\infty$}
+
+Supponiamo di fornire un servizio al quale arrivano richeste secondo una distribuzione di Poisson con parametro $\lambda$. Ogni richiesta ha durata $Y_1,Y_2,\hdots$, variabili aleatorie con funzione di distribuzione comune $G(y) = P[Y_k \le y]$. Gli arrivi sono invece regolati dalle variabili $W_1,W_2,\hdots$ \textit{che possiamo far diventare variabili aleatorie uniformi}.\\
+Sia $M(t)$ una variabile che conta le richieste attive in un dato istante $t$ con $M(0) = 0$ e sia $X(t)$ il numero totale di richieste arrivate fino all'istante $t$. Allora
+\begin{align*}
+M(t) &= \sum_{k=1}^{X(t)} \textbf{1}\{W_k + Y_k \ge t\}
+\end{align*}
+Sia
+\begin{align*}
+p &= P[U_k + Y_k \ge t] = \frac{1}{t}\int_0^t P[Y_k \ge t - u]\,du\\
+&= \frac{1}{t}\int_0^t [1-G(t-u)]\,du = \frac{1}{t} \int_0^t [1-G(z)]\,dz
+\end{align*}
+Conoscendo il numero $n$ di richieste totali fino all'istante $t$, la probabilità condizionata fornisce
+\begin{align*}
+P[M(t) = m \mid X(t) = n] = \frac{n!}{m!(n-m)!} p^m (1-p)^{n-m}
+\end{align*}
+mentre
+\begin{align*}
+P[M(t) = m] = e^{-\lambda\,p\,t}\frac{(\lambda\,p\,t)^m}{m!}
+\end{align*}
+Il numero di richieste esistenti al tempo $t$ è un processo di Poisson con media
+\begin{align*}
+E[M(t)] &= \lambda\,p\,t\\
+&= \lambda \int_0^t [1-G(z)]\,dz
+\end{align*}
+
+% aggiunta, da controllare
+\emph{Sia $G(z)$ la distribuzione del tempo di servizio.
+Il contatore per il numero di utenti attivi al tempo $t$ è $M(t) \sim \mathcal{P}(\Lambda)$, dove:
+\begin{align*}
+\Lambda = \lambda \int_0^t [1-G(z)]\,dz
+\end{align*}
+quindi la probabilità di trovare $k$ richieste attive è $e^{-\Lambda}\Lambda^k/k!$.
+Da notare che $\Lambda \xrightarrow{t\to\infty} \lambda E[X]$.
+$M(t)$ condizionata su $X(t)$ è una variabile aleatoria binomiale:
+\begin{align*}
+Pr[M(t) = m\mid X(t) = n] = \binom{n}{m} p^m (1-p)^{n-m}, \quad p = \frac{1}{t} \int_0^t [1-G(z)]\,dz
+\end{align*}}
+
+\subsection{Processi di Rinnovamento}
+
+\subsubsection{Due Componenti Indipendenti}
+Se $ON \sim \xi(\alpha)$ e $OFF \sim \xi(\beta)$, allora
+\begin{align*}
+&Pr[\text{both } OFF] = \left(\frac{\frac{1}{\alpha}}{\frac{1}{\alpha} + \frac{1}{\beta}}\right)^2 = \left(\frac{\alpha}{\alpha + \beta} \right)\\
+&Pr[\text{both } ON] = \left(\frac{\beta}{\alpha + \beta}\right)^2\\
+&Pr[1\;ON,1\;OFF] = 2\left(\frac{\alpha}{\alpha + \beta}\right)\left(\frac{\beta}{\alpha + \beta}\right)
+\end{align*}
+
+Se viene chiesto di calcolare la probabilità che, dato un componente rotto, il componente funzionante si rompa prima che l'altro venga aggiustato:
+\begin{align*}
+Pr[\xi(\alpha) < \xi(\beta)] &= \int_0^{\infty} Pr[\xi(\beta) > \xi(\alpha)\mid \xi(\alpha) = t]\, Pr[\xi(\alpha) = t]\,d\xi(\alpha)\\
+&= \int_0^{\infty} Pr[\xi(\beta) > t]\,\alpha e^{-\alpha t}\,dt\\
+&= \int_0^{\infty} e^{-\beta t}\,\alpha e^{-\alpha t}\,dt
+\end{align*}
+
+Per un ciclo di rinnovamento valgono
+\begin{align*}
+&E[\text{both } OFF] = \min{\xi(\beta), \xi(\beta)} = \frac{1}{2\beta} \Rightarrow E[cycle] = \frac{E[\text{both} OFF]}{Pr[\text{both } OFF]}\\
+&E[\text{both } ON] = Pr[\text{both } ON]\cdot E[cycle]\\
+&E[1\;ON,1\;OFF] = Pr[1\;ON,1\;OFF] \cdot E[cycle]
+\end{align*}
+
+\subsubsection{Processi che si Alternano}
+Se un sistema si alterna tra 2 stati (ad esempio, pieno e vuoto), in generale è possibile modellizzarlo come un \emph{alternating renewal process}.
+L'istante di rinnovamento è il primo arrivo, quando il sistema è vuoto.
+Di solito si ha a che fare con variabili di Poisson di intensità $\lambda$ per gli arrivi, quindi in tempo medio in cui il sistema è vuoto è
+\begin{align*}
+E[\text{empty}] = \frac{1}{\lambda}
+\end{align*}
+Il tempo medio in cui il sistema è impegnato dipende dal sistema: può essere esponenziale (anche troncato ad un certo $T$) o fisso.
+La probabilità di trovare il sistema occupato è
+\begin{gather}
+\beta = \frac{E[\text{busy}]}{E[\text{cycle}]}
+\end{gather}
+Nel caso di sistemi di trasmissione è utile introdurre una variabile aleatoria $N$ che conta il numero di trasmissioni fallimentari consecutive prima di una che abbia successo.
+$N$ è una variabile geometrica, quindi
+\begin{gather*}
+E[N] = \sum_{k=1}^{\infty} Pr[N\ge k] = \sum_{k=1}^{\infty} \beta^k = \frac{\beta}{1 - \beta}
+\end{gather*}
+Il tempo medio di ritardo può essere generalmente calcolato come
+\begin{gather*}
+E[\text{delay}] = E[N]E[\text{busy}]
+\end{gather*}
+
+\subsubsection{Modelli Semi-Markoviani}
+\begin{align*}
+P = \left[\begin{array}{ccc}
+0 & P_{01} & 0\\
+P_{10} & 0 & P_{12}\\
+P_{20} & 0 & 0
+\end{array}\right]
+T = \left[\begin{array}{ccc}
+0 & T_{01} & 0\\
+T_{10} & 0 & T_{12}\\
+T_{20} & 0 & 0\\
+\end{array}\right]
+\end{align*}
+Data la matrice di transizione $P$ e la matrice dei tempi $T$, il \emph{tempo medio} trascorso nello stato $i$ è
+\begin{align*}
+\mu_i = \sum_{k=0}^N P_{ik}T_{ik}
+\end{align*}
+La frazione del tempo speso in $i$ è data da (la probabilità di trovare il processo nello statp $i$)
+\begin{align*}
+P_i = \frac{\pi_i \mu_i}{\sum_k \pi_k \mu_k}
+\end{align*}
+
+Metriche per \emph{reward}, guadagni associati alle transizioni
+\begin{align*}
+r_{ij} &= \text{reward associato alla transizione $ij$}\\
+R_{ij} &= E[r_{ij}]
+\end{align*}
+Quando la metrica è il \emph{tempo} allora 
+se è dato un traffico $A_i$ è associato a ciascuno stato, allora il vettore \emph{reward} è $\vec{R}$ dove l'$i$-esima componente è $R_i = \mu_i A_i$.
+Il throughput è dato da
+\begin{align*}
+\lim_{t\to \infty} \frac{R(t)}{t} = \frac{\sum_i \pi_i R_i}{\sum_i \pi_i T_i}
+\end{align*}
+Negli \textbf{appunti} però si trova che
+\begin{align*}
+\lim_{t\to \infty} \frac{R(t)}{t} = \frac{\sum_i \pi_i R_i}{\sum_i \pi_i \mu_i}
+\end{align*}
+
+Se si utilizzano altre metriche, come ad esempio i pacchetti utili su tutti i pacchetti inviati, si può utilizzare
+\begin{align*}
+\lim_{t\to\infty} \frac{R^{(1)}(t)}{R^{(2)}(t)} = \frac{E[R^{(1)}]}{E[R^{(2)}]} = \frac{\sum_i \pi R_i^{(1)}}{\sum_i \pi R_i^{(2)}}
+\end{align*}
+Se è chiesto di usare la teoria del rinnovamento, in generale valgono
+\begin{align*}
+E[\text{state } 0] &= T_{01} + T_{01}E[N]\\
+E[\text{state } 1] &= T_{10} E[N] + T_{12}\\
+E[\text{state } 2] &= T_{20}\\
+E[N] &= \sum_{k=1}^{\infty} P_{10} = \frac{P_{10}}{1-P_{10}}\\
+\end{align*}
+
+\subsection{Protocollo Go-Back-N}
+
+\begin{align*}
+P = \left(\begin{array}{cc}
+p_{00} & p_{01}\\
+p_{10} & p_{11}
+\end{array}\right)\quad
+P^{(m)} = \left(\begin{array}{cc}
+p_{00}(m) & p_{01}(m)\\
+p_{10}(m) & p_{11}(m)
+\end{array}\right)
+\end{align*}
+
+Il numero medio di \emph{good slot} consecutivi è $\frac{1}{p_{01}}$ mentre il numero medio di \emph{bad slot} consecutivi è $\frac{1}{p_{10}}$.
+
+Throughput nel caso si trasmetta direttamente sul canale (senza protocollo): $thp = \pi_0 = \frac{p_{10}}{p_{10} + p_{01}}$
+
+$E[\text{tempo di ritorno in G}] = m_0 = p_{00}\cdot 1+p_{01}\left(1+\frac{m}{p_{10}(m)}\right)$
+
+\subsubsection{Forward e Feedback Perfetti}
+Il throughput è dato da
+\begin{align*}
+\lim_{t\to \infty} \frac{R(t)}{t} = \frac{p_{10}^{(m)}}{p_{10}^{(m)} + m\, p_{01}}
+\end{align*}
+
+\subsubsection{Forward Perfetto e Feedback con Errori iid}
+Se $\delta$ è l'errore nel canale di \emph{feedback} (o anche \emph{errore di ritorno}), il throughput è dato da
+\begin{align*}
+\lim_{t\to \infty} \frac{R(t)}{t} = \frac{(1-\delta)p_{10}^{(m)}}{(1-\delta)p_{10}^{(m)} + m \left[(1 - \delta)p_{01} + \delta \left( p_{01}^{(m)} + p_{10}^{(m)} \right)\right]}
+\end{align*}
+
+\subsubsection{Forward con Errori iid e Feedback Perfetto}
+Se $\epsilon$ è la probabilità degli errori sul canale \emph{forward}, il throughput è dato da
+\begin{align*}
+\lim_{t\to \infty} \frac{R(t)}{t} = \frac{1 - \epsilon}{1 - \epsilon + m\,\epsilon}
+\end{align*}
+
+\subsubsection{Forward e Feedback con Errori iid}
+Se $\delta$ è l'errore sul canale di \emph{feedback} e $\epsilon$ l'errore sul canale di \emph{forward}, il throughput è dato da
+\begin{align*}
+\lim_{t\to \infty} \frac{R(t)}{t} = \frac{(1-\delta)(1-\epsilon)}{(1-\delta)(1-\epsilon) + m \left[1-(1-\delta)(1-\epsilon)\right]}
+\end{align*}
+
 
 
 \newpage
 \section{Catene di Markov}
 
-
-\subsection{Processi di Markov}
-
-\begin{definizione}
-Un processo di Markov $\{X_t\}$ è un processo aleatorio con la proprietà che, noto il valore di $X_t$, i valori di $X_s$ per $s > t$ non sono influenzati dai valori di $X_u$ per $u < t$.
-\end{definizione}
-
-In termini formali la \textit{proprietà di Markov} afferma che
-$$
-P[X_{n+1} = j \mid X_0 = i_0,\hdots,X_{n-1} = i_{n-1}, X_n = i] = P[X_{n+1} = j \mid X_{n} = i]
-$$
-Gli stati che un processo di Markov può assumere sono spesso indicati con gli interi positivi $0,\,1,\,\hdots$. La \textit{probabilità di transizione ad un passo} (cioè la probabilità che trovandosi in uno stato $i$ all'istante $n$-esimo, all'istante successivo ci si trovi nello stato $j$) è definita come
-$$
-P_{ij}^{n,n+1} = P[X_{n+1} = j \mid X_n = i] = P_{ij}
-$$
-Considerando tutti le possibili probabilità di transizione ad un passo si ottiene la \textit{matrice di Markov} relativa al processo
-$$
-P=
-\left[\begin{array}{c c c c}
-P_{00}&P_{01}&P_{02}&\hdots\\
-P_{10}&P_{11}&P_{12}&\hdots\\
-\vdots&\vdots&\vdots&\\
-P_{i0}&P_{i1}&P_{i2}&\hdots\\
-\vdots&\vdots&\vdots&
-\end{array}\right]
-$$
-per la quale devono valere
-\begin{align}
-P_{i,j} \ge 0\qquad i,j = 0,1,2,\hdots\\
-\sum_{j = 0}^{\infty} P_{ij} = 1 \qquad i = 0,1,2,\hdots
-\end{align}
-Un processo di Markov è completamente definito dalla sua matrice. Sia $P[X_0 = i] = p_i$, allora, grazie alla proprità di Markov possiamo eseguire la seguente computazione
-\begin{align*}
-P[X_0 = i_0, X_1 = i_1,\hdots,X_n = i_n] &= P[X_0 = i_0,X_1 = i_1, \hdots,X_{n-1} = i_{n-1}] \cdot \\
-&\qquad P[X_n = i_n \mid X_0 = i_0, X_1 = i_1, \hdots, X_{n-1} = i_{n-1}]\\
-&= P[X_0= i_0, X_1 = i_1,\hdots,X_{n-1} = I_{n-1}] \cdot P_{i_{n-1}i_n}\\
-&= p_iP_{i_0i_1}P_{i_1i_2}\hdots P_{i_{n-1}i_n}
-\end{align*}
-Analizziamo ora la probabilità di transizione compiendo $n$ passi.
-$$
-P_{ij}^{(n)} = P[X_{n+m} = j \mid X_{m} = i] = P[X_n = j \mid X_0 = i]
-$$
-L'ultima uguaglienza deriva dalla \textit{proprietà di omogeneità} dei processi di Markov.
-\begin{proposizione}
-\label{mc_matrice_transizione_n_passi}
-La matrice di transizione a $n$ passi soddisfa
-$$
-P_{ij}^{(n)} = \sum_{k = 0}^{\infty} P_{ik}\,P_{kj}^{(n-1)}
-$$
-dove
-$$
-P_{ij}^{(0)} =
-\left\{\begin{array}{c l}
-1 &\quad\text{se}\;i = j\\
-0 &\quad\text{altrimenti}
-\end{array}
-$$
-\end{proposizione}
-\begin{dimostrazione*}
-\begin{align*}
-P_{ij}^{(n)} &= P[X_{n+m} = j \mid X_m = i] = P[X_n = j \mid X_0 = i]\\ 
-&= \sum_{k = 0}^{\infty} P[X_n = j, X_1 = k \mid X_0 = i]\\
-&=\sum_{k = 0}^{\infty} P[X_n = j \mid X_1 = k, X_0 = i]\cdot P[X_1 = k \mid X_0 =i]\\
-&=\sum_{k =0 }^{\infty} P[X_n = j \mid X_1 = k] \cdot P[X_1 = k \mid X_0 = i]\\
-&=\sum_{k = 0}^{\infty} P_{ik}\,P_{kj}^{(n-1)}
-\end{align*}
-\QED
-\end{dimostrazione*}
+%\subsection{Processi di Markov}
+%
+%\begin{definizione}
+%Un processo di Markov $\{X_t\}$ è un processo aleatorio con la proprietà che, noto il valore di $X_t$, i valori di $X_s$ per $s > t$ non sono influenzati dai valori di $X_u$ per $u < t$.
+%\end{definizione}
+%
+%In termini formali la \textit{proprietà di Markov} afferma che
+%$$
+%P[X_{n+1} = j \mid X_0 = i_0,\hdots,X_{n-1} = i_{n-1}, X_n = i] = P[X_{n+1} = j \mid X_{n} = i]
+%$$
+%Gli stati che un processo di Markov può assumere sono spesso indicati con gli interi positivi $0,\,1,\,\hdots$. La \textit{probabilità di transizione ad un passo} (cioè la probabilità che trovandosi in uno stato $i$ all'istante $n$-esimo, all'istante successivo ci si trovi nello stato $j$) è definita come
+%$$
+%P_{ij}^{n,n+1} = P[X_{n+1} = j \mid X_n = i] = P_{ij}
+%$$
+%Considerando tutti le possibili probabilità di transizione ad un passo si ottiene la \textit{matrice di Markov} relativa al processo
+%$$
+%P=
+%\left[\begin{array}{c c c c}
+%P_{00}&P_{01}&P_{02}&\hdots\\
+%P_{10}&P_{11}&P_{12}&\hdots\\
+%\vdots&\vdots&\vdots&\\
+%P_{i0}&P_{i1}&P_{i2}&\hdots\\
+%\vdots&\vdots&\vdots&
+%\end{array}\right]
+%$$
+%per la quale devono valere
+%\begin{align}
+%P_{i,j} \ge 0\qquad i,j = 0,1,2,\hdots\\
+%\sum_{j = 0}^{\infty} P_{ij} = 1 \qquad i = 0,1,2,\hdots
+%\end{align}
+%Un processo di Markov è completamente definito dalla sua matrice. Sia $P[X_0 = i] = p_i$, allora, grazie alla proprità di Markov possiamo eseguire la seguente computazione
+%\begin{align*}
+%P[X_0 = i_0, X_1 = i_1,\hdots,X_n = i_n] &= P[X_0 = i_0,X_1 = i_1, \hdots,X_{n-1} = i_{n-1}] \cdot \\
+%&\qquad P[X_n = i_n \mid X_0 = i_0, X_1 = i_1, \hdots, X_{n-1} = i_{n-1}]\\
+%&= P[X_0= i_0, X_1 = i_1,\hdots,X_{n-1} = I_{n-1}] \cdot P_{i_{n-1}i_n}\\
+%&= p_iP_{i_0i_1}P_{i_1i_2}\hdots P_{i_{n-1}i_n}
+%\end{align*}
+%Analizziamo ora la probabilità di transizione compiendo $n$ passi.
+%$$
+%P_{ij}^{(n)} = P[X_{n+m} = j \mid X_{m} = i] = P[X_n = j \mid X_0 = i]
+%$$
+%L'ultima uguaglienza deriva dalla \textit{proprietà di omogeneità} dei processi di Markov.
+%\begin{proposizione}
+%\label{mc_matrice_transizione_n_passi}
+%La matrice di transizione a $n$ passi soddisfa
+%$$
+%P_{ij}^{(n)} = \sum_{k = 0}^{\infty} P_{ik}\,P_{kj}^{(n-1)}
+%$$
+%dove
+%$$
+%P_{ij}^{(0)} =
+%\begin{cases}
+%1 &\quad\text{se}\;i = j\\
+%0 &\quad\text{altrimenti}
+%\end{cases}
+%$$
+%\end{proposizione}
+%\begin{dimostrazione*}
+%\begin{align*}
+%P_{ij}^{(n)} &= P[X_{n+m} = j \mid X_m = i] = P[X_n = j \mid X_0 = i]\\ 
+%&= \sum_{k = 0}^{\infty} P[X_n = j, X_1 = k \mid X_0 = i]\\
+%&=\sum_{k = 0}^{\infty} P[X_n = j \mid X_1 = k, X_0 = i]\cdot P[X_1 = k \mid X_0 =i]\\
+%&=\sum_{k =0 }^{\infty} P[X_n = j \mid X_1 = k] \cdot P[X_1 = k \mid X_0 = i]\\
+%&=\sum_{k = 0}^{\infty} P_{ik}\,P_{kj}^{(n-1)}
+%\end{align*}
+%\QED
+%\end{dimostrazione*}
 
 \subsection{Analisi di Primo Passo}
 
@@ -289,10 +536,10 @@ P[\theta_{ij} = n] = f_{ij}(n) = P[X_n = j,\,X_m \neq j,\,m = 1,\,\hdots,\,n-1 \
 \end{gather*}
 Abbiamo la relazione ricorsiva
 \begin{align*}
-f_{ij}(n) = \left\{\begin{array}{l c}
+f_{ij}(n) = \begin{cases}
 P_{ij} & n = 1\\
 \sum_{k\neq j} P_{ik}f_{kj}(n-1) & n > 1
-\end{array}
+\end{cases}
 \end{align*}\\
 
 \begin{boxedminipage}{\textwidth}
@@ -331,10 +578,10 @@ che è indipendente dallo stato iniziale della catena.\\
 \begin{proposizione}
 Sia $P$ una matrice di probabilità di transizione regolare con stati $0,1,\hdots,N$. Allora la distribuzione limite $\vec{\pi} = (\pi_0,\hdots,\pi_N)$ è l'unica soluzione non negativa del sistema
 $$
-\left\{\begin{array}{l}
+\begin{cases}
 \pi_j = \sum_{k=0}^N \pi_k P_{kj}\qquad j = 0,\hdots,N\\
 \sum_{k=0}^N \pi_k = 1
-\end{array}
+\end{cases}
 $$
 con $\pi_k = \lim_{n \to \infty} P_{ik}^{(n-1)}$.
 \end{proposizione}
@@ -366,100 +613,100 @@ Si dimostrano le proprietà di una relazione di equivalenza.
 \end{dimostrazione*}
 Una catena di Markov è detta \textit{irriducibile} se tutti gli stati comunicano tra di loro (quindi se tutti gli stati appartendono a un'unica classe di equivalenza).
 
-\subsubsection{Periodicità di una catena di Markov}
+%\subsubsection{Periodicità di una catena di Markov}
+%
+%\begin{proposizione}
+%\label{mc_periodo_prop_classe}
+%Se $i \leftrightarrow j$ allora $d(i) = d(j)$ (il periodo è una proprietà di classe).
+%\end{proposizione}
+%\begin{dimostrazione*}
+%Sia $S_i = \{s > 0 : P_{ii}^{(s)} > 0\}$. Allora esistono $m,n$ tali che
+%\begin{gather*}
+%P_{ij}^{(m)} > 0,\quad P_{ji}^{(n)} > 0\\
+%\forall\,s \in S_i,\, P_{ii}^{(s)} > 0\\
+%P_{jj}^{(n+s+m)} = \sum_{h,k}\,P_{jh}^{(n)}\,P_{hk}^{(s)}\,P_{kj}^{(m)} \ge P_{ji}^{(n)}\,P_{ii}^{(s)}\,P_{ij}^{(m)} > 0
+%\end{gather*}
+%Se $s \in S_i$ allora $n + s + m \in S_j$. Analogamente $P_{ii}^{(2s)} \ge (P_{ii}^{(s)})^2 > 0$. Quindi $n+2s+m \in S_j$ e di conseguenza $n+s+m$ è multiplo intero di $n+2s+m$.
+%$$
+%n+2s+m -n-s-m = s \in S_j
+%$$
+%Se $s \in S_i$ allora è multiplo di $d(j)$. Quindi $d(j)$ è divisore comune di $S_i$, $d(i)$ è MCD di $S_i$. Ma allora $d(i)$ è multiplo di $d(j)$. Per simmetria $d(j)$ multiplo di $d(i)$ quindi $d(i) = d(j)$.
+%\QED
+%\end{dimostrazione*}
+%
+%\subsubsection{Stati ricorrenti e stati transitori}
+%
+%\begin{proposizione}
+%\begin{gather*}
+%i \text{ ricorrente } \Leftrightarrow \sum_{n=1}^{\infty} P_{ii}^{(n)} = \infty\\
+%i \text{ transitorio } \Leftrightarrow \sum_{n=1}^{\infty} P_{ii}^{(n)} < \infty
+%\end{gather*}
+%\end{proposizione}
+%
+%\begin{proposizione}
+%\label{mc_i_comm_j_ricor}
+%Se $i \leftrightarrow j$ e $i$ ricorrente, allora anche $j$ è ricorrente.
+%\end{proposizione}
+%\begin{dimostrazione*}
+%Dall'ipotesi $i \leftrightarrow j$ sappiamo che esistono $m, n \ge 1$ tali che
+%$$
+%P_{ij}^{(n)} > 0,\quad P_{ji}^{(m)} > 0
+%$$
+%Sia $l > 0$. Sapendo che
+%$$
+%P_{jj}^{(m+n+l)} = \sum_{h,k} P_{jh}^{(m)}\,P_{hk}^{(l)}\,P_{kj}^{(n)} \ge P_{ji}^{(m)}\,P_{ii}^{(l)}\,P_{ij}^{(n)} 
+%$$
+%Sommando otteniamo
+%$$
+%\sum_{n=1}^{\infty} P_{jj}^{(n)} \ge \sum_{l =1}^{\infty} P_{jj}^{(m+n+l)} \ge P_{ji}^{(m)}\,P_{ij}^{(n)}\,\sum_{l=1}^{\infty} P_{ii}^{(l)} = \infty
+%$$
+%(La sommatoria diverge perché $i$ è ricorrente)
+%\QED
+%\end{dimostrazione*}
 
-\begin{proposizione}
-\label{mc_periodo_prop_classe}
-Se $i \leftrightarrow j$ allora $d(i) = d(j)$ (il periodo è una proprietà di classe).
-\end{proposizione}
-\begin{dimostrazione*}
-Sia $S_i = \{s > 0 : P_{ii}^{(s)} > 0\}$. Allora esistono $m,n$ tali che
-\begin{gather*}
-P_{ij}^{(m)} > 0,\quad P_{ji}^{(n)} > 0\\
-\forall\,s \in S_i,\, P_{ii}^{(s)} > 0\\
-P_{jj}^{(n+s+m)} = \sum_{h,k}\,P_{jh}^{(n)}\,P_{hk}^{(s)}\,P_{kj}^{(m)} \ge P_{ji}^{(n)}\,P_{ii}^{(s)}\,P_{ij}^{(m)} > 0
-\end{gather*}
-Se $s \in S_i$ allora $n + s + m \in S_j$. Analogamente $P_{ii}^{(2s)} \ge (P_{ii}^{(s)})^2 > 0$. Quindi $n+2s+m \in S_j$ e di conseguenza $n+s+m$ è multiplo intero di $n+2s+m$.
-$$
-n+2s+m -n-s-m = s \in S_j
-$$
-Se $s \in S_i$ allora è multiplo di $d(j)$. Quindi $d(j)$ è divisore comune di $S_i$, $d(i)$ è MCD di $S_i$. Ma allora $d(i)$ è multiplo di $d(j)$. Per simmetria $d(j)$ multiplo di $d(i)$ quindi $d(i) = d(j)$.
-\QED
-\end{dimostrazione*}
-
-\subsubsection{Stati ricorrenti e stati transitori}
-
-\begin{proposizione}
-\begin{gather*}
-i \text{ ricorrente } \Leftrightarrow \sum_{n=1}^{\infty} P_{ii}^{(n)} = \infty\\
-i \text{ transitorio } \Leftrightarrow \sum_{n=1}^{\infty} P_{ii}^{(n)} < \infty
-\end{gather*}
-\end{proposizione}
-
-\begin{proposizione}
-\label{mc_i_comm_j_ricor}
-Se $i \leftrightarrow j$ e $i$ ricorrente, allora anche $j$ è ricorrente.
-\end{proposizione}
-\begin{dimostrazione*}
-Dall'ipotesi $i \leftrightarrow j$ sappiamo che esistono $m, n \ge 1$ tali che
-$$
-P_{ij}^{(n)} > 0,\quad P_{ji}^{(m)} > 0
-$$
-Sia $l > 0$. Sapendo che
-$$
-P_{jj}^{(m+n+l)} = \sum_{h,k} P_{jh}^{(m)}\,P_{hk}^{(l)}\,P_{kj}^{(n)} \ge P_{ji}^{(m)}\,P_{ii}^{(l)}\,P_{ij}^{(n)} 
-$$
-Sommando otteniamo
-$$
-\sum_{n=1}^{\infty} P_{jj}^{(n)} \ge \sum_{l =1}^{\infty} P_{jj}^{(m+n+l)} \ge P_{ji}^{(m)}\,P_{ij}^{(n)}\,\sum_{l=1}^{\infty} P_{ii}^{(l)} = \infty
-$$
-(La sommatoria diverge perché $i$ è ricorrente)
-\QED
-\end{dimostrazione*}
-
-\subsection{Teorema Fondamentale delle Catene di Markov}
-
-Ricordiamo che
-\begin{align*}
-f_{ii}^{(n)} &= P[X_n = i, X_m \neq i, m = 1,\hdots,n-1 \mid X_0 = i]\\
-&= P[R_i = n \mid X_0 = i] \quad \text{ con } \quad R_i = \min\{n \ge 1\;;\; X_n = i\}
-\end{align*}
-La durata media tra due visite è quindi definita come
-\begin{gather}
-m_i = E[R_i \mid X_0 = i] = \sum_{n = 1}^{\infty} n \, f_{ii}^{(n)}
-\end{gather}
-\begin{definizione}
-Se $m_i < \infty$ allora $i$ si dice \emph{ricorrente positivo} ($\pi_i > 0$) mentre se $m_i = \infty$ allora $i$ si rice \emph{ricorrente nullo} ($\pi_i = 0$). 
-\end{definizione}
-
-\begin{proposizione}
-\label{mc_teorema_limite_fondamentale}
-Consideriamo una catena di Markov aperiodica, irriducibile, ricorrente. Sia $P_{ii}^{(n)}$ la probabilità di essere nello stato $i$ alla transizione $n$-esima per $n=0,1,2,\hdots$ e sia dato lo stato iniziale $X_0 = i$ (per convenzione si assume $P_{ii}^{(0)} = 1$). Sia $f_{ii}^{(n)}$ la probabilità di primo ritorno allo stato $i$ nella stansizione $n$-esima, dove $f_{ii}^{(0)} = 0$. Allora
-\begin{align}
-\lim_{n\to \infty} P_{ii}^{(n)} = \frac{1}{\sum_{n=0}^{\infty} n\,f_{ii}^{(n)}} = \frac{1}{m_i}
-\end{align}
-Sotto le medesime condizioni abbiamo anche che
-\begin{align}
-\lim_{n\to\infty} P_{ji}^{(n)} = \lim_{n\to\infty} P_{ii}^{(n)}\quad \forall\,j
-\end{align}
-\end{proposizione}
-
-\begin{proposizione}
-\label{mc_numero_finito_di stati}
-In una catena di Markov con un numero finito di stati deve esserci almeno uno stato ricorrente positivo.
-\end{proposizione}
-\begin{dimostrazione*}
-(Per assurdo) Supponiamo che tutti gli stati siano transitori o ricorrenti nulli, quindi
-$$
-1 = \sum_{j=0}^N P_{ij}^{(n)}\quad \forall\,n,\,i
-$$
-Per $n \to \infty$:
-$$
-1 = \lim_{n \to \infty} \sum_{j=0}^N P_{ij}^{(n)}=\sum_{j=0}^N \lim_{n\to \infty} P_{ij}^{n} = 0
-$$
-Assurdo.
-\QED
-\end{dimostrazione*}
+%\subsection{Teorema Fondamentale delle Catene di Markov}
+%
+%Ricordiamo che
+%\begin{align*}
+%f_{ii}^{(n)} &= P[X_n = i, X_m \neq i, m = 1,\hdots,n-1 \mid X_0 = i]\\
+%&= P[R_i = n \mid X_0 = i] \quad \text{ con } \quad R_i = \min\{n \ge 1\;;\; X_n = i\}
+%\end{align*}
+%La durata media tra due visite è quindi definita come
+%\begin{gather}
+%m_i = E[R_i \mid X_0 = i] = \sum_{n = 1}^{\infty} n \, f_{ii}^{(n)}
+%\end{gather}
+%\begin{definizione}
+%Se $m_i < \infty$ allora $i$ si dice \emph{ricorrente positivo} ($\pi_i > 0$) mentre se $m_i = \infty$ allora $i$ si rice \emph{ricorrente nullo} ($\pi_i = 0$). 
+%\end{definizione}
+%
+%\begin{proposizione}
+%\label{mc_teorema_limite_fondamentale}
+%Consideriamo una catena di Markov aperiodica, irriducibile, ricorrente. Sia $P_{ii}^{(n)}$ la probabilità di essere nello stato $i$ alla transizione $n$-esima per $n=0,1,2,\hdots$ e sia dato lo stato iniziale $X_0 = i$ (per convenzione si assume $P_{ii}^{(0)} = 1$). Sia $f_{ii}^{(n)}$ la probabilità di primo ritorno allo stato $i$ nella stansizione $n$-esima, dove $f_{ii}^{(0)} = 0$. Allora
+%\begin{align}
+%\lim_{n\to \infty} P_{ii}^{(n)} = \frac{1}{\sum_{n=0}^{\infty} n\,f_{ii}^{(n)}} = \frac{1}{m_i}
+%\end{align}
+%Sotto le medesime condizioni abbiamo anche che
+%\begin{align}
+%\lim_{n\to\infty} P_{ji}^{(n)} = \lim_{n\to\infty} P_{ii}^{(n)}\quad \forall\,j
+%\end{align}
+%\end{proposizione}
+%
+%\begin{proposizione}
+%\label{mc_numero_finito_di stati}
+%In una catena di Markov con un numero finito di stati deve esserci almeno uno stato ricorrente positivo.
+%\end{proposizione}
+%\begin{dimostrazione*}
+%(Per assurdo) Supponiamo che tutti gli stati siano transitori o ricorrenti nulli, quindi
+%$$
+%1 = \sum_{j=0}^N P_{ij}^{(n)}\quad \forall\,n,\,i
+%$$
+%Per $n \to \infty$:
+%$$
+%1 = \lim_{n \to \infty} \sum_{j=0}^N P_{ij}^{(n)}=\sum_{j=0}^N \lim_{n\to \infty} P_{ij}^{n} = 0
+%$$
+%Assurdo.
+%\QED
+%\end{dimostrazione*}
 
 
 \newpage
@@ -529,7 +776,7 @@ Quindi possiamo generalizzare il procedimento per qualunque $s_i$.
 
 \begin{proposizione}
 \label{pp_dens_congiunta_variabili}
-Siano $W_1,W_2,\hdtos$ i tempi di occorrenza in un processo di Poisson con $\lambda > 0$. Dato $N(t) =n$, la densità congiunta delle variabili $W_1,W_2,\hdtos,W_n$ è
+Siano $W_1,W_2,\hdots$ i tempi di occorrenza in un processo di Poisson con $\lambda > 0$. Dato $N(t) =n$, la densità congiunta delle variabili $W_1,W_2,\hdots,W_n$ è
 \begin{align*}
 f_{W_1,W_2,...,W_n}(w_1,w_2,\hdots,w_n) = \frac{n!}{t^n}\quad\text{ con }\quad 0<w_1<w_2<\hdots<w_n\le t
 \end{align*}
@@ -553,39 +800,14 @@ Una proprietà significativa
 P[X_1(t) = k \mid X_1(t) + X_2(t) = n] = \frac{n!}{k!(n-k)!}\left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^k\left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)^{n-k}
 \end{align}
 \end{boxedminipage}
-\bigbreak
-\begin{boxedminipage}{\textwidth}
-\textbf{IMPORTANTE.} Supponiamo di fornire un servizio al quale arrivano richeste secondo una distribuzione di Poisson con parametro $\lambda$. Ogni richiesta ha durata $Y_1,Y_2,\hdots$, variabili aleatorie con funzione di distribuzione comune $G(y) = P[Y_k \le y]$. Gli arrivi sono invece regolati dalle variabili $W_1,W_2,\hdots$ \textit{che possiamo far diventare variabili aleatorie uniformi}.\\
-Sia $M(t)$ una variabile che conta le richieste attive in un dato istante $t$ con $M(0) = 0$ e sia $X(t)$ il numero totale di richieste arrivate fino all'istante $t$. Allora
-\begin{align*}
-M(t) &= \sum_{k=1}^{X(t)} \textbf{1}\{W_k + Y_k \ge t\}
-\end{align*}
-Sia
-\begin{align*}
-p &= P[U_k + Y_k \ge t] = \frac{1}{t}\int_0^t P[Y_k \ge t - u]\,du\\
-&= \frac{1}{t}\int_0^t [1-G(t-u)]\,du = \frac{1}{t} \int_0^t [1-G(z)]\,dz
-\end{align*}
-Conoscendo il numero $n$ di richieste totali fino all'istante $t$, la probabilità condizionata fornisce
-\begin{align*}
-P[M(t) = m \mid X(t) = n] = \frac{n!}{m!(n-m)!} p^m (1-p)^{n-m}
-\end{align*}
-mentre
-\begin{align*}
-P[M(t) = m] = e^{-\lambda\,p\,t}\frac{(\lambda\,p\,t)^m}{m!}
-\end{align*}
-Il numero di richieste esistenti al tempo $t$ è un processo di Poisson con media
-\begin{align*}
-E[M(t)] &= \lambda\,p\,t\\
-&= \lambda \int_0^t [1-G(z)]\,dz
-\end{align*}
-\end{boxedminipage}
+
 
 
 \newpage
 \section{Processi di Rinnovamento}
 
-
 \subsection{Definizione di Processi di Rinnovamento e Concetti Correlati}
+
 \begin{definizione}
 Uno processo contatore (di rinnovamento) è un processo stocastico non negativo a valori interi denominato con $N(t), t \ge 0$. Il processo registra le occorrenze successive di un evento nell'intervallo temporale $(0,t]$, dove i tempi tra eventi consecutivi sono variabili aleatorie i.i.d positive.
 \begin{itemize}
@@ -708,10 +930,10 @@ Sappiamo che $t<S_{N(t)+1}$, usando $E[S_{N(t)+1}] = E[X_1]\cdot[M(t)+1]$ otteni
 \end{gather*}
 Sia
 \begin{align*}
-X_i^c = \left\{\begin{array}{l l}
+X_i^c = \begin{cases}
 X_i & \text{ se } X_i \le c\\
 0 & \text{ se } X_i > c
-\end{array}
+\end{cases}
 \end{align*}
 \emph{(Stuff)}.
 \begin{gather*}
@@ -736,65 +958,67 @@ Non resta che verificare che $\mu_c$ tende a $\mu$. Abbiamo che \emph{(con grafi
 \end{dimostrazione*}
 
 
-\newpage
-\section{Altri Concetti Utili all'Analisi}
 
-\subsection{Processi Semi-Markoviani}
+%\newpage
+%\section{Altri Concetti Utili all'Analisi}
+%
+%\subsection{Processi Semi-Markoviani}
+%
+%Un processo semi-markoviano cambia stato in accordo ad una catena di Markov ma la transizione da uno stato $i$ ad uno stato $j$ richiede una quantità casuale di tempo.
+%\begin{enumerate}
+%    \item Se $i$ è lo stato corrente, lo stato successivo sarà $j$ con probabilità $P_{ij}$.
+%    \item Sapendo che lo stato corrente è $i$ e il prossimo stato sarà $j$, il tempo necessario alla transizione ha distribuzione $F_{ij}(t)$.
+%\end{enumerate}
+%Sia quindi $Z(t)$ lo stato all'istante $t$, $\{Z(t),t\ge 0\}$ è un processo semi-markoviano mentre $\{X_n, n\ge 0\}$ è detta \emph{catena inclusa nel processo} (embedded chain).
+%
+%Distribuzione del tempo associato alla visita dello stato $i$-esimo.
+%\begin{align}
+%H_i(t) = \sum_j = P_{ij}F_{ij}(t)
+%\end{align}
+%
+%Tempo medio che trascorro nello stato $i$-esimo prima della transizione.
+%\begin{align}
+%\mu_i =\int_0^{\infty} x\,dH_i(x)
+%\end{align}
+%
+%Sia $T_{ii}$ il tempo tra due passaggi nello stato $i$-esimo, allora $\mu_{ii} = E[T_{ii}]$.
+%
+%\begin{proposizione}
+%Se il processo $Z$ è irriducibile e $E[T_{ii}] < \infty$ allora
+%\begin{align}
+%P_i = \lim_{t\to\infty} P[Z(t) = i\mid Z(0) = j] = \frac{\mu_i}{\mu_{ii}}
+%\end{align}
+%\end{proposizione}
+%
+%\begin{proposizione}
+%Con probabilità $1$ vale
+%\begin{align}
+%\lim_{t\to\infty} \frac{\text{tempo speso in $i$ durante $[0,t]$}}{t} = \frac{\mu_i}{\mu_{ii}}
+%\end{align}
+%\end{proposizione}
+%
+%\begin{proposizione}
+%Se la catena inclusa nel processo è ricorrente positiva, allora
+%\begin{align}
+%P_j = \frac{\pi_j \mu_j}{\sum_i \pi_i \mu_i}
+%\end{align}
+%dove $\pi$ è la distribuzione asintotica della catena inclusa.
+%\end{proposizione}
+%
+%\begin{boxedminipage}{\textwidth}
+%\textbf{IMPORTANTE.} Sia $P$ la matrice della catena di markov inclusa e $T$ la matrice dei tempi medi associati alle transizioni ($T_{ij}$ è il tempo medio che il processo impiega per andare dallo stato $i$ allo stato $j$). Allora i tempi medi di permanenza sono dati da
+%\begin{align*}
+%\mu_i = \sum_i P_{ij}T_{ij}
+%\end{align*}
+%\end{boxedminipage}
 
-Un processo semi-markoviano cambia stato in accordo ad una catena di Markov ma la transizione da uno stato $i$ ad uno stato $j$ richiede una quantità casuale di tempo.
-\begin{enumerate}
-    \item Se $i$ è lo stato corrente, lo stato successivo sarà $j$ con probabilità $P_{ij}$.
-    \item Sapendo che lo stato corrente è $i$ e il prossimo stato sarà $j$, il tempo necessario alla transizione ha distribuzione $F_{ij}(t)$.
-\end{enumerate}
-Sia quindi $Z(t)$ lo stato all'istante $t$, $\{Z(t),t\ge 0\}$ è un processo semi-markoviano mentre $\{X_n, n\ge 0\}$ è detta \emph{catena inclusa nel processo} (embedded chain).
-
-Distribuzione del tempo associato alla visita dello stato $i$-esimo.
-\begin{align}
-H_i(t) = \sum_j = P_{ij}F_{ij}(t)
-\end{align}
-
-Tempo medio che trascorro nello stato $i$-esimo prima della transizione.
-\begin{align}
-\mu_i =\int_0^{\infty} x\,dH_i(x)
-\end{align}
-
-Sia $T_{ii}$ il tempo tra due passaggi nello stato $i$-esimo, allora $\mu_{ii} = E[T_{ii}]$.
-
-\begin{proposizione}
-Se il processo $Z$ è irriducibile e $E[T_{ii}] < \infty$ allora
-\begin{align}
-P_i = \lim_{t\to\infty} P[Z(t) = i\mid Z(0) = j] = \frac{\mu_i}{\mu_{ii}}
-\end{align}
-\end{proposizione}
-
-\begin{proposizione}
-Con probabilità $1$ vale
-\begin{align}
-\lim_{t\to\infty} \frac{\text{tempo speso in $i$ durante $[0,t]$}}{t} = \frac{\mu_i}{\mu_{ii}}
-\end{align}
-\end{proposizione}
-
-\begin{proposizione}
-Se la catena inclusa nel processo è ricorrente positiva, allora
-\begin{align}
-P_j = \frac{\pi_j \mu_j}{\sum_i \pi_i \mu_i}
-\end{align}
-dove $\pi$ è la distribuzione asintotica della catena inclusa.
-\end{proposizione}
-
-\begin{boxedminipage}{\textwidth}
-\textbf{IMPORTANTE.} Sia $P$ la matrice della catena di markov inclusa e $T$ la matrice dei tempi medi associati alle transizioni ($T_{ij}$ è il tempo medio che il processo impiega per andare dallo stato $i$ allo stato $j$). Allora i tempi medi di permanenza sono dati da
-\begin{align*}
-\mu_i = \sum_i P_{ij}T_{ij}
-\end{align*}
-\end{boxedminipage}
 
 
 \newpage
 \section{Analisi di Code e Protocolli}
 
-
 \subsection{Coda M/G/1}
+
 \begin{itemize}
     \item $M$, la distribuzione degli arrivi è esponenziale, quindi gli arrivi sono un processo di Poisson;
     \item $G$, i server hanno distribuzione generica $G$;
@@ -802,10 +1026,10 @@ dove $\pi$ è la distribuzione asintotica della catena inclusa.
 \end{itemize}
 Non si tratta di un processo di Markov, è necessario adottare delle ipotesi semplificatrici. Sia $X_n$ la variabile che conta il numero di elementi in coda nell'$n$-esimo slot di tempo e sia $Y_n$ la variabile che indica il numero di arrivi durante il tempo di servizio tra $t_n$ e $t_{n+1}$, allora
 \begin{align*}
-X_{n+1} = \left\{\begin{array}{l l}
+X_{n+1} = \begin{cases}
 X_n - 1 + Y_n & \text{ se } X_n > 0\\
 Y_n & \text{ se } X_n = 0
-\end{array}
+\end{cases}
 \end{align*}
 Essendo gli arrivi un processo di Poisson sono tra loro indipendenti, la probabilità che in uno slot temporale di durata $x$ arrivino $j$ nuovi pacchetti è
 \begin{align*}
@@ -816,10 +1040,10 @@ a_j &= P[Y_n = j]\\
 \end{align*}
 Da questa probabilità si possono derivare le probabilità di transizione di $X$
 \begin{align*}
-P_{ij} = P[Y_n = j -i + 1] = \left\{\begin{array}{l l}
+P_{ij} = P[Y_n = j -i + 1] = \begin{cases}
 \int_0^{\infty} e^{-\lambda x} \frac{(\lambda x)^j}{j!}\, dG(x) & i \ge 1,\;j \ge i-1\\
 0 & j < i -1
-\end{array}
+\end{cases}
 \end{align*}
 
 La matrice del processo sarà quindi
@@ -833,18 +1057,15 @@ a_0 & a_1 & a_2 & \hdots \\
 \end{array}\right]
 \end{align*}
 
-
-\subsection{Coda G/M/1}
-
 \subsection{Esempi di Protocolli di Livello 2 e 4}
 
 \subsubsection{Protocollo 1}
 All'inizio di ogni slot temporale trasmetto il contenuto del buffer fino ad un massimo di $M$ pacchetti.
 \begin{align*}
-X_{n+1} = \left\{\begin{array}{l l}
+X_{n+1} = \begin{cases}
 Y_n & \text{ se } X_n \le M\\
 X_n - M + Y_n & \text{ se } X_n > M
-\end{array}
+\end{cases}
 \end{align*}
 
 \subsubsection{Protocollo 2}
@@ -852,78 +1073,76 @@ All'inizio di ogni slot temporale trasmetto il contenuto del buffer solo se sono
 \begin{itemize}
     \item trasmetto tutto il contenuto del buffer
 \begin{align*}
-X_{n+1} = \left\{\begin{array}{l l}
+X_{n+1} = \begin{cases}
 Y_n & \text{ se } X_n \ge m\\
 X_n + Y_n & \text{ se } X_n < m
-\end{array}
+\end{cases}
 \end{align*}
 
     \item trasmetto fino ad un massimo di $M \ge m$ pacchetti
 \begin{align*}
-X_{n+1} = \left\{\begin{array}{l l}
+X_{n+1} = \begin{cases}
 X_n + Y_n & \text{ se } X_n < m\\
 Y_n & \text{ se } m \le X_n \le M\\
 X_n - M + Y_n & \text{ se } X_n > M
-\end{array}
+\end{cases}
 \end{align*}
 \end{itemize}
 
-\subsection{ALOHA}
-
-\subsection{Go-Back-N}
-
-Si tratta di un protocollo di livello $2$ che si impegna a ritrasmettere i pacchetti corrotti. Il canale di trasmissione può assumere due stati:
-\begin{itemize}
-    \item \emph{good}, indicato con $0$ o con \textbf{G};
-    \item \emph{bad}, indicato con $1$ o con \textbf{B}.
-\end{itemize}
-Quando una trasmisione non è buona (\textbf{B}) si ritrasmette lo stesso pacchetto dopo $m-1$ slot temporali. $m$ è il tempo di \emph{round-trip}.\\
-Siamo interessati a calcolare il throughput
-\begin{align*}
-\text{throughput} = \frac{\text{\# slot buoni}}{\text{\# totale di slot}} = \lim_{t\to\infty}\frac{N(t)}{t}
-\end{align*}
-Si tratta di un canale con memoria. Metrica del tempo:
-\begin{itemize}
-    \item $1$ per stato \textbf{G} (durata $1$ se esco dallo stato buono);
-    \item $m$ per stato \textbf{B} (durata $m$ se esco dallo stato non buono).
-\end{itemize}
-Metrica di successo:
-\begin{itemize}
-    \item $R_G = 1$ per stato \textbf{G};
-    \item $R_B = 0$ per stato \textbf{B}.
-\end{itemize}
-Matrice della catena di Markov inclusa:
-\begin{align*}
-P = \left[\begin{array}{c c}
-p_{00} & p_{01}\\
-p_{10}(m) & p_{11}(m)
-\end{array}\right]
-\end{align*}
-Quindi le distribuzioni asintotiche dei due stati risultano essere
-\begin{gather*}
-\pi_G = \frac{p_{10}(m)}{p_{01} + p_{10}(m)} \quad \pi_B = \frac{p_{01}}{p_{01} + p_{10}(m)}
-\end{gather*}
-mentre il throughput vale
-\begin{align*}
-\text{throughput} &= \frac{\pi_G R_G + \pi_B R_B}{\pi_G T_G + \pi_B T_B}\\
-&= \frac{p_{10}(m)}{p_{10}(m) + m\,p_{01}}
-\end{align*}
-Supponiamo ora che esista un canale di ritorno per fornire un feedback, con probabilità di errore $\delta$. Con i nuovi stati \textbf{$G_0$}, \textbf{$G_1$}, \textbf{B} la matrice di transizione diventa
-\begin{align*}
-P = \left[\begin{array}{c c c}
-(1-\delta)\,p_{00} & \delta\,p_{00} & p_{01}\\
-(1-\delta)\,p_{00}(m) & \delta\,p_{00}(m) & p_{01}(m)\\
-(1-\delta)\,p_{10}(m) & \delta\,p_{10}(m) & p_{11}(m)\\
-\end{array}\right]
-\end{align*}
-Ora le probabilità stazionarie valgono
-\begin{gather*}
-\pi_{G_1} = \pi_{G_0}\frac{\delta}{1-\delta} \quad \pi_B = 1-\frac{\pi_{G_0}}{1-\delta} \quad \pi_{G_0} = \frac{(1-\delta)\,p_{10}(m)}{(1-\delta)\,p_{01} + \delta\,p_{01}(m) + p_{10}(m)} 
-\end{gather*}
-mentre il throughput
-\begin{gather*}
-\text{throughput} = \frac{\pi_{G_0}}{\pi_{G_0} + m\,(1-\pi_{G_0})}
-\end{gather*}
+%\subsection{Go-Back-N}
+%
+%Si tratta di un protocollo di livello $2$ che si impegna a ritrasmettere i pacchetti corrotti. Il canale di trasmissione può assumere due stati:
+%\begin{itemize}
+%    \item \emph{good}, indicato con $0$ o con \textbf{G};
+%    \item \emph{bad}, indicato con $1$ o con \textbf{B}.
+%\end{itemize}
+%Quando una trasmisione non è buona (\textbf{B}) si ritrasmette lo stesso pacchetto dopo $m-1$ slot temporali. $m$ è il tempo di \emph{round-trip}.\\
+%Siamo interessati a calcolare il throughput
+%\begin{align*}
+%\text{throughput} = \frac{\text{\# slot buoni}}{\text{\# totale di slot}} = \lim_{t\to\infty}\frac{N(t)}{t}
+%\end{align*}
+%Si tratta di un canale con memoria. Metrica del tempo:
+%\begin{itemize}
+%    \item $1$ per stato \textbf{G} (durata $1$ se esco dallo stato buono);
+%    \item $m$ per stato \textbf{B} (durata $m$ se esco dallo stato non buono).
+%\end{itemize}
+%Metrica di successo:
+%\begin{itemize}
+%    \item $R_G = 1$ per stato \textbf{G};
+%    \item $R_B = 0$ per stato \textbf{B}.
+%\end{itemize}
+%Matrice della catena di Markov inclusa:
+%\begin{align*}
+%P = \left[\begin{array}{c c}
+%p_{00} & p_{01}\\
+%p_{10}(m) & p_{11}(m)
+%\end{array}\right]
+%\end{align*}
+%Quindi le distribuzioni asintotiche dei due stati risultano essere
+%\begin{gather*}
+%\pi_G = \frac{p_{10}(m)}{p_{01} + p_{10}(m)} \quad \pi_B = \frac{p_{01}}{p_{01} + p_{10}(m)}
+%\end{gather*}
+%mentre il throughput vale
+%\begin{align*}
+%\text{throughput} &= \frac{\pi_G R_G + \pi_B R_B}{\pi_G T_G + \pi_B T_B}\\
+%&= \frac{p_{10}(m)}{p_{10}(m) + m\,p_{01}}
+%\end{align*}
+%Supponiamo ora che esista un canale di ritorno per fornire un feedback, con probabilità di errore $\delta$. Con i nuovi stati \textbf{$G_0$}, \textbf{$G_1$}, \textbf{B} la matrice di transizione diventa
+%\begin{align*}
+%P = \left[\begin{array}{c c c}
+%(1-\delta)\,p_{00} & \delta\,p_{00} & p_{01}\\
+%(1-\delta)\,p_{00}(m) & \delta\,p_{00}(m) & p_{01}(m)\\
+%(1-\delta)\,p_{10}(m) & \delta\,p_{10}(m) & p_{11}(m)\\
+%\end{array}\right]
+%\end{align*}
+%Ora le probabilità stazionarie valgono
+%\begin{gather*}
+%\pi_{G_1} = \pi_{G_0}\frac{\delta}{1-\delta} \quad \pi_B = 1-\frac{\pi_{G_0}}{1-\delta} \quad \pi_{G_0} = \frac{(1-\delta)\,p_{10}(m)}{(1-\delta)\,p_{01} + \delta\,p_{01}(m) + p_{10}(m)} 
+%\end{gather*}
+%mentre il throughput
+%\begin{gather*}
+%\text{throughput} = \frac{\pi_{G_0}}{\pi_{G_0} + m\,(1-\pi_{G_0})}
+%\end{gather*}
 
 
 \newpage
@@ -934,14 +1153,36 @@ mentre il throughput
 
 \subsubsection{Compito 22 settembre 2005}
 \begin{enumerate}
-    \item\begin{enumerate}[label=\alph*)]
-        \item $\vec{\pi} = (\frac{40}{72},\frac{15}{72},\frac{17}{72})$
-        \item $m_{31}=1$, $v_{31}=0$
-        \item $m_{13}=\frac{55}{17}$, $v_{13}=\frac{1490}{289}$
-        \item $P[X_1 = 1, X_3 = 1\mid X_2 = 2] = \frac{1}{5}$, $P[X_2 = 2\mid X_1 = 1, X_3 = 1] = \frac{2}{17}$
+
+	% ESERCIZIO 1
+    \item Si consideri la catena di Markov $X(t)$ con stati 1, 2, 3 e $X(0) = 3$ e matrice di transizione
+    \begin{align*}
+    P = \left(\begin{array}{c c c}
+    0.5 & 0.3 & 0.2\\
+    0.2 & 0.2 & 0.6\\
+    1 & 0 & 0
+    \end{array}\right)
+    \end{align*}
+    		
+    		\begin{enumerate}[label=\alph*)]
+        \item Si calcolino le probabilità stazionarie e i tempi medi di ricorrenza di tutti gli stati.\\
+        
+        Risposte: $\vec{\pi} = (\frac{40}{72},\frac{15}{72},\frac{17}{72})$
+        \item Si calcolino la media e la varianza del tempo di primo passaggio dallo stato 3 allo stato 1.\\
+        
+        Risposte: $m_{31}=1$, $v_{31}=0$
+        \item Si calcolino la media e la varianza del tempo di primo passaggio dallo stato 1 allo stato 3.\\
+        
+        Risposte: $m_{13}=\frac{55}{17}$, $v_{13}=\frac{1490}{289}$
+        \item Si calcolino $P[X(1) = 1, X(3) = 1\mid X(2) = 2] = \frac{1}{5}$ e $P[X(2) = 2\mid X(1) = 1, X(3) = 1] = \frac{2}{17}$
     \end{enumerate}
 
-    \item Risoluzione come processo semi-markoviano. Le matrici incluse e dei tempi sono rispettivamente:
+	% ESERCIZIO 2
+    \item Si consideri una coda alla quale arrivano pacchetti secondo un processo di Poisson di intensità $\lambda = 1$ pacchetto al secondo.
+    Tutti i pacchetti presenti nella coda vengono trasmessi quando si verifica uno dei seguenti eventi: i) ci sono due pacchetti in coda, ii) c'è un solo pacchetto e il suo tempo d'attesa è pari a 2 secondi.
+    La trasmissione è istantanea.\\
+    
+    Risoluzione come processo semi-markoviano. Le matrici incluse e dei tempi sono rispettivamente:
     \begin{align*}
     P=\left[\begin{array}{c c c}
     0 & 1 & 0\\
@@ -955,71 +1196,158 @@ mentre il throughput
     0 & -& -
     \end{array}\right]
     \end{align*}
-    dove $\alpha =P[X(2)=0]$ è la probabilità che non arrivi alcun pacchetto entro $2$ secondi, mentre $\beta$ è il tempo medio che il secondo pacchetto impiega per arrivare, essendo noto che questo arrivi, quindi
+    dove $\alpha =P[X(2)=0] = e^{-2\lambda}$ è la probabilità che non arrivi alcun pacchetto entro $2$ secondi, mentre $\beta$ è il tempo medio che il secondo pacchetto impiega per arrivare, essendo noto che questo arrivi, quindi
     \begin{align*}
     \beta &= E[\text{ tempo arrivo pacchetto }\mid\text{ il pacchetto arriva }]\\
     &= \frac{1}{1-e^{-2\lambda}}\int_0^2x\lambda e^{x\lambda}\,dx\\
     &= \frac{1-3e^{-2\lambda}}{1-e^{-2\lambda}}
     \end{align*}
     \begin{enumerate}[label=\alph*)]
-        \item La frazione di tempo in cui la coda è vuota vale $\frac{\mu_0}{\mu_0+\mu_1+\mu_2}=\frac{1}{2-e^{-2}}$.
-        \item $E[\text{ ritardo }] P[\text{ coda piena }] = 1 - \frac{1}{2-e^{-2}} = \frac{1-e^{-2}}{2-e^{-2}}$.
+        \item Si calcoli la percentiale di tempo durante la quale la coda è vuota.\\
+        
+        Risposta: $\frac{\mu_0}{\mu_0+\mu_1+\mu_2}=\frac{1}{2-e^{-2}}$.
+        \item Si calcoli la media del ritardo di un pacchetto (cioè il tempo medio speso in coda).\\
+        
+        Risposta: $E[\text{ ritardo }] P[\text{ coda piena }] = 1 - \frac{1}{2-e^{-2}} = \frac{1-e^{-2}}{2-e^{-2}}$.
+    \end{enumerate}
+    
+    Con un ragionamento alternativo posso calcolare il valore atteso del tempo in cui la coda è piena.
+    Sapendo che i tempi di interarrivo di una Poisson sono variabili esponenziali, bisogna integrare tra 0 e 2 (cioè tutti i valori di tempo in cui la coda può essere piena).
+    Abbiamo quindi
+    \begin{align*}
+    E[T_{\text{coda piena}}] = \int_0^2 \lambda e^{-\lambda t}\,dt = \left[ e^{-\lambda t} \right]_0^2 = 1 - e^{-2\lambda}
+    \end{align*}
+    Poiché gli intervalli sono variabili esponenziali il tempo medio in cui la coda resta vuota è
+    \begin{align*}
+    E[T_{\text{coda vuota}}] = \frac{1}{\lambda}
+    \end{align*}
+    \begin{enumerate}[label=\alph*)]
+        \item Si calcoli la percentiale di tempo durante la quale la coda è vuota.\\
+        
+        Risposta: $\frac{E[T_{\text{coda vuota}}]}{E[T_{\text{coda vuota}}] + E[T_{\text{coda piena}}]} = \frac{1}{2-e^{-2}}$.
+        \item Si calcoli la media del ritardo di un pacchetto (cioè il tempo medio speso in coda).\\
+        
+        Risposta: $E[\text{ ritardo }] = E[T_{\text{totale}}] \cdot P[\text{ coda vuota }] + 0\cdot P[\text{ coda piena }]$.
     \end{enumerate}
 
-    \item\begin{enumerate}[label=\alph*)]
-        \item $E[X(\frac{1}{10})] = 10(1-e^{-1})$, $E[X(\frac{1}{6})] = 10(1-e^{-5/3})$, $\lim_{t\to\infty}E[X(t)] = 10$, 
-        \item $P[X(\frac{1}{10})=10]=e^{-r}\frac{r^{10}}{10!} = 0.05$, con $r=10(1-e^{-1})$, $\lim_{t\to\infty}P[X(t) = 10] = e^{\lambda / \mu}\frac{(\lambda / \mu)^{10}}{10!}= 0.125$.
+	% ESERCIZIO 3
+    \item \emph{(Coda $M/G/\infty$)} Si consideri un sistema di trasmissione a divisione di frequenza in cui il numero di canali è sufficientemente elevato da trascurare la probabilità che tutti siano occupati.
+    A tale sistema arrivano richieste di connessione secondo un processo di Poisson di intensità $\lambda = 100$ chiamate all'ora e la durata di ciascuna chiamata è esponenziale con media 6 minuti.
+    Sia $X(t)$ il numero di canali occupati al tempo $t$.
+    \begin{enumerate}[label=\alph*)]
+        \item Si calcoli la media di $X(t)$ per $t=6,10$ minuti e per $t=\infty$.\\
+        
+        Risposta: $E[X(\frac{1}{10})] = 10(1-e^{-1})$, $E[X(\frac{1}{6})] = 10(1-e^{-5/3})$, $\lim_{t\to\infty}E[X(t)] = 10$, 
+        
+        \item Si calcoli $P[X(t)=10]$ per $t=6$ e per $t=\infty$.\\
+        
+        Risposta: $P[X(\frac{1}{10})=10]=e^{-r}\frac{r^{10}}{10!} = 0.05$, con $r=10(1-e^{-1})$, $\lim_{t\to\infty}P[X(t) = 10] = e^{\lambda / \mu}\frac{(\lambda / \mu)^{10}}{10!}= 0.125$.
         \item
         \begin{align*}
-        \lambda p t = \left\{\begin{array}{l l}
+        \lambda p t = \begin{cases}
         \lambda t & t < 2\\
-        \lambda \int_2^t \left(1-\frac{z-2}{8}\right)\,dz & 2\le t\le10\\
+        \lambda t + \lambda \int_2^t \left(1-\frac{z-2}{8}\right)\,dz & 2\le t\le10\\
         6\lambda & t > 10
-        \end{array}
+        \end{cases}
         \end{align*}
         Quindi $E[X(6)] = 2\lambda + \lambda \int_2^6 \left(1-\frac{z-2}{8}\right)\,dz = 5\lambda$, mentre $E[X(10)] = 2\lambda + \lambda \int_2^{10} \left(1-\frac{z-2}{8}\right)\,dz = 6\lambda$.
         Per l'ultimo punto abbiamo invece $P[X(t) = 10]$ per $t=6,\infty$, quindi $\lambda p t = 25/3$, $P[X(6)=10] = 0.107$ e $\lambda p t = 10$ per $\lim_{t\to\infty}P[X(t)=10]=0.125$. 
     \end{enumerate}
 
-    \item Canale markoviano con $p_{00} = 0.99$ e $p_{10} = 0.1$:
+	% ESERCIZIO 4
+    \item Canale markoviano con $p_{00} = 0.99$ e $p_{10} = 0.1$, round-trip time $m=2$:
     \begin{enumerate}[label=\alph*)]
-        \item $\text{thp} = \frac{p_{10}(2)}{p_{10}(2)+m\,p_{01}} = \frac{189}{209} = 0.904$
-        \item $\text{thp} = \frac{\pi_{G_0}}{\pi_{G_0}+m\,(1-\pi_{G_0})} = 0.74$
+        \item Calcolare il throughput in assenza di errori.\\
+        
+        Risposta: thp$ = \frac{p_{10}(2)}{p_{10}(2)+m\,p_{01}} = \frac{0.189}{0.189+2\cdot 0.0189} = 0.833$
+        \item Calcolare il throughput con errori iid $\delta = 0.1$ nel canale di feedback.\\
+        
+        Risposta: thp $= \frac{(1-\delta)p_{10}^{(m)}}{(1-\delta)p_{10}^{(m)} + m \left[(1 - \delta)p_{01} + \delta \left( p_{01}^{(m)} + p_{10}^{(m)} \right)\right]} = \frac{9}{13} = 0.692$
     \end{enumerate}
 
 \end{enumerate}
 
+\newpage
 \subsubsection{Compito 14 luglio 2006}
 \begin{enumerate}
-    \item\begin{enumerate}[label=\alph*)]
-        \item La distribuzione di probabilità di $X_1$ corrisponde alla prima riga della matrice $P$, la distribuzione di $X_2$ corrisponde alla prima riga di $P^2$ mentre la distribuzione di $X_{500}$ corrisponde al vettore $\vec{\pi} = (\frac{10}{27},\frac{12}{27},\frac{5}{27})$.
-        \item $m_{00} = \frac{1}{\pi_0} = \frac{27}{10}$, $m_{01} = \frac{5}{2}$, $m_{02} = \frac{9}{2}$.
-        \item $W^3 = I + P + P^2 + P^3$ la prima riga vale $(1.964,1.284,0.752)$, $W=(I-P)^{-1}$.
-    \end{enumerate}
-    
-    \item\begin{enumerate}[label=\alph*)]
-        \item
-        \item
-        \item
-    \end{enumerate}
-    
-    \item\begin{enumerate}[label=\alph*)]
-        \item
-        \item
-        \item
-    \end{enumerate}
-    
-    \item Canale markoviano con $p_{00} = 0.98$ e $p_{10} = 0.1$:
+
+	% ESERCIZIO 1
+    \item Si consideri una catena di Markov $X_n$ con la seguente matrice di trasizione (stati da 0 a 2)
+    \begin{align*}
+    P = \left(\begin{array}{ccc}
+    0.2 & 0.4 & 0.4\\
+    0.5 & 0.5 & 0\\
+    0.4 & 0.4 & 0.2
+    \end{array}\right)
+    \end{align*}
     \begin{enumerate}[label=\alph*)]
-        \item $\text{thp} = \frac{p_{10}(2)}{p_{10}(2)+m\,p_{01}} = \frac{705}{874} = 0.806$
-        \item $\text{thp} = \frac{\pi_{G_0}}{\pi_{G_0}+m\,(1-\pi_{G_0})} = \frac{403}{597} = 0.675$
+        \item Si disegni il diagramma di transizione e si calcoli la distribuzione di probabilità di $X_1,X_2,X_{500}$ dato $X_0 = 0$.\\
+        
+        Risposta: la distribuzione di probabilità di $X_1$ corrisponde alla prima riga della matrice $P$, la distribuzione di $X_2$ corrisponde alla prima riga di $P^2$ mentre la distribuzione di $X_{500}$ corrisponde al vettore $\vec{\pi} = (\frac{10}{27},\frac{12}{27},\frac{5}{27})$.
+        \item Si calcoli il tempo medio di primo passaggio dallo stato 0 agli stati 0, 1, 2.\\
+        
+        Risposta: $m_{00} = \frac{1}{\pi_0} = \frac{27}{10}$, $m_{01} = \frac{5}{2}$, $m_{02} = \frac{9}{2}$.
+        \item Sia $W_{ij}^{(n)}$ il numero medio di visite allo stato $j$ a partire dallo stato $i$ durante i primi $n$ istanti dell'evoluzione della catena.
+        Si calcolino $W_{0j}^{(3)}$ e $W_{0j}^{(5000)}$.\\
+        
+        Risposta: $W^3 = I + P + P^2 + P^3$ la prima riga vale $(1.964,1.284,0.752)$, per $n\to\infty$ si può approssimare $W_{ij}=n\pi_i$.
+    \end{enumerate}
+    
+    % ESERCIZIO 2
+    \item Si consideri un link di capacità $1\,Mbps$ condiviso da un gran numero di utenti che collettivamente producono pacchetti secondo un processo di Poisson di intensità $\lambda = 500$ pacchetti al secondo.
+    La lunghezza dei pacchetti è costante e pari a $1000\,bit$.
+    Il protocollo di accesso è un CSMA ideale, secondo cui un pacchetto trova il canale occupato se ne prova la ritrasmissione dopo un tempo esponenziale di media $100/\lambda$.
+    Si supponga che il traffico totale (nuovo più ritrasmissioni) si possa approssimare come poissoniano di intensità $\lambda$.
+    \begin{enumerate}[label=\alph*)]
+        \item Si calcoli il throughput (traffico medio smaltito) del link.\\
+        
+        Risposta: Il canale può trovarsi in 2 stati: \emph{libero} o \emph{occupato}, nell'ultimo caso sta trasmettendo un pacchetto di lunghezza 1000 bit e per questo impiega 1 ms.
+        Quindi abbiamo $E[\text{libero}] = 1/\lambda = 2\,ms$ e $E[\text{occupato}] = 1000\,bit / 10^{6}\,bps = 1\,ms$ quindi il throughput vale $E[\text{occupato}] / (E[\text{occupato}]+E[\text{libero}]) = 1/3\,Mbps$.
+        \item Si calcoli il ritardo medio di accesso, da quando un pacchetto è generato, a quando riesce ad accedere al canale.\\
+        
+        Risposta: sia $P[\text{accesso al k-esimo tentativo}] = (1/3)^k (2/3)$, è una variabile aleatoria geometrica con $p=2/3$, quindi $E[\text{numero tentativi}] = 3/2$.
+        Il tempo medio di accesso è pari a $E[\text{tempo tra 2 tentativi}]\cdot (E[\text{numero tentativi}] - 1) = 100/\lambda (3/2 - 1) = 50/\lambda$.
+        \item Se una trasmissione sul canale corrisponde a un guadagno di 1 unità e ogni tentativo di accesso fallito corrisponde ad un costo di 0.2 unità, si calcoli il guadagno totale (in unità al secondo).\\
+        
+        Risposta: il guadagno totale è $\lambda (2/3 \cdot 1 - 1/3\cdot 0.2) = 300$ unità al secondo.
+    \end{enumerate}
+    
+    % ESERCIZIO 3
+    \item (\emph{Coda $M/G/\infty$}) Si consideri una mostra a cui i visitatori arrivano...
+    \begin{enumerate}[label=\alph*)]
+        \item Si calcoli la probabilità che durante la prima mezz'ora arrivino meno di 3 visitatori.\\
+        
+        Risposta: $Pr[M(t) < 3] = Pr[M(t)=0]+Pr[M(t)=1]+Pr[M(t)=2]=e^{\lambda p t}\frac{(\lambda p t)^0}{0!}+e^{\lambda p t}\frac{(\lambda p t)^1}{1!}+e^{\lambda p t}\frac{(\lambda p t)^2}{2!}$
+        \item Si calcoli la probabilità che alle 8:15 vi sia un solo visitatore.\\
+        
+        Risposta: $P[M(15) = 1] = $
+        \item Si calcoli la probabilità che all'orario di chiusura la sala sia vuota.\\
+        
+        Risposta: $P[M(600) = 0] = $
+    \end{enumerate}
+    
+    % ESERCIZIO 4
+    \item Canale markoviano con $p_{00} = 0.98$ e $p_{10} = 0.1$.
+    \begin{enumerate}[label=\alph*)]
+        \item Calcolare il throughput con round trip time $m=2$ in assenza di errori.\\
+        
+        Risposta: thp $= \frac{p_{10}(m)}{p_{10}(m) + m\cdot} = \frac{47}{57} = 0.824$
+        \item Si consideri adesso un canale che alterna il comportamento precedente a uno con errori iid con probabilità $\delta=0.01$.
+    		In particolare il canale si comporta secondo il modello markoviano precedente per un numero geometrico di media $10^6$ slot poi passa al comportamento iid per un numero geometrico di media $2\cdot 10^6$ slot e così via.
+    		Calcolare il throughput.\\
+    		
+    		Risposta: $\frac{10^6}{10^6+2\cdot 10^6}\cdot thp_{a} + \frac{2\cdot 10^6}{10^6+2\cdot 10^6}\cdot thp_{iid}$
     \end{enumerate}
 \end{enumerate}
 
+\newpage
 \subsubsection{Compito 12 dicembre 2006}
 \begin{enumerate}
-    \item\begin{enumerate}[label=\alph*)]
-        \item Le classi in cui la catena si scompone sono $C_1 = \{0,4\}$ periodica di periodo $1$, $C_2 = \{2\}$ transitoria e $C_3=\{1,3,5\}$ ricorrente.
+
+	% ESERCIZIO 1
+    \item\emph{(Vedere appunti a pagina 38)}
+    \begin{enumerate}[label=\alph*)]
+        \item Le classi in cui la catena si scompone sono $C_1 = \{0,4\}$ ricorrente positiva periodica di periodo $2$, $C_2 = \{2\}$ transitoria e $C_3=\{1,3,5\}$ ricorrente positiva aperiodica.
         \item Per la classe $C_1$ abbiamo $\vec{\pi} = (1/2,1/2)$ mentre per $C_3$ (essendo la sottomatrice di questa classe doppiamente stocastica) $\vec{\pi} = (1/3,1/3,1/3)$. Partendo dallo stato $2$ la probabilità di andare in $C_1$ è $2/5$ mentre di andare in $C_3$ è $3/5$. Abbiamo quindi:
         \begin{align*}
         \lim_{n\to\infty} P^n = \left[\begin{array}{c c c c c c}
@@ -1045,25 +1373,69 @@ mentre il throughput
         \item $P[X_4 = 5,X_2 = 3\mid X_3 = 1,X_1=3] = P_{15}\cdot P_{31}\cdot P_{33}/P_{31}^{(2)} = 0.122$.
     \end{enumerate}
     
-    \item\begin{enumerate}[label=\alph*)]
-        \item
-        \item
+    % ESERCIZIO 2
+    \item Si consideri un nodo di rete che in condizioni normali riesce a smaltire un traffico pari a $1\,Gbps$.
+    Tale nodo funziona normalmente per un tempo esponenziale di media $99T$, dopodiché entra in uno stato di allarme durante il quale la sua capacità si riduce a $250\,Mbps$.
+    Dopo essere rimasto $T$ secondi nello stato di allarme, il nodo viene istantaneamente riparato.
+    \begin{enumerate}[label=\alph*)]
+        \item Si calcoli la frazione del tempo che il nodo passa nello stato di allarme e il traffico medio smaltito (supponendo che ci siano sempre pacchetti da trasmettere).\\
+        
+        Risposta: $E[\text{ciclo}] = 99T + T = 100T$, quindi il tempo speso nello stato di allarme è $\frac{E[\text{allarme}]}{E[\text{ciclo}]} = 1/100$ mentre il traffico medio smaltito è $1000E[\text{normale}]+250E[\text{allarme}] = 992.5\,Mbps$.
+        \item Risposta:
     \end{enumerate}
     
-    \item\begin{enumerate}[label=\alph*)]
-        \item $P[X_1(3) = 1\mid X_1(3)+X_2(3)=3] = \binom{3}{1} 0.5^4 = 0.1875$, $P[X_1(3)+X_2(3)= 3\mid X_1(3)=1]=P[X_2(3)=2]=0.112$.
-        \item $P[X_1(2)=1\mid X_1(3)=3] = 2/9 = 0.222$, $P[X_1(3)=3\mid X_1(2)=1]=P[X_1(1)=2]=0.251$.
+    % ESERCIZIO 3
+    \item Si considerino due processi di Poisson indipendenti, $X_1(t)$ e $X_2(t)$, in cui $X_i(t)$ è il numero di arriv del processo $i$ nell'intervallo $[0,t]$.
+    Il numero medio di arriv dei due processi è $\lambda_1 = \lambda_2 = 1.5$.
+    \begin{enumerate}[label=\alph*)]
+        \item Si calcolino $Pr[X_1(3) = 1\mid X_1(3)+X_2(3)=3]$ e $Pr[X_1(3)+X_2(3)= 3\mid X_1(3)=1]$.\\
+        
+        Risposta: 
+		\begin{align*}
+		Pr[X_1(3) = 1\mid X_1(3)+X_2(3)=3] &= \frac{Pr[X_1(3) = 1, X_1(3) + X_2(3) = 3]}{Pr[X_1(3) + X_2(3) = 3}\\
+		&= \frac{Pr[X_2(3) = 2]Pr[X_1(3) = 1]}{Pr[X_1(3) + X_2(3) = 3]} = \frac{3}{8} = 0.375\\
+		&\left(= P[X_1(3) = 1, X(3) = 3] = \binom{3}{1} \frac{(3\lambda_2)^2(3\lambda_1)}{(3(\lambda_1+\lambda_2))^3}\right)
+		\end{align*}
+		
+		\begin{align*}
+		Pr[X_1(3)+X_2(3)= 3\mid X_1(3)=1] &= Pr[X(3) = 3\mid X_1(3) = 1]\\
+		&= Pr[X_2(3) = 2] = e^{-3\lambda_2}\frac{(3\lambda_2)^2}{2!}
+		\end{align*}		     
+        
+        \item Si calcolino $Pr[X_1(2)=1\mid X_1(3)=3]$ e $Pr[X_1(3)=3\mid X_1(2)=1]$.\\
+        
+        Risposta:
+        \begin{align*}
+        Pr[X_1(2)=1\mid X_1(3)=3] &= \frac{Pr[X_1(3)=3 \mid X_1(2)=1]Pr[X_1(2)=1]}{Pr[X_1(3)=3]}\\
+        &= \frac{Pr[X_1(1)=2]Pr[X_1(2)=1]}{Pr[X_1(3)=3]}\\
+        &= \frac{e^{-\lambda}(\lambda)^2}{2!} \cdot \frac{e^{-2\lambda}2\lambda}{1!} \cdot \frac{3!}{e^{-3\lambda}(3\lambda)^3} = \frac{2}{9}
+        \end{align*}
+        
+        \begin{align*}
+        Pr[X_1(3)=3\mid X_1(2)=1] &= Pr[X_1(1)=2]\\
+        &= \frac{e^{-\lambda}\lambda^2}{2!}
+        \end{align*}
     \end{enumerate}
     
-    \item\begin{enumerate}[label=\alph*)]
-        \item
-        \item
-        \item
+    % ESERCIZIO 4
+    \item Canale markoviano con $p_{00} = 0.98$, $p_{10} = 0.1$.\begin{enumerate}[label=\alph*)]
+        \item Calcolare il throughput del canale in assenza di protocollo (senza ritrasmissioni).\\
+        
+        Risposta: thp $= \pi_0 = \frac{p_{10}}{p_{10} + p_{01}} = \frac{5}{6} = 0.833$
+        \item Calcolare il throughput con round trip time $m=2$ in assenza di errori.\\
+        
+        Risposta: thp $= \frac{p_{10}(m)}{p_{10}(m) + m\cdot} = \frac{47}{57} = 0.824$
+        \item Calcolare il throughput come nel caso precedente ma con errori $\delta = 0.1$ iid nel canale di feedback.\\
+        
+        Risposta: thp $= \frac{(1-\delta)p_{10}^{(m)}}{(1-\delta)p_{10}^{(m)} + m \left[(1 - \delta)p_{01} + \delta \left( p_{01}^{(m)} + p_{10}^{(m)} \right)\right]} = $
     \end{enumerate}
 \end{enumerate}
 
+\newpage
 \subsubsection{Compito 09 luglio 2007}
 \begin{enumerate}
+
+	% ESERCIZIO 1
     \item\begin{enumerate}[label=\alph*)]
         \item Conoscendo lo stato iniziale $X_0 = 0$, la distribuzione di probabilità per $X_1$ corrisponde alla prima riga della matrice di transizione $P$, la distribuzione di $X_2$ corrisponde alla prima riga della matrice $P^2$ mentre la distribuzione per $X_{500}$ abbiamo $P^{500} \approx P^{\infty}$, quindi è necessario calcolarsi $\vec{\pi} = (0.5,0.25,0.25)$ con le tecniche note. 
 
@@ -1072,12 +1444,14 @@ mentre il throughput
         \item Ottenere il risultato può essere un po' lungo ma bassa applicare la proprietà di Markov e la formula di Bayes, $P[X_1 = 1, X_3 = 1\mid X_2 = 1] = \frac{1}{15}$, $P[X_2 = 1 \mid X_1 = 1, X_3 = 1] = \frac{1}{3}$.
     \end{enumerate}
     
+    % ESERCIZIO 2
     \item\begin{enumerate}[label=\alph*)]
         \item $\frac{\beta^2}{(\alpha + \beta)^2} = 0.01$, $\frac{1}{2\beta} = 1.5$ giorni.
         \item $24\cdot\frac{\alpha^2}{(\alpha + \beta)^2}+12\cdot\frac{2\alpha\beta}{(\alpha + \beta)^2} = 21.6$
         \item $30\cdot\frac{\alpha^2}{(\alpha + \beta)^2}+12\cdot\frac{2\alpha\beta}{(\alpha + \beta)^2} = 26.46$
     \end{enumerate}
     
+    % ESERCIZIO 3
     \item Processo semi-markoviano.
     \begin{enumerate}[label=\alph*)]
         \item \begin{align*}
@@ -1093,6 +1467,7 @@ mentre il throughput
         \end{align*}
     \end{enumerate}
 
+	% ESERCIZIO 4
     \item Processi di Poisson, facile andandosi a vedere le formule.
     \begin{enumerate}[label=\alph*)]
         \item $P[X(0.1) = 0] = e^{-2} = 0.1353$
@@ -1100,6 +1475,7 @@ mentre il throughput
     \end{enumerate}
 \end{enumerate}
 
+\newpage
 \subsubsection{Compito 09 luglio 2007}
 \begin{enumerate}
     \item\begin{enumerate}[label=\alph*)]
@@ -1126,30 +1502,224 @@ mentre il throughput
     \end{enumerate}
 \end{enumerate}
 
-\subsection{Dimostrazioni}
-\begin{itemize}
-    \item \textbf{Dimostrare che il periodo è una proprietà di classe:} vedi proposizione \ref{mc_periodo_prop_classe}.
+\newpage
+\subsubsection{Compito 5 settembre 2007}
+\begin{enumerate}
 
-    \item \textbf{Dimostrare che se $i \leftrightarrow j$ e $i$ ricorrente, allora anche $j$ è ricorrente:} vedi proposizione \ref{mc_i_comm_j_ricor}.
+	% ESERCIZIO 1
+    \item\begin{enumerate}[label=\alph*)]
+        \item
+        \item
+    \end{enumerate}
+    
+    % ESERCIZIO 2
+    \item\begin{enumerate}[label=\alph*)]
+        \item
+        \item
+        \item
+    \end{enumerate}
+    
+    % ESERCIZIO 3
+    \item\begin{enumerate}[label=\alph*)]
+        \item
+        \item
+        \item
+    \end{enumerate}
+    
+    % ESERCIZIO 4
+    \item 
+    \begin{enumerate}[label=\alph*)]
+    		\item
+    		\item Si consideri adesso un canale che alterna il comportamento precedente a uno con errori iid con probabilità $\delta=0.01$.
+    		In particolare il canale si comporta secondo il modello markoviano precedente per un numero geometrico di media $10^6$ slot poi passa al comportamento iid per un numero geometrico di media $2\cdot 10^6$ slot e così via.
+    		Calcolare il throughput.\\
+    		
+    		Risposta: $\frac{10^6}{10^6+2\cdot 10^6}\cdot thp_{a} + \frac{2\cdot 10^6}{10^6+2\cdot 10^6}\cdot thp_{iid}$
+    \end{enumerate}
+\end{enumerate}
 
-    \item \textbf{Si consideri una passeggiata casuale sugli interi non negativi con le seguenti probabilità di transizione: $P_{01} = 1$, $P_{i,i+1} = p$, $P_{i,i-1} = q$ con $i > 0$ e $p+q = 1$. Se ne studi il comportamento, caratterizzandone in particolare la ricorrenza o transitorietà e ricavandone la distribuzione stazionaria:}
+\newpage
+\subsubsection{Compito 24 settembre 2007}
+\begin{enumerate}
 
-    \item \textbf{Dare la definizione di stato riconente e dimostrare che uno stato $i$ è riconente se e solo se $\sum_{n=1}^{\infty}P_{ii}^{(n)}=\infty$:}
+	% ESERCIZIO 1
+    \item \emph{(Vedere esercizio 1 appello del 14 luglio 2006)}
+    
+    % ESERCIZIO 2
+    \item\begin{enumerate}[label=\alph*)]
+        \item
+        \item
+        \item
+    \end{enumerate}
+    
+    % ESERCIZIO 3
+    \item\begin{enumerate}[label=\alph*)]
+        \item
+        \item
+        \item
+    \end{enumerate}
+    
+    % ESERCIZIO 4
+    \item 
+    \begin{enumerate}[label=\alph*)]
+    		\item
+    		\item
+    \end{enumerate}
+\end{enumerate}
 
-    \item \textbf{Dimostrare che in una catena di Markov con un numero finito di stati non possono esserci stati ricorrenti nulli:}
-    \begin{dimostrazione*}
-    Suppongo che esista uno stato ricorrente nullo. Allora deve esistere una classe ricorrente nulla con un numero finito di stati ma questo è impossibile per il teorema \ref{mc_numero_finito_di stati}.
-    \end{dimostrazione*}
+\newpage
+\subsubsection{Compito 21 luglio 2016}
+\begin{enumerate}
+    \item Protocollo Go-Back-N su un canale markoviano a due stati...
+    \begin{enumerate}[label=\alph*)]
+        \item
+        \item
+    \end{enumerate}
+    
+    \item\begin{enumerate}[label=\alph*)]
+        \item
+        \item
+        \item
+    \end{enumerate}
+    
+    \item\begin{enumerate}[label=\alph*)]
+        \item
+        \item
+        \item
+    \end{enumerate}
+    
+    \item Si consideri il seguente schema per la trasmissione di messaggi.
+    Una sorgente produce messaggi da 1000 bit secondo un processo di Poisson di intensità $\lambda = 1000$ messaggi al secondo.
+    I messaggi vengono incapsulati in pacchetti, dove ciascun pacchetto può contenere uno o due messaggi e ha un header di 40 byte.
+    Il tempo di trasmissione è trascurabile.
+    Per minimizzare l'impatto dell'overhead, il sistema cerca di inserire due messaggi per pacchetto.
+    Tuttavia, dato che ogni messaggio non può ritardare più di $T=1.5$ ms, se un messaggio ha atteso un tempo $T$ e nessun altro messaggio è arrivato, viene inviato un pacchetto con un solo messaggio.\\
+    
+    \emph{Per maggiori dettagli vedere l'esercizio 2 del 22 settembre 2005.}
+    Convertire $\lambda = 1000$ messaggi al secondo in $\lambda = 1$ messaggio al millisecondo.
+    \begin{enumerate}[label=\alph*)]
+        \item Calcolare la probabilità che sia presente un messaggio da inviare.\\
+        
+        Risposta: $E[\text{pieno}] = \int_0^T \lambda e^{-\lambda t}\, dt = 1 - e^{-1.5}$, $E[\text{vuoto}] = \frac{1}{\lambda}$, $P[\text{pieno}] = \frac{E[\text{pieno}]}{E[\text{pieno} + E[\text{vuoto}]]} = \frac{1-e^{-1.5}}{2-e^{1.5}}$.
+        \item Calcolare il tempo medio di attesa per ciascun messaggio.\\
+        
+        Risposta: $E[\text{attesa}] = (E[\text{vuoto}] + E[\text{pieno}])\cdot P[\text{vuoto}] = 1 - e^{-1.5}$.
+        \item Calcolare l'efficienza di trasmissione del sistema, cioè il rapporto tra i bit utili e il totale dei bit trasmessi.\\
+        
+        Risposta: \emph{vedere risoluzione con processi semi-markoviani.}
+    \end{enumerate}
+    
+    Risolvendo l'esercizio come un processo semi-markoviano abbiamo
+    \begin{align*}
+    P = \left[\begin{array}{ccc}
+    0 & \frac{1}{\lambda} & 0\\
+  	\alpha & 0 & 1-\alpha\\
+    1 & 0 & 0\\
+    \end{array}\right]
+    	\quad
+    	T = \left[\begin{array}{ccc}
+    - & 1 & -\\
+  	T & - & \beta\\
+    0 & - & -\\
+    \end{array}\right]
+    \end{align*}
+    dove $\alpha = Pr[X(T) = 0] = e^{-T}$ e $\beta = \frac{1}{1-e^{-\lambda T}} \int_0^T \lambda T e^{-\lambda T}\,dt = \frac{1-e^{-T} -T e^{-T}}{1-e^{-T}}$.
+    \begin{enumerate}[label=\alph*)]
+        \item Calcolare la probabilità che sia presente un messaggio da inviare.\\
+        
+        Risposta: questo significa calcolare la frazione di tempo in cui il sistema si trova nello stato 1, quindi $\frac{\mu_1}{\mu_0+\mu_1+\mu_2} = \frac{1-e^{1.5}}{2-e^{-1.5}}$.
+        \item Calcolare il tempo medio di attesa per ciascun messaggio.\\
+        
+        Risposta:
+        \item Calcolare l'efficienza di trasmissione del sistema, cioè il rapporto tra i bit utili e il totale dei bit trasmessi.\\
+        
+        Risposta: Per rispondere è necessario sviluppare la \emph{reward theory} con le metriche
+        \begin{itemize}
+        \item $R^{(1)}$, numero di pacchetti utili,
+        \item $R^{(2)}$, numero totale di pacchetti inviati 
+        \end{itemize}
+        \begin{align*}
+        R_{10}^{(1)} = 1000,\;R_{20}^{(1)} = 2000,\;R_{10}^{(2)} = 1320,\;R_{20}^{(2)} = 2320
+        \end{align*}
+        Quindi, una volta calcolati gli $R_i = \sum_k P_{ik} R_{ik}$, si ottiene
+        \begin{align*}
+        \lim_{t\to\infty} \frac{R^{(1)}}{R^{(2)}} = \frac{\pi_1 R_1^{(1)} + \pi_2 R_2^{(1)}}{\pi_1 R_1^{(2)} + \pi_2 R_2^{(2)}} = 0.847
+        \end{align*}
+    \end{enumerate}
+\end{enumerate}
 
-    \item \textbf{Dimostrare che se $X$ e $Y$ sono due variabili aleatorie con distribuzione di Poisson, rispettivamente di parametri $\mu$ e $\lambda$ allora $X+Y$ è una variabile di Poisson con parametro $\mu + \lambda$:} vedi proposizione \ref{pp_somma_due_poisson}.
+\newpage
+\subsubsection{Compito 12 settembre 2018}
+\begin{enumerate}
 
-    \item \textbf{Si dimostri che per un processo di Poisson $X(t)$ la statistica $X(s)$ condizionata a $X(t)$, con $s<t$, è binomiale e si fornisca l'espressione di $P[X(s) = k\mid X(t) = n]$:} vedi proposizione \ref{pp_prob_condizionata_binomiale}.
+	% ESERCIZIO 1
+    \item\begin{enumerate}[label=\alph*)]
+        \item
+        \item
+    \end{enumerate}
+    
+    % ESERCIZIO 2
+    \item\begin{enumerate}[label=\alph*)]
+        \item
+        \item
+        \item
+    \end{enumerate}
+    
+    % ESERCIZIO 3
+    \item\begin{enumerate}[label=\alph*)]
+        \item
+        \item
+        \item
+    \end{enumerate}
+    
+    % ESERCIZIO 4
+    \item Processi di Poisson, $X(t) = X_1(t) + X_2(t)$ con $\lambda_1 = 0.5$ e $\lambda_2 = 1$.
+    \begin{enumerate}[label=\alph*)]
+    		\item
+    		\item Calcolare $Pr[X_2(1) = 1,X(3)=3\mid X_2(2) = 2]$ e $Pr[X_2(2)=2\mid X_2(1)=1,X(3)=3]$.\\
+    		
+    		Risposta: Usando il metodo grafico si ottiene
+    		\begin{align*}
+    		Pr[X_2(1) = 1,X(3)=3\mid X_2(2) = 2] &= \frac{Pr[X_2(1) = 1, X_2(2) - X_2(1) = 1, X_1(3) + X_2(1) = 1]}{Pr[X_2(2) = 2]}\\
+    		&= \frac{e^{-1}e^{-1}e^{-2.5}2.5}{e^{-2}\frac{2^2}{2!}}\\
+    		&Hint:\;\left(Pr[X_1(3)+X_2(1)=k] = e^{-(3\lambda_1+1\lambda_2)}\frac{(3\lambda_1 +1\lambda_2)^k}{k!}\right)
+    		\end{align*}
+    		
+    		\begin{align*}
+    		Pr[X_2(2)=2\mid X_2(1)=1,X(3)=3] &= \frac{Pr[X_2(2) = 2, X_2(1)=1, X(3)=3]}{Pr[X_2(1)=1, X(3)=3]}\\
+    		&= \frac{Pr[X_2(1)=1, X_2(2)-X_2(1)=1,X(3)-X_2(2)=1]}{Pr[Pr[X_2(1)=1,X(3)-X_2(1)=2]]}\\
+    		&= \frac{Pr[X_2(1)=1]Pr[X_1(3)+X_2(1)=1]}{Pr[X_1(3)+X_2(2)=2]}\\
+    		&= \frac{e^{-1}e^{-2.5} 2.5}{e^{-3.5}\frac{3.5^2}{2!}}
+    		\end{align*}
+    \end{enumerate}
+\end{enumerate}
 
-    \item \textbf{Dimostrare che $E[S_{N(t) + 1}] = E[X_k]\,[M(t) + 1]$ con $E[X_1] = \mu$:} la dimostrazione è resa possibile dalla proposizione \ref{pr_proposizione_soluzione_equazione_rinnovamento} e segue la dimostrazione del teorema.
 
-    \item \textbf{Enunciare e dimostrare il teorema elementare di rinnovamento:} vedi proposizione \ref{pr_teorema_elementare_rinnovamento}.
-
-    \item \textbf{Dimostrare che per un processo di rinnovamento $M(t) < \infty$ per ogni $t$ intero. (Sugg.: si ricordi che $M(t) = \sum_{k=1}^{\infty}F_k(t)$):}
-\end{itemize}
+%\newpage
+%\subsection{Dimostrazioni}
+%\begin{itemize}
+%    \item \textbf{Dimostrare che il periodo è una proprietà di classe:} vedi proposizione \ref{mc_periodo_prop_classe}.
+%
+%    \item \textbf{Dimostrare che se $i \leftrightarrow j$ e $i$ ricorrente, allora anche $j$ è ricorrente:} vedi proposizione \ref{mc_i_comm_j_ricor}.
+%
+%    \item \textbf{Si consideri una passeggiata casuale sugli interi non negativi con le seguenti probabilità di transizione: $P_{01} = 1$, $P_{i,i+1} = p$, $P_{i,i-1} = q$ con $i > 0$ e $p+q = 1$. Se ne studi il comportamento, caratterizzandone in particolare la ricorrenza o transitorietà e ricavandone la distribuzione stazionaria:}
+%
+%    \item \textbf{Dare la definizione di stato riconente e dimostrare che uno stato $i$ è riconente se e solo se $\sum_{n=1}^{\infty}P_{ii}^{(n)}=\infty$:}
+%
+%    \item \textbf{Dimostrare che in una catena di Markov con un numero finito di stati non possono esserci stati ricorrenti nulli:}
+%    \begin{dimostrazione*}
+%    Suppongo che esista uno stato ricorrente nullo. Allora deve esistere una classe ricorrente nulla con un numero finito di stati ma questo è impossibile per il teorema \ref{mc_numero_finito_di stati}.
+%    \end{dimostrazione*}
+%
+%    \item \textbf{Dimostrare che se $X$ e $Y$ sono due variabili aleatorie con distribuzione di Poisson, rispettivamente di parametri $\mu$ e $\lambda$ allora $X+Y$ è una variabile di Poisson con parametro $\mu + \lambda$:} vedi proposizione \ref{pp_somma_due_poisson}.
+%
+%    \item \textbf{Si dimostri che per un processo di Poisson $X(t)$ la statistica $X(s)$ condizionata a $X(t)$, con $s<t$, è binomiale e si fornisca l'espressione di $P[X(s) = k\mid X(t) = n]$:} vedi proposizione \ref{pp_prob_condizionata_binomiale}.
+%
+%    \item \textbf{Dimostrare che $E[S_{N(t) + 1}] = E[X_k]\,[M(t) + 1]$ con $E[X_1] = \mu$:} la dimostrazione è resa possibile dalla proposizione \ref{pr_proposizione_soluzione_equazione_rinnovamento} e segue la dimostrazione del teorema.
+%
+%    \item \textbf{Enunciare e dimostrare il teorema elementare di rinnovamento:} vedi proposizione \ref{pr_teorema_elementare_rinnovamento}.
+%
+%    \item \textbf{Dimostrare che per un processo di rinnovamento $M(t) < \infty$ per ogni $t$ intero. (Sugg.: si ricordi che $M(t) = \sum_{k=1}^{\infty}F_k(t)$):}
+%\end{itemize}
 
 \end{document}

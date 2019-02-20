@@ -38,7 +38,9 @@
  
 \begin{document}
 
-\title{Appunti Di Robotica Autonoma}
+\title{Appunti Di Robotica Autonoma\\
+\vspace{1cm}
+\large Dalle lezioni di Emanuele Menegatti (Unipd)}
 
 \maketitle
 \date
@@ -72,10 +74,10 @@ Si ricorda che tale blocco causa la perdita di un grado di libertà corrisponden
 \item ...
 \end{itemize}
 
-\item Spiegare il significato del termine “robot olonomo”
-\item Spiegare il significato del termine "subsumption architecture”
-\item In robotica cosa significa “SLAM”? Definire lo "SLAM problem”.
-\item Quali delle seguenti affermazioni sono vere per un Fiducial Marker?
+\item Spiegare il significato del termine \emph{robot olonomo}.
+\item Spiegare il significato del termine \emph{subsumption architecture}.
+\item In robotica cosa significa \emph{SLAM}? Definire lo \emph{SLAM problem}.
+\item Quali delle seguenti affermazioni sono vere per un \emph{Fiducial Marker}?
 \begin{itemize}
 \item Incorpora molte informazioni
 \item Vuole essere robusto a diverse illuminazioni e a occlusioni
@@ -90,11 +92,11 @@ Si ricorda che tale blocco causa la perdita di un grado di libertà corrisponden
 \item Resolution
 \end{enumerate}
 
-\item Cosa si intende per localizzazione probabilistica? Descrivere una tecnica per la localizzazione probabilistica.
+\item Cosa si intende per \emph{localizzazione probabilistica}? Descrivere una tecnica per la localizzazione probabilistica.
 
 \item Descrivere le architetture per robot \textbf{reactive} e \textbf{deliberative}.
 
-\item Quanti gradi di libertà possiede il robot synchro drive e perché.
+\item Quanti gradi di libertà possiede il robot \emph{synchro drive} e perché.
 
 \item Elencare quattro tipi di sensori per la localizzazione indoor.
 
@@ -104,27 +106,42 @@ Si ricorda che tale blocco causa la perdita di un grado di libertà corrisponden
 
 \section{Locomozione}
 
-
-
-La locomozione è l'atto di muoversi da un posto ad un altro, per farlo si richiede al dispositivo di interagiere fisicamente con l'ambiente circostante.
-La locomozione ha a che vedere con le forze e con i meccanismi e gli attuatori che le generano.
+La locomozione è l'atto di muoversi da un posto ad un altro, per farlo si richiede al dispositivo di interagire fisicamente con l'ambiente circostante.
+La locomozione ha a che vedere con le forze, i meccanismi e gli attuatori che le generano.
 
 Molti concetti relativi alla locomozione sono ispirati a processi naturali, anche se molto spesso è difficile imitarli.
-La locomozione per rotolamento non è presente in natura ma è ancora la più efficiente (soprattutto in ambienti ingegnerizzati), per questo molti sistemi utilizzano ancora le ruote e i cingoli.\\
+La locomozione per rotolamento non è presente in natura ma è ancora la più efficiente (soprattutto in ambienti ingegnerizzati), per questo molti sistemi utilizzano le ruote e i cingoli.\\
 
 Come generare il moto?
 \begin{itemize}
-\item Progettazione manuale.
-\item Progettazione basata sul controllo.
-\item Algoritmi di apprendimento, per trovare i migliori parametri.
-\item Movimenti ottenuti da dati umani.
+\item Progettazione manuale (per mezzo di editor di moto).
+\item Progettazione basata sul controllo (ad esempio, per la locomozione bipede, si può usare il modello del pendolo inverso).
+\item Algoritmi di apprendimento, per trovare i migliori parametri (il moto viene specificato tramite dei parametri i quali vengono determinati con algoritmi di ricerca).
+\item Movimenti ottenuti da dati umani (apprendimento e imitazione).
 \end{itemize}
+
+\subsection{Locomozione con Gambe}
 
 Il movimento di un camminatore bipede, si può modellare con un poligono che ruota.
 Il passo di un bipede $d$ (cioè la distanza tra i suoi piedi nella fase di moto mentre sono entrambi a terra) rappresenta il lato del poligono, mentre la lunghezza delle gambe $l$, il raggio.
 Più il passo si accorcia, più il poligono tende a somigliare ad un cerchio.  
 
+Minore è il numero gi gambe, più diventa complessa la locomozione: se infatti bastano 3 gambe per la stabilità statica, ne servono 6 per garantire una camminata statica (perché durante il moto alcuni arti devono sollevarsi).
+
+\subsection{Locomozione con Ruote}
+
+Tipi di ruota:
+\begin{itemize}
+\item \emph{standard wheel}, 2 DOF;
+\item \emph{castor wheel}, 3 DOF;
+\item \emph{ruota svedese}, 3 DOF;
+\item \emph{ruota sferica}.
+\end{itemize}
+La stabilità è garantita con 3 ruote ma viene solitamente migliorata con 4.
+Bisogna fare dei compromessi tra \emph{manovrabilità} e \emph{controllabilità}.
+
 \subsection{Gradi di Libertà}
+
 \textbf{Gradi di libertà} (\emph{degrees of freedom}) per robot:
 \begin{itemize}
 \item un corpo rigido che trasla e ruota in una dimensione ha un DOF (ad esempio un treno);
@@ -138,8 +155,6 @@ I robot olonomi esistono, ma richiedono molti motori o una progettazione inusual
 
 
 \section{Dinamica}
-
-
 
 La \textbf{dinamica} è lo studio delle leggi fisiche necessarie per il moto dei corpi costituenti il robot.
 $f$ indica la forza distribuita sul piede caratterizzante il contatto tra piede e suolo.
@@ -572,8 +587,6 @@ Non si adatta se l'ambiente circostante cambia e le traiettorie risultanti di so
 
 \section{Percezione}
 
-
-
 (Da slide 4a - Percezione, sensori) I sensori senguono la seguente classificaizione.
 \begin{itemize}
 \item Cosa?
@@ -620,6 +633,62 @@ I sensori vengono modellati su distribuzioni di probabilità (errori casuali).
 Si hanno poche informazioni sulle cause degli errori, quindi questi possono essere considerati con delle curve Gaussiane.\\
 
 Esempi di sensiori (vedi slide): encoder, inclinometri, bussole, giroscopi.
+
+
+
+\section{Architetture Software per Robot}
+
+\subsection{Paradigma SPA}
+
+Il paradigma SPA (\emph{Sense-Plan-Act}) inizia con il robot \emph{Shakey} dell'Università di Stanford negli ultimi anni '60.
+\begin{enumerate}
+\item \emph{Shakey} era dotato di una telecamera e il sistema sensoriale prendeva i dati che questa forniva per tradurli in un \emph{modello interno del mondo}.
+\item Il sistema pianificatore prendeva i dati relativi al modello interno del mondo e un \emph{obiettivo} e generava un piano d'azione che avrebbe permesso ri raggiungere tale obiettivo.
+\item Il piano veniva quindi fornito ad un sistema che si occupava di tradurlo in segnali per gli attuatori.
+\end{enumerate}
+
+\subsection{Subsumption Architecture}
+
+Nei primi anni '80 divenne evidente che il paradigma SPA aveva dei problemi.
+Infatti, il planning richiedeva troppo tempo nel mondo reale e eseguire un piano senza dei sensori poteva risultare pericoloso in un ambiente reale.
+
+La più influente delle architetture che cercavano un'alternativa al paradigma SPA fu la \emph{subsumption architecture} di \emph{Brooks}.
+Questa si componeva di diversi \emph{layer} di macchine a stati finiti, ciascuno connesso direttamente con i sensori e gli attuatori.
+Le macchine a stati finiti erano dette \emph{behavior}.
+Dato che più behavior possono essere attivi contemporaneamente, si rende necessario un meccanismo di \emph{arbitration} che consenta a behavior con priorità più alta di sovrascrivere i segnali di quelli con priorità inferiore.
+
+In breve tempo però, anche questo sistema raggiunse i suoi limiti.
+
+\subsection{Layered Architecture}
+
+\subsection{Sistemi Behavior-Based}
+
+\emph{(Pensa, poi agisci.)}
+Nel \emph{controllo deliberativo}, il robot utilizza tutte le informazioni disponibili fornite dai sensori per decidere come agire in seguito.
+I sistemi che implementano questo approccio sono solitamente composti da moduli che processano i segnali dei sensori, creano modelli, pianificano e valutano la scelta migliore.
+La pianificazione però è nota per essere un processo computazionale complesso e il robot deve ripeterlo a ogni ciclo di \emph{sense-plan-act}.
+
+La pianificazione richiede inoltre che il robot possieda una rappresentazione simbolica del mondo al suo interno, con la quale si possano fare previsioni sui futuri stati del sistema.
+Quando il tempo è sufficiente e il modello è accurato, questo è il miglior approccio ma è sconsigliato nel caso in cui l'ambiente sia dinamico.\\
+
+\emph{(Non pensare, reagisci.)}
+Il \emph{controllo reattivo} è una tecnica per connettere strettamente gli input dei sensori con gli output degli attuatori.
+Questo consente al robot di reagire molto rapidamente in ambienti dinamici e non strutturati.
+Il controllo deliberativo si ispira al concetto biologico di \emph{stimolo-risposta} e non necessita di complesse rappresentazioni del mondo.\\
+
+I \emph{sistemi ibridi} cercano dei compromessi ai due paradigmi precedenti prendendo la rapidità di risposta dei sistemi reattivi e l'ottimalità delle decisioni dei sistemi deliberativi.
+La sfida consiste nell'accordare la componente reattiva (che si occupa delle necessità immediate del robot, come evitare un ostacolo) con la componente deliberativa (che opera su una scala temporale più lunga) producendo un output coerente.
+
+Ci si riferisce spesso ai sistemi ibridi come \emph{architetture a tre strati} per via della loro struttura:
+\begin{itemize}
+\item modulo reattivo, per l'esecuzione;
+\item strato intermedio di coordinazione;
+\item modulo deliberativo, per l'organizzazione e la pianificazione.
+\end{itemize}
+
+Il \emph{controllo behavior-based} utilizza un insieme di moduli distribuiti e interagenti, detti \emph{behavior}, per ottenere un comportamento desiderato a livello di sistema.
+Ogni behavior riceve gli input dai sensori e/o altri behavior e fornisce gli output agli attuatori e/o altri behavior.
+Quindi, questo tipo di controllo, è una rete strutturata di comportamenti interagenti, senza una rappresentazione del mondo centralizzata. 
 
 
 
